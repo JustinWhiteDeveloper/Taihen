@@ -788,7 +788,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Taihen/Preview Content\"";
-				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Taihen/Info.plist;
@@ -813,7 +813,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Taihen/Preview Content\"";
-				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Taihen/Info.plist;
@@ -926,7 +926,7 @@
 				17DCE3772839C27B001520A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		17DCE3782839C27B001520A7 /* Build configuration list for PBXNativeTarget "Taihen" */ = {
 			isa = XCConfigurationList;
@@ -935,7 +935,7 @@
 				17DCE37A2839C27B001520A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		17DCE37B2839C27B001520A7 /* Build configuration list for PBXNativeTarget "TaihenTests" */ = {
 			isa = XCConfigurationList;
@@ -944,7 +944,7 @@
 				17DCE37D2839C27B001520A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		17DCE37E2839C27B001520A7 /* Build configuration list for PBXNativeTarget "TaihenUITests" */ = {
 			isa = XCConfigurationList;
@@ -953,7 +953,7 @@
 				17DCE3802839C27B001520A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
