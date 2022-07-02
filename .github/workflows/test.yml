@@ -29,4 +29,9 @@ jobs:
           security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
       - name: Test
-        run: xcodebuild -project Taihen/Taihen.xcodeproj test -scheme Taihen
+        run: xcodebuild -project Taihen/Taihen.xcodeproj test -scheme Taihen -resultBundlePath TestResults
+        
+      - uses: kishikawakatsumi/xcresulttool@v1
+        with:
+          path: TestResults.xcresult
+        if: success() || failure()
