@@ -26,7 +26,7 @@ struct ReaderView: View {
                             return
                         }
                         
-                        let data = SharedManagedDataController.instance.fileContentsByKey(key: lastActiveKey)
+                        let data = SharedManagedDataController.appManagementInstance.fileContentsByKey(key: lastActiveKey)
                         
                         text = data?.content ?? ""
                     }
@@ -44,7 +44,7 @@ struct ReaderView: View {
                     return
                 }
                 
-                let data = SharedManagedDataController.instance.fileContentsByKey(key: lastActiveKey)
+                let data = SharedManagedDataController.appManagementInstance.fileContentsByKey(key: lastActiveKey)
                 
                 let marks: [ManagedHighlight] = data?.highlights ?? []
                 
@@ -162,7 +162,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
                         nsTextView.scrollRangeToVisible(sRange)
                     }
                 }
-            
             }
             
             context.coordinator.firstBoundsChange = false
@@ -172,9 +171,9 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
 
             for range in highlights {
 
-                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: NSColor(deviceRed: 1, green: 1, blue: 0, alpha: 0.5)]
-
-                // Use add attributes instead of set attributes
+                let highlightColor = NSColor(deviceRed: 1, green: 1, blue: 0, alpha: 0.5)
+                
+                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: highlightColor]
                 nsTextView.textStorage?.addAttributes(attrs, range: range)
 
             }
@@ -341,7 +340,7 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
                 return
             }
             
-            SharedManagedDataController.instance.saveFileContents(path: lastActiveKey, highLights: mappedValues)
+            SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey, highLights: mappedValues)
         }
         
         @objc func boundsChange(_ notification: Notification) {
@@ -359,7 +358,7 @@ extension NSTextView {
   var selectedText: String {
       var text = ""
       for case let range as NSRange in self.selectedRanges {
-          text.append(string[range]+"\n")
+          text.append(string[range] + "\n")
       }
       text = String(text.dropLast())
       return text

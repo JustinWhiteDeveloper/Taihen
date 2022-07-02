@@ -23,7 +23,7 @@ extension TaihenCustomDictionaryTag {
     }
 }
 
-class RealmManagedDataController: ManagedDataController {
+class RealmAppManagementDataController: AppManagementDataController {
     
     private static var dictionaries: [String] = []
     private static var activeDictionaries: [String] = []
@@ -60,7 +60,8 @@ class RealmManagedDataController: ManagedDataController {
     func reloadTags() {
         self.realm = getRealm()
 
-        YomiChanTagManager.tags = realm.objects(RealmTag.self).map({ TaihenCustomDictionaryTag.from(entity: $0) })
+        YomiChanTagManager.tags = realm.objects(RealmTag.self)
+            .map({ TaihenCustomDictionaryTag.from(entity: $0) })
     }
 
     func saveFileContents(path: String, contents: String) {

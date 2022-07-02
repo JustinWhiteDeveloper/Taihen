@@ -2,9 +2,7 @@ import Foundation
 import SwiftUI
 import TaihenDictionarySupport
 
-protocol TagManager {
-    
-}
+protocol TagManager {}
 
 class YomiChanTagManager: TagManager {
     static var tags: [TaihenCustomDictionaryTag] = [] {

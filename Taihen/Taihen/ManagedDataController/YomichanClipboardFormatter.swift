@@ -1,7 +1,11 @@
 import Foundation
 import TaihenDictionarySupport
 
-class YomiFormatter {
+protocol ClipboardDescriptionFormatter {
+    func formatForTerms(terms: TaihenDictionaryViewModel) -> String
+}
+
+class YomichanClipboardFormatter: ClipboardDescriptionFormatter {
 
     func formatForTerms(terms: TaihenDictionaryViewModel) -> String {
         
@@ -33,5 +37,4 @@ class YomiFormatter {
         
         return text
     }
-    
 }

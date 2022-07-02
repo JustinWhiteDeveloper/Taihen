@@ -76,7 +76,6 @@ class AnkiSearcher {
     private let localServerAddress = "http://localhost:8765"
     private let httpMethod = "POST"
     
-    
     func findCards(expression: String, callback: @escaping (AnkiQueryResult?) -> Void) {
         let url = URL(string: localServerAddress)!
         var request = URLRequest(url: url)

@@ -115,33 +115,32 @@ class RealmManagedDictionaryController: DictionaryDataController {
             let activeDicts = RealmManagedDictionaryController.activeDictionaries
             let activeHashes = RealmManagedDictionaryController.activeHashes
 
-            var selectedTerms: [[TaihenDictionaryViewModel]] = []
             let time = Date()
 
             var resultCount = 0
             
-            var terms2: [TaihenCustomDictionaryTerm] = []
+            var resultsFoundInDictionaries: [TaihenCustomDictionaryTerm] = []
 
             for activeDict in activeHashes {
                 guard let objects = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + "0") else {
                     continue
                 }
 
-                terms2.append(TaihenCustomDictionaryTerm.from(entity: objects))
+                resultsFoundInDictionaries.append(TaihenCustomDictionaryTerm.from(entity: objects))
                 
-                var object = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + String(terms2.count))
+                var object = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + String(resultsFoundInDictionaries.count))
                 
                 if object != nil {
                     while object != nil {
-                        terms2.append(TaihenCustomDictionaryTerm.from(entity: object!))
-                        object = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + String(terms2.count))
+                        resultsFoundInDictionaries.append(TaihenCustomDictionaryTerm.from(entity: object!))
+                        object = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + String(resultsFoundInDictionaries.count))
                     }
                 }
                 
-                resultCount += terms2.count
+                resultCount += resultsFoundInDictionaries.count
             }
             
-            let dictionary = ConcreteTaihenCustomDictionary(name: "", revision: "", tags: [], terms: terms2)
+            let dictionary = ConcreteTaihenCustomDictionary(name: "", revision: "", tags: [], terms: resultsFoundInDictionaries)
             
             let termDict: [String: [TaihenDictionaryViewModel]] = dictionary.termDict
 
@@ -159,8 +158,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
                     return indexA < indexB
                 }
             }
-            
-            selectedTerms = [models]
             
             let lookupTime = abs(time.timeIntervalSinceNow)
             
@@ -201,7 +198,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
                                 }
                                 
                                 return
-                                
                             }
                         }
                     }
@@ -216,7 +212,7 @@ class RealmManagedDictionaryController: DictionaryDataController {
             } else {
                 
                 DispatchQueue.main.async {
-                    callback(true, lookupTime, selectedTerms, resultCount)
+                    callback(true, lookupTime, [models], resultCount)
                 }
             }
         }
@@ -262,16 +258,12 @@ class RealmManagedDictionaryController: DictionaryDataController {
             
             let kanaMapsCount = kanaMap.keys.count
 
-            
             for (index, term) in dictionary.terms.enumerated() {
 
                 if index % notifyOnBlockSize == 0 {
                     DispatchQueue.main.async {
-                        
-                        var object: [String: Int] = [:]
-                        
-                        object["progress"] = index
-                        object["maxProgress"] = maxTerms + kanaMapsCount
+                        let object = Notification.dictionaryUpdateProgress(progress: index,
+                                                                           maxProgress: maxTerms + kanaMapsCount)
                         
                         NotificationCenter.default.post(name: Notification.Name.onSaveDictionaryUpdate,
                                                         object: object)
@@ -331,11 +323,8 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 if index % notifyOnBlockSize == 0 {
                     DispatchQueue.main.async {
                         
-                        var object: [String: Int] = [:]
-                        
-                        object["progress"] = maxTerms + index
-                        object["maxProgress"] = maxTerms + kanaMapsCount
-                        
+                        let object = Notification.dictionaryUpdateProgress(progress: maxTerms + index,
+                                                                           maxProgress: maxTerms + kanaMapsCount)
                         NotificationCenter.default.post(name: Notification.Name.onSaveDictionaryUpdate,
                                                         object: object)
                     }
@@ -445,26 +434,22 @@ class RealmManagedDictionaryController: DictionaryDataController {
         
         input = searchValue(value: term) { finished, _, model, _ in
             
-            guard finished else {
+            guard finished,
+                  let firstModel = model.first,
+                  let firstSubModel = firstModel.first else {
                 return
             }
             
-            let yomiFormatter = YomiFormatter()
+            let clipboardFormatter = YomichanClipboardFormatter()
+            let copyText = clipboardFormatter.formatForTerms(terms: firstSubModel)
             
-            let selectedModel = model.first ?? []
+            CopyboardEnabler.enabled = false
             
-            if let firstModel = selectedModel.first {
-                
-                let copyText = yomiFormatter.formatForTerms(terms: firstModel)
-                
-                CopyboardEnabler.enabled = false
-                
-                NSPasteboard.general.clearContents()
-                NSPasteboard.general.setString( copyText, forType: .string)
-                                
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                    CopyboardEnabler.enabled = true
-                }
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString( copyText, forType: .string)
+                            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                CopyboardEnabler.enabled = true
             }
         }
     }

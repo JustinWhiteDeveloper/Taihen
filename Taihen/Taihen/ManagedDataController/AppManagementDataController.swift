@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 import TaihenDictionarySupport
 
-protocol ManagedDataController {
+protocol AppManagementDataController {
     func reloadTags()
     func saveFileContents(path: String, contents: String)
     func saveFileContents(path: String, highLights: [ManagedHighlight])
@@ -23,7 +23,7 @@ protocol DictionaryDataController {
 
 // Abstract away defining which implementation of the protocol is used
 class SharedManagedDataController {
-    static var instance: ManagedDataController = RealmManagedDataController()
+    static var appManagementInstance: AppManagementDataController = RealmAppManagementDataController()
     static var dictionaryInstance: DictionaryDataController = RealmManagedDictionaryController()
 }
 

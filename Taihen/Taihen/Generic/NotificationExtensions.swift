@@ -6,3 +6,14 @@ extension Notification.Name {
     static let onSaveDictionaryUpdate = Notification.Name("onDictionarySaveUpdate")
     static let onDeleteDictionaryUpdate = Notification.Name("onDictionaryDeleteUpdate")
 }
+
+extension Notification {
+    static func dictionaryUpdateProgress(progress: Int, maxProgress: Int) -> [String: Int] {
+        var object: [String: Int] = [:]
+        
+        object["progress"] = progress
+        object["maxProgress"] = maxProgress
+        
+        return object
+    }
+}

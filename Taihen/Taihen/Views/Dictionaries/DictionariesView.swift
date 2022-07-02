@@ -3,77 +3,18 @@ import SwiftUI
 import TaihenDictionarySupport
 
 private enum Strings {
+    
+    static let title = "Dictionaries"
     static let defaultLoadingText = "loading"
     static let readingFile = "Reading files from folder"
     static let savingDictionary = "Saving dictionary"
     static let deletingDictionary = "Deleting dictionary"
     static let deletingDictionaries = "Deleting dictionaries"
-    
-    static let activeToggle = "Active"
-    
-    static let deleteDictionaryIcon = "CancelIcon"
-    static let reorderIcon = "MoveIcon"
-    
-    static let title = "Dictionaries"
     static let addButtonTitle = "Add Dictionaries"
     static let deleteAllButtonTitle = "Delete All"
-    
 }
 
-
-struct DictionaryRow: View {
-
-    @State var model: DictionaryViewModel
-    var onDelete: (_ name: String) -> Void
-    
-    var body: some View {
-        HStack {
-            Text(model.name)
-                .foregroundColor(.black)
-                .font(.title)
-                .bold()
-            
-            Spacer()
-            
-            Toggle(Strings.activeToggle, isOn: $model.active)
-                .padding()
-                .foregroundColor(.black)
-                .onChange(of: model.active) { newValue in
-                    SharedManagedDataController.dictionaryInstance.updateDictionaryActive(viewModel: model.managedModel, active: newValue)
-                }
-            
-            ZStack {
-                Button("   ",  action: {
-                    onDelete(model.name)
-                })
-                .frame(maxWidth: .infinity,maxHeight: .infinity)
-                .buttonStyle(PlainButtonStyle())
-                
-                Image(Strings.deleteDictionaryIcon)
-                    .renderingMode(.original)
-                    .allowsHitTesting(false)
-
-            }
-            .padding(.vertical, 10)
-            .frame(width: 34, height: 34)
-            .cornerRadius(12)
-            
-            ZStack {
-                Button("",
-                       action: {
-                    
-                })
-                .buttonStyle(PlainButtonStyle())
-
-                Image(Strings.reorderIcon)
-                    .renderingMode(.original)
-                
-            }
-            .frame(width: 24, height: 24)
-
-        }
-    }
-}
+private enum Sizings {}
 
 struct DictionariesView: View {
 
@@ -113,7 +54,6 @@ struct DictionariesView: View {
                         break
                     }
                 }
-            
                 
             } else {
             
@@ -248,22 +188,11 @@ struct DictionariesView: View {
 }
 
 extension NSTableView {
-  open override func viewDidMoveToWindow() {
-    super.viewDidMoveToWindow()
+    open override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
 
     backgroundColor = NSColor.clear
-    enclosingScrollView?.drawsBackground = false
-  }
-}
-
-struct DictionaryViewModel: Equatable {
-    var name: String
-    var order: Int
-    var active: Bool
-}
-
-extension DictionaryViewModel {
-    var managedModel: ManagedDictionaryViewModel {
-        return ManagedDictionaryViewModel(name: name, order: order, active: active)
+        enclosingScrollView?.drawsBackground = false
     }
 }
+
