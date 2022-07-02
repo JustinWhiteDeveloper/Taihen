@@ -79,17 +79,14 @@ struct ItemView: View {
                         .font(Font.system(size: 30))
                         .foregroundColor(Color.black)
                         .onTapGesture {
-                            let searcher = AnkiSearcher()
+                            let searcher = ConcreteAnkiInterface()
                             
                             let searchText = hasCard ? ankiExpressionText : search
                             
-                            searcher.browseQuery(expression: searchText)
+                            searcher.browseQuery(expression: searchText) {}
                         }
-
                 }
-                
             }
-            
         }
         
         ForEach(Array(terms.enumerated()), id: \.offset) { index1, term in
@@ -122,7 +119,7 @@ struct ItemView: View {
                 
                 cardText = result
 
-                let searcher = AnkiSearcher()
+                let searcher = ConcreteAnkiInterface()
                 
                 //If contains hiragana and kanji then use *contains*
                 let expressionPart = (result.containsKanji && result.containsHiragana) ? "*\(result)*" : result

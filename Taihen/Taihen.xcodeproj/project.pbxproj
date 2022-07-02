@@ -16,6 +16,7 @@
 		1748710628701FDE00FFCC08 /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */; };
 		1748710828702DA300FFCC08 /* DictionaryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710728702DA300FFCC08 /* DictionaryRow.swift */; };
 		1748710A28702E9E00FFCC08 /* DictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710928702E9E00FFCC08 /* DictionaryViewModel.swift */; };
+		1748710B2870482000FFCC08 /* AnkiInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBA2AF285B0A93007BEC66 /* AnkiInterfaceTests.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -33,7 +34,6 @@
 		17DCE3582839C278001520A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3572839C278001520A7 /* ContentView.swift */; };
 		17DCE35A2839C27A001520A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3592839C27A001520A7 /* Assets.xcassets */; };
 		17DCE35D2839C27A001520A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE35C2839C27A001520A7 /* Preview Assets.xcassets */; };
-		17DCE3692839C27B001520A7 /* TaihenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3682839C27B001520A7 /* TaihenTests.swift */; };
 		17DCE3742839C27B001520A7 /* TaihenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3732839C27B001520A7 /* TaihenUITests.swift */; };
 		17DCE3A8283A0F47001520A7 /* term_bank_16.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE385283A0F47001520A7 /* term_bank_16.json */; };
 		17DCE3A9283A0F47001520A7 /* term_bank_20.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE386283A0F47001520A7 /* term_bank_20.json */; };
@@ -116,7 +116,7 @@
 		1794C70E284F32DB00AC6700 /* FeatureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureManager.swift; sourceTree = "<group>"; };
 		179E50C1284A106400A575E4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17BBA2AC285B09AC007BEC66 /* TaihenDictionarySupport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TaihenDictionarySupport; sourceTree = "<group>"; };
-		17BBA2AF285B0A93007BEC66 /* JapaneseConjugationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseConjugationTests.swift; sourceTree = "<group>"; };
+		17BBA2AF285B0A93007BEC66 /* AnkiInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiInterfaceTests.swift; sourceTree = "<group>"; };
 		17CA0BC32851DC9F00507CF5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		17CA0BC52851DE1C00507CF5 /* ViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMode.swift; sourceTree = "<group>"; };
 		17CA0BC72851DE3E00507CF5 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
@@ -129,7 +129,6 @@
 		17DCE35E2839C27B001520A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17DCE35F2839C27B001520A7 /* Taihen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Taihen.entitlements; sourceTree = "<group>"; };
 		17DCE3642839C27B001520A7 /* TaihenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaihenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		17DCE3682839C27B001520A7 /* TaihenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenTests.swift; sourceTree = "<group>"; };
 		17DCE36A2839C27B001520A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17DCE36F2839C27B001520A7 /* TaihenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaihenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DCE3732839C27B001520A7 /* TaihenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenUITests.swift; sourceTree = "<group>"; };
@@ -237,22 +236,6 @@
 			path = Generic;
 			sourceTree = "<group>";
 		};
-		17BBA2AD285B0A93007BEC66 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				17BBA2AE285B0A93007BEC66 /* JapaneseConjugationTests */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		17BBA2AE285B0A93007BEC66 /* JapaneseConjugationTests */ = {
-			isa = PBXGroup;
-			children = (
-				17BBA2AF285B0A93007BEC66 /* JapaneseConjugationTests.swift */,
-			);
-			path = JapaneseConjugationTests;
-			sourceTree = "<group>";
-		};
 		17CA0BBF2851D7A100507CF5 /* Yomi */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,7 +306,6 @@
 		17DCE3542839C278001520A7 /* Taihen */ = {
 			isa = PBXGroup;
 			children = (
-				17BBA2AD285B0A93007BEC66 /* Tests */,
 				1794C70D284F312C00AC6700 /* TaihenDebug.entitlements */,
 				1794C71028508C8F00AC6700 /* Generic */,
 				17F935CC2843798600513356 /* ManagedDataController */,
@@ -350,7 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				17DCE3822839E4E6001520A7 /* Dictionaries */,
-				17DCE3682839C27B001520A7 /* TaihenTests.swift */,
+				17BBA2AF285B0A93007BEC66 /* AnkiInterfaceTests.swift */,
 				17DCE36A2839C27B001520A7 /* Info.plist */,
 			);
 			path = TaihenTests;
@@ -651,7 +633,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17DCE3692839C27B001520A7 /* TaihenTests.swift in Sources */,
+				1748710B2870482000FFCC08 /* AnkiInterfaceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,38 +48,69 @@ extension CardInfoTemplate {
     }
 }
 
-
 extension GuiBrowseTemplate {
     static func getCardsWithQuery(_ query: String) -> GuiBrowseTemplate {
         return GuiBrowseTemplate(action: "guiBrowse", version: 6, params: ["query":query])
     }
 }
 
-struct AnkiQueryResult: Codable {
+struct AnkiQueryResult: Codable, Equatable {
     var result: [Int]
     var error: String?
 }
 
-struct AnkiCardInfoResultItem: Codable {
+struct AnkiCardInfoResultItem: Codable, Equatable {
     var cardId: Int
     var due: Int
 }
 
-
-struct AnkiCardInfoResult: Codable {
+struct AnkiCardInfoResult: Codable, Equatable {
     var result: [AnkiCardInfoResultItem]
     var error: String?
 }
 
-class AnkiSearcher {
+protocol AnkiServer {
+    func sendRequest(request: URLRequest, completionHandler handler: @escaping (URLResponse?, Data?, Error?) -> Void)
+}
+
+class ConcreteAnkiServer: AnkiServer {
     
-    private let localServerAddress = "http://localhost:8765"
-    private let httpMethod = "POST"
+    init() {}
     
+    func sendRequest(request: URLRequest, completionHandler handler: @escaping (URLResponse?, Data?, Error?) -> Void) {
+        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler: handler)
+    }
+}
+
+protocol AnkiInterface {
+    func findCards(expression: String, callback: @escaping (AnkiQueryResult?) -> Void)
+    func getCardInfo(values: [Int], callback: @escaping (AnkiCardInfoResult?) -> Void)
+    func browseQuery(expression: String, callback: @escaping () -> Void)
+}
+
+private enum HTTPMethod: String {
+    case Post = "POST"
+}
+
+class ConcreteAnkiInterface: AnkiInterface {
+    
+    private let address = "http://localhost:8765"
+    
+    private let server: AnkiServer
+    
+    init(server: AnkiServer = ConcreteAnkiServer()) {
+        self.server = server
+    }
+
     func findCards(expression: String, callback: @escaping (AnkiQueryResult?) -> Void) {
-        let url = URL(string: localServerAddress)!
+        
+        guard let url = URL(string: address) else {
+            callback(nil)
+            return
+        }
+        
         var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
+        request.httpMethod = HTTPMethod.Post.rawValue
         
         let template = FindCardTemplate.findCardsWithExpression(expression)
         
@@ -92,7 +123,7 @@ class AnkiSearcher {
             callback(nil)
         }
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {(response, data, error) in
+        server.sendRequest(request: request) { (response, data, error) in
             guard let data = data else { return }
             
             let jsonDecoder = JSONDecoder()
@@ -109,9 +140,13 @@ class AnkiSearcher {
     }
     
     func getCardInfo(values: [Int], callback: @escaping (AnkiCardInfoResult?) -> Void) {
-        let url = URL(string: localServerAddress)!
+        guard let url = URL(string: address) else {
+            callback(nil)
+            return
+        }
+        
         var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
+        request.httpMethod = HTTPMethod.Post.rawValue
         
         let template = CardInfoTemplate.getCardInfoWithCards(values)
         
@@ -124,7 +159,7 @@ class AnkiSearcher {
             callback(nil)
         }
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {(response, data, error) in
+        server.sendRequest(request: request) {(response, data, error) in
             guard let data = data else { return }
             
             let jsonDecoder = JSONDecoder()
@@ -139,10 +174,14 @@ class AnkiSearcher {
         }
     }
     
-    func browseQuery(expression: String) {
-        let url = URL(string: localServerAddress)!
+    func browseQuery(expression: String, callback: @escaping () -> Void) {
+        
+        guard let url = URL(string: address) else {
+            return
+        }
+        
         var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
+        request.httpMethod = HTTPMethod.Post.rawValue
         
         let template = GuiBrowseTemplate.getCardsWithQuery(expression)
         
@@ -153,6 +192,8 @@ class AnkiSearcher {
         }
         catch { }
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main) {_,_,_ in }
+        server.sendRequest(request: request) {_,_,_ in
+            callback()
+        }
     }
 }
