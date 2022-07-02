@@ -144,7 +144,6 @@ struct SettingsView: View {
             }
             
             Spacer()
-            
         }
     }
 }

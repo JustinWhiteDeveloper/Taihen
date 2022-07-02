@@ -58,7 +58,6 @@ class RealmManagedDataController: ManagedDataController {
     }
     
     func reloadTags() {
-        print("reload tags")
         self.realm = getRealm()
 
         YomiChanTagManager.tags = realm.objects(RealmTag.self).map({ TaihenCustomDictionaryTag.from(entity: $0) })
@@ -96,7 +95,6 @@ class RealmManagedDataController: ManagedDataController {
         self.realm.beginWrite()
 
         guard let object = realm.object(ofType: RealmFileState.self, forPrimaryKey: path) else {
-            print("item not found")
             return
         }
         

@@ -303,8 +303,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 realmTerm.dictionaryName = dictionary.name
                 
                 self.realm.add(realmTerm, update: .modified)
-
-
             }
 
             var index = 0
@@ -463,9 +461,7 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 
                 NSPasteboard.general.clearContents()
                 NSPasteboard.general.setString( copyText, forType: .string)
-                
-                print(copyText)
-                
+                                
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                     CopyboardEnabler.enabled = true
                 }

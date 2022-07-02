@@ -9,13 +9,10 @@ private enum Sizings {
 struct ReaderView: View {
 
     @State var text = ""
-    
     @State var highlights: [NSRange] = []
-
     @State var scrollPercentage: Float = 0.0
     
-    let pub = NotificationCenter.default
-        .publisher(for: Notification.Name.onReadFile)
+    private let pub = NotificationCenter.default.publisher(for: Notification.Name.onReadFile)
 
     var body: some View {
         
@@ -25,7 +22,7 @@ struct ReaderView: View {
                 CustomizableTextEditor(text: $text, highlights: $highlights, scrollPercentage: $scrollPercentage)
                     .onReceive(pub) { (output) in
                         
-                        guard let lastActiveKey = UserDefaults.standard.string(forKey: "lastActiveFileKey") else {
+                        guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
                             return
                         }
                         
@@ -43,7 +40,7 @@ struct ReaderView: View {
                 
             }.onAppear {
                 
-                guard let lastActiveKey = UserDefaults.standard.string(forKey: "lastActiveFileKey") else {
+                guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
                     return
                 }
                 
@@ -64,9 +61,7 @@ struct ReaderView: View {
                         .foregroundColor(Color.black)
                     
                     Spacer()
-
                 }
-                    
             }
         }
     }
@@ -173,7 +168,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
             context.coordinator.firstBoundsChange = false
         }
         
-
         if coordinator.highLightsNeedUpdate, FeatureManager.instance.enableTextHighlights {
 
             for range in highlights {
@@ -212,12 +206,10 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
 
         var isFirstTextLayout = false
 
-        
         init(textEditor: Representable) {
             self.parent = textEditor
-        
+
             super.init()
-            
         }
         
         // delegate method to retrieve changed text
@@ -246,13 +238,10 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
                 return
             }
                         
-            
             parent.scrollPercentage = nsTextView.enclosingScrollView?.verticalScroller?.floatValue ?? 0
 
-            
             let text = nsTextView.selectedText
-    
-            
+
             lastSelectedText = text
             lastSelectedRange = nsTextView.selectedRange()
             
@@ -272,7 +261,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
                             
                         }
                     }
-                    
                 }
             }
 
@@ -322,7 +310,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
             return menu
         }
         
-
         @objc func highlightItem() {
             
             if let range = lastSelectedRange {
@@ -345,13 +332,12 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
             highLightsNeedUpdate = true
             
             updateHighlightsOnDisk()
-
         }
         
         func updateHighlightsOnDisk() {
             let mappedValues = parent.highlights.map({ ManagedHighlight(start: $0.location, length: $0.length) })
             
-            guard let lastActiveKey = UserDefaults.standard.string(forKey: "lastActiveFileKey") else {
+            guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
                 return
             }
             
@@ -365,7 +351,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
             }
             
             parent.scrollPercentage = nsScrollview.verticalScroller?.floatValue ?? 0
-
         }
     }
 }
@@ -380,4 +365,3 @@ extension NSTextView {
       return text
   }
 }
-

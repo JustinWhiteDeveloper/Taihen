@@ -1,5 +1,9 @@
 import SwiftUI
 
+private enum Strings {
+    static let openFolderTitle = NSLocalizedString("Open", comment: "")
+}
+
 @main
 struct TaihenApp: App {
     var body: some Scene {
@@ -8,24 +12,18 @@ struct TaihenApp: App {
                 .frame(minWidth: 1000,
                        minHeight: 600,
                        alignment: .center)
-            }.commands {
-                
-                CommandGroup(replacing: .newItem) {
-                    Button(action: {
-                        selectFolder()
-                    }) {
-                        Text("Open")
-                    }
+        }
+        .commands {
+            CommandGroup(replacing: .newItem) {
+                Button(action: {
+                    selectFolder()
+                }) {
+                    Text(Strings.openFolderTitle)
                 }
-                CommandGroup(replacing: .undoRedo) {
-                    
-                }
-                CommandGroup(replacing: .help) {
-
-                }
-
             }
-        
+            CommandGroup(replacing: .undoRedo) {}
+            CommandGroup(replacing: .help) {}
+        }
     }
     
     func selectFolder() {
@@ -50,7 +48,7 @@ struct TaihenApp: App {
                     
                     let readText: String = try! String(contentsOf: folder)
                     
-                    UserDefaults.standard.set(folder.path.md5, forKey: "lastActiveFileKey")
+                    UserDefaults.standard.lastOpenedFileKey = folder.path.md5
 
                     SharedManagedDataController.instance.saveFileContents(path: folder.path, contents: readText)
                     

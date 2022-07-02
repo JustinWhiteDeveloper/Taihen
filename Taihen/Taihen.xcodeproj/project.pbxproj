@@ -13,6 +13,7 @@
 		17487100286FFB5500FFCC08 /* FileState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174870FF286FFB5500FFCC08 /* FileState.swift */; };
 		17487102286FFDD200FFCC08 /* SettingsSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17487101286FFDD200FFCC08 /* SettingsSliderView.swift */; };
 		1748710428701CF700FFCC08 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710328701CF700FFCC08 /* NotificationExtensions.swift */; };
+		1748710628701FDE00FFCC08 /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -100,6 +101,7 @@
 		174870FF286FFB5500FFCC08 /* FileState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileState.swift; sourceTree = "<group>"; };
 		17487101286FFDD200FFCC08 /* SettingsSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSliderView.swift; sourceTree = "<group>"; };
 		1748710328701CF700FFCC08 /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
+		1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
 		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				17F935C7284360DF00513356 /* TagManager.swift */,
 				17CA0BC32851DC9F00507CF5 /* Colors.swift */,
 				1748710328701CF700FFCC08 /* NotificationExtensions.swift */,
+				1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */,
 				17F935C42843500200513356 /* ReaderView.swift in Sources */,
 				17F935C6284358AE00513356 /* YomiPreviewView.swift in Sources */,
+				1748710628701FDE00FFCC08 /* UserDefaultsExtensions.swift in Sources */,
 				170619652841C85800294124 /* Clipboard.swift in Sources */,
 				1794C704284B14CC00AC6700 /* YomiResultsView.swift in Sources */,
 				179E50C2284A106400A575E4 /* SettingsView.swift in Sources */,

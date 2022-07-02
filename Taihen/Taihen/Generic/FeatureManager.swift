@@ -7,7 +7,6 @@ class FeatureManager {
     
     private let userDefaults = UserDefaults.standard
     
-    
     var audioEnabled: Bool {
         get {
             userDefaults.bool(forKey: "AudioEnabled")
