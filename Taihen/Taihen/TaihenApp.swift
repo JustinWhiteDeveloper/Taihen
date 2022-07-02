@@ -50,7 +50,7 @@ struct TaihenApp: App {
                     
                     UserDefaults.standard.lastOpenedFileKey = folder.path.md5
 
-                    SharedManagedDataController.instance.saveFileContents(path: folder.path, contents: readText)
+                    SharedManagedDataController.appManagementInstance.saveFileContents(path: folder.path, contents: readText)
                     
                     NotificationCenter.default.post(name: Notification.Name.onReadFile, object: nil)
                     

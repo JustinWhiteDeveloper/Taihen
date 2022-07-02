@@ -96,7 +96,7 @@ struct YomiPreviewView: View {
             }
         }
         .onAppear {
-            SharedManagedDataController.instance.reloadTags()
+            SharedManagedDataController.appManagementInstance.reloadTags()
             SharedManagedDataController.dictionaryInstance.reloadDictionaries()
             
         }
