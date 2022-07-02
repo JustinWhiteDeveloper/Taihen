@@ -3,33 +3,39 @@ import SwiftUI
 import TaihenDictionarySupport
 
 private enum Strings {
-    static let loadingText = "Loading"
-    static let searchTextPreview = "Search here"
+    static let searchTextPreview = NSLocalizedString("Search here", comment: "")
+}
+
+private enum Sizings {
+    static let searchBarCornerRadius: CGFloat = 16.0
+    static let searchBarHorizontalPadding: CGFloat = 40.0
+    static let searchBarMaxWidth: CGFloat = 200.0
+}
+
+struct YomiSearchBar: View {
+    
+    @Binding var text: String
+    
+    var body: some View {
+        TextField(Strings.searchTextPreview, text: $text)
+            .foregroundColor(.black)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .cornerRadius(Sizings.searchBarCornerRadius)
+            .padding(.horizontal, Sizings.searchBarHorizontalPadding)
+            .frame(maxWidth: Sizings.searchBarMaxWidth, alignment: .leading)
+    }
 }
 
 struct YomiView: View {
 
     @State var text = ""
-    @State var oldText = ""
-
-    @State var lookupTime: Double = 0
-    @State var isLoading: Bool = false
-    
-    @State var selectedTerms: [[TaihenDictionaryViewModel]] = []
-    
-    @State var loadingText = Strings.loadingText
-
+        
     var body: some View {
         
         VStack(alignment: .leading) {
             Spacer()
             
-            TextField(Strings.searchTextPreview, text: $text)
-                .foregroundColor(.black)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .cornerRadius(16)
-                .padding(.horizontal, 40.0)
-                .frame(maxWidth: 200.0, alignment: .leading)
+            YomiSearchBar(text: $text)
             
             YomiPreviewView(parentValue: $text)
                 .padding()

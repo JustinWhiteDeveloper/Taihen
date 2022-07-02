@@ -17,6 +17,8 @@
 		1748710828702DA300FFCC08 /* DictionaryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710728702DA300FFCC08 /* DictionaryRow.swift */; };
 		1748710A28702E9E00FFCC08 /* DictionaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710928702E9E00FFCC08 /* DictionaryViewModel.swift */; };
 		1748710B2870482000FFCC08 /* AnkiInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBA2AF285B0A93007BEC66 /* AnkiInterfaceTests.swift */; };
+		1748710D2870FF1D00FFCC08 /* FolderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710C2870FF1C00FFCC08 /* FolderPicker.swift */; };
+		1748710F2871081F00FFCC08 /* YomichanTagColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710E2871081F00FFCC08 /* YomichanTagColorTests.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -106,6 +108,8 @@
 		1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		1748710728702DA300FFCC08 /* DictionaryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRow.swift; sourceTree = "<group>"; };
 		1748710928702E9E00FFCC08 /* DictionaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewModel.swift; sourceTree = "<group>"; };
+		1748710C2870FF1C00FFCC08 /* FolderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPicker.swift; sourceTree = "<group>"; };
+		1748710E2871081F00FFCC08 /* YomichanTagColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomichanTagColorTests.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
 		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				17CA0BC32851DC9F00507CF5 /* Colors.swift */,
 				1748710328701CF700FFCC08 /* NotificationExtensions.swift */,
 				1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */,
+				1748710C2870FF1C00FFCC08 /* FolderPicker.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 			children = (
 				17DCE3822839E4E6001520A7 /* Dictionaries */,
 				17BBA2AF285B0A93007BEC66 /* AnkiInterfaceTests.swift */,
+				1748710E2871081F00FFCC08 /* YomichanTagColorTests.swift */,
 				17DCE36A2839C27B001520A7 /* Info.plist */,
 			);
 			path = TaihenTests;
@@ -610,6 +616,7 @@
 				170619652841C85800294124 /* Clipboard.swift in Sources */,
 				1794C704284B14CC00AC6700 /* YomiResultsView.swift in Sources */,
 				179E50C2284A106400A575E4 /* SettingsView.swift in Sources */,
+				1748710D2870FF1D00FFCC08 /* FolderPicker.swift in Sources */,
 				17487100286FFB5500FFCC08 /* FileState.swift in Sources */,
 				17CA0BC42851DC9F00507CF5 /* Colors.swift in Sources */,
 				1794C706284B2FBA00AC6700 /* CustomizableLoadingView.swift in Sources */,
@@ -633,6 +640,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1748710F2871081F00FFCC08 /* YomichanTagColorTests.swift in Sources */,
 				1748710B2870482000FFCC08 /* AnkiInterfaceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

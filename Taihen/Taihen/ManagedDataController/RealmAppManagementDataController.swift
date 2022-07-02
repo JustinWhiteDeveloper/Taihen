@@ -60,8 +60,10 @@ class RealmAppManagementDataController: AppManagementDataController {
     func reloadTags() {
         self.realm = getRealm()
 
-        YomiChanTagManager.tags = realm.objects(RealmTag.self)
-            .map({ TaihenCustomDictionaryTag.from(entity: $0) })
+        TagManager.setTags(
+            realm.objects(RealmTag.self)
+                .map({ TaihenCustomDictionaryTag.from(entity: $0) })
+        )
     }
 
     func saveFileContents(path: String, contents: String) {

@@ -246,10 +246,18 @@ struct TagView: View {
         HStack {
                         
             ForEach(Array(tags.enumerated()), id: \.offset) { index1, text in
+
                 TagPill(text: text,
-                        color: YomiChanTagManager.colorOfTag(name: text))
+                        color: tagColor(tag: text))
             }
         }
+    }
+    
+    func tagColor(tag: String) -> Color {
+        let integerValue = TagManager.tagColorInteger(tag)
+        
+        let colorScheme = YomichanColorScheme()
+        return colorScheme.integerToColor(integerValue)
     }
 }
 

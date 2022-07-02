@@ -4,13 +4,21 @@ private enum Strings {
     static let openFolderTitle = NSLocalizedString("Open", comment: "")
 }
 
+private enum Sizings {
+    static let minWindowSize = CGSize(width: 1000.0,
+                                      height: 600.0)
+    
+    static let folderPickerSize = CGSize(width: 500.0,
+                                         height: 600.0)
+}
+
 @main
 struct TaihenApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .frame(minWidth: 1000,
-                       minHeight: 600,
+                .frame(minWidth: Sizings.minWindowSize.width,
+                       minHeight: Sizings.minWindowSize.height,
                        alignment: .center)
         }
         .commands {
@@ -28,16 +36,9 @@ struct TaihenApp: App {
     
     func selectFolder() {
         
-        let folderChooserPoint = CGPoint(x: 0, y: 0)
-        let folderChooserSize = CGSize(width: 500, height: 600)
-        let folderChooserRectangle = CGRect(origin: folderChooserPoint, size: folderChooserSize)
-        let folderPicker = NSOpenPanel(contentRect: folderChooserRectangle, styleMask: .utilityWindow, backing: .buffered, defer: true)
-        
-        folderPicker.canChooseDirectories = false
-        folderPicker.canChooseFiles = true
-        folderPicker.allowsMultipleSelection = false
-        folderPicker.canDownloadUbiquitousContents = false
-        folderPicker.canResolveUbiquitousConflicts = false
+        let folderPicker = FolderPicker(windowSize: Sizings.folderPickerSize,
+                                        canChooseDirectories: false,
+                                        allowMultipleSelection: false)
         
         folderPicker.begin { response in
             

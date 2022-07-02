@@ -2,39 +2,16 @@ import Foundation
 import SwiftUI
 import TaihenDictionarySupport
 
-protocol TagManager {}
-
-class YomiChanTagManager: TagManager {
-    static var tags: [TaihenCustomDictionaryTag] = [] {
-        didSet {
-            for tag in tags {
-                tagDict[tag.shortName] = tag
-            }
-        }
+class TagManager {
+    private static var _tagDictionary: [String: TaihenCustomDictionaryTag] = [:]
+    
+    static func tagColorInteger(_ key: String) -> Int? {
+        return _tagDictionary[key]?.color
     }
     
-    static var tagDict: [String: TaihenCustomDictionaryTag] = [:]
-    
-    static func colorOfTag(name: String) -> Color {
-    
-        if let item = tagDict[name] {
-            
-            switch(item.color * -1) {
-            case 0:
-                return Colors.lightGreyColor
-            case 2:
-                return Colors.cyanColor
-            case 3:
-                return Colors.darkGreyColor
-            case 5:
-                return Colors.lightOrangeColor
-            case 10:
-                return Colors.darkBlueColor
-            default:
-                return Colors.purpleColor
-            }
+    static func setTags(_ tags: [TaihenCustomDictionaryTag]) {
+        for tag in tags {
+            _tagDictionary[tag.shortName] = tag
         }
-        
-        return Colors.purpleColor
     }
 }
