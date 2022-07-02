@@ -48,6 +48,24 @@ class AnkiInterfaceTests: XCTestCase {
         XCTAssertEqual(expectedCards, ankiResult)
     }
     
+    func testGivenAnBadAnkiInterfaceThenCardInfoCannotBeRetrieved() throws {
+        
+        // given
+        let interface = ConcreteAnkiInterface(server: TestAnkiServer(), address: "")
+        var ankiResult: AnkiCardInfoResult?
+        let expectation = XCTestExpectation(description: "Wait for Response")
+        
+        // when
+        interface.getCardInfo(values: [0,1,2]) { result in
+            ankiResult = result
+            expectation.fulfill()
+        }
+        
+        //then
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertNil(ankiResult)
+    }
+    
     func testGivenAnAnkiInterfaceThenCanFindCardsWithExpression() throws {
         
         // given
@@ -67,10 +85,43 @@ class AnkiInterfaceTests: XCTestCase {
         XCTAssertEqual(expectedCards, ankiResult)
     }
     
+    func testGivenAnBadAnkiInterfaceThenCannotFindCardsWithExpression() throws {
+        
+        // given
+        let interface = ConcreteAnkiInterface(server: TestAnkiServer(), address: "")
+        var ankiResult: AnkiQueryResult?
+        let expectation = XCTestExpectation(description: "Wait for Response")
+        
+        // when
+        interface.findCards(expression: "はい") { result in
+            ankiResult = result
+            expectation.fulfill()
+        }
+        
+        //then
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertNil(ankiResult)
+    }
+    
     func testGivenAnAnkiInterfaceThenCanDoABrowseQuery() throws {
         
         // given
         let interface = ConcreteAnkiInterface(server: TestAnkiServer())
+        let expectation = XCTestExpectation(description: "Wait for Response")
+        
+        // when
+        interface.browseQuery(expression: "はい") {
+            expectation.fulfill()
+        }
+        
+        //then
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGivenAnBadAnkiInterfaceThenCannotDoABrowseQueryButDontCrash() throws {
+        
+        // given
+        let interface = ConcreteAnkiInterface(server: TestAnkiServer(), address: "")
         let expectation = XCTestExpectation(description: "Wait for Response")
         
         // when

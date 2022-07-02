@@ -94,12 +94,14 @@ private enum HTTPMethod: String {
 
 class ConcreteAnkiInterface: AnkiInterface {
     
-    private let address = "http://localhost:8765"
-    
+    private let address: String
     private let server: AnkiServer
     
-    init(server: AnkiServer = ConcreteAnkiServer()) {
+    init(server: AnkiServer = ConcreteAnkiServer(),
+         address: String = "http://localhost:8765") {
+            
         self.server = server
+        self.address = address
     }
 
     func findCards(expression: String, callback: @escaping (AnkiQueryResult?) -> Void) {
@@ -115,27 +117,13 @@ class ConcreteAnkiInterface: AnkiInterface {
         let template = FindCardTemplate.findCardsWithExpression(expression)
         
         let encoder = JSONEncoder()
+        request.httpBody = try? encoder.encode(template)
 
-        do {
-            request.httpBody = try encoder.encode(template)
-        }
-        catch {
-            callback(nil)
-        }
-        
         server.sendRequest(request: request) { (response, data, error) in
             guard let data = data else { return }
             
             let jsonDecoder = JSONDecoder()
-            
-            do {
-                let template = try jsonDecoder.decode(AnkiQueryResult.self, from: data)
-                callback(template)
-
-            }
-            catch {
-                callback(nil)
-            }
+            callback(try? jsonDecoder.decode(AnkiQueryResult.self, from: data))
         }
     }
     
@@ -151,32 +139,20 @@ class ConcreteAnkiInterface: AnkiInterface {
         let template = CardInfoTemplate.getCardInfoWithCards(values)
         
         let encoder = JSONEncoder()
-    
-        do {
-            request.httpBody = try encoder.encode(template)
-        }
-        catch {
-            callback(nil)
-        }
-        
+        request.httpBody = try? encoder.encode(template)
+ 
         server.sendRequest(request: request) {(response, data, error) in
             guard let data = data else { return }
             
             let jsonDecoder = JSONDecoder()
-            
-            do {
-                let template = try jsonDecoder.decode(AnkiCardInfoResult.self, from: data)
-                callback(template)
-            }
-            catch {
-                callback(nil)
-            }
+            callback(try? jsonDecoder.decode(AnkiCardInfoResult.self, from: data))
         }
     }
     
     func browseQuery(expression: String, callback: @escaping () -> Void) {
         
         guard let url = URL(string: address) else {
+            callback()
             return
         }
         
@@ -186,12 +162,8 @@ class ConcreteAnkiInterface: AnkiInterface {
         let template = GuiBrowseTemplate.getCardsWithQuery(expression)
         
         let encoder = JSONEncoder()
-    
-        do {
-            request.httpBody = try encoder.encode(template)
-        }
-        catch { }
-        
+        request.httpBody = try? encoder.encode(template)
+
         server.sendRequest(request: request) {_,_,_ in
             callback()
         }
