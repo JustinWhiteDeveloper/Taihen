@@ -1,6 +1,6 @@
 # Taihen
 
-![Tests](https://github.com/JustinWhiteDeveloper/Taihen/blob/main/.github/workflows/test.yml/badge.svg)
+[![UnitTestRunner](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml)
 
 Taihen (working name) is a Fan project porting much of the functionality of Yomichan to a OSX application following the same conventions and colors with a few liberties taken here and there.
 
