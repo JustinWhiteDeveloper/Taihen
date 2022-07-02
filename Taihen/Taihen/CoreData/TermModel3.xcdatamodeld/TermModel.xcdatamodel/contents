@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DictionaryEntity" representedClassName="DictionaryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="revision" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="TagEntity" representedClassName="TagEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dictionary" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="TermEntity" representedClassName="TermEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="dictionaryName" optional="YES" attributeType="String"/>
+        <attribute name="groupTags" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="kana" attributeType="String"/>
+        <attribute name="meanings" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="meaningTags" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="term" attributeType="String">
+            <userInfo>
+                <entry key="key" value="value"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <elements>
+        <element name="TermEntity" positionX="-90.6795654296875" positionY="21.84967041015625" width="128" height="133"/>
+        <element name="DictionaryEntity" positionX="73.1636962890625" positionY="195.3179321289062" width="128" height="103"/>
+        <element name="TagEntity" positionX="18" positionY="162" width="128" height="74"/>
+    </elements>
+</model>

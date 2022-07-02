@@ -1,0 +1,1006 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		170619652841C85800294124 /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170619642841C85800294124 /* Clipboard.swift */; };
+		173EBE1728586C6400A59BF5 /* LaughingOctoAdventure in Frameworks */ = {isa = PBXBuildFile; productRef = 173EBE1628586C6400A59BF5 /* LaughingOctoAdventure */; };
+		174870FE286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174870FD286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift */; };
+		17487100286FFB5500FFCC08 /* FileState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174870FF286FFB5500FFCC08 /* FileState.swift */; };
+		17487102286FFDD200FFCC08 /* SettingsSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17487101286FFDD200FFCC08 /* SettingsSliderView.swift */; };
+		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
+		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
+		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
+		178B4BB4283F8BC4001636F7 /* TaihenDictionarySupport in Frameworks */ = {isa = PBXBuildFile; productRef = 178B4BB3283F8BC4001636F7 /* TaihenDictionarySupport */; };
+		1794C704284B14CC00AC6700 /* YomiResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C703284B14CC00AC6700 /* YomiResultsView.swift */; };
+		1794C706284B2FBA00AC6700 /* CustomizableLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C705284B2FBA00AC6700 /* CustomizableLoadingView.swift */; };
+		1794C70A284DC6F700AC6700 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C709284DC6F600AC6700 /* StringExtensions.swift */; };
+		1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C70E284F32DB00AC6700 /* FeatureManager.swift */; };
+		179E50C2284A106400A575E4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179E50C1284A106400A575E4 /* SettingsView.swift */; };
+		17CA0BC42851DC9F00507CF5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BC32851DC9F00507CF5 /* Colors.swift */; };
+		17CA0BC62851DE1C00507CF5 /* ViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BC52851DE1C00507CF5 /* ViewMode.swift */; };
+		17CA0BC82851DE3E00507CF5 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BC72851DE3E00507CF5 /* SideMenu.swift */; };
+		17CA0BE52855E04000507CF5 /* AnkiActionTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BE42855E04000507CF5 /* AnkiActionTemplate.swift */; };
+		17DCE3562839C278001520A7 /* TaihenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3552839C278001520A7 /* TaihenApp.swift */; };
+		17DCE3582839C278001520A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3572839C278001520A7 /* ContentView.swift */; };
+		17DCE35A2839C27A001520A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3592839C27A001520A7 /* Assets.xcassets */; };
+		17DCE35D2839C27A001520A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE35C2839C27A001520A7 /* Preview Assets.xcassets */; };
+		17DCE3692839C27B001520A7 /* TaihenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3682839C27B001520A7 /* TaihenTests.swift */; };
+		17DCE3742839C27B001520A7 /* TaihenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3732839C27B001520A7 /* TaihenUITests.swift */; };
+		17DCE3A8283A0F47001520A7 /* term_bank_16.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE385283A0F47001520A7 /* term_bank_16.json */; };
+		17DCE3A9283A0F47001520A7 /* term_bank_20.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE386283A0F47001520A7 /* term_bank_20.json */; };
+		17DCE3AA283A0F47001520A7 /* term_bank_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE387283A0F47001520A7 /* term_bank_2.json */; };
+		17DCE3AB283A0F47001520A7 /* term_bank_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE388283A0F47001520A7 /* term_bank_3.json */; };
+		17DCE3AC283A0F47001520A7 /* term_bank_21.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE389283A0F47001520A7 /* term_bank_21.json */; };
+		17DCE3AD283A0F47001520A7 /* term_bank_17.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE38A283A0F47001520A7 /* term_bank_17.json */; };
+		17DCE3AE283A0F47001520A7 /* term_bank_26.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE38B283A0F47001520A7 /* term_bank_26.json */; };
+		17DCE3AF283A0F47001520A7 /* term_bank_4.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE38C283A0F47001520A7 /* term_bank_4.json */; };
+		17DCE3B0283A0F47001520A7 /* term_bank_30.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE38D283A0F47001520A7 /* term_bank_30.json */; };
+		17DCE3B1283A0F47001520A7 /* term_bank_10.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE38E283A0F47001520A7 /* term_bank_10.json */; };
+		17DCE3B2283A0F47001520A7 /* term_bank_8.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE38F283A0F47001520A7 /* term_bank_8.json */; };
+		17DCE3B3283A0F47001520A7 /* term_bank_9.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE390283A0F47001520A7 /* term_bank_9.json */; };
+		17DCE3B4283A0F47001520A7 /* term_bank_11.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE391283A0F47001520A7 /* term_bank_11.json */; };
+		17DCE3B5283A0F47001520A7 /* term_bank_31.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE392283A0F47001520A7 /* term_bank_31.json */; };
+		17DCE3B6283A0F47001520A7 /* term_bank_5.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE393283A0F47001520A7 /* term_bank_5.json */; };
+		17DCE3B7283A0F47001520A7 /* term_bank_27.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE394283A0F47001520A7 /* term_bank_27.json */; };
+		17DCE3B8283A0F47001520A7 /* tag_bank_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE395283A0F47001520A7 /* tag_bank_1.json */; };
+		17DCE3B9283A0F47001520A7 /* term_bank_32.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE396283A0F47001520A7 /* term_bank_32.json */; };
+		17DCE3BA283A0F47001520A7 /* term_bank_6.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE397283A0F47001520A7 /* term_bank_6.json */; };
+		17DCE3BB283A0F47001520A7 /* term_bank_24.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE398283A0F47001520A7 /* term_bank_24.json */; };
+		17DCE3BC283A0F47001520A7 /* term_bank_28.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE399283A0F47001520A7 /* term_bank_28.json */; };
+		17DCE3BD283A0F47001520A7 /* term_bank_12.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE39A283A0F47001520A7 /* term_bank_12.json */; };
+		17DCE3BE283A0F47001520A7 /* term_bank_13.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE39B283A0F47001520A7 /* term_bank_13.json */; };
+		17DCE3BF283A0F47001520A7 /* term_bank_29.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE39C283A0F47001520A7 /* term_bank_29.json */; };
+		17DCE3C0283A0F47001520A7 /* term_bank_25.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE39D283A0F47001520A7 /* term_bank_25.json */; };
+		17DCE3C1283A0F47001520A7 /* term_bank_7.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE39E283A0F47001520A7 /* term_bank_7.json */; };
+		17DCE3C2283A0F47001520A7 /* term_bank_14.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE39F283A0F47001520A7 /* term_bank_14.json */; };
+		17DCE3C3283A0F47001520A7 /* term_bank_22.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A0283A0F47001520A7 /* term_bank_22.json */; };
+		17DCE3C4283A0F47001520A7 /* term_bank_18.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A1283A0F47001520A7 /* term_bank_18.json */; };
+		17DCE3C5283A0F47001520A7 /* index.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A2283A0F47001520A7 /* index.json */; };
+		17DCE3C6283A0F47001520A7 /* term_bank_19.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A3283A0F47001520A7 /* term_bank_19.json */; };
+		17DCE3C7283A0F47001520A7 /* term_bank_23.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A4283A0F47001520A7 /* term_bank_23.json */; };
+		17DCE3C8283A0F47001520A7 /* term_bank_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A5283A0F47001520A7 /* term_bank_1.json */; };
+		17DCE3C9283A0F47001520A7 /* term_bank_15.json in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A6283A0F47001520A7 /* term_bank_15.json */; };
+		17DCE3CA283A0F47001520A7 /* jmdict_english.zip in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A7283A0F47001520A7 /* jmdict_english.zip */; };
+		17F935C42843500200513356 /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C32843500200513356 /* ReaderView.swift */; };
+		17F935C6284358AE00513356 /* YomiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C5284358AE00513356 /* YomiPreviewView.swift */; };
+		17F935C8284360DF00513356 /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C7284360DF00513356 /* TagManager.swift */; };
+		17F935CB2843797500513356 /* ManagedDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CA2843797500513356 /* ManagedDataController.swift */; };
+		17F935D02846026200513356 /* RealmManagedDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CF2846026200513356 /* RealmManagedDataController.swift */; };
+		17F935D3284603E000513356 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D2284603E000513356 /* Realm */; };
+		17F935D5284603E000513356 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D4284603E000513356 /* RealmSwift */; };
+		17F935D9284756CA00513356 /* YomiFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935D8284756CA00513356 /* YomiFormatter.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		17DCE3652839C27B001520A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17DCE34A2839C278001520A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17DCE3512839C278001520A7;
+			remoteInfo = Taihen;
+		};
+		17DCE3702839C27B001520A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17DCE34A2839C278001520A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17DCE3512839C278001520A7;
+			remoteInfo = Taihen;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		170619642841C85800294124 /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
+		174870FD286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagedDictionaryController.swift; sourceTree = "<group>"; };
+		174870FF286FFB5500FFCC08 /* FileState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileState.swift; sourceTree = "<group>"; };
+		17487101286FFDD200FFCC08 /* SettingsSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSliderView.swift; sourceTree = "<group>"; };
+		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
+		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
+		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
+		1794C703284B14CC00AC6700 /* YomiResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiResultsView.swift; sourceTree = "<group>"; };
+		1794C705284B2FBA00AC6700 /* CustomizableLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizableLoadingView.swift; sourceTree = "<group>"; };
+		1794C709284DC6F600AC6700 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		1794C70D284F312C00AC6700 /* TaihenDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaihenDebug.entitlements; sourceTree = "<group>"; };
+		1794C70E284F32DB00AC6700 /* FeatureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureManager.swift; sourceTree = "<group>"; };
+		179E50C1284A106400A575E4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		17BBA2AC285B09AC007BEC66 /* TaihenDictionarySupport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = TaihenDictionarySupport; sourceTree = "<group>"; };
+		17BBA2AF285B0A93007BEC66 /* JapaneseConjugationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapaneseConjugationTests.swift; sourceTree = "<group>"; };
+		17CA0BC32851DC9F00507CF5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		17CA0BC52851DE1C00507CF5 /* ViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMode.swift; sourceTree = "<group>"; };
+		17CA0BC72851DE3E00507CF5 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
+		17CA0BE42855E04000507CF5 /* AnkiActionTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiActionTemplate.swift; sourceTree = "<group>"; };
+		17DCE3522839C278001520A7 /* Taihen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taihen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17DCE3552839C278001520A7 /* TaihenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenApp.swift; sourceTree = "<group>"; };
+		17DCE3572839C278001520A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		17DCE3592839C27A001520A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		17DCE35C2839C27A001520A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		17DCE35E2839C27B001520A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17DCE35F2839C27B001520A7 /* Taihen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Taihen.entitlements; sourceTree = "<group>"; };
+		17DCE3642839C27B001520A7 /* TaihenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaihenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17DCE3682839C27B001520A7 /* TaihenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenTests.swift; sourceTree = "<group>"; };
+		17DCE36A2839C27B001520A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17DCE36F2839C27B001520A7 /* TaihenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaihenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17DCE3732839C27B001520A7 /* TaihenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenUITests.swift; sourceTree = "<group>"; };
+		17DCE3752839C27B001520A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17DCE385283A0F47001520A7 /* term_bank_16.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_16.json; sourceTree = "<group>"; };
+		17DCE386283A0F47001520A7 /* term_bank_20.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_20.json; sourceTree = "<group>"; };
+		17DCE387283A0F47001520A7 /* term_bank_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_2.json; sourceTree = "<group>"; };
+		17DCE388283A0F47001520A7 /* term_bank_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_3.json; sourceTree = "<group>"; };
+		17DCE389283A0F47001520A7 /* term_bank_21.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_21.json; sourceTree = "<group>"; };
+		17DCE38A283A0F47001520A7 /* term_bank_17.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_17.json; sourceTree = "<group>"; };
+		17DCE38B283A0F47001520A7 /* term_bank_26.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_26.json; sourceTree = "<group>"; };
+		17DCE38C283A0F47001520A7 /* term_bank_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_4.json; sourceTree = "<group>"; };
+		17DCE38D283A0F47001520A7 /* term_bank_30.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_30.json; sourceTree = "<group>"; };
+		17DCE38E283A0F47001520A7 /* term_bank_10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_10.json; sourceTree = "<group>"; };
+		17DCE38F283A0F47001520A7 /* term_bank_8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_8.json; sourceTree = "<group>"; };
+		17DCE390283A0F47001520A7 /* term_bank_9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_9.json; sourceTree = "<group>"; };
+		17DCE391283A0F47001520A7 /* term_bank_11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_11.json; sourceTree = "<group>"; };
+		17DCE392283A0F47001520A7 /* term_bank_31.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_31.json; sourceTree = "<group>"; };
+		17DCE393283A0F47001520A7 /* term_bank_5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_5.json; sourceTree = "<group>"; };
+		17DCE394283A0F47001520A7 /* term_bank_27.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_27.json; sourceTree = "<group>"; };
+		17DCE395283A0F47001520A7 /* tag_bank_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tag_bank_1.json; sourceTree = "<group>"; };
+		17DCE396283A0F47001520A7 /* term_bank_32.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_32.json; sourceTree = "<group>"; };
+		17DCE397283A0F47001520A7 /* term_bank_6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_6.json; sourceTree = "<group>"; };
+		17DCE398283A0F47001520A7 /* term_bank_24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_24.json; sourceTree = "<group>"; };
+		17DCE399283A0F47001520A7 /* term_bank_28.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_28.json; sourceTree = "<group>"; };
+		17DCE39A283A0F47001520A7 /* term_bank_12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_12.json; sourceTree = "<group>"; };
+		17DCE39B283A0F47001520A7 /* term_bank_13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_13.json; sourceTree = "<group>"; };
+		17DCE39C283A0F47001520A7 /* term_bank_29.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_29.json; sourceTree = "<group>"; };
+		17DCE39D283A0F47001520A7 /* term_bank_25.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_25.json; sourceTree = "<group>"; };
+		17DCE39E283A0F47001520A7 /* term_bank_7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_7.json; sourceTree = "<group>"; };
+		17DCE39F283A0F47001520A7 /* term_bank_14.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_14.json; sourceTree = "<group>"; };
+		17DCE3A0283A0F47001520A7 /* term_bank_22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_22.json; sourceTree = "<group>"; };
+		17DCE3A1283A0F47001520A7 /* term_bank_18.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_18.json; sourceTree = "<group>"; };
+		17DCE3A2283A0F47001520A7 /* index.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = index.json; sourceTree = "<group>"; };
+		17DCE3A3283A0F47001520A7 /* term_bank_19.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_19.json; sourceTree = "<group>"; };
+		17DCE3A4283A0F47001520A7 /* term_bank_23.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_23.json; sourceTree = "<group>"; };
+		17DCE3A5283A0F47001520A7 /* term_bank_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_1.json; sourceTree = "<group>"; };
+		17DCE3A6283A0F47001520A7 /* term_bank_15.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = term_bank_15.json; sourceTree = "<group>"; };
+		17DCE3A7283A0F47001520A7 /* jmdict_english.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = jmdict_english.zip; sourceTree = "<group>"; };
+		17F935C32843500200513356 /* ReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderView.swift; sourceTree = "<group>"; };
+		17F935C5284358AE00513356 /* YomiPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiPreviewView.swift; sourceTree = "<group>"; };
+		17F935C7284360DF00513356 /* TagManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
+		17F935CA2843797500513356 /* ManagedDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedDataController.swift; sourceTree = "<group>"; };
+		17F935CF2846026200513356 /* RealmManagedDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagedDataController.swift; sourceTree = "<group>"; };
+		17F935D8284756CA00513356 /* YomiFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiFormatter.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17DCE34F2839C278001520A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17F935D5284603E000513356 /* RealmSwift in Frameworks */,
+				17F935D3284603E000513356 /* Realm in Frameworks */,
+				178B4BB4283F8BC4001636F7 /* TaihenDictionarySupport in Frameworks */,
+				173EBE1728586C6400A59BF5 /* LaughingOctoAdventure in Frameworks */,
+				174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DCE3612839C27B001520A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DCE36C2839C27B001520A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		176D717E285B092000F50147 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				176D717F285B092000F50147 /* JapaneseConjugation */,
+				17BBA2AC285B09AC007BEC66 /* TaihenDictionarySupport */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		178B4BB0283F8BAB001636F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1794C71028508C8F00AC6700 /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				1794C70E284F32DB00AC6700 /* FeatureManager.swift */,
+				170619642841C85800294124 /* Clipboard.swift */,
+				1794C709284DC6F600AC6700 /* StringExtensions.swift */,
+				17F935C7284360DF00513356 /* TagManager.swift */,
+				17CA0BC32851DC9F00507CF5 /* Colors.swift */,
+			);
+			path = Generic;
+			sourceTree = "<group>";
+		};
+		17BBA2AD285B0A93007BEC66 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				17BBA2AE285B0A93007BEC66 /* JapaneseConjugationTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		17BBA2AE285B0A93007BEC66 /* JapaneseConjugationTests */ = {
+			isa = PBXGroup;
+			children = (
+				17BBA2AF285B0A93007BEC66 /* JapaneseConjugationTests.swift */,
+			);
+			path = JapaneseConjugationTests;
+			sourceTree = "<group>";
+		};
+		17CA0BBF2851D7A100507CF5 /* Yomi */ = {
+			isa = PBXGroup;
+			children = (
+				17F935C5284358AE00513356 /* YomiPreviewView.swift */,
+				1794C703284B14CC00AC6700 /* YomiResultsView.swift */,
+				177BA8E32842137A004DC312 /* YomiView.swift */,
+			);
+			path = Yomi;
+			sourceTree = "<group>";
+		};
+		17CA0BC02851D7BA00507CF5 /* Dictionaries */ = {
+			isa = PBXGroup;
+			children = (
+				177BA8E528421FEF004DC312 /* DictionariesView.swift */,
+			);
+			path = Dictionaries;
+			sourceTree = "<group>";
+		};
+		17CA0BC12851D7C600507CF5 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				17F935C32843500200513356 /* ReaderView.swift */,
+			);
+			path = Reader;
+			sourceTree = "<group>";
+		};
+		17CA0BC22851D7D600507CF5 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				179E50C1284A106400A575E4 /* SettingsView.swift */,
+				17487101286FFDD200FFCC08 /* SettingsSliderView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		17CA0BE32855E01800507CF5 /* AnkiConnect */ = {
+			isa = PBXGroup;
+			children = (
+				17CA0BE42855E04000507CF5 /* AnkiActionTemplate.swift */,
+			);
+			path = AnkiConnect;
+			sourceTree = "<group>";
+		};
+		17DCE3492839C278001520A7 = {
+			isa = PBXGroup;
+			children = (
+				176D717E285B092000F50147 /* Packages */,
+				17DCE3542839C278001520A7 /* Taihen */,
+				17DCE3672839C27B001520A7 /* TaihenTests */,
+				17DCE3722839C27B001520A7 /* TaihenUITests */,
+				17DCE3532839C278001520A7 /* Products */,
+				178B4BB0283F8BAB001636F7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		17DCE3532839C278001520A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17DCE3522839C278001520A7 /* Taihen.app */,
+				17DCE3642839C27B001520A7 /* TaihenTests.xctest */,
+				17DCE36F2839C27B001520A7 /* TaihenUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		17DCE3542839C278001520A7 /* Taihen */ = {
+			isa = PBXGroup;
+			children = (
+				17BBA2AD285B0A93007BEC66 /* Tests */,
+				1794C70D284F312C00AC6700 /* TaihenDebug.entitlements */,
+				1794C71028508C8F00AC6700 /* Generic */,
+				17F935CC2843798600513356 /* ManagedDataController */,
+				17DCE3552839C278001520A7 /* TaihenApp.swift */,
+				17CA0BE32855E01800507CF5 /* AnkiConnect */,
+				17F935C92843610000513356 /* Views */,
+				17DCE3592839C27A001520A7 /* Assets.xcassets */,
+				17DCE35E2839C27B001520A7 /* Info.plist */,
+				17DCE35F2839C27B001520A7 /* Taihen.entitlements */,
+				17DCE35B2839C27A001520A7 /* Preview Content */,
+			);
+			path = Taihen;
+			sourceTree = "<group>";
+		};
+		17DCE35B2839C27A001520A7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				17DCE35C2839C27A001520A7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		17DCE3672839C27B001520A7 /* TaihenTests */ = {
+			isa = PBXGroup;
+			children = (
+				17DCE3822839E4E6001520A7 /* Dictionaries */,
+				17DCE3682839C27B001520A7 /* TaihenTests.swift */,
+				17DCE36A2839C27B001520A7 /* Info.plist */,
+			);
+			path = TaihenTests;
+			sourceTree = "<group>";
+		};
+		17DCE3722839C27B001520A7 /* TaihenUITests */ = {
+			isa = PBXGroup;
+			children = (
+				17DCE3732839C27B001520A7 /* TaihenUITests.swift */,
+				17DCE3752839C27B001520A7 /* Info.plist */,
+			);
+			path = TaihenUITests;
+			sourceTree = "<group>";
+		};
+		17DCE3822839E4E6001520A7 /* Dictionaries */ = {
+			isa = PBXGroup;
+			children = (
+				17DCE384283A0F47001520A7 /* jmdict_english */,
+				17DCE3A7283A0F47001520A7 /* jmdict_english.zip */,
+			);
+			path = Dictionaries;
+			sourceTree = "<group>";
+		};
+		17DCE384283A0F47001520A7 /* jmdict_english */ = {
+			isa = PBXGroup;
+			children = (
+				17DCE385283A0F47001520A7 /* term_bank_16.json */,
+				17DCE386283A0F47001520A7 /* term_bank_20.json */,
+				17DCE387283A0F47001520A7 /* term_bank_2.json */,
+				17DCE388283A0F47001520A7 /* term_bank_3.json */,
+				17DCE389283A0F47001520A7 /* term_bank_21.json */,
+				17DCE38A283A0F47001520A7 /* term_bank_17.json */,
+				17DCE38B283A0F47001520A7 /* term_bank_26.json */,
+				17DCE38C283A0F47001520A7 /* term_bank_4.json */,
+				17DCE38D283A0F47001520A7 /* term_bank_30.json */,
+				17DCE38E283A0F47001520A7 /* term_bank_10.json */,
+				17DCE38F283A0F47001520A7 /* term_bank_8.json */,
+				17DCE390283A0F47001520A7 /* term_bank_9.json */,
+				17DCE391283A0F47001520A7 /* term_bank_11.json */,
+				17DCE392283A0F47001520A7 /* term_bank_31.json */,
+				17DCE393283A0F47001520A7 /* term_bank_5.json */,
+				17DCE394283A0F47001520A7 /* term_bank_27.json */,
+				17DCE395283A0F47001520A7 /* tag_bank_1.json */,
+				17DCE396283A0F47001520A7 /* term_bank_32.json */,
+				17DCE397283A0F47001520A7 /* term_bank_6.json */,
+				17DCE398283A0F47001520A7 /* term_bank_24.json */,
+				17DCE399283A0F47001520A7 /* term_bank_28.json */,
+				17DCE39A283A0F47001520A7 /* term_bank_12.json */,
+				17DCE39B283A0F47001520A7 /* term_bank_13.json */,
+				17DCE39C283A0F47001520A7 /* term_bank_29.json */,
+				17DCE39D283A0F47001520A7 /* term_bank_25.json */,
+				17DCE39E283A0F47001520A7 /* term_bank_7.json */,
+				17DCE39F283A0F47001520A7 /* term_bank_14.json */,
+				17DCE3A0283A0F47001520A7 /* term_bank_22.json */,
+				17DCE3A1283A0F47001520A7 /* term_bank_18.json */,
+				17DCE3A2283A0F47001520A7 /* index.json */,
+				17DCE3A3283A0F47001520A7 /* term_bank_19.json */,
+				17DCE3A4283A0F47001520A7 /* term_bank_23.json */,
+				17DCE3A5283A0F47001520A7 /* term_bank_1.json */,
+				17DCE3A6283A0F47001520A7 /* term_bank_15.json */,
+			);
+			path = jmdict_english;
+			sourceTree = "<group>";
+		};
+		17F935C92843610000513356 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17CA0BC22851D7D600507CF5 /* SettingsView */,
+				17CA0BC12851D7C600507CF5 /* Reader */,
+				17CA0BC02851D7BA00507CF5 /* Dictionaries */,
+				17CA0BBF2851D7A100507CF5 /* Yomi */,
+				17DCE3572839C278001520A7 /* ContentView.swift */,
+				1794C705284B2FBA00AC6700 /* CustomizableLoadingView.swift */,
+				17CA0BC52851DE1C00507CF5 /* ViewMode.swift */,
+				17CA0BC72851DE3E00507CF5 /* SideMenu.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		17F935CC2843798600513356 /* ManagedDataController */ = {
+			isa = PBXGroup;
+			children = (
+				17F935CA2843797500513356 /* ManagedDataController.swift */,
+				17F935CF2846026200513356 /* RealmManagedDataController.swift */,
+				174870FD286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift */,
+				17F935D8284756CA00513356 /* YomiFormatter.swift */,
+				174870FF286FFB5500FFCC08 /* FileState.swift */,
+			);
+			path = ManagedDataController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		17DCE3512839C278001520A7 /* Taihen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17DCE3782839C27B001520A7 /* Build configuration list for PBXNativeTarget "Taihen" */;
+			buildPhases = (
+				17DCE34E2839C278001520A7 /* Sources */,
+				17DCE34F2839C278001520A7 /* Frameworks */,
+				17DCE3502839C278001520A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Taihen;
+			packageProductDependencies = (
+				178B4BB3283F8BC4001636F7 /* TaihenDictionarySupport */,
+				17F935D2284603E000513356 /* Realm */,
+				17F935D4284603E000513356 /* RealmSwift */,
+				173EBE1628586C6400A59BF5 /* LaughingOctoAdventure */,
+				174A89A0285B15810074D0F8 /* JapaneseConjugation */,
+			);
+			productName = Taihen;
+			productReference = 17DCE3522839C278001520A7 /* Taihen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		17DCE3632839C27B001520A7 /* TaihenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17DCE37B2839C27B001520A7 /* Build configuration list for PBXNativeTarget "TaihenTests" */;
+			buildPhases = (
+				17DCE3602839C27B001520A7 /* Sources */,
+				17DCE3612839C27B001520A7 /* Frameworks */,
+				17DCE3622839C27B001520A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17DCE3662839C27B001520A7 /* PBXTargetDependency */,
+			);
+			name = TaihenTests;
+			productName = TaihenTests;
+			productReference = 17DCE3642839C27B001520A7 /* TaihenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		17DCE36E2839C27B001520A7 /* TaihenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17DCE37E2839C27B001520A7 /* Build configuration list for PBXNativeTarget "TaihenUITests" */;
+			buildPhases = (
+				17DCE36B2839C27B001520A7 /* Sources */,
+				17DCE36C2839C27B001520A7 /* Frameworks */,
+				17DCE36D2839C27B001520A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17DCE3712839C27B001520A7 /* PBXTargetDependency */,
+			);
+			name = TaihenUITests;
+			productName = TaihenUITests;
+			productReference = 17DCE36F2839C27B001520A7 /* TaihenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		17DCE34A2839C278001520A7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					17DCE3512839C278001520A7 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					17DCE3632839C27B001520A7 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 17DCE3512839C278001520A7;
+					};
+					17DCE36E2839C27B001520A7 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 17DCE3512839C278001520A7;
+					};
+				};
+			};
+			buildConfigurationList = 17DCE34D2839C278001520A7 /* Build configuration list for PBXProject "Taihen" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 17DCE3492839C278001520A7;
+			packageReferences = (
+				17F935D1284603E000513356 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				173EBE1528586C6400A59BF5 /* XCRemoteSwiftPackageReference "laughing-octo-adventure" */,
+			);
+			productRefGroup = 17DCE3532839C278001520A7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				17DCE3512839C278001520A7 /* Taihen */,
+				17DCE3632839C27B001520A7 /* TaihenTests */,
+				17DCE36E2839C27B001520A7 /* TaihenUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		17DCE3502839C278001520A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17DCE35D2839C27A001520A7 /* Preview Assets.xcassets in Resources */,
+				17DCE35A2839C27A001520A7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DCE3622839C27B001520A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17DCE3C5283A0F47001520A7 /* index.json in Resources */,
+				17DCE3A8283A0F47001520A7 /* term_bank_16.json in Resources */,
+				17DCE3AD283A0F47001520A7 /* term_bank_17.json in Resources */,
+				17DCE3AB283A0F47001520A7 /* term_bank_3.json in Resources */,
+				17DCE3AA283A0F47001520A7 /* term_bank_2.json in Resources */,
+				17DCE3B7283A0F47001520A7 /* term_bank_27.json in Resources */,
+				17DCE3C6283A0F47001520A7 /* term_bank_19.json in Resources */,
+				17DCE3AE283A0F47001520A7 /* term_bank_26.json in Resources */,
+				17DCE3CA283A0F47001520A7 /* jmdict_english.zip in Resources */,
+				17DCE3AC283A0F47001520A7 /* term_bank_21.json in Resources */,
+				17DCE3B2283A0F47001520A7 /* term_bank_8.json in Resources */,
+				17DCE3B3283A0F47001520A7 /* term_bank_9.json in Resources */,
+				17DCE3BA283A0F47001520A7 /* term_bank_6.json in Resources */,
+				17DCE3B4283A0F47001520A7 /* term_bank_11.json in Resources */,
+				17DCE3BE283A0F47001520A7 /* term_bank_13.json in Resources */,
+				17DCE3AF283A0F47001520A7 /* term_bank_4.json in Resources */,
+				17DCE3C4283A0F47001520A7 /* term_bank_18.json in Resources */,
+				17DCE3C7283A0F47001520A7 /* term_bank_23.json in Resources */,
+				17DCE3C1283A0F47001520A7 /* term_bank_7.json in Resources */,
+				17DCE3BD283A0F47001520A7 /* term_bank_12.json in Resources */,
+				17DCE3C3283A0F47001520A7 /* term_bank_22.json in Resources */,
+				17DCE3B0283A0F47001520A7 /* term_bank_30.json in Resources */,
+				17DCE3C2283A0F47001520A7 /* term_bank_14.json in Resources */,
+				17DCE3C8283A0F47001520A7 /* term_bank_1.json in Resources */,
+				17DCE3C9283A0F47001520A7 /* term_bank_15.json in Resources */,
+				17DCE3BB283A0F47001520A7 /* term_bank_24.json in Resources */,
+				17DCE3B8283A0F47001520A7 /* tag_bank_1.json in Resources */,
+				17DCE3B5283A0F47001520A7 /* term_bank_31.json in Resources */,
+				17DCE3BC283A0F47001520A7 /* term_bank_28.json in Resources */,
+				17DCE3B1283A0F47001520A7 /* term_bank_10.json in Resources */,
+				17DCE3B6283A0F47001520A7 /* term_bank_5.json in Resources */,
+				17DCE3B9283A0F47001520A7 /* term_bank_32.json in Resources */,
+				17DCE3BF283A0F47001520A7 /* term_bank_29.json in Resources */,
+				17DCE3C0283A0F47001520A7 /* term_bank_25.json in Resources */,
+				17DCE3A9283A0F47001520A7 /* term_bank_20.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DCE36D2839C27B001520A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17DCE34E2839C278001520A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17CA0BE52855E04000507CF5 /* AnkiActionTemplate.swift in Sources */,
+				177BA8E42842137A004DC312 /* YomiView.swift in Sources */,
+				17F935C8284360DF00513356 /* TagManager.swift in Sources */,
+				1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */,
+				17F935C42843500200513356 /* ReaderView.swift in Sources */,
+				17F935C6284358AE00513356 /* YomiPreviewView.swift in Sources */,
+				170619652841C85800294124 /* Clipboard.swift in Sources */,
+				1794C704284B14CC00AC6700 /* YomiResultsView.swift in Sources */,
+				179E50C2284A106400A575E4 /* SettingsView.swift in Sources */,
+				17487100286FFB5500FFCC08 /* FileState.swift in Sources */,
+				17CA0BC42851DC9F00507CF5 /* Colors.swift in Sources */,
+				1794C706284B2FBA00AC6700 /* CustomizableLoadingView.swift in Sources */,
+				17DCE3582839C278001520A7 /* ContentView.swift in Sources */,
+				17CA0BC82851DE3E00507CF5 /* SideMenu.swift in Sources */,
+				17487102286FFDD200FFCC08 /* SettingsSliderView.swift in Sources */,
+				177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */,
+				174870FE286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift in Sources */,
+				1794C70A284DC6F700AC6700 /* StringExtensions.swift in Sources */,
+				17DCE3562839C278001520A7 /* TaihenApp.swift in Sources */,
+				17CA0BC62851DE1C00507CF5 /* ViewMode.swift in Sources */,
+				17F935CB2843797500513356 /* ManagedDataController.swift in Sources */,
+				17F935D02846026200513356 /* RealmManagedDataController.swift in Sources */,
+				17F935D9284756CA00513356 /* YomiFormatter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DCE3602839C27B001520A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17DCE3692839C27B001520A7 /* TaihenTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DCE36B2839C27B001520A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17DCE3742839C27B001520A7 /* TaihenUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17DCE3662839C27B001520A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17DCE3512839C278001520A7 /* Taihen */;
+			targetProxy = 17DCE3652839C27B001520A7 /* PBXContainerItemProxy */;
+		};
+		17DCE3712839C27B001520A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17DCE3512839C278001520A7 /* Taihen */;
+			targetProxy = 17DCE3702839C27B001520A7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		17DCE3762839C27B001520A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		17DCE3772839C27B001520A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		17DCE3792839C27B001520A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Taihen/TaihenDebug.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Taihen/Preview Content\"";
+				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Taihen/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = justin.Taihen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		17DCE37A2839C27B001520A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Taihen/Taihen.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Taihen/Preview Content\"";
+				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Taihen/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = justin.Taihen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		17DCE37C2839C27B001520A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				INFOPLIST_FILE = TaihenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = justin.TaihenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taihen.app/Contents/MacOS/Taihen";
+			};
+			name = Debug;
+		};
+		17DCE37D2839C27B001520A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				INFOPLIST_FILE = TaihenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_BUNDLE_IDENTIFIER = justin.TaihenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taihen.app/Contents/MacOS/Taihen";
+			};
+			name = Release;
+		};
+		17DCE37F2839C27B001520A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				INFOPLIST_FILE = TaihenUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = justin.TaihenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Taihen;
+			};
+			name = Debug;
+		};
+		17DCE3802839C27B001520A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 26TL3CY23Q;
+				INFOPLIST_FILE = TaihenUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = justin.TaihenUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Taihen;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17DCE34D2839C278001520A7 /* Build configuration list for PBXProject "Taihen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17DCE3762839C27B001520A7 /* Debug */,
+				17DCE3772839C27B001520A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17DCE3782839C27B001520A7 /* Build configuration list for PBXNativeTarget "Taihen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17DCE3792839C27B001520A7 /* Debug */,
+				17DCE37A2839C27B001520A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17DCE37B2839C27B001520A7 /* Build configuration list for PBXNativeTarget "TaihenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17DCE37C2839C27B001520A7 /* Debug */,
+				17DCE37D2839C27B001520A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17DCE37E2839C27B001520A7 /* Build configuration list for PBXNativeTarget "TaihenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17DCE37F2839C27B001520A7 /* Debug */,
+				17DCE3802839C27B001520A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		173EBE1528586C6400A59BF5 /* XCRemoteSwiftPackageReference "laughing-octo-adventure" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JustinWhiteDeveloper/laughing-octo-adventure";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.0;
+			};
+		};
+		17F935D1284603E000513356 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		173EBE1628586C6400A59BF5 /* LaughingOctoAdventure */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 173EBE1528586C6400A59BF5 /* XCRemoteSwiftPackageReference "laughing-octo-adventure" */;
+			productName = LaughingOctoAdventure;
+		};
+		174A89A0285B15810074D0F8 /* JapaneseConjugation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JapaneseConjugation;
+		};
+		178B4BB3283F8BC4001636F7 /* TaihenDictionarySupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TaihenDictionarySupport;
+		};
+		17F935D2284603E000513356 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17F935D1284603E000513356 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		17F935D4284603E000513356 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17F935D1284603E000513356 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 17DCE34A2839C278001520A7 /* Project object */;
+}
