@@ -10,6 +10,14 @@ private enum Strings {
     static let deletingDictionaries = "Deleting dictionaries"
     
     static let activeToggle = "Active"
+    
+    static let deleteDictionaryIcon = "CancelIcon"
+    static let reorderIcon = "MoveIcon"
+    
+    static let title = "Dictionaries"
+    static let addButtonTitle = "Add Dictionaries"
+    static let deleteAllButtonTitle = "Delete All"
+    
 }
 
 
@@ -41,7 +49,7 @@ struct DictionaryRow: View {
                 .frame(maxWidth: .infinity,maxHeight: .infinity)
                 .buttonStyle(PlainButtonStyle())
                 
-                Image("CancelIcon")
+                Image(Strings.deleteDictionaryIcon)
                     .renderingMode(.original)
                     .allowsHitTesting(false)
 
@@ -57,7 +65,7 @@ struct DictionaryRow: View {
                 })
                 .buttonStyle(PlainButtonStyle())
 
-                Image("MoveIcon")
+                Image(Strings.reorderIcon)
                     .renderingMode(.original)
                 
             }
@@ -79,7 +87,7 @@ struct DictionariesView: View {
     var body: some View {
         
         VStack(alignment: .center, spacing: 0, content: {
-            Text("Dictionaries")
+            Text(Strings.title)
                 .font(.largeTitle)
                 .foregroundColor(.black)
                 
@@ -112,13 +120,13 @@ struct DictionariesView: View {
                 HStack {
                     Spacer()
                     
-                    Button("Add Dictionaries",
+                    Button(Strings.addButtonTitle,
                            action: {
                         selectFolder()
                     })
                     .foregroundColor(.black)
 
-                    Button("Delete All",
+                    Button(Strings.deleteAllButtonTitle,
                            action: {
                         
                         loading = true

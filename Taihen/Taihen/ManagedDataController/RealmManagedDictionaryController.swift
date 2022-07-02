@@ -48,7 +48,6 @@ extension TaihenCustomDictionaryTerm {
     }
 }
 
-
 class RealmManagedDictionaryController: DictionaryDataController {
     
     private static var dictionaries: [String] = []
@@ -86,7 +85,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
     }
     
     func reloadDictionaries() {
-        print("reload dictionaries")
         self.realm = getRealm()
 
         let dictionaries = realm.objects(RealmDictionary.self)
@@ -97,9 +95,7 @@ class RealmManagedDictionaryController: DictionaryDataController {
     }
     
     func searchValue(value: String, callback: @escaping (Bool, Double, [[TaihenDictionaryViewModel]], Int) -> Void) {
-        
-        print("search value " + value)
-        
+                
         DispatchQueue.global(qos: .background).async {
             
             self.realm = self.getRealm()
@@ -227,9 +223,7 @@ class RealmManagedDictionaryController: DictionaryDataController {
     }
 
     func saveDictionary(_ dictionary: TaihenCustomDictionary, notifyOnBlockSize: Int, callback: @escaping () -> Void) {
-        print("save dictionary " + dictionary.name)
 
-        
         DispatchQueue.global(qos: .background).async {
             
             self.realm = self.getRealm()
@@ -370,14 +364,12 @@ class RealmManagedDictionaryController: DictionaryDataController {
         self.realm = getRealm()
 
         let dictionaries = realm.objects(RealmDictionary.self)
-        print("dictionary view models " + dictionaries.count.description)
 
         return dictionaries.map({ ManagedDictionaryViewModel(name: $0._name, order: Int($0.order), active: $0.isActive)})
             .sorted(by: { $0.order < $1.order })
     }
     
     func updateDictionaryActive(viewModel model: ManagedDictionaryViewModel, active: Bool) {
-        print("update dictionary active")
         self.realm = getRealm()
 
         let dictionary = realm.object(ofType: RealmDictionary.self, forPrimaryKey: model.name)
@@ -394,7 +386,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
     }
 
     func updateDictionaryOrder(viewModels items: [ManagedDictionaryViewModel]) {
-        print("update dictionary order")
         self.realm = getRealm()
 
         let dictionaries = realm.objects(RealmDictionary.self)
@@ -419,7 +410,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
     }
     
     func deleteDictionary(name: String, callback: @escaping ([ManagedDictionaryViewModel]) -> Void) {
-        print("delete dictionary")
         
         DispatchQueue.global(qos: .background).async { [self] in
             self.realm = self.getRealm()

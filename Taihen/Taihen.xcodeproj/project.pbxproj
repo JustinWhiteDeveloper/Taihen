@@ -12,6 +12,7 @@
 		174870FE286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174870FD286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift */; };
 		17487100286FFB5500FFCC08 /* FileState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174870FF286FFB5500FFCC08 /* FileState.swift */; };
 		17487102286FFDD200FFCC08 /* SettingsSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17487101286FFDD200FFCC08 /* SettingsSliderView.swift */; };
+		1748710428701CF700FFCC08 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710328701CF700FFCC08 /* NotificationExtensions.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -98,6 +99,7 @@
 		174870FD286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagedDictionaryController.swift; sourceTree = "<group>"; };
 		174870FF286FFB5500FFCC08 /* FileState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileState.swift; sourceTree = "<group>"; };
 		17487101286FFDD200FFCC08 /* SettingsSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSliderView.swift; sourceTree = "<group>"; };
+		1748710328701CF700FFCC08 /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
 		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				1794C709284DC6F600AC6700 /* StringExtensions.swift */,
 				17F935C7284360DF00513356 /* TagManager.swift */,
 				17CA0BC32851DC9F00507CF5 /* Colors.swift */,
+				1748710328701CF700FFCC08 /* NotificationExtensions.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				17CA0BC62851DE1C00507CF5 /* ViewMode.swift in Sources */,
 				17F935CB2843797500513356 /* ManagedDataController.swift in Sources */,
 				17F935D02846026200513356 /* RealmManagedDataController.swift in Sources */,
+				1748710428701CF700FFCC08 /* NotificationExtensions.swift in Sources */,
 				17F935D9284756CA00513356 /* YomiFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

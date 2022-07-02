@@ -4,6 +4,11 @@ import TaihenDictionarySupport
 import AVFoundation
 import LaughingOctoAdventure
 
+private enum Strings {
+    static let copyButtonTitle = NSLocalizedString("Copy", comment: "")
+    static let playAudioButtonTitle = NSLocalizedString("Play Audio", comment: "")
+}
+
 struct ItemView: View {
     
     @State var search = ""
@@ -25,7 +30,6 @@ struct ItemView: View {
 
     @State var ankiExpressionText: String = ""
 
-    
     var body: some View {
         
         Spacer()
@@ -47,13 +51,13 @@ struct ItemView: View {
             HStack {
                 TagView(tags: tags.filter({$0.count > 0}))
                 
-                Button("Copy") {
+                Button(Strings.copyButtonTitle) {
                     SharedManagedDataController.dictionaryInstance.termDescriptionToClipboard(term: term)
                 }
                 .foregroundColor(.black)
 
                 if FeatureManager.instance.audioEnabled {
-                    Button("Audio") {
+                    Button(Strings.playAudioButtonTitle) {
                         
                         if let url = audioUrl {
                             print("playing \(url)")
@@ -290,15 +294,10 @@ extension TaihenDictionaryViewModel {
             let urlString = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana=\(encodedTerm)"
 
             return URL(string: urlString)
-            
-            
         } else {
             let urlString = "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=\(encodedTerm)&kana=\(encodedKana)"
 
             return URL(string: urlString)
         }
-        
-
     }
-
 }

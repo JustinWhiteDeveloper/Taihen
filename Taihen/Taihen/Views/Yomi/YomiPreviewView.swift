@@ -4,9 +4,9 @@ import TaihenDictionarySupport
 import AVFoundation
 
 private enum Strings {
-    static let loadingText = "Loading"
+    static let loadingText = NSLocalizedString("Loading", comment: "")
+    static let noResultsText = NSLocalizedString("No results", comment: "")
 }
-
 
 struct YomiPreviewView: View {
     @State var hasBooted = false
@@ -26,8 +26,6 @@ struct YomiPreviewView: View {
     
     let pub = NotificationCenter.default
         .publisher(for: Notification.Name.onSelectionChange)
-
-
     
     var body: some View {
         
@@ -51,8 +49,6 @@ struct YomiPreviewView: View {
                             if let url = selectedTerms.first?.first?.audioUrl,
                                 FeatureManager.instance.autoplayAudio {
                                 
-                                print("playing \(url)")
-
                                 do {
                                     let audioData = try Data(contentsOf: url)
                                     
@@ -60,9 +56,6 @@ struct YomiPreviewView: View {
                                     if audioData.count >= 52288 {
                                         return
                                     }
-                                    
-                                    print("audioSize" + audioData.count.description)
-                                    
                                     
                                     
                                     let tmpFileURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("audio").appendingPathExtension("mp3")
@@ -76,26 +69,18 @@ struct YomiPreviewView: View {
                                         player?.volume = 1.0
                                         player?.play()
                                     }
-                                        
-                                    
-                                    
-
-                                    
                                 }
                                 catch {
                                     print(String(describing: error))
                                 }
-                            
-
                             }
-                            
                         }
 
                     } else {
                         
                         ZStack {
                             Color.clear
-                            Text("No results")
+                            Text(Strings.noResultsText)
                                 .foregroundColor(Color.black)
                                 .padding()
                         }

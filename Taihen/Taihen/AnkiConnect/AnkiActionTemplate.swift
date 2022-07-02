@@ -74,17 +74,18 @@ struct AnkiCardInfoResult: Codable {
 class AnkiSearcher {
     
     private let localServerAddress = "http://localhost:8765"
+    private let httpMethod = "POST"
+    
     
     func findCards(expression: String, callback: @escaping (AnkiQueryResult?) -> Void) {
         let url = URL(string: localServerAddress)!
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = httpMethod
         
         let template = FindCardTemplate.findCardsWithExpression(expression)
         
         let encoder = JSONEncoder()
-        
-    
+
         do {
             request.httpBody = try encoder.encode(template)
         }
@@ -111,7 +112,7 @@ class AnkiSearcher {
     func getCardInfo(values: [Int], callback: @escaping (AnkiCardInfoResult?) -> Void) {
         let url = URL(string: localServerAddress)!
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = httpMethod
         
         let template = CardInfoTemplate.getCardInfoWithCards(values)
         
@@ -142,7 +143,7 @@ class AnkiSearcher {
     func browseQuery(expression: String) {
         let url = URL(string: localServerAddress)!
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = httpMethod
         
         let template = GuiBrowseTemplate.getCardsWithQuery(expression)
         

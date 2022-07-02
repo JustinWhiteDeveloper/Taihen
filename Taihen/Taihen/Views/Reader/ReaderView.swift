@@ -2,6 +2,10 @@ import Foundation
 import SwiftUI
 import UserNotifications
 
+private enum Sizings {
+    static let dictionaryPreviewMaximumSize: CGFloat = 600.0
+}
+
 struct ReaderView: View {
 
     @State var text = ""
@@ -34,7 +38,7 @@ struct ReaderView: View {
                     YomiPreviewView(parentValue: Binding.constant(""))
                         .background(Colors.customGray1)
                         .padding()
-                        .frame(minWidth: 200, idealWidth: 200, maxWidth: 600)
+                        .frame(maxWidth: Sizings.dictionaryPreviewMaximumSize)
                 }
                 
             }.onAppear {
@@ -65,7 +69,6 @@ struct ReaderView: View {
                     
             }
         }
-        
     }
 }
 
@@ -79,9 +82,7 @@ struct CustomizableTextEditor: View {
         GeometryReader { geometry in
             NSScrollableTextViewRepresentable(text: $text, size: geometry.size, highlights: $highlights, scrollPercentage: $scrollPercentage)
         }
-    
     }
-    
 }
 
 struct NSScrollableTextViewRepresentable: NSViewRepresentable {
@@ -101,7 +102,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     
     @Binding var scrollPercentage: Float
 
-    
     // create an NSTextView
     func makeNSView(context: Context) -> NSScrollView {
         
@@ -161,9 +161,7 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
 
                     if let oldY = UserDefaults.standard.string(forKey: "ScrollPosY"),
                         let tRange = text.localizedStandardRange(of: oldY) {
-                        
-                        print("first: " + oldY.description)
-                        
+                                                
                         let sRange: NSRange = NSRange(tRange, in: text)
                         
                         nsTextView.scrollRangeToVisible(sRange)
@@ -326,7 +324,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         
 
         @objc func highlightItem() {
-            print("here" + (lastSelectedText ?? "") + " " + (lastSelectedRange?.debugDescription ?? ""))
             
             if let range = lastSelectedRange {
                 parent.highlights.append(range)
@@ -338,7 +335,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         }
         
         @objc func unhighlightItem() {
-            print("here" + (lastSelectedText ?? "") + " " + (lastSelectedRange?.debugDescription ?? ""))
             
             for (index, item) in parent.highlights.enumerated() {
                 if item.contains(lastSelectedCharIndex ?? 0) {
@@ -385,9 +381,3 @@ extension NSTextView {
   }
 }
 
-extension Notification.Name {
-    static let onSelectionChange = Notification.Name("onSelectionChange")
-    static let onReadFile = Notification.Name("onReadFile")
-    static let onSaveDictionaryUpdate = Notification.Name("onDictionarySaveUpdate")
-    static let onDeleteDictionaryUpdate = Notification.Name("onDictionaryDeleteUpdate")
-}

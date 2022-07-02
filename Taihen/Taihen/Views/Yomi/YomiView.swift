@@ -4,7 +4,6 @@ import TaihenDictionarySupport
 
 private enum Strings {
     static let loadingText = "Loading"
-    
     static let searchTextPreview = "Search here"
 }
 
