@@ -164,13 +164,13 @@ class RealmManagedDictionaryController: DictionaryDataController {
             //retry if possible
             if resultCount == 0 && search.count > 1 {
                 
-                let kanaCorrector: JPConjugator
+                let kanaCorrector: JapaneseConjugator
                 
-                switch FeatureManager.instance.parserMode {
+                switch FeatureManager.instance.textSelectionParserMode {
                 case .Rule:
-                    kanaCorrector = RuleJPConjugator()
+                    kanaCorrector = RuleCollectionJapaneseConjugator()
                 default:
-                    kanaCorrector = HardCodedJPConjugator()
+                    kanaCorrector = RuleListJapaneseConjugator()
                 }
                 
                 // Check kana map

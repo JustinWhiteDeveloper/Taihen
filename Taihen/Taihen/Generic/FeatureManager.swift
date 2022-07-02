@@ -138,17 +138,17 @@ class FeatureManager {
         }
     }
     
-    public enum TempJapaneseParserMode: Int {
+    public enum JapaneseTextSelectionParserMode: Int {
         case Rule
         case Basic
         case AIBasic
     }
     
-    var parserMode: TempJapaneseParserMode {
+    var textSelectionParserMode: JapaneseTextSelectionParserMode {
         get {
             let value = userDefaults.integer(forKey: Strings.japaneseParserMode)
             
-            return TempJapaneseParserMode(rawValue: value) ?? .Rule
+            return JapaneseTextSelectionParserMode(rawValue: value) ?? .Rule
         }
         
         set {
@@ -157,11 +157,11 @@ class FeatureManager {
     }
     
     func setParserMode(value: Int) {
-        parserMode = TempJapaneseParserMode(rawValue: value) ?? .Rule
+        textSelectionParserMode = JapaneseTextSelectionParserMode(rawValue: value) ?? .Rule
     }
     
-    func changeToNextParserMode() -> TempJapaneseParserMode {
-        parserMode = TempJapaneseParserMode(rawValue: parserMode.rawValue + 1) ?? .Rule
-        return parserMode
+    func changeToNextParserMode() -> JapaneseTextSelectionParserMode {
+        textSelectionParserMode = JapaneseTextSelectionParserMode(rawValue: textSelectionParserMode.rawValue + 1) ?? .Rule
+        return textSelectionParserMode
     }
 }

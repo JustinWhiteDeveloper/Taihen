@@ -1,7 +1,7 @@
 import Foundation
 
 // Basic hardcoded but incomplete implementation for comparision
-public class RuleJPConjugator: JPConjugator {
+public class RuleCollectionJapaneseConjugator: JapaneseConjugator {
     
     private let excelSeperator = "    "
 

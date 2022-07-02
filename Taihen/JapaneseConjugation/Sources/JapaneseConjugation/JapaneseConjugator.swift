@@ -1,5 +1,5 @@
 import Foundation
 
-public protocol JPConjugator {
+public protocol JapaneseConjugator {
     func correctTerm(_ term: String) -> [String]?
 }

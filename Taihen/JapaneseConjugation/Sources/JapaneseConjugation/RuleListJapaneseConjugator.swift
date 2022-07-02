@@ -1,7 +1,7 @@
 import Foundation
 
 // Basic hardcoded but incomplete implementation for comparision
-public class HardCodedJPConjugator: JPConjugator {
+public class RuleListJapaneseConjugator: JapaneseConjugator {
     
     let m1 = ReplacementRule(term: "まれている", replacements: ["む"])
 

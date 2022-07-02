@@ -1,13 +1,5 @@
 import Foundation
-import CoreData
 import TaihenDictionarySupport
-
-protocol AppManagementDataController {
-    func reloadTags()
-    func saveFileContents(path: String, contents: String)
-    func saveFileContents(path: String, highLights: [ManagedHighlight])
-    func fileContentsByKey(key: String) -> ManagedFileState?
-}
 
 protocol DictionaryDataController {
     func reloadDictionaries()
@@ -19,12 +11,6 @@ protocol DictionaryDataController {
     func updateDictionaryOrder(viewModels items: [ManagedDictionaryViewModel])
     func deleteDictionary(name: String, callback: @escaping (_ elements: [ManagedDictionaryViewModel]) -> Void) -> ()
     func deleteAllDictionaries(callback: @escaping () -> Void)
-}
-
-// Abstract away defining which implementation of the protocol is used
-class SharedManagedDataController {
-    static var appManagementInstance: AppManagementDataController = RealmAppManagementDataController()
-    static var dictionaryInstance: DictionaryDataController = RealmManagedDictionaryController()
 }
 
 // Use a seperate View model to avoid coupling

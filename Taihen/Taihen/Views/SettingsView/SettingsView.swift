@@ -29,7 +29,7 @@ struct SettingsView: View {
     @State var lookupPreviewEnabled = FeatureManager.instance.lookupPreviewEnabled
     @State var readerBackgroundColor = FeatureManager.instance.readerBackgroundColor
     @State var clipboardEnabled = FeatureManager.instance.clipboardReadingEnabled
-    @State var parserMode = FeatureManager.instance.parserMode.rawValue
+    @State var parserMode = FeatureManager.instance.textSelectionParserMode.rawValue
     
     var body: some View {
         

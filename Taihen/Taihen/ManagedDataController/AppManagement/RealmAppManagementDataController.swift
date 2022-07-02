@@ -4,31 +4,9 @@ import RealmSwift
 import TaihenDictionarySupport
 import JapaneseConjugation
 
-public class RealmTag: Object {
-    @Persisted(primaryKey: true) var _name: String
-    @Persisted var color: Int
-}
-
-extension TaihenCustomDictionaryTag {
-    
-    static func from(entity: RealmTag) -> TaihenCustomDictionaryTag {
-        
-        let tag = TaihenCustomDictionaryTag(shortName: entity._name,
-                                            extraInfo: "",
-                                            color: Int(entity.color),
-                                            tagDescription: "",
-                                            piority: 0)
-        
-        return tag
-    }
-}
 
 class RealmAppManagementDataController: AppManagementDataController {
     
-    private static var dictionaries: [String] = []
-    private static var activeDictionaries: [String] = []
-    private static var activeHashes: [String] = []
-
     private var realm: Realm
 
     func getRealm() -> Realm {
@@ -57,15 +35,6 @@ class RealmAppManagementDataController: AppManagementDataController {
         }
     }
     
-    func reloadTags() {
-        self.realm = getRealm()
-
-        TagManager.setTags(
-            realm.objects(RealmTag.self)
-                .map({ TaihenCustomDictionaryTag.from(entity: $0) })
-        )
-    }
-
     func saveFileContents(path: String, contents: String) {
         
         self.realm = getRealm()
@@ -121,11 +90,7 @@ class RealmAppManagementDataController: AppManagementDataController {
     }
 
     func fileContentsByKey(key: String) -> ManagedFileState? {
-        
         self.realm = getRealm()
-
         return realm.object(ofType: RealmFileState.self, forPrimaryKey: key)?.managedObject
     }
 }
-
-
