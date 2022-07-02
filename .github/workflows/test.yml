@@ -1,0 +1,10 @@
+name: UnitTestRunner
+
+on: push
+
+uses: sersoft-gmbh/xcodebuild-action@v2
+with:
+  project: Taihen.xcodeproj
+  scheme: Taihen
+  destination: platform=macOS
+  action: test
