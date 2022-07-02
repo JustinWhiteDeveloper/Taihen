@@ -2,9 +2,12 @@ name: UnitTestRunner
 
 on: push
 
-uses: sersoft-gmbh/xcodebuild-action@v2
-with:
-  project: Taihen.xcodeproj
-  scheme: Taihen
-  destination: platform=macOS
-  action: test
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: swift build
+      - name: Run tests
+        run: swift test
