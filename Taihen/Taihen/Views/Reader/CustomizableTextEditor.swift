@@ -35,6 +35,11 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
 
     @Environment(\.undoManager) var undoManger
     
+    @State var enableHighlights = false
+    @State var hasDonePostLayout = false
+
+    @State var timer: Timer?
+    
     func makeNSView(context: Context) -> NSScrollView {
         
         let scrollView = NSTextView.scrollableTextView()
@@ -61,6 +66,7 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
                                                name: NSView.boundsDidChangeNotification,
                                                object: scrollView.contentView)
         
+        
         return scrollView
     }
     
@@ -81,20 +87,31 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
             nsTextView.string = text
             coordinator.clearAttributedText = false
         }
-
-        if FeatureManager.instance.enableTextHighlights {
+        
+        if !hasDonePostLayout {
+            
+            DispatchQueue.main.async {
+                timer?.invalidate()
+                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
+                    self.enableHighlights = FeatureManager.instance.enableTextHighlights
+                    self.hasDonePostLayout = true
+                })
+            }
+        }
+        
+        if enableHighlights {
 
             for range in highlights {
                 let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: Colors.highlight]
                 nsTextView.textStorage?.addAttributes(attrs, range: range)
             }
         }
-        
+
         DispatchQueue.main.async {
             scrollPercentage = scrollView.verticalScroller?.floatValue ?? 0
         }
     }
-    
+
     // Create Coordinator for this View
     func makeCoordinator() -> TextCoordinator {
         TextCoordinator(textEditor: self)
