@@ -1,79 +1,10 @@
 import Foundation
 
-class FindCardTemplate: Codable {
-    var action: String
-    var version: Int
-    var params: [String: String]
-    
-    init(action: String, version: Int, params: [String: String]) {
-        self.action = action
-        self.version = version
-        self.params = params
-    }
-}
-
-class CardInfoTemplate: Codable {
-    var action: String
-    var version: Int
-    var params: [String: [Int]]
-    
-    init(action: String, version: Int, params: [String: [Int]]) {
-        self.action = action
-        self.version = version
-        self.params = params
-    }
-}
-
-class GuiBrowseTemplate: Codable {
-    var action: String
-    var version: Int
-    var params: [String: String]
-    
-    init(action: String, version: Int, params: [String: String]) {
-        self.action = action
-        self.version = version
-        self.params = params
-    }
-}
-
-extension FindCardTemplate {
-    static func findCardsWithExpression(_ expression: String) -> FindCardTemplate {
-        return FindCardTemplate(action: "findCards", version: 6, params: ["query":expression])
-    }
-}
-
-extension CardInfoTemplate {
-    static func getCardInfoWithCards(_ cards: [Int]) -> CardInfoTemplate {
-        return CardInfoTemplate(action: "cardsInfo", version: 6, params: ["cards":cards])
-    }
-}
-
-extension GuiBrowseTemplate {
-    static func getCardsWithQuery(_ query: String) -> GuiBrowseTemplate {
-        return GuiBrowseTemplate(action: "guiBrowse", version: 6, params: ["query":query])
-    }
-}
-
-struct AnkiQueryResult: Codable, Equatable {
-    var result: [Int]
-    var error: String?
-}
-
-struct AnkiCardInfoResultItem: Codable, Equatable {
-    var cardId: Int
-    var due: Int
-}
-
-struct AnkiCardInfoResult: Codable, Equatable {
-    var result: [AnkiCardInfoResultItem]
-    var error: String?
-}
-
-protocol AnkiServer {
+protocol AnkiClient {
     func sendRequest(request: URLRequest, completionHandler handler: @escaping (URLResponse?, Data?, Error?) -> Void)
 }
 
-class ConcreteAnkiServer: AnkiServer {
+class ConcreteAnkiClient: AnkiClient {
     
     init() {}
     
@@ -94,13 +25,13 @@ private enum HTTPMethod: String {
 
 class ConcreteAnkiInterface: AnkiInterface {
     
+    private let client: AnkiClient
     private let address: String
-    private let server: AnkiServer
     
-    init(server: AnkiServer = ConcreteAnkiServer(),
+    init(client: AnkiClient = ConcreteAnkiClient(),
          address: String = "http://localhost:8765") {
             
-        self.server = server
+        self.client = client
         self.address = address
     }
 
@@ -119,7 +50,7 @@ class ConcreteAnkiInterface: AnkiInterface {
         let encoder = JSONEncoder()
         request.httpBody = try? encoder.encode(template)
 
-        server.sendRequest(request: request) { (response, data, error) in
+        client.sendRequest(request: request) { (response, data, error) in
             guard let data = data else { return }
             
             let jsonDecoder = JSONDecoder()
@@ -141,7 +72,7 @@ class ConcreteAnkiInterface: AnkiInterface {
         let encoder = JSONEncoder()
         request.httpBody = try? encoder.encode(template)
  
-        server.sendRequest(request: request) {(response, data, error) in
+        client.sendRequest(request: request) {(response, data, error) in
             guard let data = data else { return }
             
             let jsonDecoder = JSONDecoder()
@@ -164,7 +95,7 @@ class ConcreteAnkiInterface: AnkiInterface {
         let encoder = JSONEncoder()
         request.httpBody = try? encoder.encode(template)
 
-        server.sendRequest(request: request) {_,_,_ in
+        client.sendRequest(request: request) {_,_,_ in
             callback()
         }
     }

@@ -1,6 +1,4 @@
-import Foundation
 import SwiftUI
-import TaihenDictionarySupport
 
 private enum Strings {
     static let searchTextPreview = NSLocalizedString("Search here", comment: "")
@@ -23,24 +21,5 @@ struct YomiSearchBar: View {
             .cornerRadius(Sizings.searchBarCornerRadius)
             .padding(.horizontal, Sizings.searchBarHorizontalPadding)
             .frame(maxWidth: Sizings.searchBarMaxWidth, alignment: .leading)
-    }
-}
-
-struct YomiView: View {
-
-    @State var text = ""
-        
-    var body: some View {
-        
-        VStack(alignment: .leading) {
-            Spacer()
-            
-            YomiSearchBar(text: $text)
-            
-            YomiPreviewView(parentValue: $text)
-                .padding()
-                .background(Colors.customGray1)
-            
-        }
     }
 }

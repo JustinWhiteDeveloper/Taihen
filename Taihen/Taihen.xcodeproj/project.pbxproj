@@ -28,11 +28,17 @@
 		1748712228712CDF00FFCC08 /* TagManagementDataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712128712CDF00FFCC08 /* TagManagementDataControllerTests.swift */; };
 		174871242871353D00FFCC08 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871232871353D00FFCC08 /* MainViewModelTests.swift */; };
 		174871262871457E00FFCC08 /* DictionariesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871252871457E00FFCC08 /* DictionariesViewModel.swift */; };
+		174871282871474B00FFCC08 /* CustomizableTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871272871474B00FFCC08 /* CustomizableTextEditor.swift */; };
+		1748712A2871486600FFCC08 /* AnkiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871292871486600FFCC08 /* AnkiClient.swift */; };
+		1748712C2871492E00FFCC08 /* AnkiResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712B2871492E00FFCC08 /* AnkiResults.swift */; };
+		1748712E2871499C00FFCC08 /* YomiSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712D2871499C00FFCC08 /* YomiSearchBar.swift */; };
+		1748713028714CFE00FFCC08 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712F28714CFE00FFCC08 /* TagView.swift */; };
+		1748713228714E0600FFCC08 /* YomiResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748713128714E0600FFCC08 /* YomiResultItemView.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
-		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
+		177BA8E42842137A004DC312 /* LookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* LookupView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
 		178B4BB4283F8BC4001636F7 /* TaihenDictionarySupport in Frameworks */ = {isa = PBXBuildFile; productRef = 178B4BB3283F8BC4001636F7 /* TaihenDictionarySupport */; };
-		1794C704284B14CC00AC6700 /* YomiResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C703284B14CC00AC6700 /* YomiResultsView.swift */; };
+		1794C704284B14CC00AC6700 /* YomiResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C703284B14CC00AC6700 /* YomiResultCollectionView.swift */; };
 		1794C706284B2FBA00AC6700 /* CustomizableLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C705284B2FBA00AC6700 /* CustomizableLoadingView.swift */; };
 		1794C70A284DC6F700AC6700 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C709284DC6F600AC6700 /* StringExtensions.swift */; };
 		1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794C70E284F32DB00AC6700 /* FeatureManager.swift */; };
@@ -40,14 +46,14 @@
 		17CA0BC42851DC9F00507CF5 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BC32851DC9F00507CF5 /* ColorExtensions.swift */; };
 		17CA0BC62851DE1C00507CF5 /* ViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BC52851DE1C00507CF5 /* ViewMode.swift */; };
 		17CA0BC82851DE3E00507CF5 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BC72851DE3E00507CF5 /* SideMenu.swift */; };
-		17CA0BE52855E04000507CF5 /* AnkiActionTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BE42855E04000507CF5 /* AnkiActionTemplate.swift */; };
+		17CA0BE52855E04000507CF5 /* AnkiActionTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA0BE42855E04000507CF5 /* AnkiActionTemplates.swift */; };
 		17DCE3562839C278001520A7 /* TaihenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3552839C278001520A7 /* TaihenApp.swift */; };
 		17DCE3582839C278001520A7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3572839C278001520A7 /* MainView.swift */; };
 		17DCE35A2839C27A001520A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3592839C27A001520A7 /* Assets.xcassets */; };
 		17DCE35D2839C27A001520A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE35C2839C27A001520A7 /* Preview Assets.xcassets */; };
 		17DCE3742839C27B001520A7 /* TaihenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3732839C27B001520A7 /* TaihenUITests.swift */; };
 		17F935C42843500200513356 /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C32843500200513356 /* ReaderView.swift */; };
-		17F935C6284358AE00513356 /* YomiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C5284358AE00513356 /* YomiPreviewView.swift */; };
+		17F935C6284358AE00513356 /* YomiSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C5284358AE00513356 /* YomiSearchView.swift */; };
 		17F935CB2843797500513356 /* AppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CA2843797500513356 /* AppManagementDataController.swift */; };
 		17F935D02846026200513356 /* RealmAppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CF2846026200513356 /* RealmAppManagementDataController.swift */; };
 		17F935D3284603E000513356 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D2284603E000513356 /* Realm */; };
@@ -92,10 +98,16 @@
 		1748712128712CDF00FFCC08 /* TagManagementDataControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementDataControllerTests.swift; sourceTree = "<group>"; };
 		174871232871353D00FFCC08 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		174871252871457E00FFCC08 /* DictionariesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesViewModel.swift; sourceTree = "<group>"; };
+		174871272871474B00FFCC08 /* CustomizableTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizableTextEditor.swift; sourceTree = "<group>"; };
+		174871292871486600FFCC08 /* AnkiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiClient.swift; sourceTree = "<group>"; };
+		1748712B2871492E00FFCC08 /* AnkiResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiResults.swift; sourceTree = "<group>"; };
+		1748712D2871499C00FFCC08 /* YomiSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiSearchBar.swift; sourceTree = "<group>"; };
+		1748712F28714CFE00FFCC08 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		1748713128714E0600FFCC08 /* YomiResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiResultItemView.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
-		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
+		177BA8E32842137A004DC312 /* LookupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
-		1794C703284B14CC00AC6700 /* YomiResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiResultsView.swift; sourceTree = "<group>"; };
+		1794C703284B14CC00AC6700 /* YomiResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiResultCollectionView.swift; sourceTree = "<group>"; };
 		1794C705284B2FBA00AC6700 /* CustomizableLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizableLoadingView.swift; sourceTree = "<group>"; };
 		1794C709284DC6F600AC6700 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		1794C70D284F312C00AC6700 /* TaihenDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaihenDebug.entitlements; sourceTree = "<group>"; };
@@ -106,7 +118,7 @@
 		17CA0BC32851DC9F00507CF5 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		17CA0BC52851DE1C00507CF5 /* ViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMode.swift; sourceTree = "<group>"; };
 		17CA0BC72851DE3E00507CF5 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
-		17CA0BE42855E04000507CF5 /* AnkiActionTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiActionTemplate.swift; sourceTree = "<group>"; };
+		17CA0BE42855E04000507CF5 /* AnkiActionTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiActionTemplates.swift; sourceTree = "<group>"; };
 		17DCE3522839C278001520A7 /* Taihen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taihen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DCE3552839C278001520A7 /* TaihenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenApp.swift; sourceTree = "<group>"; };
 		17DCE3572839C278001520A7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -120,7 +132,7 @@
 		17DCE3732839C27B001520A7 /* TaihenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenUITests.swift; sourceTree = "<group>"; };
 		17DCE3752839C27B001520A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17F935C32843500200513356 /* ReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderView.swift; sourceTree = "<group>"; };
-		17F935C5284358AE00513356 /* YomiPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiPreviewView.swift; sourceTree = "<group>"; };
+		17F935C5284358AE00513356 /* YomiSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiSearchView.swift; sourceTree = "<group>"; };
 		17F935CA2843797500513356 /* AppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagementDataController.swift; sourceTree = "<group>"; };
 		17F935CF2846026200513356 /* RealmAppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAppManagementDataController.swift; sourceTree = "<group>"; };
 		17F935D8284756CA00513356 /* ClipboardDescriptionFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardDescriptionFormatter.swift; sourceTree = "<group>"; };
@@ -223,9 +235,12 @@
 		17CA0BBF2851D7A100507CF5 /* Yomi */ = {
 			isa = PBXGroup;
 			children = (
-				17F935C5284358AE00513356 /* YomiPreviewView.swift */,
-				1794C703284B14CC00AC6700 /* YomiResultsView.swift */,
-				177BA8E32842137A004DC312 /* YomiView.swift */,
+				17F935C5284358AE00513356 /* YomiSearchView.swift */,
+				1748713128714E0600FFCC08 /* YomiResultItemView.swift */,
+				1794C703284B14CC00AC6700 /* YomiResultCollectionView.swift */,
+				1748712D2871499C00FFCC08 /* YomiSearchBar.swift */,
+				1748712F28714CFE00FFCC08 /* TagView.swift */,
+				177BA8E32842137A004DC312 /* LookupView.swift */,
 			);
 			path = Yomi;
 			sourceTree = "<group>";
@@ -245,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				17F935C32843500200513356 /* ReaderView.swift */,
+				174871272871474B00FFCC08 /* CustomizableTextEditor.swift */,
 			);
 			path = Reader;
 			sourceTree = "<group>";
@@ -261,7 +277,9 @@
 		17CA0BE32855E01800507CF5 /* AnkiConnect */ = {
 			isa = PBXGroup;
 			children = (
-				17CA0BE42855E04000507CF5 /* AnkiActionTemplate.swift */,
+				17CA0BE42855E04000507CF5 /* AnkiActionTemplates.swift */,
+				1748712B2871492E00FFCC08 /* AnkiResults.swift */,
+				174871292871486600FFCC08 /* AnkiClient.swift */,
 			);
 			path = AnkiConnect;
 			sourceTree = "<group>";
@@ -337,10 +355,10 @@
 		17F935C92843610000513356 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				17CA0BC22851D7D600507CF5 /* SettingsView */,
 				17CA0BC12851D7C600507CF5 /* Reader */,
 				17CA0BC02851D7BA00507CF5 /* Dictionaries */,
 				17CA0BBF2851D7A100507CF5 /* Yomi */,
+				17CA0BC22851D7D600507CF5 /* SettingsView */,
 				17DCE3572839C278001520A7 /* MainView.swift */,
 				1748710C2870FF1C00FFCC08 /* FolderPicker.swift */,
 				1794C705284B2FBA00AC6700 /* CustomizableLoadingView.swift */,
@@ -505,34 +523,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17CA0BE52855E04000507CF5 /* AnkiActionTemplate.swift in Sources */,
-				177BA8E42842137A004DC312 /* YomiView.swift in Sources */,
+				17CA0BE52855E04000507CF5 /* AnkiActionTemplates.swift in Sources */,
+				177BA8E42842137A004DC312 /* LookupView.swift in Sources */,
 				1748711528710DEA00FFCC08 /* DictionaryDataController.swift in Sources */,
 				1748712028712C0300FFCC08 /* CoreDataTagManagementDataController.swift in Sources */,
 				1748710A28702E9E00FFCC08 /* DictionaryRowViewModel.swift in Sources */,
 				1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */,
 				17F935C42843500200513356 /* ReaderView.swift in Sources */,
-				17F935C6284358AE00513356 /* YomiPreviewView.swift in Sources */,
+				17F935C6284358AE00513356 /* YomiSearchView.swift in Sources */,
 				174871262871457E00FFCC08 /* DictionariesViewModel.swift in Sources */,
 				1748710628701FDE00FFCC08 /* UserDefaultsExtensions.swift in Sources */,
 				170619652841C85800294124 /* ClipboardViewExtensions.swift in Sources */,
-				1794C704284B14CC00AC6700 /* YomiResultsView.swift in Sources */,
+				1794C704284B14CC00AC6700 /* YomiResultCollectionView.swift in Sources */,
 				179E50C2284A106400A575E4 /* SettingsView.swift in Sources */,
 				1748710D2870FF1D00FFCC08 /* FolderPicker.swift in Sources */,
 				17487100286FFB5500FFCC08 /* RealmFileState.swift in Sources */,
 				17CA0BC42851DC9F00507CF5 /* ColorExtensions.swift in Sources */,
 				1794C706284B2FBA00AC6700 /* CustomizableLoadingView.swift in Sources */,
+				1748712A2871486600FFCC08 /* AnkiClient.swift in Sources */,
 				174871172871112E00FFCC08 /* TagManagementDataController.swift in Sources */,
 				17DCE3582839C278001520A7 /* MainView.swift in Sources */,
 				17CA0BC82851DE3E00507CF5 /* SideMenu.swift in Sources */,
+				1748712C2871492E00FFCC08 /* AnkiResults.swift in Sources */,
 				17487102286FFDD200FFCC08 /* SettingsSliderView.swift in Sources */,
 				177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */,
 				1748711328710DBB00FFCC08 /* AppManagementModel.xcdatamodeld in Sources */,
+				1748712E2871499C00FFCC08 /* YomiSearchBar.swift in Sources */,
 				174870FE286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift in Sources */,
 				1748710828702DA300FFCC08 /* DictionaryRow.swift in Sources */,
 				1794C70A284DC6F700AC6700 /* StringExtensions.swift in Sources */,
+				1748713228714E0600FFCC08 /* YomiResultItemView.swift in Sources */,
+				174871282871474B00FFCC08 /* CustomizableTextEditor.swift in Sources */,
 				17DCE3562839C278001520A7 /* TaihenApp.swift in Sources */,
 				174871192871118600FFCC08 /* SharedManagedDataController.swift in Sources */,
+				1748713028714CFE00FFCC08 /* TagView.swift in Sources */,
 				17CA0BC62851DE1C00507CF5 /* ViewMode.swift in Sources */,
 				17F935CB2843797500513356 /* AppManagementDataController.swift in Sources */,
 				17F935D02846026200513356 /* RealmAppManagementDataController.swift in Sources */,

@@ -1,7 +1,7 @@
 import XCTest
 @testable import Taihen
 
-class TestAnkiServer: AnkiServer {
+class TestAnkiClient: AnkiClient {
     func sendRequest(request: URLRequest, completionHandler handler: @escaping (URLResponse?, Data?, Error?) -> Void) {
         
         guard let httpBody = request.httpBody else {
@@ -33,7 +33,7 @@ class AnkiInterfaceTests: XCTestCase {
         
         // given
         let expectedCards = AnkiCardInfoResult(result: [], error: nil)
-        let interface = ConcreteAnkiInterface(server: TestAnkiServer())
+        let interface = ConcreteAnkiInterface(client: TestAnkiClient())
         var ankiResult: AnkiCardInfoResult?
         let expectation = XCTestExpectation(description: "Wait for Response")
         
@@ -51,7 +51,7 @@ class AnkiInterfaceTests: XCTestCase {
     func testGivenAnBadAnkiInterfaceThenCardInfoCannotBeRetrieved() throws {
         
         // given
-        let interface = ConcreteAnkiInterface(server: TestAnkiServer(), address: "")
+        let interface = ConcreteAnkiInterface(client: TestAnkiClient(), address: "")
         var ankiResult: AnkiCardInfoResult?
         let expectation = XCTestExpectation(description: "Wait for Response")
         
@@ -70,7 +70,7 @@ class AnkiInterfaceTests: XCTestCase {
         
         // given
         let expectedCards = AnkiQueryResult(result: [], error: nil)
-        let interface = ConcreteAnkiInterface(server: TestAnkiServer())
+        let interface = ConcreteAnkiInterface(client: TestAnkiClient())
         var ankiResult: AnkiQueryResult?
         let expectation = XCTestExpectation(description: "Wait for Response")
         
@@ -88,7 +88,7 @@ class AnkiInterfaceTests: XCTestCase {
     func testGivenAnBadAnkiInterfaceThenCannotFindCardsWithExpression() throws {
         
         // given
-        let interface = ConcreteAnkiInterface(server: TestAnkiServer(), address: "")
+        let interface = ConcreteAnkiInterface(client: TestAnkiClient(), address: "")
         var ankiResult: AnkiQueryResult?
         let expectation = XCTestExpectation(description: "Wait for Response")
         
@@ -106,7 +106,7 @@ class AnkiInterfaceTests: XCTestCase {
     func testGivenAnAnkiInterfaceThenCanDoABrowseQuery() throws {
         
         // given
-        let interface = ConcreteAnkiInterface(server: TestAnkiServer())
+        let interface = ConcreteAnkiInterface(client: TestAnkiClient())
         let expectation = XCTestExpectation(description: "Wait for Response")
         
         // when
@@ -121,7 +121,7 @@ class AnkiInterfaceTests: XCTestCase {
     func testGivenAnBadAnkiInterfaceThenCannotDoABrowseQueryButDontCrash() throws {
         
         // given
-        let interface = ConcreteAnkiInterface(server: TestAnkiServer(), address: "")
+        let interface = ConcreteAnkiInterface(client: TestAnkiClient(), address: "")
         let expectation = XCTestExpectation(description: "Wait for Response")
         
         // when

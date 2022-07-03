@@ -16,9 +16,6 @@ struct DictionariesView: View {
 
     @ObservedObject var viewModel: DictionariesViewModel
     
-    let pub = NotificationCenter.default
-        .publisher(for: Notification.Name.onSaveDictionaryUpdate)
-
     var body: some View {
         
         VStack(alignment: .center, spacing: 0, content: {
@@ -32,8 +29,6 @@ struct DictionariesView: View {
                     if newValue == true {
                         viewModel.loadingText = Strings.defaultLoadingText
                     }
-                }.onReceive(pub) { (output) in
-                    viewModel.onRecieveNotification(notification: output)
                 }
                 
             } else {

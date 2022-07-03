@@ -64,7 +64,6 @@ struct DictionaryRow: View {
             }
             .frame(width: Sizings.reorderButtonSize.width,
                    height: Sizings.reorderButtonSize.height)
-
         }
     }
 }

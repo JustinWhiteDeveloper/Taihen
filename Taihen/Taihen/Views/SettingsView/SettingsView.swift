@@ -19,17 +19,21 @@ private enum Sizings {
     static let maximumFontSize = 60.0
 }
 
+class SettingsViewModel: ObservableObject {
+    @Published var fontSliderValue = FeatureManager.instance.readerTextSize
+    @Published var dictionaryFontSliderValue = FeatureManager.instance.dictionaryTextSize
+    @Published var highlightsEnabled = FeatureManager.instance.enableTextHighlights
+    @Published var autoPlayAudioEnabled = FeatureManager.instance.autoplayAudio
+    @Published var positionScrollingEnabled = FeatureManager.instance.positionScrolling
+    @Published var lookupPreviewEnabled = FeatureManager.instance.lookupPreviewEnabled
+    @Published var readerBackgroundColor = FeatureManager.instance.readerBackgroundColor
+    @Published var clipboardEnabled = FeatureManager.instance.clipboardReadingEnabled
+    @Published var parserMode = FeatureManager.instance.textSelectionParserMode.rawValue
+}
+
 struct SettingsView: View {
 
-    @State var fontSliderValue = FeatureManager.instance.readerTextSize
-    @State var dictionaryFontSliderValue = FeatureManager.instance.dictionaryTextSize
-    @State var highlightsEnabled = FeatureManager.instance.enableTextHighlights
-    @State var autoPlayAudioEnabled = FeatureManager.instance.autoplayAudio
-    @State var positionScrollingEnabled = FeatureManager.instance.positionScrolling
-    @State var lookupPreviewEnabled = FeatureManager.instance.lookupPreviewEnabled
-    @State var readerBackgroundColor = FeatureManager.instance.readerBackgroundColor
-    @State var clipboardEnabled = FeatureManager.instance.clipboardReadingEnabled
-    @State var parserMode = FeatureManager.instance.textSelectionParserMode.rawValue
+    @ObservedObject var viewModel = SettingsViewModel()
     
     var body: some View {
         
@@ -38,14 +42,14 @@ struct SettingsView: View {
             
             List {
                 SettingsSliderView(text: Strings.readerFontSize,
-                                   sliderValue: fontSliderValue,
+                                   sliderValue: viewModel.fontSliderValue,
                                    maximumValue: Sizings.maximumFontSize) { value in
                     
                     FeatureManager.instance.readerTextSize = value
                 }
                 
                 SettingsSliderView(text: Strings.dictionaryFontSize,
-                                   sliderValue: dictionaryFontSliderValue,
+                                   sliderValue: viewModel.dictionaryFontSliderValue,
                                    maximumValue: Sizings.maximumFontSize) { value in
                     
                     FeatureManager.instance.dictionaryTextSize = value
@@ -53,7 +57,7 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Toggle(Strings.enableHightlightsTitle, isOn:  $highlightsEnabled).onChange(of: highlightsEnabled) { newValue in
+                    Toggle(Strings.enableHightlightsTitle, isOn:  $viewModel.highlightsEnabled).onChange(of: viewModel.highlightsEnabled) { newValue in
                         FeatureManager.instance.enableTextHighlights = newValue
                     }
                     .foregroundColor(Color.black)
@@ -64,8 +68,8 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.autoPlayAudioTitle, isOn:  $autoPlayAudioEnabled)
-                        .onChange(of: autoPlayAudioEnabled) { newValue in
+                    Toggle(Strings.autoPlayAudioTitle, isOn:  $viewModel.autoPlayAudioEnabled)
+                        .onChange(of: viewModel.autoPlayAudioEnabled) { newValue in
                             
                         FeatureManager.instance.autoplayAudio = newValue
                     }
@@ -77,8 +81,8 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.positionScrollingTitle, isOn:  $positionScrollingEnabled)
-                        .onChange(of: positionScrollingEnabled) { newValue in
+                    Toggle(Strings.positionScrollingTitle, isOn:  $viewModel.positionScrollingEnabled)
+                        .onChange(of: viewModel.positionScrollingEnabled) { newValue in
                             
                         FeatureManager.instance.positionScrolling = newValue
                     }
@@ -90,8 +94,8 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.previewEnabledTitle, isOn:  $lookupPreviewEnabled)
-                        .onChange(of: lookupPreviewEnabled) { newValue in
+                    Toggle(Strings.previewEnabledTitle, isOn:  $viewModel.lookupPreviewEnabled)
+                        .onChange(of: viewModel.lookupPreviewEnabled) { newValue in
                             
                         FeatureManager.instance.lookupPreviewEnabled = newValue
                     }
@@ -103,8 +107,8 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.listenForClipboardTitle, isOn:  $clipboardEnabled)
-                        .onChange(of: clipboardEnabled) { newValue in
+                    Toggle(Strings.listenForClipboardTitle, isOn:  $viewModel.clipboardEnabled)
+                        .onChange(of: viewModel.clipboardEnabled) { newValue in
                             
                             FeatureManager.instance.clipboardReadingEnabled = newValue
                     }
@@ -117,10 +121,10 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    ColorPicker(selection: $readerBackgroundColor) {
+                    ColorPicker(selection: $viewModel.readerBackgroundColor) {
                         Label(Strings.readerBackgroundColorTitle, image: "")
                             .foregroundColor(Color.black)
-                    }.onChange(of: readerBackgroundColor) { newValue in
+                    }.onChange(of: viewModel.readerBackgroundColor) { newValue in
                         FeatureManager.instance.readerBackgroundColor = newValue
                     }
 
@@ -130,11 +134,11 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Text(Strings.parserModeTitle  + parserMode.description)
+                    Text(Strings.parserModeTitle + viewModel.parserMode.description)
                         .foregroundColor(Color.black)
 
                     Button(Strings.parserChangeActionTitle) {
-                        parserMode = FeatureManager.instance.changeToNextParserMode().rawValue
+                        viewModel.parserMode = FeatureManager.instance.changeToNextParserMode().rawValue
                     }
                     .foregroundColor(Color.black)
 

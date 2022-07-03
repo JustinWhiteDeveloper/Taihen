@@ -331,9 +331,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 }
             }
             
-            //TODO: Refactor to not hardcode reference
-            SharedManagedDataController.tagManagementInstance.addTags(tags: dictionary.tags)
-
             try! self.realm.commitWrite()
             
             

@@ -8,7 +8,7 @@ private enum Strings {
     static let noResultsText = NSLocalizedString("No results", comment: "")
 }
 
-struct YomiPreviewView: View {
+struct YomiSearchView: View {
     @State var hasBooted = false
     @State var lastResultCount = 0
 
@@ -43,8 +43,8 @@ struct YomiPreviewView: View {
                 } else {
                     
                     if lastResultCount > 0 {
-                        YomiResultsView(search: lastSearch,
-                                        selectedTerms: selectedTerms).onAppear {
+                        YomiResultCollectionView(search: lastSearch,
+                                                 selectedTerms: selectedTerms).onAppear {
   
                             if let url = selectedTerms.first?.first?.audioUrl,
                                 FeatureManager.instance.autoplayAudio {
@@ -56,7 +56,6 @@ struct YomiPreviewView: View {
                                     if audioData.count >= 52288 {
                                         return
                                     }
-                                    
                                     
                                     let tmpFileURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("audio").appendingPathExtension("mp3")
                                     let wasFileWritten = (try? audioData.write(to: tmpFileURL, options: [.atomic])) != nil
@@ -84,8 +83,6 @@ struct YomiPreviewView: View {
                                 .foregroundColor(Color.black)
                                 .padding()
                         }
-                        
-
                     }
                     
                     Text(lookupTime.description)
@@ -151,8 +148,25 @@ struct YomiPreviewView: View {
                 self.selectedTerms = selectedTerms
                 self.lastResultCount = resultCount
                 self.finishedLoadingDelay = false
-
             }
+        }
+    }
+}
+
+extension TaihenDictionaryViewModel {
+    
+    var audioUrl: URL? {
+        let encodedTerm = groupTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        let encodedKana = kana.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        
+        if kana.isEmpty {
+            let urlString = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana=\(encodedTerm)"
+
+            return URL(string: urlString)
+        } else {
+            let urlString = "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=\(encodedTerm)&kana=\(encodedKana)"
+
+            return URL(string: urlString)
         }
     }
 }

@@ -1,4 +1,3 @@
-import Foundation
 import SwiftUI
 import TaihenDictionarySupport
 import AVFoundation
@@ -9,7 +8,7 @@ private enum Strings {
     static let playAudioButtonTitle = NSLocalizedString("Play Audio", comment: "")
 }
 
-struct ItemView: View {
+struct YomiResultItemView: View {
     
     @State var search = ""
     @State var text = ""
@@ -69,7 +68,6 @@ struct ItemView: View {
                             player?.play()
 
                         }
-                        
                     }
                     .foregroundColor(.black)
                 }
@@ -215,92 +213,6 @@ extension TaihenCustomDictionaryTerm {
             }
             
             return text
-        }
-    }
-}
-
-struct TagPill: View {
-    
-    @State var text: String
-    @State var color: Color = Color.red
-
-    var body: some View {
-        
-        ZStack {
-            Text(text)
-                .bold()
-                .foregroundColor(.white)
-        }
-        .padding(.all, 8.0)
-        .background(color)
-        .cornerRadius(8.0)
-    }
-}
-
-struct TagView: View {
-    
-    @State var tags: [String] = []
-    
-    var body: some View {
-        
-        HStack {
-                        
-            ForEach(Array(tags.enumerated()), id: \.offset) { index1, text in
-
-                TagPill(text: text,
-                        color: tagColor(tag: text))
-            }
-        }
-    }
-    
-    func tagColor(tag: String) -> Color {
-        let colorScheme = YomichanColorScheme()
-        return SharedManagedDataController.tagManagementInstance.tagColor(tag, colorScheme: colorScheme)
-    }
-}
-
-struct YomiResultsView: View {
-    
-    @State var search: String
-    @State var selectedTerms: [[TaihenDictionaryViewModel]] = []
-
-    var body: some View {
-        ScrollView {
-            
-            VStack(alignment: .leading) {
-                ForEach(Array(selectedTerms.enumerated()), id: \.offset) { index, termItem in
-                                    
-                    ForEach(Array(termItem.enumerated()), id: \.offset) { index2, item in
-                    
-                        ItemView(search: search,
-                                 term: item.groupTerm,
-                                 kana: item.kana,
-                                 terms: item.terms,
-                                 tags: item.tags,
-                                 audioUrl: item.audioUrl)
-                        
-                        Spacer()
-                    }
-                }
-            }
-        }
-    }
-}
-    
-extension TaihenDictionaryViewModel {
-    
-    var audioUrl: URL? {
-        let encodedTerm = groupTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        let encodedKana = kana.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        
-        if kana.isEmpty {
-            let urlString = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana=\(encodedTerm)"
-
-            return URL(string: urlString)
-        } else {
-            let urlString = "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=\(encodedTerm)&kana=\(encodedKana)"
-
-            return URL(string: urlString)
         }
     }
 }

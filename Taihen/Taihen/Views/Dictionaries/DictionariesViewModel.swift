@@ -4,7 +4,8 @@ import TaihenDictionarySupport
 private enum Strings {
     static let defaultLoadingText = NSLocalizedString("loading", comment: "")
     static let readingFile = NSLocalizedString("Reading files from folder", comment: "")
-    static let savingDictionary = NSLocalizedString("Saving dictionary", comment: "")
+    static let savingTags = NSLocalizedString("Pre-processing tags", comment: "")
+    static let savingDictionary = NSLocalizedString("Saving dictionary information", comment: "")
     static let deletingDictionary = NSLocalizedString("Deleting dictionary", comment: "")
     static let deletingDictionaries = NSLocalizedString("Deleting dictionaries", comment: "")
 }
@@ -19,12 +20,23 @@ class DictionariesViewModel: ObservableObject {
     @Published var loading: Bool = false
     @Published var loadingText: String = Strings.defaultLoadingText
         
-    init() {}
+    init() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onRecieveNotification(notification:)),
+                                               name: Notification.Name.onSaveDictionaryUpdate,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onRecieveNotification(notification:)),
+                                               name: Notification.Name.onDeleteDictionaryUpdate,
+                                               object: nil)
+    }
     
     func onViewAppear() {
         items = SharedManagedDataController.dictionaryInstance.dictionaryViewModels()?
             .map({
-                DictionaryRowModel(name: $0.name, order: $0.order, active: $0.active)
+                DictionaryRowModel(name: $0.name,
+                                   order: $0.order,
+                                   active: $0.active)
             }) ?? []
     }
     
@@ -42,6 +54,11 @@ class DictionariesViewModel: ObservableObject {
             }
 
             DispatchQueue.main.async {
+                self.loadingText = Strings.savingTags
+
+                //Save tags to Core Data
+                SharedManagedDataController.tagManagementInstance.addTags(tags: dictionary.tags)
+                
                 self.loadingText = Strings.savingDictionary
 
                 SharedManagedDataController.dictionaryInstance.saveDictionary(dictionary,
@@ -98,7 +115,7 @@ class DictionariesViewModel: ObservableObject {
         items.move(fromOffsets: source, toOffset: destination)
     }
     
-    func onRecieveNotification(notification output: Notification) {
+    @objc func onRecieveNotification(notification output: Notification) {
         switch output.name {
         case Notification.Name.onSaveDictionaryUpdate:
             

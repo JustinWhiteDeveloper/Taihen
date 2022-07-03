@@ -25,7 +25,6 @@ class DictionaryRowViewModel: ObservableObject {
     }
 }
 
-
 extension DictionaryRowModel {
     var managedModel: ManagedDictionaryViewModel {
         return ManagedDictionaryViewModel(name: name, order: order, active: active)
