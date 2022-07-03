@@ -1,9 +1,9 @@
 import SwiftUI
 
 private enum Strings {
-    static let activeToggle = "Active"
-    static let deleteDictionaryIcon = "CancelIcon"
-    static let reorderIcon = "MoveIcon"
+    static let activeToggle = NSLocalizedString("Active", comment: "")
+    static let deleteDictionaryIcon = NSLocalizedString("CancelIcon", comment: "")
+    static let reorderIcon = NSLocalizedString("MoveIcon", comment: "")
 }
 
 private enum Sizings {
@@ -12,25 +12,6 @@ private enum Sizings {
     static let deleteButtonCornerRadius: CGFloat = 12.0
     
     static let reorderButtonSize = CGSize(width: 24.0, height: 24.0)
-}
-
-class DictionaryRowViewModel: ObservableObject {
-    
-    @Published var model: DictionaryRowModel
-    var onDelete: (_ name: String) -> Void
-
-    init(model: DictionaryRowModel, onDelete: @escaping (_ name: String) -> Void) {
-        self.model = model
-        self.onDelete = onDelete
-    }
-    
-    func onDeleteRow() {
-        self.onDelete(model.name)
-    }
-    
-    func onChangeOfActiveState(newValue: Bool) {
-        SharedManagedDataController.dictionaryInstance.updateDictionaryActive(viewModel: model.managedModel, active: newValue)
-    }
 }
 
 struct DictionaryRow: View {

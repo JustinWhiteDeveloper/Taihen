@@ -15,7 +15,7 @@
 		1748710428701CF700FFCC08 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710328701CF700FFCC08 /* NotificationExtensions.swift */; };
 		1748710628701FDE00FFCC08 /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */; };
 		1748710828702DA300FFCC08 /* DictionaryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710728702DA300FFCC08 /* DictionaryRow.swift */; };
-		1748710A28702E9E00FFCC08 /* DictionaryRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710928702E9E00FFCC08 /* DictionaryRowModel.swift */; };
+		1748710A28702E9E00FFCC08 /* DictionaryRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710928702E9E00FFCC08 /* DictionaryRowViewModel.swift */; };
 		1748710B2870482000FFCC08 /* AnkiInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BBA2AF285B0A93007BEC66 /* AnkiInterfaceTests.swift */; };
 		1748710D2870FF1D00FFCC08 /* FolderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710C2870FF1C00FFCC08 /* FolderPicker.swift */; };
 		1748710F2871081F00FFCC08 /* YomichanTagColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748710E2871081F00FFCC08 /* YomichanTagColorTests.swift */; };
@@ -27,6 +27,7 @@
 		1748712028712C0300FFCC08 /* CoreDataTagManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748711F28712C0300FFCC08 /* CoreDataTagManagementDataController.swift */; };
 		1748712228712CDF00FFCC08 /* TagManagementDataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712128712CDF00FFCC08 /* TagManagementDataControllerTests.swift */; };
 		174871242871353D00FFCC08 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871232871353D00FFCC08 /* MainViewModelTests.swift */; };
+		174871262871457E00FFCC08 /* DictionariesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871252871457E00FFCC08 /* DictionariesViewModel.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -79,7 +80,7 @@
 		1748710328701CF700FFCC08 /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
 		1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		1748710728702DA300FFCC08 /* DictionaryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRow.swift; sourceTree = "<group>"; };
-		1748710928702E9E00FFCC08 /* DictionaryRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRowModel.swift; sourceTree = "<group>"; };
+		1748710928702E9E00FFCC08 /* DictionaryRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRowViewModel.swift; sourceTree = "<group>"; };
 		1748710C2870FF1C00FFCC08 /* FolderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPicker.swift; sourceTree = "<group>"; };
 		1748710E2871081F00FFCC08 /* YomichanTagColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomichanTagColorTests.swift; sourceTree = "<group>"; };
 		1748711228710DBB00FFCC08 /* AppManagementModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppManagementModel.xcdatamodel; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 		1748711F28712C0300FFCC08 /* CoreDataTagManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTagManagementDataController.swift; sourceTree = "<group>"; };
 		1748712128712CDF00FFCC08 /* TagManagementDataControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementDataControllerTests.swift; sourceTree = "<group>"; };
 		174871232871353D00FFCC08 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
+		174871252871457E00FFCC08 /* DictionariesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesViewModel.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
 		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
@@ -232,8 +234,9 @@
 			isa = PBXGroup;
 			children = (
 				177BA8E528421FEF004DC312 /* DictionariesView.swift */,
+				174871252871457E00FFCC08 /* DictionariesViewModel.swift */,
 				1748710728702DA300FFCC08 /* DictionaryRow.swift */,
-				1748710928702E9E00FFCC08 /* DictionaryRowModel.swift */,
+				1748710928702E9E00FFCC08 /* DictionaryRowViewModel.swift */,
 			);
 			path = Dictionaries;
 			sourceTree = "<group>";
@@ -506,10 +509,11 @@
 				177BA8E42842137A004DC312 /* YomiView.swift in Sources */,
 				1748711528710DEA00FFCC08 /* DictionaryDataController.swift in Sources */,
 				1748712028712C0300FFCC08 /* CoreDataTagManagementDataController.swift in Sources */,
-				1748710A28702E9E00FFCC08 /* DictionaryRowModel.swift in Sources */,
+				1748710A28702E9E00FFCC08 /* DictionaryRowViewModel.swift in Sources */,
 				1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */,
 				17F935C42843500200513356 /* ReaderView.swift in Sources */,
 				17F935C6284358AE00513356 /* YomiPreviewView.swift in Sources */,
+				174871262871457E00FFCC08 /* DictionariesViewModel.swift in Sources */,
 				1748710628701FDE00FFCC08 /* UserDefaultsExtensions.swift in Sources */,
 				170619652841C85800294124 /* ClipboardViewExtensions.swift in Sources */,
 				1794C704284B14CC00AC6700 /* YomiResultsView.swift in Sources */,
