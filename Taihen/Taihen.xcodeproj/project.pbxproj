@@ -23,6 +23,7 @@
 		1748711528710DEA00FFCC08 /* DictionaryDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748711428710DEA00FFCC08 /* DictionaryDataController.swift */; };
 		174871172871112E00FFCC08 /* TagManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871162871112E00FFCC08 /* TagManagementDataController.swift */; };
 		174871192871118600FFCC08 /* SharedManagedDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871182871118600FFCC08 /* SharedManagedDataController.swift */; };
+		1748711E28712A8200FFCC08 /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748711D28712A8200FFCC08 /* PersistenceContainer.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -78,7 +79,6 @@
 		17DCE3CA283A0F47001520A7 /* jmdict_english.zip in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3A7283A0F47001520A7 /* jmdict_english.zip */; };
 		17F935C42843500200513356 /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C32843500200513356 /* ReaderView.swift */; };
 		17F935C6284358AE00513356 /* YomiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C5284358AE00513356 /* YomiPreviewView.swift */; };
-		17F935C8284360DF00513356 /* TagManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C7284360DF00513356 /* TagManager.swift */; };
 		17F935CB2843797500513356 /* AppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CA2843797500513356 /* AppManagementDataController.swift */; };
 		17F935D02846026200513356 /* RealmAppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CF2846026200513356 /* RealmAppManagementDataController.swift */; };
 		17F935D3284603E000513356 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D2284603E000513356 /* Realm */; };
@@ -118,6 +118,7 @@
 		1748711428710DEA00FFCC08 /* DictionaryDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDataController.swift; sourceTree = "<group>"; };
 		174871162871112E00FFCC08 /* TagManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementDataController.swift; sourceTree = "<group>"; };
 		174871182871118600FFCC08 /* SharedManagedDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedManagedDataController.swift; sourceTree = "<group>"; };
+		1748711D28712A8200FFCC08 /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
 		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
@@ -182,7 +183,6 @@
 		17DCE3A7283A0F47001520A7 /* jmdict_english.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = jmdict_english.zip; sourceTree = "<group>"; };
 		17F935C32843500200513356 /* ReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderView.swift; sourceTree = "<group>"; };
 		17F935C5284358AE00513356 /* YomiPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiPreviewView.swift; sourceTree = "<group>"; };
-		17F935C7284360DF00513356 /* TagManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManager.swift; sourceTree = "<group>"; };
 		17F935CA2843797500513356 /* AppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagementDataController.swift; sourceTree = "<group>"; };
 		17F935CF2846026200513356 /* RealmAppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAppManagementDataController.swift; sourceTree = "<group>"; };
 		17F935D8284756CA00513356 /* ClipboardDescriptionFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardDescriptionFormatter.swift; sourceTree = "<group>"; };
@@ -222,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				1748711128710DBB00FFCC08 /* AppManagementModel.xcdatamodeld */,
+				1748711D28712A8200FFCC08 /* PersistenceContainer.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -229,7 +230,6 @@
 		1748711A287111A800FFCC08 /* AppManagement */ = {
 			isa = PBXGroup;
 			children = (
-				1748711B287111BF00FFCC08 /* Tag Management */,
 				17F935CF2846026200513356 /* RealmAppManagementDataController.swift */,
 				17F935CA2843797500513356 /* AppManagementDataController.swift */,
 				174870FF286FFB5500FFCC08 /* RealmFileState.swift */,
@@ -241,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				174871162871112E00FFCC08 /* TagManagementDataController.swift */,
-				17F935C7284360DF00513356 /* TagManager.swift */,
 			);
 			path = "Tag Management";
 			sourceTree = "<group>";
@@ -250,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				1748710328701CF700FFCC08 /* NotificationExtensions.swift */,
+				1794C70E284F32DB00AC6700 /* FeatureManager.swift */,
 				1748710528701FDE00FFCC08 /* UserDefaultsExtensions.swift */,
 				1794C709284DC6F600AC6700 /* StringExtensions.swift */,
 				17CA0BC32851DC9F00507CF5 /* ColorExtensions.swift */,
@@ -277,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				1748711C2871120C00FFCC08 /* Extensions */,
-				1794C70E284F32DB00AC6700 /* FeatureManager.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -465,11 +464,12 @@
 		17F935CC2843798600513356 /* ManagedDataController */ = {
 			isa = PBXGroup;
 			children = (
+				174871182871118600FFCC08 /* SharedManagedDataController.swift */,
+				1748711B287111BF00FFCC08 /* Tag Management */,
 				1748711A287111A800FFCC08 /* AppManagement */,
 				1748711028710D9900FFCC08 /* CoreData */,
 				1748711428710DEA00FFCC08 /* DictionaryDataController.swift */,
 				174870FD286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift */,
-				174871182871118600FFCC08 /* SharedManagedDataController.swift */,
 			);
 			path = ManagedDataController;
 			sourceTree = "<group>";
@@ -651,7 +651,6 @@
 			files = (
 				17CA0BE52855E04000507CF5 /* AnkiActionTemplate.swift in Sources */,
 				177BA8E42842137A004DC312 /* YomiView.swift in Sources */,
-				17F935C8284360DF00513356 /* TagManager.swift in Sources */,
 				1748711528710DEA00FFCC08 /* DictionaryDataController.swift in Sources */,
 				1748710A28702E9E00FFCC08 /* DictionaryViewModel.swift in Sources */,
 				1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */,
@@ -679,6 +678,7 @@
 				17CA0BC62851DE1C00507CF5 /* ViewMode.swift in Sources */,
 				17F935CB2843797500513356 /* AppManagementDataController.swift in Sources */,
 				17F935D02846026200513356 /* RealmAppManagementDataController.swift in Sources */,
+				1748711E28712A8200FFCC08 /* PersistenceContainer.swift in Sources */,
 				1748710428701CF700FFCC08 /* NotificationExtensions.swift in Sources */,
 				17F935D9284756CA00513356 /* ClipboardDescriptionFormatter.swift in Sources */,
 			);

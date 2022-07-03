@@ -4,7 +4,6 @@ import RealmSwift
 import TaihenDictionarySupport
 import JapaneseConjugation
 
-
 class RealmAppManagementDataController: AppManagementDataController {
     
     private var realm: Realm

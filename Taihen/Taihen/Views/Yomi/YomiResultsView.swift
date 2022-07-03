@@ -254,10 +254,8 @@ struct TagView: View {
     }
     
     func tagColor(tag: String) -> Color {
-        let integerValue = TagManager.tagColorInteger(tag)
-        
         let colorScheme = YomichanColorScheme()
-        return colorScheme.integerToColor(integerValue)
+        return SharedManagedDataController.tagManagementInstance.tagColor(tag, colorScheme: colorScheme)
     }
 }
 

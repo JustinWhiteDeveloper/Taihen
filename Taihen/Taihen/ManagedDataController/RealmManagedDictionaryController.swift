@@ -331,12 +331,8 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 }
             }
             
-            for tag in dictionary.tags {
-                let realmTag = RealmTag()
-                realmTag._name = tag.shortName
-                realmTag.color = tag.color
-                self.realm.add(realmTag, update: .modified)
-            }
+            //TODO: Refactor to not hardcode reference
+            SharedManagedDataController.tagManagementInstance.addTags(tags: dictionary.tags)
 
             try! self.realm.commitWrite()
             
@@ -461,7 +457,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
 
             let dictionaries = self.realm.objects(RealmDictionary.self)
             let terms = self.realm.objects(RealmTerm.self)
-            let tags = self.realm.objects(RealmTag.self)
             
             self.realm.beginWrite()
             
@@ -470,10 +465,6 @@ class RealmManagedDictionaryController: DictionaryDataController {
             }
             
             for item in terms {
-                self.realm.delete(item)
-            }
-            
-            for item in tags {
                 self.realm.delete(item)
             }
             
