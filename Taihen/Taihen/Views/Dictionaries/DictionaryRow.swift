@@ -14,30 +14,48 @@ private enum Sizings {
     static let reorderButtonSize = CGSize(width: 24.0, height: 24.0)
 }
 
+class DictionaryRowViewModel: ObservableObject {
+    
+    @Published var model: DictionaryRowModel
+    var onDelete: (_ name: String) -> Void
+
+    init(model: DictionaryRowModel, onDelete: @escaping (_ name: String) -> Void) {
+        self.model = model
+        self.onDelete = onDelete
+    }
+    
+    func onDeleteRow() {
+        self.onDelete(model.name)
+    }
+    
+    func onChangeOfActiveState(newValue: Bool) {
+        SharedManagedDataController.dictionaryInstance.updateDictionaryActive(viewModel: model.managedModel, active: newValue)
+    }
+}
+
 struct DictionaryRow: View {
 
-    @State var model: DictionaryViewModel
-    var onDelete: (_ name: String) -> Void
+    @ObservedObject var viewModel: DictionaryRowViewModel
     
     var body: some View {
         HStack {
-            Text(model.name)
+            Text(viewModel.model.name)
                 .foregroundColor(.black)
                 .font(.title)
                 .bold()
             
             Spacer()
             
-            Toggle(Strings.activeToggle, isOn: $model.active)
+            Toggle(Strings.activeToggle, isOn: $viewModel.model.active)
                 .padding()
                 .foregroundColor(.black)
-                .onChange(of: model.active) { newValue in
-                    SharedManagedDataController.dictionaryInstance.updateDictionaryActive(viewModel: model.managedModel, active: newValue)
+                .onChange(of: viewModel.model.active) { newValue in
+                    viewModel.onChangeOfActiveState(newValue: newValue)
                 }
             
             ZStack {
                 Button("   ",  action: {
-                    onDelete(model.name)
+                    viewModel.onDeleteRow()
                 })
                 .frame(maxWidth: .infinity,maxHeight: .infinity)
                 .buttonStyle(PlainButtonStyle())

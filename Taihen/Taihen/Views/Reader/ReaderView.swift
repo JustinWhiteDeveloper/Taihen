@@ -6,6 +6,17 @@ private enum Sizings {
     static let dictionaryPreviewMaximumSize: CGFloat = 600.0
 }
 
+class ReaderViewModel: ObservableObject {
+    
+    @State var text = ""
+    @State var highlights: [NSRange] = []
+    @State var scrollPercentage: Float = 0.0
+        
+    init() {
+    }
+}
+
+
 struct ReaderView: View {
 
     @State var text = ""

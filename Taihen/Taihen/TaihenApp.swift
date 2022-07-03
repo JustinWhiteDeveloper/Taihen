@@ -16,7 +16,7 @@ private enum Sizings {
 struct TaihenApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView(viewModel: MainViewModel(viewMode: .reader))
                 .frame(minWidth: Sizings.minWindowSize.width,
                        minHeight: Sizings.minWindowSize.height,
                        alignment: .center)

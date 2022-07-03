@@ -15,128 +15,24 @@ private enum Strings {
 }
 
 private enum Sizings {
-    static let folderPickerSize = CGSize(width: 500, height: 600)
+    static let folderPickerSize = CGSize(width: 500.0, height: 600.0)
 }
 
-struct DictionariesView: View {
-
-    @State var items: [DictionaryViewModel] = []
-    @State var loading: Bool = false
-    @State var loadingText: String = Strings.defaultLoadingText
+class DictionariesViewModel: ObservableObject {
     
-    let pub = NotificationCenter.default
-        .publisher(for: Notification.Name.onSaveDictionaryUpdate)
-
-    var body: some View {
+    @Published var items: [DictionaryRowModel] = []
+    @Published var loading: Bool = false
+    @Published var loadingText: String = Strings.defaultLoadingText
         
-        VStack(alignment: .center, spacing: 0, content: {
-            Text(Strings.title)
-                .font(.largeTitle)
-                .foregroundColor(.black)
-                
-            if loading {
-                CustomizableLoadingView(text: $loadingText)
-                    .onChange(of: loading) { newValue in
-                    if newValue == true {
-                        loadingText = Strings.defaultLoadingText
-                    }
-                }.onReceive(pub) { (output) in
-                    
-                    switch output.name {
-                    case Notification.Name.onSaveDictionaryUpdate:
-                        
-                        if let dict = output.object as? [String: Int],
-                            let progress = dict["progress"],
-                            let maxProgress = dict["maxProgress"] {
-                            
-                            loadingText = Strings.savingDictionary + " " + String(progress) + "/" + String(maxProgress)
-
-                        }
-                    default:
-                        break
-                    }
-                }
-                
-            } else {
-            
-                HStack {
-                    Spacer()
-                    
-                    Button(Strings.addButtonTitle,
-                           action: {
-                        selectFolder()
-                    })
-                    .foregroundColor(.black)
-
-                    Button(Strings.deleteAllButtonTitle,
-                           action: {
-                        
-                        loading = true
-                        loadingText = Strings.deletingDictionaries
-
-                        SharedManagedDataController.dictionaryInstance.deleteAllDictionaries {
-                            
-                            loading = false
-                            onViewAppear()
-                        }
-                    })
-                    .foregroundColor(.black)
-                }
-                
-                List {
-                    ForEach(items, id:\.name) { item in
-                        
-                        DictionaryRow(model: item, onDelete: { name in
-                            
-                            loading = true
-                            
-                            loadingText = Strings.deletingDictionary
-                            
-                            SharedManagedDataController.dictionaryInstance.deleteDictionary(name: name) { elements in
-                                
-                                loading = false
-                                items = elements.map({
-                                    DictionaryViewModel(name: $0.name, order: $0.order, active: $0.active)
-                                })
-                            }
-                        })
-                        .padding()
-
-                    }
-                    .onMove(perform: onMove)
-                    .background(Color.clear)
-                }
-                .listStyle(PlainListStyle())
-                .background(Color.clear)
-                .onChange(of: items) { newValue in
-                    SharedManagedDataController.dictionaryInstance.updateDictionaryOrder(viewModels: items.map({ $0.managedModel }))
-                }
-            
-                Spacer()
-            
-            }
-        })
-        .frame(maxWidth: .infinity,
-                maxHeight: .infinity,
-                alignment: .center)
-        .onAppear() {
-            onViewAppear()
-        }
-        .padding()
-
-    }
-    
-    private func onMove(source: IndexSet, destination: Int) {
-        items.move(fromOffsets: source, toOffset: destination)
-    }
+    init() {}
     
     func onViewAppear() {
         items = SharedManagedDataController.dictionaryInstance.dictionaryViewModels()?
             .map({
-                DictionaryViewModel(name: $0.name, order: $0.order, active: $0.active)
+                DictionaryRowModel(name: $0.name, order: $0.order, active: $0.active)
             }) ?? []
     }
-
+    
     func addDictionaryFromPath(_ path: String) {
         
         loading = true
@@ -146,18 +42,18 @@ struct DictionariesView: View {
         
         DispatchQueue.global(qos: .background).async {
             guard let dictionary = reader.readFolder(path: path) else {
-                loading = false
+                self.loading = false
                 return
             }
             
-            loadingText = Strings.savingDictionary
+            self.loadingText = Strings.savingDictionary
 
             DispatchQueue.main.async {
 
                 SharedManagedDataController.dictionaryInstance.saveDictionary(dictionary,
                                                                               notifyOnBlockSize: 100) {
-                    onViewAppear()
-                    loading = false
+                    self.onViewAppear()
+                    self.loading = false
                 }
             }
         }
@@ -173,10 +69,136 @@ struct DictionariesView: View {
                 let pickedFolders = folderPicker.urls
                 
                 if let folder = pickedFolders.first?.path {
-                    addDictionaryFromPath(folder)
+                    self.addDictionaryFromPath(folder)
                 }
             }
         }
+    }
+    
+    func onDeleteAllButtonPressed() {
+        loading = true
+        loadingText = Strings.deletingDictionaries
+
+        SharedManagedDataController.dictionaryInstance.deleteAllDictionaries {
+            
+            self.loading = false
+            self.onViewAppear()
+        }
+    }
+    
+    func onDeleteRowButtonPressed(name: String) {
+        loading = true
+        
+        loadingText = Strings.deletingDictionary
+        
+        SharedManagedDataController.dictionaryInstance.deleteDictionary(name: name) { elements in
+            
+            self.loading = false
+            self.items = elements.map({
+                DictionaryRowModel(name: $0.name, order: $0.order, active: $0.active)
+            })
+        }
+    }
+    
+    func onMove(source: IndexSet, destination: Int) {
+        items.move(fromOffsets: source, toOffset: destination)
+    }
+    
+    func onRecieveNotification(notification output: Notification) {
+        switch output.name {
+        case Notification.Name.onSaveDictionaryUpdate:
+            
+            if let dict = output.object as? [String: Int],
+                let progress = dict["progress"],
+                let maxProgress = dict["maxProgress"] {
+                
+                loadingText = Strings.savingDictionary + " " + String(progress) + "/" + String(maxProgress)
+
+            }
+        default:
+            break
+        }
+    }
+    
+    func onUpdateOrderOfDictionaries() {
+        SharedManagedDataController.dictionaryInstance.updateDictionaryOrder(viewModels: items.map({ $0.managedModel }))
+    }
+}
+
+struct DictionariesView: View {
+
+    @ObservedObject var viewModel: DictionariesViewModel
+    
+    let pub = NotificationCenter.default
+        .publisher(for: Notification.Name.onSaveDictionaryUpdate)
+
+    var body: some View {
+        
+        VStack(alignment: .center, spacing: 0, content: {
+            Text(Strings.title)
+                .font(.largeTitle)
+                .foregroundColor(.black)
+                
+            if viewModel.loading {
+                CustomizableLoadingView(text: $viewModel.loadingText)
+                    .onChange(of: viewModel.loading) { newValue in
+                    if newValue == true {
+                        viewModel.loadingText = Strings.defaultLoadingText
+                    }
+                }.onReceive(pub) { (output) in
+                    viewModel.onRecieveNotification(notification: output)
+                }
+                
+            } else {
+            
+                HStack {
+                    Spacer()
+                    
+                    Button(Strings.addButtonTitle,
+                           action: {
+                        viewModel.selectFolder()
+                    })
+                    .foregroundColor(.black)
+
+                    Button(Strings.deleteAllButtonTitle,
+                           action: {
+                        
+                        viewModel.onDeleteAllButtonPressed()
+                    })
+                    .foregroundColor(.black)
+                }
+                
+                List {
+                    ForEach(viewModel.items, id:\.name) { item in
+                        
+                        DictionaryRow(viewModel: DictionaryRowViewModel(model: item,
+                                                                        onDelete: { name in
+                            viewModel.onDeleteRowButtonPressed(name: name)
+                        }))
+                        .padding()
+
+                    }
+                    .onMove(perform: viewModel.onMove)
+                    .background(Color.clear)
+                }
+                .listStyle(PlainListStyle())
+                .background(Color.clear)
+                .onChange(of: viewModel.items) { newValue in
+                    viewModel.onUpdateOrderOfDictionaries()
+                }
+            
+                Spacer()
+            
+            }
+        })
+        .frame(maxWidth: .infinity,
+                maxHeight: .infinity,
+                alignment: .center)
+        .onAppear() {
+            viewModel.onViewAppear()
+
+        }
+        .padding()
     }
 }
 

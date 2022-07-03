@@ -398,6 +398,8 @@ class RealmManagedDictionaryController: DictionaryDataController {
             self.realm = self.getRealm()
 
             let dictionary = self.realm.object(ofType: RealmDictionary.self, forPrimaryKey: name)
+            
+            //Note: loads all terms in DB, costly!
             let terms = self.realm.objects(RealmTerm.self)
 
             self.realm.beginWrite()

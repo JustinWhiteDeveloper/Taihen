@@ -6,6 +6,8 @@ struct SideMenu: View {
     @Binding var modes: [ViewMode]
     @Binding var viewMode: ViewMode
     
+    var onChangeViewMode: (_ viewMode:ViewMode) -> Void
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 20.0) {
@@ -19,7 +21,7 @@ struct SideMenu: View {
                             .font(.headline)
                     }
                     .onTapGesture {
-                        viewMode = item
+                        onChangeViewMode(item)
                     }
                 }
             }
