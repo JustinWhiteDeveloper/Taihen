@@ -24,6 +24,8 @@
 		174871172871112E00FFCC08 /* TagManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871162871112E00FFCC08 /* TagManagementDataController.swift */; };
 		174871192871118600FFCC08 /* SharedManagedDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871182871118600FFCC08 /* SharedManagedDataController.swift */; };
 		1748711E28712A8200FFCC08 /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748711D28712A8200FFCC08 /* PersistenceContainer.swift */; };
+		1748712028712C0300FFCC08 /* CoreDataTagManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748711F28712C0300FFCC08 /* CoreDataTagManagementDataController.swift */; };
+		1748712228712CDF00FFCC08 /* TagManagementDataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712128712CDF00FFCC08 /* TagManagementDataControllerTests.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* YomiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* YomiView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -119,6 +121,8 @@
 		174871162871112E00FFCC08 /* TagManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementDataController.swift; sourceTree = "<group>"; };
 		174871182871118600FFCC08 /* SharedManagedDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedManagedDataController.swift; sourceTree = "<group>"; };
 		1748711D28712A8200FFCC08 /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
+		1748711F28712C0300FFCC08 /* CoreDataTagManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTagManagementDataController.swift; sourceTree = "<group>"; };
+		1748712128712CDF00FFCC08 /* TagManagementDataControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManagementDataControllerTests.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
 		177BA8E32842137A004DC312 /* YomiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				174871162871112E00FFCC08 /* TagManagementDataController.swift */,
+				1748711F28712C0300FFCC08 /* CoreDataTagManagementDataController.swift */,
 			);
 			path = "Tag Management";
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 				17DCE3822839E4E6001520A7 /* Dictionaries */,
 				17BBA2AF285B0A93007BEC66 /* AnkiInterfaceTests.swift */,
 				1748710E2871081F00FFCC08 /* YomichanTagColorTests.swift */,
+				1748712128712CDF00FFCC08 /* TagManagementDataControllerTests.swift */,
 				17DCE36A2839C27B001520A7 /* Info.plist */,
 			);
 			path = TaihenTests;
@@ -652,6 +658,7 @@
 				17CA0BE52855E04000507CF5 /* AnkiActionTemplate.swift in Sources */,
 				177BA8E42842137A004DC312 /* YomiView.swift in Sources */,
 				1748711528710DEA00FFCC08 /* DictionaryDataController.swift in Sources */,
+				1748712028712C0300FFCC08 /* CoreDataTagManagementDataController.swift in Sources */,
 				1748710A28702E9E00FFCC08 /* DictionaryViewModel.swift in Sources */,
 				1794C70F284F32DB00AC6700 /* FeatureManager.swift in Sources */,
 				17F935C42843500200513356 /* ReaderView.swift in Sources */,
@@ -690,6 +697,7 @@
 			files = (
 				1748710F2871081F00FFCC08 /* YomichanTagColorTests.swift in Sources */,
 				1748710B2870482000FFCC08 /* AnkiInterfaceTests.swift in Sources */,
+				1748712228712CDF00FFCC08 /* TagManagementDataControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
