@@ -18,7 +18,6 @@ private enum Fonts {
     static let ankiPromptFont = Font.system(size: 30)
 }
 
-
 class YomiSearchViewModel: ObservableObject {
     @Published var hasBooted = false
     @Published var lastResultCount = 0
@@ -49,6 +48,10 @@ class YomiSearchViewModel: ObservableObject {
                                                object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func onLoad() {
         SharedManagedDataController.tagManagementInstance.reloadTags()
         SharedManagedDataController.dictionaryInstance.reloadDictionaries()
@@ -56,6 +59,7 @@ class YomiSearchViewModel: ObservableObject {
     
     func autoplayAudioIfAvailable() {
 
+        // Delay to prevent blocking layout
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
             
             guard let url = self.firstTerm?.audioUrl,
@@ -91,9 +95,6 @@ class YomiSearchViewModel: ObservableObject {
                 self.player = AVPlayer(url: tmpFileURL)
                 self.player?.volume = 1.0
                 self.player?.play()
-                
-            } else {
-                print("File was NOT Written")
             }
         }
         catch {
@@ -116,14 +117,10 @@ class YomiSearchViewModel: ObservableObject {
     }
     
     func onSearch(value: String) {
-        
-        print(value + " " + hasBooted.description)
-        
+                
         if self.lastSearch == value {
-            print("duplicate")
             return
         }
-
 
         self.lastSearch = value
 
@@ -186,8 +183,6 @@ class YomiSearchViewModel: ObservableObject {
         let ankiExpression = "\"expression:\(expressionPart)\" OR \"Focus:\(term)\" OR \"Meaning:\(term)\""
         
         ankiExpressionText = ankiExpression
-
-        print("here")
         
         searcher.findCards(expression: ankiExpression) { result in
             
@@ -386,6 +381,29 @@ extension TaihenDictionaryViewModel {
             let urlString = "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=\(encodedTerm)&kana=\(encodedKana)"
 
             return URL(string: urlString)
+        }
+    }
+}
+
+extension TaihenCustomDictionaryTerm {
+    
+    var meaningDescription: String {
+        if meanings.count == 1 {
+            return meanings.first ?? ""
+            
+        } else {
+            
+            var text = ""
+            
+            for (index, meaning) in meanings.enumerated() {
+                text += "• " + meaning
+                
+                if index < meanings.count - 1 {
+                    text += "\n"
+                }
+            }
+            
+            return text
         }
     }
 }

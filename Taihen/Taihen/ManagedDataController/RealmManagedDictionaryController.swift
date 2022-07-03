@@ -35,9 +35,7 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
     var isSearching = false
 
     private var input: Void
-    
-    let realmQueue = DispatchQueue(label: "realmQueue", qos: .userInteractive)
-    
+        
     var realm: Realm
 
     func getRealm() -> Realm {
