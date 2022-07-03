@@ -22,6 +22,7 @@ struct YomiResultCollectionView: View {
                                      terms: item.terms,
                                      tags: item.tags,
                                      audioUrl: item.audioUrl)
+                            .padding(.horizontal)
                         
                         Spacer()
                     }

@@ -27,35 +27,24 @@ private extension Colors {
 
 struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     
-    // Hook this binding up with the parent View
     @Binding var text: String
-    
     var size: CGSize
-    
-    // Get the UndoManager
-    @Environment(\.undoManager) var undoManger
-            
     @Binding var highlights: [NSRange]
-    
     @State var setText: Bool = false
-    
     @Binding var scrollPercentage: Float
 
-    // create an NSTextView
+    @Environment(\.undoManager) var undoManger
+    
     func makeNSView(context: Context) -> NSScrollView {
         
-        // create NSTextView inside NSScrollView
         let scrollView = NSTextView.scrollableTextView()
         
         let nsTextView = scrollView.documentView as! NSTextView
         nsTextView.textColor = .black
         nsTextView.insertionPointColor = NSColor.black
-        
         nsTextView.textContainerInset = NSSize(width: Sizings.containerWidthInset,
                                                height: Sizings.containerHeightInset)
         nsTextView.font = NSFont.userFont(ofSize: FeatureManager.instance.readerTextSize)
-        
-        // use SwiftUI Coordinator as the delegate
         nsTextView.delegate = context.coordinator
         
         // set drawsBackground to false (=> clear Background)
@@ -88,9 +77,9 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         
         let coordinator = context.coordinator
         
-        if nsTextView.string != text || coordinator.isFirstTextLayout {
+        if nsTextView.string != text || coordinator.clearAttributedText {
             nsTextView.string = text
-            coordinator.isFirstTextLayout = false
+            coordinator.clearAttributedText = false
         }
 
         if FeatureManager.instance.enableTextHighlights {
@@ -107,8 +96,8 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     }
     
     // Create Coordinator for this View
-    func makeCoordinator() -> Coordinator {
-        Coordinator(textEditor: self)
+    func makeCoordinator() -> TextCoordinator {
+        TextCoordinator(textEditor: self)
     }
 }
 
@@ -119,7 +108,7 @@ private enum Dimensions {
 }
 
 // Declare nested Coordinator class which conforms to NSTextViewDelegate
-class Coordinator: NSObject, NSTextViewDelegate {
+class TextCoordinator: NSObject, NSTextViewDelegate {
     
     typealias Representable = NSScrollableTextViewRepresentable
     
@@ -128,8 +117,8 @@ class Coordinator: NSObject, NSTextViewDelegate {
     var lastSelectedRange: NSRange?
     var lastSelectedCharIndex: Int?
 
-    // Don't relayout text as it overrides Attributed text
-    var isFirstTextLayout: Bool = true
+    // Don't continually set text as it overrides Attributed text
+    var clearAttributedText: Bool = true
     
     init(textEditor: Representable) {
         self.parent = textEditor
@@ -207,7 +196,7 @@ class Coordinator: NSObject, NSTextViewDelegate {
             }
         }
         
-        isFirstTextLayout = true
+        clearAttributedText = true
                             
         updateHighlightsOnDisk()
     }
@@ -233,12 +222,14 @@ class Coordinator: NSObject, NSTextViewDelegate {
 }
 
 extension NSTextView {
-  var selectedText: String {
-      var text = ""
-      for case let range as NSRange in self.selectedRanges {
-          text.append(string[range] + "\n")
-      }
-      text = String(text.dropLast())
-      return text
-  }
+    var selectedText: String {
+        var text = ""
+        
+        for case let range as NSRange in self.selectedRanges {
+            text.append(string[range] + "\n")
+        }
+        
+        text = String(text.dropLast())
+        return text
+    }
 }

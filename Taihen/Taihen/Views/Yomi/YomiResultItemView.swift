@@ -17,16 +17,11 @@ struct YomiResultItemView: View {
     @State var terms: [TaihenCustomDictionaryTerm] = []
     @State var tags: [String] = []
     @State var audioUrl: URL?
-    
     @State var player: AVPlayer?
-    
     @State var didSearch: Bool = false
-
     @State var hasCard: Bool = false
     @State var isReviewed: Bool = false
-
     @State var cardText: String = ""
-
     @State var ankiExpressionText: String = ""
 
     var body: some View {
@@ -59,8 +54,6 @@ struct YomiResultItemView: View {
                     Button(Strings.playAudioButtonTitle) {
                         
                         if let url = audioUrl {
-                            print("playing \(url)")
-
                             let playerItem = AVPlayerItem(url: url)
 
                             player = AVPlayer(playerItem:playerItem)
@@ -108,11 +101,8 @@ struct YomiResultItemView: View {
         
         Spacer()
             .onAppear {
-                
-                //Algorithm needed
-                
+                                
                 let furiganaFormatter = ConcreteFuriganaFormatter()
-                
                 let result = furiganaFormatter.formattedString(fromKanji: term, andHiragana: kana)
                 
                 cardText = result
@@ -175,7 +165,6 @@ struct YomiResultItemView: View {
                         hasCard = false
                         didSearch = true
                     }
-                    
                 }
             }
         

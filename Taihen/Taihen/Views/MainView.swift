@@ -37,7 +37,7 @@ struct MainView: View {
                 case .reader:
                     ReaderView(viewModel: readerViewModel)
                 case .yomi:
-                    LookupView()
+                    LookupContainerView()
                 case .dictionaries:
                     DictionariesView(viewModel: dictionaryViewModel)
                 default:

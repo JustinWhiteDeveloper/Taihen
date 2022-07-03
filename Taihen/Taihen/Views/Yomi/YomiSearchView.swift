@@ -44,7 +44,8 @@ struct YomiSearchView: View {
                     
                     if lastResultCount > 0 {
                         YomiResultCollectionView(search: lastSearch,
-                                                 selectedTerms: selectedTerms).onAppear {
+                                                 selectedTerms: selectedTerms)
+                        .onAppear {
   
                             if let url = selectedTerms.first?.first?.audioUrl,
                                 FeatureManager.instance.autoplayAudio {
@@ -57,7 +58,10 @@ struct YomiSearchView: View {
                                         return
                                     }
                                     
-                                    let tmpFileURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("audio").appendingPathExtension("mp3")
+                                    let tmpFileURL = URL(fileURLWithPath:NSTemporaryDirectory())
+                                                        .appendingPathComponent("audio")
+                                                        .appendingPathExtension("mp3")
+                                    
                                     let wasFileWritten = (try? audioData.write(to: tmpFileURL, options: [.atomic])) != nil
 
                                     if !wasFileWritten{
@@ -95,7 +99,6 @@ struct YomiSearchView: View {
         .onAppear {
             SharedManagedDataController.tagManagementInstance.reloadTags()
             SharedManagedDataController.dictionaryInstance.reloadDictionaries()
-            
         }
         .onPasteboardChange {
             if FeatureManager.instance.clipboardReadingEnabled,
@@ -119,7 +122,6 @@ struct YomiSearchView: View {
             onSearch(value: parentValue)
         }
     }
-    
     
     func onSearch(value: String) {
         

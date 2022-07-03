@@ -18,13 +18,10 @@ struct ReaderView: View {
                                        highlights: $viewModel.highlights,
                                        scrollPercentage: $viewModel.scrollPercentage)
                 
-                if viewModel.lookupPreviewEnabled {
-
-                    YomiSearchView(parentValue: Binding.constant(""))
-                        .background(Colors.customGray1)
-                        .padding()
-                        .frame(maxWidth: Sizings.dictionaryPreviewMaximumSize)
-                }
+                YomiSearchView(parentValue: Binding.constant(""))
+                    .background(Colors.customGray1)
+                    .padding(.vertical)
+                    .frame(maxWidth: Sizings.dictionaryPreviewMaximumSize)
             }
             .onAppear {
                 viewModel.onAppear()

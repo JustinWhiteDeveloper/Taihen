@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import TaihenDictionarySupport
 
-struct LookupView: View {
+struct LookupContainerView: View {
 
     @State var text = ""
         
@@ -16,7 +16,6 @@ struct LookupView: View {
             YomiSearchView(parentValue: $text)
                     .padding()
                     .background(Colors.customGray1)
-            
         }
     }
 }
