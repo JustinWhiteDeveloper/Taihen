@@ -34,6 +34,7 @@
 		1748712E2871499C00FFCC08 /* YomiSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712D2871499C00FFCC08 /* YomiSearchBar.swift */; };
 		1748713028714CFE00FFCC08 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712F28714CFE00FFCC08 /* TagView.swift */; };
 		1748713228714E0600FFCC08 /* YomiResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748713128714E0600FFCC08 /* YomiResultItemView.swift */; };
+		174871342871555D00FFCC08 /* ReaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871332871555D00FFCC08 /* ReaderViewModel.swift */; };
 		174A89A1285B15810074D0F8 /* JapaneseConjugation in Frameworks */ = {isa = PBXBuildFile; productRef = 174A89A0285B15810074D0F8 /* JapaneseConjugation */; };
 		177BA8E42842137A004DC312 /* LookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E32842137A004DC312 /* LookupView.swift */; };
 		177BA8E628421FEF004DC312 /* DictionariesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177BA8E528421FEF004DC312 /* DictionariesView.swift */; };
@@ -104,6 +105,7 @@
 		1748712D2871499C00FFCC08 /* YomiSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiSearchBar.swift; sourceTree = "<group>"; };
 		1748712F28714CFE00FFCC08 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		1748713128714E0600FFCC08 /* YomiResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiResultItemView.swift; sourceTree = "<group>"; };
+		174871332871555D00FFCC08 /* ReaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewModel.swift; sourceTree = "<group>"; };
 		176D717F285B092000F50147 /* JapaneseConjugation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = JapaneseConjugation; sourceTree = "<group>"; };
 		177BA8E32842137A004DC312 /* LookupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupView.swift; sourceTree = "<group>"; };
 		177BA8E528421FEF004DC312 /* DictionariesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionariesView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				17F935C32843500200513356 /* ReaderView.swift */,
+				174871332871555D00FFCC08 /* ReaderViewModel.swift */,
 				174871272871474B00FFCC08 /* CustomizableTextEditor.swift */,
 			);
 			path = Reader;
@@ -525,6 +528,7 @@
 			files = (
 				17CA0BE52855E04000507CF5 /* AnkiActionTemplates.swift in Sources */,
 				177BA8E42842137A004DC312 /* LookupView.swift in Sources */,
+				174871342871555D00FFCC08 /* ReaderViewModel.swift in Sources */,
 				1748711528710DEA00FFCC08 /* DictionaryDataController.swift in Sources */,
 				1748712028712C0300FFCC08 /* CoreDataTagManagementDataController.swift in Sources */,
 				1748710A28702E9E00FFCC08 /* DictionaryRowViewModel.swift in Sources */,

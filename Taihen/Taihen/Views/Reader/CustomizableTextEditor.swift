@@ -61,7 +61,9 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         
         let coordinator = context.coordinator
         
-        scrollPercentage = scrollView.verticalScroller?.floatValue ?? 0
+        DispatchQueue.main.async {
+            scrollPercentage = scrollView.verticalScroller?.floatValue ?? 0
+        }
         
         // get wrapped nsTextView
         guard let nsTextView = scrollView.documentView as? NSTextView else {
@@ -169,8 +171,10 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
             guard let nsTextView = notification.object as? NSTextView else {
                 return
             }
-                        
-            parent.scrollPercentage = nsTextView.enclosingScrollView?.verticalScroller?.floatValue ?? 0
+            
+            DispatchQueue.main.async {
+                self.parent.scrollPercentage = nsTextView.enclosingScrollView?.verticalScroller?.floatValue ?? 0
+            }
 
             let text = nsTextView.selectedText
 

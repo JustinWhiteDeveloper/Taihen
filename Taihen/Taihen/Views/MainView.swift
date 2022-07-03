@@ -19,6 +19,7 @@ class MainViewModel: ObservableObject {
 struct MainView: View {
     
     @ObservedObject var viewModel: MainViewModel
+    @State private var readerViewModel = ReaderViewModel()
     @State private var dictionaryViewModel = DictionariesViewModel()
     
     var body: some View {
@@ -34,7 +35,7 @@ struct MainView: View {
                 
                 switch(viewModel.viewMode) {
                 case .reader:
-                    ReaderView()
+                    ReaderView(viewModel: readerViewModel)
                 case .yomi:
                     LookupView()
                 case .dictionaries:
