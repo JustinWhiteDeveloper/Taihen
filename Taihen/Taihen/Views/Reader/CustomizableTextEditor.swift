@@ -104,7 +104,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
 // Using alternate naming as Coordinator still not mature..
 private enum Dimensions {
 
-    
 }
 
 // Declare nested Coordinator class which conforms to NSTextViewDelegate
@@ -158,15 +157,12 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
             NotificationCenter.default.post(name: Notification.Name.onSelectionChange, object: text)
         }
         else if let position = lastSelectedRange?.location {
-            for highlight in parent.highlights {
-                if highlight.contains(position) {
-                    
-                    let text = nsTextView.string[highlight]
-                    
-                    NotificationCenter.default.post(name: Notification.Name.onSelectionChange, object: text)
-                    
-                    break
-                }
+            
+            if let range = parent.highlights.first(where: { $0.contains(position) }) {
+                let text = nsTextView.string[range]
+                
+                NotificationCenter.default.post(name: Notification.Name.onSelectionChange,
+                                                object: text)
             }
         }
     }

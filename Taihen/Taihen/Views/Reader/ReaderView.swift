@@ -42,7 +42,7 @@ struct ReaderView: View {
     }
     
     var formattedScrollPercentage: String {
-        String(format: "%.2f%", viewModel.scrollPercentage * 100)
+        String(format: "%.2f", viewModel.scrollPercentage * 100) + "%"
     }
 }
 

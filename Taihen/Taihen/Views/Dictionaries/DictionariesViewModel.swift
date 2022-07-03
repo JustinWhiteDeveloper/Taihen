@@ -17,7 +17,14 @@ private enum Sizings {
 class DictionariesViewModel: ObservableObject {
     
     @Published var items: [DictionaryRowModel] = []
-    @Published var loading: Bool = false
+    @Published var loading: Bool = false {
+        didSet {
+            if loading {
+                loadingText = Strings.defaultLoadingText
+            }
+        }
+    }
+    
     @Published var loadingText: String = Strings.defaultLoadingText
         
     init() {

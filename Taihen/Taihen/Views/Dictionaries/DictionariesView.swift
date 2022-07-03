@@ -25,14 +25,9 @@ struct DictionariesView: View {
                 
             if viewModel.loading {
                 CustomizableLoadingView(text: $viewModel.loadingText)
-                    .onChange(of: viewModel.loading) { newValue in
-                    if newValue == true {
-                        viewModel.loadingText = Strings.defaultLoadingText
-                    }
-                }
-                
-            } else {
             
+            }
+            else {
                 HStack {
                     Spacer()
                     
