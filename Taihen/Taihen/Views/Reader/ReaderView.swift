@@ -7,7 +7,7 @@ private enum Sizings {
 
 struct ReaderView: View {
 
-    @ObservedObject var viewModel: ReaderViewModel = ReaderViewModel()
+    @StateObject var viewModel: ReaderViewModel = ReaderViewModel()
         
     var body: some View {
         

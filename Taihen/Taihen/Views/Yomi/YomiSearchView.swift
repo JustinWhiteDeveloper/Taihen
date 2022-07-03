@@ -244,7 +244,7 @@ class YomiSearchViewModel: ObservableObject {
     
     func onAnkiPromptButtonPressed() {
         let searcher = ConcreteAnkiInterface()
-        let searchText = hasCard ? ankiExpressionText : lastSearch
+        let searchText = hasCard ? ankiExpressionText : lastSearchString
         
         searcher.browseQuery(expression: searchText) {}
     }
