@@ -55,15 +55,20 @@ class YomiSearchViewModel: ObservableObject {
     }
     
     func autoplayAudioIfAvailable() {
-       guard let url = selectedTerms.first?.first?.audioUrl,
-             FeatureManager.instance.autoplayAudio else {
-           return
-       }
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
             
-        playAudioUrl(url)
+            guard let url = self.firstTerm?.audioUrl,
+                  FeatureManager.instance.autoplayAudio else {
+                return
+            }
+                 
+            self.playAudioUrl(url)
+        }
     }
     
     func playAudioUrl(_ url: URL?) {
+        
         guard let url = url else {
             return
         }
@@ -130,19 +135,21 @@ class YomiSearchViewModel: ObservableObject {
         self.finishedLoadingDelay = false
         self.lookupTime = 0
         
-        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             self.finishedLoadingDelay = true
         }
         
         SharedManagedDataController.dictionaryInstance.searchValue(value: value) { finished, timeTaken, selectedTerms, resultCount in
             
-            self.lookupTime = timeTaken
-            self.isLoading = false
-            self.selectedTerms = selectedTerms
-            self.lastResultCount = resultCount
-            self.finishedLoadingDelay = false
-            self.firstTerm = selectedTerms.first?.first
+            DispatchQueue.main.async {
+                self.lookupTime = timeTaken
+                self.isLoading = false
+                self.selectedTerms = selectedTerms
+                self.lastResultCount = resultCount
+                self.finishedLoadingDelay = false
+                self.firstTerm = selectedTerms.first?.first
+            }
+
             
             self.onSearchFinished()
         }
@@ -162,7 +169,7 @@ class YomiSearchViewModel: ObservableObject {
     func onSearchFinished() {
         
         autoplayAudioIfAvailable()
-        
+
         let term = firstTerm?.groupTerm ?? ""
         let kana = firstTerm?.kana ?? ""
         
