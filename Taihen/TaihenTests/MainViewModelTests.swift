@@ -44,13 +44,4 @@ class MainViewModelTests: XCTestCase {
         
         XCTAssertEqual(view.viewModel.viewMode, .yomi)
     }
-    
-    func testGivenADictionaryViewModelExample() throws {
-        let viewModel = DictionariesViewModel()
-        let view = DictionariesView(viewModel: viewModel)
-                
-        viewModel.onViewAppear()
-        
-        XCTAssertEqual(view.viewModel.loading, false)
-    }
 }

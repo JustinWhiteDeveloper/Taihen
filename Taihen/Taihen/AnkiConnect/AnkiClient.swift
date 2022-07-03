@@ -20,7 +20,7 @@ protocol AnkiInterface {
 }
 
 private enum HTTPMethod: String {
-    case Post = "POST"
+    case POST = "POST"
 }
 
 class ConcreteAnkiInterface: AnkiInterface {
@@ -43,7 +43,7 @@ class ConcreteAnkiInterface: AnkiInterface {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.Post.rawValue
+        request.httpMethod = HTTPMethod.POST.rawValue
         
         let template = FindCardTemplate.findCardsWithExpression(expression)
         
@@ -65,7 +65,7 @@ class ConcreteAnkiInterface: AnkiInterface {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.Post.rawValue
+        request.httpMethod = HTTPMethod.POST.rawValue
         
         let template = CardInfoTemplate.getCardInfoWithCards(values)
         
@@ -88,7 +88,7 @@ class ConcreteAnkiInterface: AnkiInterface {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.Post.rawValue
+        request.httpMethod = HTTPMethod.POST.rawValue
         
         let template = GuiBrowseTemplate.getCardsWithQuery(expression)
         

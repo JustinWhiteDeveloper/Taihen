@@ -27,36 +27,18 @@ class RealmKanaMap: Object {
     @Persisted var terms: List<String>
 }
 
-extension TaihenCustomDictionaryTerm {
+class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
     
-    static func from(entity: RealmTerm) -> TaihenCustomDictionaryTerm {
-        
-        var meaningTags: [String] = Array(entity.meaningTags)
-                
-        meaningTags.append(entity.dictionaryName)
-        
-        let term = TaihenCustomDictionaryTerm(term: entity.term,
-                                              kana: entity.kana,
-                                              meaningTags: meaningTags,
-                                              explicitType: "",
-                                              meanings: Array(entity.meanings),
-                                              extraMeanings: [],
-                                              index: 0,
-                                              termTags: Array(entity.groupTags),
-                                              dictionary: entity.dictionaryName)
-        return term
-    }
-}
+    static var dictionaries: [String] = []
+    static var activeDictionaries: [String] = []
+    static var activeHashes: [String] = []
+    var isSearching = false
 
-class RealmManagedDictionaryController: DictionaryDataController {
+    private var input: Void
     
-    private static var dictionaries: [String] = []
-    private static var activeDictionaries: [String] = []
-    private static var activeHashes: [String] = []
-
-    private var realm: Realm
+    let realmQueue = DispatchQueue(label: "realmQueue", qos: .userInteractive)
     
-    var input: Void
+    var realm: Realm
 
     func getRealm() -> Realm {
         var config = Realm.Configuration()
@@ -83,144 +65,12 @@ class RealmManagedDictionaryController: DictionaryDataController {
             }
         }
     }
-    
-    func reloadDictionaries() {
-        self.realm = getRealm()
-
-        let dictionaries = realm.objects(RealmDictionary.self)
-
-        RealmManagedDictionaryController.dictionaries = dictionaries.sorted(by: {$0.order < $1.order }).map({ $0._name })
-        RealmManagedDictionaryController.activeDictionaries = dictionaries.sorted(by: {$0.order < $1.order }).filter({ $0.isActive }).map({ $0._name })
-        RealmManagedDictionaryController.activeHashes = dictionaries.sorted(by: {$0.order < $1.order }).filter({ $0.isActive }).map({ $0.hashKey })
-    }
-    
-    func searchValue(value: String, callback: @escaping (Bool, Double, [[TaihenDictionaryViewModel]], Int) -> Void) {
-                
-        DispatchQueue.global(qos: .background).async {
-            
-            self.realm = self.getRealm()
-
-            if value.isEmpty || !value.containsValidJapaneseCharacters {
-                
-                DispatchQueue.main.async {
-                    callback(false, 0, [], 0)
-                }
-                
-                return
-            }
-            
-            var search = value
-
-            let dictStrings = RealmManagedDictionaryController.dictionaries
-            let activeDicts = RealmManagedDictionaryController.activeDictionaries
-            let activeHashes = RealmManagedDictionaryController.activeHashes
-
-            let time = Date()
-
-            var resultCount = 0
-            
-            var resultsFoundInDictionaries: [TaihenCustomDictionaryTerm] = []
-
-            for activeDict in activeHashes {
-                guard let objects = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + "0") else {
-                    continue
-                }
-
-                resultsFoundInDictionaries.append(TaihenCustomDictionaryTerm.from(entity: objects))
-                
-                var object = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + String(resultsFoundInDictionaries.count))
-                
-                if object != nil {
-                    while object != nil {
-                        resultsFoundInDictionaries.append(TaihenCustomDictionaryTerm.from(entity: object!))
-                        object = self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + search + String(resultsFoundInDictionaries.count))
-                    }
-                }
-                
-                resultCount += resultsFoundInDictionaries.count
-            }
-            
-            let dictionary = ConcreteTaihenCustomDictionary(name: "", revision: "", tags: [], terms: resultsFoundInDictionaries)
-            
-            let termDict: [String: [TaihenDictionaryViewModel]] = dictionary.termDict
-
-            var models: [TaihenDictionaryViewModel] = termDict[search] ?? []
-
-            for (index, _) in models.enumerated() {
-                
-                models[index].terms = models[index].terms
-                    .filter({ activeDicts.contains($0.dictionary ?? "")})
-                    .sorted { termA, termB in
-                    
-                    let indexA = dictStrings.firstIndex(of: termA.dictionary ?? "") ?? 0
-                    let indexB = dictStrings.firstIndex(of: termB.dictionary ?? "") ?? 0
-                    
-                    return indexA < indexB
-                }
-            }
-            
-            let lookupTime = abs(time.timeIntervalSinceNow)
-            
-            //retry if possible
-            if resultCount == 0 && search.count > 1 {
-                
-                let kanaCorrector: JapaneseConjugator
-                
-                switch FeatureManager.instance.textSelectionParserMode {
-                case .Rule:
-                    kanaCorrector = RuleCollectionJapaneseConjugator()
-                default:
-                    kanaCorrector = RuleListJapaneseConjugator()
-                }
-                
-                // Check kana map
-                if let kanaMap = self.realm.object(ofType: RealmKanaMap.self, forPrimaryKey: search) {
-                    
-                    //TODO: for every term
-                    if let firstTerm = kanaMap.terms.first {
-                        
-                        self.searchValue(value: firstTerm) { finished, timeTaken, selectedTerms, resultCount in
-                            callback(finished, timeTaken + lookupTime, selectedTerms, resultCount)
-                        }
-                        
-                        return
-                    }
-                    
-                } else if let correctedSearch = kanaCorrector.correctTerm(search) {
-
-                    for searchItem in correctedSearch {
-                        for activeDict in activeHashes {
-
-                            if self.realm.object(ofType: RealmTerm.self, forPrimaryKey: activeDict + searchItem + "0") != nil {
-
-                                self.searchValue(value: searchItem) { finished, timeTaken, selectedTerms, resultCount in
-                                    callback(finished, timeTaken + lookupTime, selectedTerms, resultCount)
-                                }
-                                
-                                return
-                            }
-                        }
-                    }
-                }
-                
-                search.removeLast()
-                
-                self.searchValue(value: search) { finished, timeTaken, selectedTerms, resultCount in
-                    callback(finished, timeTaken + lookupTime, selectedTerms, resultCount)
-                }
-                
-            } else {
-                
-                DispatchQueue.main.async {
-                    callback(true, lookupTime, [models], resultCount)
-                }
-            }
-        }
-    }
 
     func saveDictionary(_ dictionary: TaihenCustomDictionary, notifyOnBlockSize: Int, callback: @escaping () -> Void) {
 
-        DispatchQueue.global(qos: .background).async {
+        print("save")
+        
+        DispatchQueue.global(qos: .background).sync {
             
             self.realm = self.getRealm()
 
@@ -244,16 +94,13 @@ class RealmManagedDictionaryController: DictionaryDataController {
             
             var kanaMap: [String: [String]] = [:]
 
-            for (_, term) in dictionary.terms.enumerated() {
+            for (_, term) in dictionary.terms.enumerated() where !term.kana.isEmpty {
                 
-                // Add kana maps for kana lookups
-                if !term.kana.isEmpty {
-                    if kanaMap[term.kana] == nil {
-                        kanaMap[term.kana] = []
-                    }
-                    
-                    kanaMap[term.kana]?.append(term.term)
+                if kanaMap[term.kana] == nil {
+                    kanaMap[term.kana] = []
                 }
+                
+                kanaMap[term.kana]?.append(term.term)
             }
             
             let kanaMapsCount = kanaMap.keys.count
@@ -309,11 +156,8 @@ class RealmManagedDictionaryController: DictionaryDataController {
                     realmKana._key = key
                 }
                 
-                for item in value {
-                    
-                    if !realmKana.terms.contains(item) {
-                        realmKana.terms.append(item)
-                    }
+                for item in value where !realmKana.terms.contains(item) {
+                    realmKana.terms.append(item)
                 }
                 
                 self.realm.add(realmKana, update: .modified)
@@ -331,8 +175,12 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 }
             }
             
-            try! self.realm.commitWrite()
-            
+            do {
+                try self.realm.commitWrite()
+
+            } catch {
+                print(error.localizedDescription)
+            }
             
             DispatchQueue.main.async {
                 callback()
@@ -340,16 +188,11 @@ class RealmManagedDictionaryController: DictionaryDataController {
         }
     }
     
-    func dictionaryViewModels() -> [ManagedDictionaryViewModel]? {
-        self.realm = getRealm()
-
-        let dictionaries = realm.objects(RealmDictionary.self)
-
-        return dictionaries.map({ ManagedDictionaryViewModel(name: $0._name, order: Int($0.order), active: $0.isActive)})
-            .sorted(by: { $0.order < $1.order })
-    }
-    
     func updateDictionaryActive(viewModel model: ManagedDictionaryViewModel, active: Bool) {
+        
+        print("update dicts")
+
+        
         self.realm = getRealm()
 
         let dictionary = realm.object(ofType: RealmDictionary.self, forPrimaryKey: model.name)
@@ -366,6 +209,10 @@ class RealmManagedDictionaryController: DictionaryDataController {
     }
 
     func updateDictionaryOrder(viewModels items: [ManagedDictionaryViewModel]) {
+        
+        print("update dictionary order")
+
+        
         self.realm = getRealm()
 
         let dictionaries = realm.objects(RealmDictionary.self)
@@ -373,11 +220,8 @@ class RealmManagedDictionaryController: DictionaryDataController {
         realm.beginWrite()
         
         for dictionary in dictionaries {
-            for (index, element) in items.enumerated() {
-                
-                if dictionary._name == element.name {
-                    dictionary.order = index
-                }
+            for (index, element) in items.enumerated() where dictionary._name == element.name {
+                dictionary.order = index
             }
         }
         
@@ -390,8 +234,9 @@ class RealmManagedDictionaryController: DictionaryDataController {
     }
     
     func deleteDictionary(name: String, callback: @escaping ([ManagedDictionaryViewModel]) -> Void) {
-        
-        DispatchQueue.global(qos: .background).async { [self] in
+        print("delete dictionary")
+
+        DispatchQueue.global(qos: .background).sync { [self] in
             self.realm = self.getRealm()
 
             let dictionary = self.realm.object(ofType: RealmDictionary.self, forPrimaryKey: name)
@@ -405,11 +250,8 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 self.realm.delete(dictionary)
             }
 
-            for item in terms {
-                
-                if item.dictionaryName == name {
-                    self.realm.delete(item)
-                }
+            for item in terms where item.dictionaryName == name {
+                self.realm.delete(item)
             }
             
             do {
@@ -425,33 +267,10 @@ class RealmManagedDictionaryController: DictionaryDataController {
         }
     }
 
-    func termDescriptionToClipboard(term: String) {
-        
-        input = searchValue(value: term) { finished, _, model, _ in
-            
-            guard finished,
-                  let firstModel = model.first,
-                  let firstSubModel = firstModel.first else {
-                return
-            }
-            
-            let clipboardFormatter = YomichanClipboardFormatter()
-            let copyText = clipboardFormatter.formatForTerms(terms: firstSubModel)
-            
-            CopyboardEnabler.enabled = false
-            
-            NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString( copyText, forType: .string)
-                            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                CopyboardEnabler.enabled = true
-            }
-        }
-    }
-    
     func deleteAllDictionaries(callback: @escaping () -> Void) {
-        
-        DispatchQueue.global(qos: .background).async { [self] in
+        print("delete all dictionaries")
+
+        DispatchQueue.global(qos: .background).sync { [self] in
             self.realm = self.getRealm()
 
             let dictionaries = self.realm.objects(RealmDictionary.self)
@@ -478,5 +297,89 @@ class RealmManagedDictionaryController: DictionaryDataController {
                 callback()
             }
         }
+    }
+}
+
+
+extension RealmManagedDictionaryController: DictionaryClipboardController {
+    
+    func dictionaryViewModels() -> [ManagedDictionaryViewModel]? {
+        
+        print("dictionary view models")
+
+        
+        self.realm = getRealm()
+
+        let dictionaries = realm.objects(RealmDictionary.self)
+
+        return dictionaries.map({ ManagedDictionaryViewModel(name: $0._name,
+                                                             order: Int($0.order),
+                                                             active: $0.isActive)})
+            .sorted(by: { $0.order < $1.order })
+    }
+    
+    func termDescriptionToClipboard(term: String) {
+        
+        print("term description")
+
+        
+        input = searchValue(value: term) { finished, _, model, _ in
+            
+            guard finished,
+                  let firstModel = model.first,
+                  let firstSubModel = firstModel.first else {
+                return
+            }
+            
+            let clipboardFormatter = YomichanClipboardFormatter()
+            let copyText = clipboardFormatter.formatForTerms(terms: firstSubModel)
+            
+            CopyboardEnabler.enabled = false
+            
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString( copyText, forType: .string)
+                            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                CopyboardEnabler.enabled = true
+            }
+        }
+    }
+}
+
+extension RealmManagedDictionaryController: DictionaryReloadController {
+    
+    func reloadDictionaries() {
+        
+        print("reload dictionaries")
+
+        
+        self.realm = getRealm()
+
+        let dictionaries = realm.objects(RealmDictionary.self)
+
+        RealmManagedDictionaryController.dictionaries = dictionaries.sorted(by: {$0.order < $1.order }).map({ $0._name })
+        RealmManagedDictionaryController.activeDictionaries = dictionaries.sorted(by: {$0.order < $1.order }).filter({ $0.isActive }).map({ $0._name })
+        RealmManagedDictionaryController.activeHashes = dictionaries.sorted(by: {$0.order < $1.order }).filter({ $0.isActive }).map({ $0.hashKey })
+    }
+}
+
+extension TaihenCustomDictionaryTerm {
+    
+    static func from(entity: RealmTerm) -> TaihenCustomDictionaryTerm {
+        
+        var meaningTags: [String] = Array(entity.meaningTags)
+                
+        meaningTags.append(entity.dictionaryName)
+        
+        let term = TaihenCustomDictionaryTerm(term: entity.term,
+                                              kana: entity.kana,
+                                              meaningTags: meaningTags,
+                                              explicitType: "",
+                                              meanings: Array(entity.meanings),
+                                              extraMeanings: [],
+                                              index: 0,
+                                              termTags: Array(entity.groupTags),
+                                              dictionary: entity.dictionaryName)
+        return term
     }
 }

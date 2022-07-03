@@ -14,7 +14,7 @@ private enum Sizings {
 
 struct DictionariesView: View {
 
-    @ObservedObject var viewModel: DictionariesViewModel
+    @ObservedObject var viewModel: DictionariesViewModel = DictionariesViewModel()
     
     var body: some View {
         

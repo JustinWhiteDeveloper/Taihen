@@ -7,8 +7,8 @@ private enum Sizings {
 
 struct ReaderView: View {
 
-    @ObservedObject var viewModel: ReaderViewModel
-    
+    @ObservedObject var viewModel: ReaderViewModel = ReaderViewModel()
+        
     var body: some View {
         
         ZStack {
@@ -18,7 +18,7 @@ struct ReaderView: View {
                                        highlights: $viewModel.highlights,
                                        scrollPercentage: $viewModel.scrollPercentage)
                 
-                YomiSearchView(parentValue: Binding.constant(""))
+                YomiSearchView()
                     .background(Colors.customGray1)
                     .padding(.vertical)
                     .frame(maxWidth: Sizings.dictionaryPreviewMaximumSize)

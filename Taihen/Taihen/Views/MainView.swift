@@ -12,15 +12,15 @@ class MainViewModel: ObservableObject {
     }
     
     func onViewModeSelection(viewMode: ViewMode) {
-        self.viewMode = viewMode
+        if self.viewMode != viewMode {
+            self.viewMode = viewMode
+        }
     }
 }
 
 struct MainView: View {
     
-    @ObservedObject var viewModel: MainViewModel
-    @State private var readerViewModel = ReaderViewModel()
-    @State private var dictionaryViewModel = DictionariesViewModel()
+    @StateObject var viewModel: MainViewModel
     
     var body: some View {
 
@@ -35,11 +35,11 @@ struct MainView: View {
                 
                 switch(viewModel.viewMode) {
                 case .reader:
-                    ReaderView(viewModel: readerViewModel)
+                    ReaderView()
                 case .yomi:
                     LookupContainerView()
                 case .dictionaries:
-                    DictionariesView(viewModel: dictionaryViewModel)
+                    DictionariesView()
                 default:
                     SettingsView()
                 }

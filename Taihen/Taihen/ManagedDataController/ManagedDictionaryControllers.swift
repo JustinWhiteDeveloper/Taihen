@@ -1,16 +1,25 @@
 import Foundation
 import TaihenDictionarySupport
 
-protocol DictionaryDataController {
-    func reloadDictionaries()
-    func termDescriptionToClipboard(term: String)
-    func searchValue(value: String, callback: @escaping (_ finished: Bool, _ timeTaken: Double, _ selectedTerms: [[TaihenDictionaryViewModel]], _ resultCount: Int) -> Void)
+protocol DictionaryDataReaderWriterController {
     func saveDictionary(_ dictionary: TaihenCustomDictionary, notifyOnBlockSize: Int, callback: @escaping () -> Void)
-    func dictionaryViewModels() -> [ManagedDictionaryViewModel]?
     func updateDictionaryActive(viewModel model: ManagedDictionaryViewModel, active: Bool)
     func updateDictionaryOrder(viewModels items: [ManagedDictionaryViewModel])
     func deleteDictionary(name: String, callback: @escaping (_ elements: [ManagedDictionaryViewModel]) -> Void) -> ()
     func deleteAllDictionaries(callback: @escaping () -> Void)
+}
+
+protocol DictionaryClipboardController {
+    func termDescriptionToClipboard(term: String)
+}
+
+protocol DictionaryReloadController {
+    func dictionaryViewModels() -> [ManagedDictionaryViewModel]?
+    func reloadDictionaries()
+}
+
+protocol DictionarySearchController {
+    func searchValue(value: String, callback: @escaping (_ finished: Bool, _ timeTaken: Double, _ selectedTerms: [[TaihenDictionaryViewModel]], _ resultCount: Int) -> Void)
 }
 
 // Use a seperate View model to avoid coupling

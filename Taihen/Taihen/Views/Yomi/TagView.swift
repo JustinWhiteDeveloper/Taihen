@@ -17,7 +17,7 @@ struct TagPill: View {
                 .bold()
                 .foregroundColor(.white)
         }
-        .padding(.all, Sizings.pillPadding)
+        .padding(Sizings.pillPadding)
         .background(color)
         .cornerRadius(Sizings.pillCornerRadius)
     }
