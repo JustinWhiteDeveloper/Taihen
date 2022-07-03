@@ -8,13 +8,24 @@ struct CustomizableTextEditor: View {
     var body: some View {
         
         GeometryReader { geometry in
-            NSScrollableTextViewRepresentable(text: $text, size: geometry.size, highlights: $highlights, scrollPercentage: $scrollPercentage)
+            NSScrollableTextViewRepresentable(text: $text,
+                                              size: geometry.size,
+                                              highlights: $highlights,
+                                              scrollPercentage: $scrollPercentage)
         }
     }
 }
 
+private enum Sizings {
+    static let containerWidthInset: CGFloat = 20.0
+    static let containerHeightInset: CGFloat = 20.0
+}
+
+private extension Colors {
+    static let highlight = NSColor(deviceRed: 1, green: 1, blue: 0, alpha: 0.5)
+}
+
 struct NSScrollableTextViewRepresentable: NSViewRepresentable {
-    typealias Representable = Self
     
     // Hook this binding up with the parent View
     @Binding var text: String
@@ -40,7 +51,8 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         nsTextView.textColor = .black
         nsTextView.insertionPointColor = NSColor.black
         
-        nsTextView.textContainerInset = NSSize(width: 20.0, height: 20.0)
+        nsTextView.textContainerInset = NSSize(width: Sizings.containerWidthInset,
+                                               height: Sizings.containerHeightInset)
         nsTextView.font = NSFont.userFont(ofSize: FeatureManager.instance.readerTextSize)
         
         // use SwiftUI Coordinator as the delegate
@@ -54,16 +66,16 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         // allow undo/redo
         nsTextView.allowsUndo = true
                 
+        
+        NotificationCenter.default.addObserver(context.coordinator,
+                                               selector: #selector(context.coordinator.boundsChange),
+                                               name: NSView.boundsDidChangeNotification,
+                                               object: scrollView.contentView)
+        
         return scrollView
     }
     
     func updateNSView(_ scrollView: NSScrollView, context: Context) {
-        
-        let coordinator = context.coordinator
-        
-        DispatchQueue.main.async {
-            scrollPercentage = scrollView.verticalScroller?.floatValue ?? 0
-        }
         
         // get wrapped nsTextView
         guard let nsTextView = scrollView.documentView as? NSTextView else {
@@ -71,223 +83,152 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         }
         
         scrollView.contentView.postsFrameChangedNotifications = true
-                
-        // fill entire given size
+        
         nsTextView.minSize = size
         
-        if nsTextView.string != text, !coordinator.isFirstTextLayout {
+        let coordinator = context.coordinator
+        
+        if nsTextView.string != text || coordinator.isFirstTextLayout {
             nsTextView.string = text
             coordinator.isFirstTextLayout = false
         }
-        
-        if scrollView.contentView.visibleRect.size.height > 100, context.coordinator.firstBoundsChange {
-            
-            let fullRange = nsTextView.textStorage?.string.count ?? 0
-            
-            if fullRange > 2, FeatureManager.instance.positionScrolling {
-                
-                //Wait until layout has finished
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
 
-                    if let oldY = UserDefaults.standard.string(forKey: "ScrollPosY"),
-                        let tRange = text.localizedStandardRange(of: oldY) {
-                                                
-                        let sRange: NSRange = NSRange(tRange, in: text)
-                        
-                        nsTextView.scrollRangeToVisible(sRange)
-                    }
-                }
-            }
-            
-            context.coordinator.firstBoundsChange = false
-        }
-        
-        if coordinator.highLightsNeedUpdate, FeatureManager.instance.enableTextHighlights {
+        if FeatureManager.instance.enableTextHighlights {
 
             for range in highlights {
-
-                let highlightColor = NSColor(deviceRed: 1, green: 1, blue: 0, alpha: 0.5)
-                
-                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: highlightColor]
+                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: Colors.highlight]
                 nsTextView.textStorage?.addAttributes(attrs, range: range)
-
             }
         }
-
-        NotificationCenter.default.addObserver(context.coordinator,
-                                               selector: #selector(context.coordinator.boundsChange),
-                                               name: NSView.boundsDidChangeNotification,
-                                               object: scrollView.contentView)
         
+        DispatchQueue.main.async {
+            scrollPercentage = scrollView.verticalScroller?.floatValue ?? 0
+        }
     }
     
     // Create Coordinator for this View
     func makeCoordinator() -> Coordinator {
         Coordinator(textEditor: self)
     }
+}
+
+// Using alternate naming as Coordinator still not mature..
+private enum Dimensions {
+
     
-    // Declare nested Coordinator class which conforms to NSTextViewDelegate
-    class Coordinator: NSObject, NSTextViewDelegate {
-        var parent: Representable // store reference to parent
+}
+
+// Declare nested Coordinator class which conforms to NSTextViewDelegate
+class Coordinator: NSObject, NSTextViewDelegate {
+    
+    typealias Representable = NSScrollableTextViewRepresentable
+    
+    var parent: Representable // store reference to parent
         
-        var firstBoundsChange = true
-        
-        var lastSelectedText: String?
-        var lastSelectedRange: NSRange?
-        var lastSelectedCharIndex: Int?
+    var lastSelectedRange: NSRange?
+    var lastSelectedCharIndex: Int?
 
-        var highLightsNeedUpdate: Bool = true
+    // Don't relayout text as it overrides Attributed text
+    var isFirstTextLayout: Bool = true
+    
+    init(textEditor: Representable) {
+        self.parent = textEditor
 
-        var isFirstTextLayout = false
-
-        init(textEditor: Representable) {
-            self.parent = textEditor
-
-            super.init()
+        super.init()
+    }
+    
+    func textDidChange(_ notification: Notification) {
+        guard notification.name == NSText.didChangeNotification,
+            let nsTextView = notification.object as? NSTextView else {
+            return
         }
         
-        // delegate method to retrieve changed text
-        func textDidChange(_ notification: Notification) {
-            // check that Notification.name is of expected notification
-            // cast Notification.object as NSTextView
-
-            guard notification.name == NSText.didChangeNotification,
-                let nsTextView = notification.object as? NSTextView else {
-                return
-            }
-            
-            // set SwiftUI-Binding
-            parent.text = nsTextView.string
+        // set SwiftUI-Binding
+        parent.text = nsTextView.string
+    }
+    
+    func undoManager(for view: NSTextView) -> UndoManager? {
+        parent.undoManger
+    }
+    
+    func textViewDidChangeSelection(_ notification: Notification) {
+    
+        guard let nsTextView = notification.object as? NSTextView else {
+            return
         }
         
-        // Pass SwiftUI UndoManager to NSTextView
-        func undoManager(for view: NSTextView) -> UndoManager? {
-            parent.undoManger
+        DispatchQueue.main.async {
+            self.parent.scrollPercentage = nsTextView.enclosingScrollView?.verticalScroller?.floatValue ?? 0
         }
+
+        let text = nsTextView.selectedText
+
+        lastSelectedRange = nsTextView.selectedRange()
         
-        func textViewDidChangeSelection(_ notification: Notification) {
-            
-
-            guard let nsTextView = notification.object as? NSTextView else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.parent.scrollPercentage = nsTextView.enclosingScrollView?.verticalScroller?.floatValue ?? 0
-            }
-
-            let text = nsTextView.selectedText
-
-            lastSelectedText = text
-            lastSelectedRange = nsTextView.selectedRange()
-            
-            if text.count > 0 {
-                NotificationCenter.default.post(name: Notification.Name.onSelectionChange, object: text)
-            } else {
-                
-                if let position = lastSelectedRange?.location {
-                    for highlight in parent.highlights {
-                        if highlight.contains(position) {
-                            
-                            let text = nsTextView.string[highlight]
-                            
-                            NotificationCenter.default.post(name: Notification.Name.onSelectionChange, object: text)
-                            
-                            break
-                            
-                        }
-                    }
-                }
-            }
-
-            let y = lastSelectedRange?.location ?? 0
-            
-            let textViewText = nsTextView.string
-            
-            let textCount = textViewText.count
-            
-            let copyCount = 20
-            
-            if textCount > copyCount + 1 {
-                
-                // not at bottom of view
-                if (y < textCount - copyCount) {
-                    let sY = textViewText.dropFirst(y)
+        if text.count > 0 {
+            NotificationCenter.default.post(name: Notification.Name.onSelectionChange, object: text)
+        }
+        else if let position = lastSelectedRange?.location {
+            for highlight in parent.highlights {
+                if highlight.contains(position) {
                     
-                    let sY2 = sY.dropLast(sY.count - copyCount)
+                    let text = nsTextView.string[highlight]
                     
-                    UserDefaults.standard.set(String(sY2), forKey: "ScrollPosY")
+                    NotificationCenter.default.post(name: Notification.Name.onSelectionChange, object: text)
+                    
+                    break
                 }
             }
         }
+    }
+    
+    func textView(_ view: NSTextView, menu: NSMenu, for event: NSEvent, at charIndex: Int) -> NSMenu? {
+        lastSelectedCharIndex = charIndex
         
-        func textView(_ view: NSTextView, menu: NSMenu, for event: NSEvent, at charIndex: Int) -> NSMenu? {
-            
-            let menu = NSMenu(title: "Options")
-            
-            let highlightOption = NSMenuItem()
-            highlightOption.title = "Highlight"
-            highlightOption.target = self
-            highlightOption.action = #selector(highlightItem)
-            highlightOption.tag = 0
-            
-            menu.addItem(highlightOption)
-            
-            let highlightOption2 = NSMenuItem()
-            highlightOption2.title = "Remove Highlight"
-            highlightOption2.target = self
-            highlightOption2.action = #selector(unhighlightItem)
-            highlightOption2.tag = 0
-            
-            menu.addItem(highlightOption2)
-            
-            lastSelectedCharIndex = charIndex
-            
-            return menu
+        return ReaderRightClickMenu(target: self,
+                                    highlightSelector: #selector(highlightItem),
+                                    unhighlightSelector: #selector(unhighlightItem))
+    }
+    
+    @objc func highlightItem() {
+        
+        if let range = lastSelectedRange {
+            parent.highlights.append(range)
         }
+                
+        updateHighlightsOnDisk()
+    }
+    
+    @objc func unhighlightItem() {
         
-        @objc func highlightItem() {
-            
-            if let range = lastSelectedRange {
-                parent.highlights.append(range)
+        for (index, item) in parent.highlights.enumerated() {
+            if item.contains(lastSelectedCharIndex ?? 0) {
+                parent.highlights.remove(at: index)
             }
-            
-            highLightsNeedUpdate = true
-            
-            updateHighlightsOnDisk()
         }
         
-        @objc func unhighlightItem() {
-            
-            for (index, item) in parent.highlights.enumerated() {
-                if item.contains(lastSelectedCharIndex ?? 0) {
-                    parent.highlights.remove(at: index)
-                }
-            }
-                        
-            highLightsNeedUpdate = true
-            
-            updateHighlightsOnDisk()
+        isFirstTextLayout = true
+                            
+        updateHighlightsOnDisk()
+    }
+    
+    func updateHighlightsOnDisk() {
+        let mappedValues = parent.highlights.map({ ManagedHighlight(start: $0.location, length: $0.length) })
+        
+        guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
+            return
         }
         
-        func updateHighlightsOnDisk() {
-            let mappedValues = parent.highlights.map({ ManagedHighlight(start: $0.location, length: $0.length) })
-            
-            guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
-                return
-            }
-            
-            SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey, highLights: mappedValues)
+        SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey, highLights: mappedValues)
+    }
+    
+    @objc func boundsChange(_ notification: Notification) {
+        
+        guard let nsScrollview = (notification.object as? NSClipView)?.enclosingScrollView else {
+            return
         }
         
-        @objc func boundsChange(_ notification: Notification) {
-            
-            guard let nsScrollview = (notification.object as? NSClipView)?.enclosingScrollView else {
-                return
-            }
-            
-            parent.scrollPercentage = nsScrollview.verticalScroller?.floatValue ?? 0
-        }
+        parent.scrollPercentage = nsScrollview.verticalScroller?.floatValue ?? 0
     }
 }
 
