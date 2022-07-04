@@ -1,4 +1,4 @@
-name: Archive New Build
+name: Release Archive
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
       - name: Archive
         run: xcodebuild -project Taihen/Taihen.xcodeproj archive -scheme Taihen -archivePath ArchiveResults/Taihen.xcarchive
       - name: Archive Export
-        run: xcodebuild -project Taihen/Taihen.xcodeproj exportArchive -archivePath ArchiveResults/Taihen.xcarchive -exportPath ExportArchive/Taihen.archive
+        run: xcodebuild -project Taihen/Taihen.xcodeproj -exportArchive -archivePath ArchiveResults/Taihen.xcarchive -exportPath ExportArchive/Taihen.archive
       - name: Export Archive results
         uses: actions/upload-artifact@v3
         with:
