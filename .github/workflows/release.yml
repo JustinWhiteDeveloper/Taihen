@@ -47,10 +47,10 @@ jobs:
       - name: Upload xcarchive
         uses: actions/upload-artifact@v3
         with:
-          name: xcarchive
-          path: ArchiveResults/Taihen.xcarchive
+          name: ArchiveResults
+          path: ArchiveResults
       - name: Zip Folder
-        run: /usr/bin/ditto -c -k --keepParent ArchiveResults/Taihen.xcarchive/Taihen.app ArchiveResults/Taihen.zip
+        run: /usr/bin/ditto -c -k --keepParent ArchiveResults/Taihen.app ArchiveResults/Taihen.zip
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
