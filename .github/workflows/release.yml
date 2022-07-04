@@ -44,5 +44,10 @@ jobs:
       - name: Export Archive results
         uses: actions/upload-artifact@v3
         with:
+          name: app
+          path: ExportArchive/Taihen.archive/Taihen
+      - name: Upload xcarchive
+        uses: actions/upload-artifact@v3
+        with:
           name: xcarchive
-          path: ExportArchive/Taihen.archive
+          path: ArchiveResults/Taihen.xcarchive
