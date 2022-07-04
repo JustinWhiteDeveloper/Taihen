@@ -124,7 +124,7 @@ class YomiSearchViewModel: ObservableObject {
 
         self.lastSearch = value
 
-        self.lastSearchString = self.lastSearch
+        self.lastSearchString = value
         self.hasBooted = true
         self.isLoading = true
         

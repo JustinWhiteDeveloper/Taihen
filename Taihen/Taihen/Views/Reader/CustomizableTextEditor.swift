@@ -35,8 +35,7 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
 
     @Environment(\.undoManager) var undoManger
     
-    @State var enableHighlights = true
-    @State var hasDonePostLayout = false
+    @State var enableHighlights = false
 
     
     func makeNSView(context: Context) -> NSScrollView {
@@ -86,38 +85,17 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
             coordinator.clearAttributedText = false
         }
         
+        if enableHighlights {
 
-//        print("timer " + scrollView.contentSize.debugDescription)
+            for range in highlights {
+                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: Colors.highlight]
+                nsTextView.textStorage?.addAttributes(attrs, range: range)
+            }
 
-        
-//        if !hasDonePostLayout {
-//
-//            DispatchQueue.main.async {
-//
-//
-//                coordinator.timer?.invalidate()
-//                coordinator.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
-//
-//                    print("layout")
-//                    self.hasDonePostLayout = true
-//                })
-//            }
-//        }
-        
-        
-//        if enableHighlights {
-//
-//            for range in highlights {
-//                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: Colors.highlight]
-//                nsTextView.textStorage?.addAttributes(attrs, range: range)
-//            }
-//
-//            enableHighlights = false
-//        }
-//
-//        DispatchQueue.main.async {
-//            scrollPercentage = scrollView.verticalScroller?.floatValue ?? 0
-//        }
+            DispatchQueue.main.async {
+                enableHighlights = false
+            }
+        }
     }
 
     // Create Coordinator for this View
@@ -145,12 +123,14 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     var clearAttributedText: Bool = true
     
     var timer: Timer?
+    var hasDonePostLayout = false
 
-    
     init(textEditor: Representable) {
         self.parent = textEditor
 
         super.init()
+        
+        prelayout()
     }
     
     func textDidChange(_ notification: Notification) {
@@ -208,18 +188,23 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         if let range = lastSelectedRange {
             parent.highlights.append(range)
         }
-                
+        
+        parent.enableHighlights = true
+
         updateHighlightsOnDisk()
     }
     
     @objc func unhighlightItem() {
         
         for (index, item) in parent.highlights.enumerated() {
-            if item.contains(lastSelectedCharIndex ?? 0) {
+            if let lastCharIndex = lastSelectedCharIndex,
+                item.contains(lastCharIndex) {
                 parent.highlights.remove(at: index)
             }
         }
         
+        parent.enableHighlights = true
+
         clearAttributedText = true
                             
         updateHighlightsOnDisk()
@@ -242,6 +227,22 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         }
         
         parent.scrollPercentage = nsScrollview.verticalScroller?.floatValue ?? 0
+        
+        prelayout()
+    }
+    
+    func prelayout() {
+        if !hasDonePostLayout {
+
+            DispatchQueue.main.async {
+                self.timer?.invalidate()
+                self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
+                    print("layout")
+                    self.hasDonePostLayout = true
+                    self.parent.enableHighlights = true
+                })
+            }
+        }
     }
 }
 

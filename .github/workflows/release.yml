@@ -29,8 +29,10 @@ jobs:
           security list-keychain -d user -s $KEYCHAIN_PATH
       - name: Archive
         run: xcodebuild -project Taihen/Taihen.xcodeproj archive -scheme Taihen -archivePath ArchiveResults/Taihen.xcarchive
-      - name: Archive results
+      - name: Archive Export
+        run: xcodebuild -project Taihen/Taihen.xcodeproj exportArchive -archivePath ArchiveResults/Taihen.xcarchive -exportPath ExportArchive/Taihen.archive
+      - name: Export Archive results
         uses: actions/upload-artifact@v3
         with:
-          name: code-coverage-report
-          path: ArchiveResults/Taihen.xcarchive
+          name: xcarchive
+          path: ExportArchive/Taihen.archive
