@@ -777,6 +777,7 @@
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = justin.Taihen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Justin Taihen Developer ID Profile";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
