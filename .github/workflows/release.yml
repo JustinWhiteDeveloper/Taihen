@@ -16,6 +16,7 @@ jobs:
           KEYCHAIN_PASSWORD: ""
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.PROV }}
           APPPASS: ${{ secrets.APP_PASS }}
+          DEVID: ${{ secrets.DEV_ID}}
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
@@ -41,4 +42,4 @@ jobs:
       - name: Archive
         run: xcodebuild -project Taihen/Taihen.xcodeproj archive -scheme Taihen -archivePath ArchiveResults/Taihen.zip
       - name: Upload to notary
-        run: xcrun notarytool submit ArchiveResults/Taihen.zip --keychain-profile $APPPASS --wait
+        run: xcrun notarytool submit ArchiveResults/Taihen.zip --apple-id $DEVID --password $APPPASS --wait
