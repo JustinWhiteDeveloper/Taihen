@@ -1,4 +1,4 @@
-# Taihen
+# Taihen - A Yomichan OSX Fan project
 
 [![UnitTestRunner](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml)
 
@@ -6,6 +6,9 @@
 
 Taihen (working name) is a Fan project porting much of the functionality of Yomichan to a OSX application following the same conventions and colors with a few liberties taken here and there.
 
+### Getting Started:
+
+Guide to Taihen:
 [Getting Started With Taihen](Docs/GettingStarted.md)
 
 ### Project Description:
@@ -29,6 +32,3 @@ Dictionaries:
 App Settings (WIP):
 
 <img width="1201" alt="Screen Shot 2022-07-02 at 10 49 09 PM" src="https://user-images.githubusercontent.com/12780440/176997675-942f5483-d9e6-4a18-9cad-2fd96cb98df0.png">
-
-
-At a later stage, open to porting to other languages with the right help.
