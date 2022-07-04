@@ -44,5 +44,7 @@ jobs:
         run: xcrun notarytool store-credentials "AC_PASSWORD" --password "$APPPASS" --apple-id "$DEVID" --team-id 26TL3CY23Q 
       - name: Archive
         run: xcodebuild -project Taihen/Taihen.xcodeproj archive -scheme Taihen -archivePath ArchiveResults
+      - name: Zip Folder
+        run: /usr/bin/ditto -c -k --keepParent ArchiveResults/Taihen.app ArchiveResults/Taihen.zip
       - name: Upload to notary
-        run: xcrun notarytool submit ArchiveResults/Taihen --keychain-profile "AC_PASSWORD"
+        run: xcrun notarytool submit ArchiveResults/Taihen.zip --keychain-profile "AC_PASSWORD"
