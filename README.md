@@ -2,6 +2,8 @@
 
 [![UnitTestRunner](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml)
 
+[![Release Archive](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/release.yml/badge.svg)](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/release.yml)
+
 Taihen (working name) is a Fan project porting much of the functionality of Yomichan to a OSX application following the same conventions and colors with a few liberties taken here and there.
 
 This project is not very mature with bugs, known issues and some intentional differences such as verb conjugation using a learning algorithm and which dictionary libraries are used under the hood. I hope to eventually add machine learning to improve the user experience and create the best Japanese reader app.
