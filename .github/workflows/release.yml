@@ -15,8 +15,6 @@ jobs:
           P12_PASSWORD: ""
           KEYCHAIN_PASSWORD: ""
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.PROV }}
-          APPPASS: ${{ secrets.APP_PASS }}
-          DEVID: ${{ secrets.DEV_ID }}
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
@@ -40,7 +38,10 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
       - name: Store credentials
-        run: xcrun notarytool store-credentials "AC_PASSWORD" --password "$APPPASS" --apple-id justin@liteboxnz.com --team-id 26TL3CY23Q 
+        env:
+          APPPASS: ${{ secrets.APP_PASS }}
+          DEVID: ${{ secrets.DEV_ID }}
+        run: xcrun notarytool store-credentials "AC_PASSWORD" --password "$APPPASS" --apple-id "$DEVID" --team-id 26TL3CY23Q 
       - name: Archive
         run: xcodebuild -project Taihen/Taihen.xcodeproj archive -scheme Taihen -archivePath ArchiveResults/Taihen.zip
       - name: Upload to notary
