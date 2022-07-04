@@ -40,7 +40,7 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
       - name: Store credentials
-        run: xcrun notarytool store-credentials "AC_PASSWORD" --apple-id justin@liteboxnz.com --team-id 26TL3CY23Q --password "$APPPASS"
+        run: xcrun notarytool store-credentials "AC_PASSWORD" --password "$APPPASS" --apple-id justin@liteboxnz.com --team-id 26TL3CY23Q 
       - name: Archive
         run: xcodebuild -project Taihen/Taihen.xcodeproj archive -scheme Taihen -archivePath ArchiveResults/Taihen.zip
       - name: Upload to notary
