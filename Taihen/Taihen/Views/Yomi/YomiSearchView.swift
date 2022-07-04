@@ -7,242 +7,10 @@ import LaughingOctoAdventure
 private enum Strings {
     static let loadingText = NSLocalizedString("Loading", comment: "")
     static let noResultsText = NSLocalizedString("No results", comment: "")
-    static let copyButtonTitle = NSLocalizedString("Copy", comment: "")
-    static let playAudioButtonTitle = NSLocalizedString("Play Audio", comment: "")
 }
 
 private enum Fonts {
     static let arial = Font.custom("Arial", size: FeatureManager.instance.dictionaryTextSize)
-    static let kanaFont = Font.system(size: 26.0)
-    static let termFont = Font.system(size: 50.0)
-    static let ankiPromptFont = Font.system(size: 30)
-}
-
-class YomiSearchViewModel: ObservableObject {
-    @Published var hasBooted = false
-    @Published var lastResultCount = 0
-
-    @Published var isLoading = true
-    @Published var finishedLoadingDelay = true
-
-    @Published var lookupTime: Double = 0
-
-    @Published var selectedTerms: [[TaihenDictionaryViewModel]] = []
-    @Published var firstTerm: TaihenDictionaryViewModel?
-
-    @Published var loadingText = Strings.loadingText
-    @Published var player: AVPlayer?
-    @State var lastSearch = "*"
-    @Published var lastSearchString = "*"
-
-    @Published var didSearch: Bool = false
-    @Published var hasCard: Bool = false
-    @Published var isReviewed: Bool = false
-    @Published var cardText: String = ""
-    @Published var ankiExpressionText: String = ""
-    
-    
-    init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onRecieveNotification(notification:)),
-                                               name: Notification.Name.onSelectionChange,
-                                               object: nil)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func onLoad() {
-        SharedManagedDataController.tagManagementInstance.reloadTags()
-        SharedManagedDataController.dictionaryInstance.reloadDictionaries()
-    }
-    
-    func autoplayAudioIfAvailable() {
-
-        // Delay to prevent blocking layout
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-            
-            guard let url = self.firstTerm?.audioUrl,
-                  FeatureManager.instance.autoplayAudio else {
-                return
-            }
-                 
-            self.playAudioUrl(url)
-        }
-    }
-    
-    func playAudioUrl(_ url: URL?) {
-        
-        guard let url = url else {
-            return
-        }
-        
-        do {
-            let audioData = try Data(contentsOf: url)
-            
-            // Too long audio
-            if audioData.count >= 52288 {
-                return
-            }
-            
-            let tmpFileURL = URL(fileURLWithPath:NSTemporaryDirectory())
-                .appendingPathComponent("audio" + NSUUID().uuidString)
-                                .appendingPathExtension("mp3")
-            
-            let wasFileWritten = (try? audioData.write(to: tmpFileURL, options: [.atomic])) != nil
-
-            if wasFileWritten{
-                self.player = AVPlayer(url: tmpFileURL)
-                self.player?.volume = 1.0
-                self.player?.play()
-            }
-        }
-        catch {
-            print(String(describing: error))
-        }
-    }
-    
-    func onPasteChange() {
-        guard FeatureManager.instance.clipboardReadingEnabled,
-           let latestItem = NSPasteboard.general.clipboardContent()?.trimingTrailingSpaces(), CopyboardEnabler.enabled, latestItem.count < 100 else {
-            return
-        }
-            
-        //Prevent accidently copying english text
-        if latestItem.containsValidJapaneseCharacters == false || latestItem.contains("expression") {
-            return
-        }
-    
-        onSearch(value: latestItem)
-    }
-    
-    func onSearch(value: String) {
-                
-        if self.lastSearch == value {
-            return
-        }
-
-        self.lastSearch = value
-
-        self.lastSearchString = value
-        self.hasBooted = true
-        self.isLoading = true
-        
-        // Reset and add timer
-        self.finishedLoadingDelay = false
-        self.lookupTime = 0
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.finishedLoadingDelay = true
-        }
-        
-        SharedManagedDataController.dictionaryInstance.searchValue(value: value) { finished, timeTaken, selectedTerms, resultCount in
-            
-            DispatchQueue.main.async {
-                self.lookupTime = timeTaken
-                self.isLoading = false
-                self.selectedTerms = selectedTerms
-                self.lastResultCount = resultCount
-                self.finishedLoadingDelay = false
-                self.firstTerm = selectedTerms.first?.first
-            }
-
-            
-            self.onSearchFinished()
-        }
-    }
-    
-    func onParentValueChange(newValue: String) {
-        onSearch(value: newValue)
-    }
-    
-    @objc func onRecieveNotification(notification: Notification) {
-        if let outputText = notification.object as? String,
-            outputText != lastSearch {
-            onSearch(value: outputText)
-        }
-    }
-
-    func onSearchFinished() {
-        
-        autoplayAudioIfAvailable()
-
-        let term = firstTerm?.groupTerm ?? ""
-        let kana = firstTerm?.kana ?? ""
-        
-        let furiganaFormatter = ConcreteFuriganaFormatter()
-        let result = furiganaFormatter.formattedString(fromKanji: term, andHiragana: kana)
-        
-        cardText = result
-
-        let searcher = ConcreteAnkiInterface()
-        
-        //If contains hiragana and kanji then use *contains*
-        let expressionPart = (result.containsKanji && result.containsHiragana) ? "*\(result)*" : result
-        
-        let ankiExpression = "\"expression:\(expressionPart)\" OR \"Focus:\(term)\" OR \"Meaning:\(term)\""
-        
-        ankiExpressionText = ankiExpression
-        
-        searcher.findCards(expression: ankiExpression) { result in
-            
-            guard let result = result else {
-                self.didSearch = false
-                return
-            }
-            
-            if let error = result.error {
-                print(error)
-                self.didSearch = false
-                return
-            }
-            
-            print(result.result)
-            
-            if result.result.count > 0 {
-                searcher.getCardInfo(values: result.result) { result in
-                    
-                    guard let result = result else {
-                        self.hasCard = false
-                        self.didSearch = true
-
-                        return
-                    }
-                    
-                    if let error = result.error {
-                        print(error)
-                        self.hasCard = false
-                        self.didSearch = true
-
-                        return
-                    }
-                    
-                    if let firstItem = result.result.map({ $0.due}).sorted().first {
-                        self.isReviewed = firstItem < 10000
-                    }
-                    
-                    self.hasCard = true
-                    self.didSearch = true
-
-                }
-                
-            } else {
-                self.hasCard = false
-                self.didSearch = true
-            }
-        }
-    }
-    
-    func onCopyButtonPressed() {
-        SharedManagedDataController.dictionaryInstance.termDescriptionToClipboard(term: firstTerm?.groupTerm ?? "")
-    }
-    
-    func onAnkiPromptButtonPressed() {
-        let searcher = ConcreteAnkiInterface()
-        let searchText = hasCard ? ankiExpressionText : lastSearchString
-        
-        searcher.browseQuery(expression: searchText) {}
-    }
 }
 
 struct YomiSearchView: View {
@@ -272,37 +40,28 @@ struct YomiSearchView: View {
                         ScrollView {
                             
                             VStack(alignment: .leading) {
-                                Spacer()
  
                                 HStack {
                                     
-                                    YomiTopView(kana: firstTerm.kana,
-                                                term: firstTerm.groupTerm)
+                                    YomiTopKanaView(kana: firstTerm.kana,
+                                                    term: firstTerm.groupTerm)
 
-                                    HStack {
-                                        TagView(tags: firstTerm.tags.filter({$0.count > 0}))
-                                        
-                                        Button(Strings.copyButtonTitle) {
-                                            viewModel.onCopyButtonPressed()
-                                        }
-                                        .foregroundColor(.black)
+                                    
+                                    YomiTopAccessoryView(tags: firstTerm.tags.filter({ $0.count > 0 }),
+                                                         didSearch: viewModel.didSearch,
+                                                         hasCard: viewModel.hasCard,
+                                                         isReviewed: viewModel.isReviewed,
+                                                         audioUrl: firstTerm.audioUrl) {
+                                        viewModel.onCopyButtonPressed()
 
-                                        Button(Strings.playAudioButtonTitle) {
-                                            
-                                            viewModel.playAudioUrl(firstTerm.audioUrl)
-                                        }
-                                        .foregroundColor(.black)
-                                        
-                                        if viewModel.didSearch {
-                                            Text((viewModel.hasCard ? ( viewModel.isReviewed ? "" : "^") : "+"))
-                                                .font(Fonts.ankiPromptFont)
-                                                .foregroundColor(Color.black)
-                                                .onTapGesture {
-                                                    viewModel.onAnkiPromptButtonPressed()
-                                                }
-                                        }
+                                    } onPlayAudio: { url in
+                                        viewModel.playAudioUrl(url)
+
+                                    } onAnkiPrompt: {
+                                        viewModel.onAnkiPromptButtonPressed()
                                     }
                                 }
+                                .padding(.top)
                                 
                                 ForEach(Array(firstTerm.terms.enumerated()), id: \.offset) { index1, term in
                                     
@@ -321,23 +80,13 @@ struct YomiSearchView: View {
                           
                                     Divider()
                                 }
-                                
-                                Spacer()
-                                
-                                Text(viewModel.cardText)
-                                    .foregroundColor(Color.black)
-                                    .textSelection(.enabled)
-                                
-                                Text(viewModel.ankiExpressionText)
-                                    .foregroundColor(Color.black)
-                                    .textSelection(.enabled)
-                                
-                                Text("\(viewModel.lastSearchString)\t\(viewModel.firstTerm?.groupTerm ?? "")")
-                                    .foregroundColor(Color.black)
-                                    .textSelection(.enabled)
 
-                                
-                                Spacer()
+                                YomiBottomView(cardText: viewModel.cardText,
+                                               ankiExpressionText: viewModel.ankiExpressionText,
+                                               lastSearchString: viewModel.lastSearchString,
+                                               groupTerm: viewModel.firstTerm?.groupTerm ?? "")
+                                .padding(.vertical)
+
                             }
                             .padding()
                         }

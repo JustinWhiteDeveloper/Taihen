@@ -20,7 +20,6 @@ struct ReaderView: View {
                 
                 YomiSearchView()
                     .background(Colors.customGray1)
-                    .padding(.vertical)
                     .frame(maxWidth: Sizings.dictionaryPreviewMaximumSize)
             }
             .onAppear {
