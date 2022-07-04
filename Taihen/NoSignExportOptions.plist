@@ -6,6 +6,11 @@
 	<string>export</string>
 	<key>method</key>
 	<string>developer-id</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>justin.Taihen</key>
+		<string>Justin Taihen Developer ID Profile</string>
+	</dict>
 	<key>signingCertificate</key>
 	<string>Developer ID Application</string>
 	<key>signingStyle</key>
