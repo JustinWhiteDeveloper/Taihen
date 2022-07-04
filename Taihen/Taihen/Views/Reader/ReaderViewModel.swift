@@ -16,23 +16,26 @@ class ReaderViewModel: ObservableObject {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func onRecieveNotification(notification output: Notification) {
         switch output.name {
         case Notification.Name.onReadFile:
             
-            guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
-                return
-            }
-            
-            let data = SharedManagedDataController.appManagementInstance.fileContentsByKey(key: lastActiveKey)
-            
-            text = data?.content ?? ""
+            update()
+
         default:
             break
         }
     }
     
     func onAppear() {
+        update()
+    }
+    
+    func update() {
         guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
             return
         }
@@ -41,7 +44,7 @@ class ReaderViewModel: ObservableObject {
         
         let marks: [ManagedHighlight] = data?.highlights ?? []
         
-        highlights = marks.map({ $0.range } )
         text = data?.content ?? ""
+        highlights = marks.map({ $0.range } )
     }
 }

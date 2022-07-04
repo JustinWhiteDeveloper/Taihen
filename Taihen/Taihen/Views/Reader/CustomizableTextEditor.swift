@@ -130,6 +130,11 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
 
         super.init()
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onReadFile(_:)),
+                                               name: Notification.Name.onReadFile,
+                                               object: nil)
+        
         prelayout()
     }
     
@@ -141,6 +146,14 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         
         // set SwiftUI-Binding
         parent.text = nsTextView.string
+    }
+    
+    @objc func onReadFile(_ notification: Notification) {
+        guard notification.name == Notification.Name.onReadFile else {
+            return
+        }
+        
+        parent.enableHighlights = true
     }
     
     func undoManager(for view: NSTextView) -> UndoManager? {
