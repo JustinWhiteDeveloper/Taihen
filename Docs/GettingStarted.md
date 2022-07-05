@@ -1,12 +1,12 @@
 # Getting Started
 
-# Installing apps from Github
+### Installing apps from Github
 
 TODO:
 - Signed/not Signed, accepting permissions
 - Unarchiver instead of default tool
 
-# Setting up dictionaries
+### Setting up dictionaries
 
 To get started with Taihen, add a Dictionary folder via the Dictionaries tab.
 
