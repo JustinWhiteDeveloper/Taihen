@@ -59,11 +59,14 @@ jobs:
       - name: Zip Folder
         run: /usr/bin/ditto -c -k --keepParent ExportArchive/Taihen.archive Taihen.zip
 
+      - name: Zip App
+        run: /usr/bin/ditto -c -k --keepParent ExportArchive/Taihen.archive/Taihen TaihenApp.zip
+
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
-          name: appzip
-          path: Taihen.zip
+          name: Taihen_0.0.X
+          path: TaihenApp.zip
 
       - name: Upload to notary
         run: xcrun notarytool submit Taihen.zip --keychain-profile "AC_PASSWORD" --wait
