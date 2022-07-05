@@ -45,6 +45,6 @@ class ReaderViewModel: ObservableObject {
         let marks: [ManagedHighlight] = data?.highlights ?? []
         
         text = data?.content ?? ""
-        highlights = marks.map({ $0.range } )
+        highlights = marks.map({ $0.range })
     }
 }

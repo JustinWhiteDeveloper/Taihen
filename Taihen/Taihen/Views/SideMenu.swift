@@ -6,7 +6,7 @@ struct SideMenu: View {
     @Binding var modes: [ViewMode]
     @Binding var viewMode: ViewMode
     
-    var onChangeViewMode: (_ viewMode:ViewMode) -> Void
+    var onChangeViewMode: (_ viewMode: ViewMode) -> Void
     
     var body: some View {
         VStack {

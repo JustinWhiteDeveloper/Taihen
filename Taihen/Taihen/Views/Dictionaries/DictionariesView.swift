@@ -70,7 +70,7 @@ struct DictionariesView: View {
         .frame(maxWidth: .infinity,
                 maxHeight: .infinity,
                 alignment: .center)
-        .onAppear() {
+        .onAppear {
             viewModel.onViewAppear()
         }
         .padding()

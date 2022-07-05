@@ -4,7 +4,6 @@ import XCTest
 
 class MainViewModelTests: XCTestCase {
 
-
     func testGivenAMainViewModelCanNavigateToTheReaderView() throws {
         
         // given

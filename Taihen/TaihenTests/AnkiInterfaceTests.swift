@@ -38,7 +38,7 @@ class AnkiInterfaceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for Response")
         
         // when
-        interface.getCardInfo(values: [0,1,2]) { result in
+        interface.getCardInfo(values: [0, 1, 2]) { result in
             ankiResult = result!
             expectation.fulfill()
         }
@@ -56,7 +56,7 @@ class AnkiInterfaceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for Response")
         
         // when
-        interface.getCardInfo(values: [0,1,2]) { result in
+        interface.getCardInfo(values: [0, 1, 2]) { result in
             ankiResult = result
             expectation.fulfill()
         }

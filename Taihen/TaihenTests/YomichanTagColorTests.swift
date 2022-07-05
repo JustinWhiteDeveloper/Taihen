@@ -3,7 +3,6 @@ import SwiftUI
 
 @testable import Taihen
 
-
 class YomichanTagColorTests: XCTestCase {
 
     func testGivenAYomichanColorSchemeThatUnknownTagsAreColoredProperly() throws {

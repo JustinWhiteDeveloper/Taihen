@@ -5,7 +5,7 @@ protocol DictionaryDataReaderWriterController {
     func saveDictionary(_ dictionary: TaihenCustomDictionary, notifyOnBlockSize: Int, callback: @escaping () -> Void)
     func updateDictionaryActive(viewModel model: ManagedDictionaryViewModel, active: Bool)
     func updateDictionaryOrder(viewModels items: [ManagedDictionaryViewModel])
-    func deleteDictionary(name: String, callback: @escaping (_ elements: [ManagedDictionaryViewModel]) -> Void) -> ()
+    func deleteDictionary(name: String, callback: @escaping (_ elements: [ManagedDictionaryViewModel]) -> Void) -> Void
     func deleteAllDictionaries(callback: @escaping () -> Void)
 }
 

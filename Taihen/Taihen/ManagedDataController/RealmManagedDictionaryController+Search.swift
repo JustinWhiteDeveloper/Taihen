@@ -45,8 +45,10 @@ extension RealmManagedDictionaryController: DictionarySearchController {
 
                 resultsFoundInDictionaries.append(TaihenCustomDictionaryTerm.from(entity: objects))
                 
+                let primaryKey = activeDict + search + String(resultsFoundInDictionaries.count)
+                
                 var object = self.realm.object(ofType: RealmTerm.self,
-                                               forPrimaryKey: activeDict + search + String(resultsFoundInDictionaries.count))
+                                               forPrimaryKey: primaryKey)
                 
                 if object != nil {
                     while object != nil {
@@ -59,7 +61,10 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                 resultCount += resultsFoundInDictionaries.count
             }
             
-            let dictionary = ConcreteTaihenCustomDictionary(name: "", revision: "", tags: [], terms: resultsFoundInDictionaries)
+            let dictionary = ConcreteTaihenCustomDictionary(name: "",
+                                                            revision: "",
+                                                            tags: [],
+                                                            terms: resultsFoundInDictionaries)
             
             let termDict: [String: [TaihenDictionaryViewModel]] = dictionary.termDict
 

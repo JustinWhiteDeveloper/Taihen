@@ -176,8 +176,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         
         if text.count > 0 {
             NotificationCenter.default.post(name: Notification.Name.onSelectionChange, object: text)
-        }
-        else if let position = lastSelectedRange?.location {
+            
+        } else if let position = lastSelectedRange?.location {
             
             if let range = parent.highlights.first(where: { $0.contains(position) }) {
                 let text = nsTextView.string[range]
@@ -230,7 +230,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
             return
         }
         
-        SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey, highLights: mappedValues)
+        SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey,
+                                                                           highLights: mappedValues)
     }
     
     @objc func boundsChange(_ notification: Notification) {

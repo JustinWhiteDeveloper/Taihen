@@ -17,8 +17,8 @@ class YomichanClipboardFormatter: ClipboardDescriptionFormatter {
             
             if term.meanings.count == 1 {
                 text += term.meanings.first ?? ""
-            }
-            else if term.meanings.count > 1 {
+                
+            } else if term.meanings.count > 1 {
                 
                 //put bullet on next line
                 text += "\n"

@@ -22,7 +22,6 @@ struct CustomizableLoadingView: View {
             .frame(height: Sizings.loadingPadding,
                    alignment: .center)
 
-
         }
         .frame(maxWidth: .infinity,
                maxHeight: .infinity)

@@ -36,8 +36,6 @@ class YomiSearchViewModel: ObservableObject {
     @Published var cardText: String = ""
     @Published var ankiExpressionText: String = ""
     
-    
-    
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(onRecieveNotification(notification:)),
                                                name: Notification.Name.onSelectionChange,
@@ -91,8 +89,7 @@ class YomiSearchViewModel: ObservableObject {
                 self.player?.volume = 1.0
                 self.player?.play()
             }
-        }
-        catch {
+        } catch {
             print(String(describing: error))
         }
     }
