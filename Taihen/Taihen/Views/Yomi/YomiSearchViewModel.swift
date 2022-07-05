@@ -80,13 +80,13 @@ class YomiSearchViewModel: ObservableObject {
                 return
             }
             
-            let tmpFileURL = URL(fileURLWithPath:NSTemporaryDirectory())
+            let tmpFileURL = URL(fileURLWithPath: NSTemporaryDirectory())
                 .appendingPathComponent("audio" + NSUUID().uuidString)
                                 .appendingPathExtension("mp3")
             
             let wasFileWritten = (try? audioData.write(to: tmpFileURL, options: [.atomic])) != nil
 
-            if wasFileWritten{
+            if wasFileWritten {
                 self.player = AVPlayer(url: tmpFileURL)
                 self.player?.volume = 1.0
                 self.player?.play()
@@ -99,7 +99,10 @@ class YomiSearchViewModel: ObservableObject {
     
     func onPasteChange() {
         guard FeatureManager.instance.clipboardReadingEnabled,
-           let latestItem = NSPasteboard.general.clipboardContent()?.trimingTrailingSpaces(), CopyboardEnabler.enabled, latestItem.count < 100 else {
+           let latestItem = NSPasteboard.general.clipboardContent()?.trimingTrailingSpaces(),
+                CopyboardEnabler.enabled,
+              latestItem.count < 100 else {
+            
             return
         }
             

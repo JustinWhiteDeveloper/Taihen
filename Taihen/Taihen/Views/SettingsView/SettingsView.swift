@@ -57,7 +57,7 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Toggle(Strings.enableHightlightsTitle, isOn:  $viewModel.highlightsEnabled)
+                    Toggle(Strings.enableHightlightsTitle, isOn: $viewModel.highlightsEnabled)
                         .onChange(of: viewModel.highlightsEnabled) { newValue in
                         FeatureManager.instance.enableTextHighlights = newValue
                     }
@@ -69,7 +69,7 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.autoPlayAudioTitle, isOn:  $viewModel.autoPlayAudioEnabled)
+                    Toggle(Strings.autoPlayAudioTitle, isOn: $viewModel.autoPlayAudioEnabled)
                         .onChange(of: viewModel.autoPlayAudioEnabled) { newValue in
                             
                         FeatureManager.instance.autoplayAudio = newValue
@@ -82,7 +82,7 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.positionScrollingTitle, isOn:  $viewModel.positionScrollingEnabled)
+                    Toggle(Strings.positionScrollingTitle, isOn: $viewModel.positionScrollingEnabled)
                         .onChange(of: viewModel.positionScrollingEnabled) { newValue in
                             
                         FeatureManager.instance.positionScrolling = newValue
@@ -95,7 +95,7 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.previewEnabledTitle, isOn:  $viewModel.lookupPreviewEnabled)
+                    Toggle(Strings.previewEnabledTitle, isOn: $viewModel.lookupPreviewEnabled)
                         .onChange(of: viewModel.lookupPreviewEnabled) { newValue in
                             
                         FeatureManager.instance.lookupPreviewEnabled = newValue
@@ -108,7 +108,7 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
  
-                    Toggle(Strings.listenForClipboardTitle, isOn:  $viewModel.clipboardEnabled)
+                    Toggle(Strings.listenForClipboardTitle, isOn: $viewModel.clipboardEnabled)
                         .onChange(of: viewModel.clipboardEnabled) { newValue in
                             
                             FeatureManager.instance.clipboardReadingEnabled = newValue
@@ -118,7 +118,6 @@ struct SettingsView: View {
                 }
                 .padding()
                 .frame(width: Sizings.standardWidth)
-                
                 
                 VStack(alignment: .center) {
  

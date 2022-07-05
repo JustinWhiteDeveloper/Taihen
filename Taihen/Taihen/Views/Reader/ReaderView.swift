@@ -13,7 +13,7 @@ struct ReaderView: View {
         
         ZStack {
             
-            HSplitView() {
+            HSplitView {
                 CustomizableTextEditor(text: $viewModel.text,
                                        highlights: $viewModel.highlights,
                                        scrollPercentage: $viewModel.scrollPercentage)
@@ -44,4 +44,3 @@ struct ReaderView: View {
         String(format: "%.2f", viewModel.scrollPercentage * 100) + "%"
     }
 }
-

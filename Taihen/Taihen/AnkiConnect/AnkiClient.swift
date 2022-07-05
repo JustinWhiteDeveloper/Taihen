@@ -20,7 +20,7 @@ protocol AnkiInterface {
 }
 
 private enum HTTPMethod: String {
-    case POST = "POST"
+    case POST
 }
 
 class ConcreteAnkiInterface: AnkiInterface {
@@ -95,7 +95,7 @@ class ConcreteAnkiInterface: AnkiInterface {
         let encoder = JSONEncoder()
         request.httpBody = try? encoder.encode(template)
 
-        client.sendRequest(request: request) {_,_,_ in
+        client.sendRequest(request: request) { _, _, _ in
             callback()
         }
     }

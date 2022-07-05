@@ -161,7 +161,8 @@ class FeatureManager {
     }
     
     func changeToNextParserMode() -> JapaneseTextSelectionParserMode {
-        textSelectionParserMode = JapaneseTextSelectionParserMode(rawValue: textSelectionParserMode.rawValue + 1) ?? .Rule
+        let nextValue = textSelectionParserMode.rawValue + 1
+        textSelectionParserMode = JapaneseTextSelectionParserMode(rawValue: nextValue) ?? .Rule
         return textSelectionParserMode
     }
 }

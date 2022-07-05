@@ -61,8 +61,7 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
             do {
                 try realm.commitWrite()
 
-            }
-            catch {
+            } catch {
                 print(error.localizedDescription)
             }
         }
@@ -96,7 +95,7 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
             
             var kanaMap: [String: [String]] = [:]
 
-            for (_, term) in dictionary.terms.enumerated() where !term.kana.isEmpty {
+            for term in dictionary.terms where !term.kana.isEmpty {
                 
                 if kanaMap[term.kana] == nil {
                     kanaMap[term.kana] = []
@@ -194,7 +193,6 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
         
         print("update dicts")
 
-        
         self.realm = getRealm()
 
         let dictionary = realm.object(ofType: RealmDictionary.self, forPrimaryKey: model.name)
@@ -214,7 +212,6 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
         
         print("update dictionary order")
 
-        
         self.realm = getRealm()
 
         let dictionaries = realm.objects(RealmDictionary.self)
@@ -302,14 +299,12 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
     }
 }
 
-
 extension RealmManagedDictionaryController: DictionaryClipboardController {
     
     func dictionaryViewModels() -> [ManagedDictionaryViewModel]? {
         
         print("dictionary view models")
 
-        
         self.realm = getRealm()
 
         let dictionaries = realm.objects(RealmDictionary.self)

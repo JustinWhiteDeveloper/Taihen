@@ -35,10 +35,10 @@ struct DictionaryRow: View {
                 }
             
             ZStack {
-                Button("   ",  action: {
+                Button("   ", action: {
                     viewModel.onDeleteRow()
                 })
-                .frame(maxWidth: .infinity,maxHeight: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .buttonStyle(PlainButtonStyle())
                 
                 Image(Strings.deleteDictionaryIcon)

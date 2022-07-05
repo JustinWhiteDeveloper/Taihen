@@ -46,7 +46,6 @@ struct YomiSearchView: View {
                                     YomiTopKanaView(kana: firstTerm.kana,
                                                     term: firstTerm.groupTerm)
 
-                                    
                                     YomiTopAccessoryView(tags: firstTerm.tags.filter({ $0.count > 0 }),
                                                          didSearch: viewModel.didSearch,
                                                          hasCard: viewModel.hasCard,

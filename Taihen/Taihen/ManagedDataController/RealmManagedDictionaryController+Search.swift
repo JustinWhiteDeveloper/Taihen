@@ -9,7 +9,6 @@ extension RealmManagedDictionaryController: DictionarySearchController {
     
     func searchValue(value: String, callback: @escaping (Bool, Double, [[TaihenDictionaryViewModel]], Int) -> Void) {
                 
-        
         print("search")
 
         // Use a sync queue to prevent Realm crashes from threading
@@ -97,7 +96,7 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                 if let kanaMap = self.realm.object(ofType: RealmKanaMap.self,
                                                    forPrimaryKey: search) {
                     
-                    //TODO: for every term
+                    // Note: Should be for every term
                     if let firstTerm = kanaMap.terms.first {
                         
                         self.searchValue(value: firstTerm) { finished, timeTaken, selectedTerms, resultCount in

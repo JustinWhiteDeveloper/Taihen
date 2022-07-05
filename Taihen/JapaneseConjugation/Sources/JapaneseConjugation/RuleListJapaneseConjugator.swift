@@ -46,7 +46,6 @@ public class RuleListJapaneseConjugator: JapaneseConjugator {
     
     let ta1 = ReplacementRule(term: "た", replacements: ["る"])
 
-    
     public func correctTerm(_ term: String) -> [String]? {
 
         for item in items {
@@ -66,12 +65,12 @@ public class RuleListJapaneseConjugator: JapaneseConjugator {
         let sItems = [s1, s2, s3]
         let ruItems = [ru1, ru2, ru3, ru4, ru5, ru6, ru7, ru8, ru9, ru10]
         let mItems = [m1]
-        let kItems = [k1,k2]
+        let kItems = [k1, k2]
         let iItems = [i1]
         let tsuItems = [tsu1, tsu2]
         let taItems = [ta1]
 
-        var items = [a1,a2]
+        var items = [a1, a2]
         
         items.append(contentsOf: kItems)
         items.append(contentsOf: uItems)

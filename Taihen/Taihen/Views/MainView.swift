@@ -33,7 +33,7 @@ struct MainView: View {
                     viewModel.onViewModeSelection(viewMode: viewMode)
                 }
                 
-                switch(viewModel.viewMode) {
+                switch viewModel.viewMode {
                 case .reader:
                     ReaderView()
                 case .yomi:

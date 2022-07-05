@@ -12,15 +12,18 @@ extension String {
     }
     
     var containsValidJapaneseCharacters: Bool {
-        return self.range(of: Constants.validJapaneseCharacterRegex, options: String.CompareOptions.regularExpression) != nil
+        return self.range(of: Constants.validJapaneseCharacterRegex,
+                          options: String.CompareOptions.regularExpression) != nil
     }
     
     var containsKanji: Bool {
-        return self.range(of: Constants.validKanjiRegex, options: String.CompareOptions.regularExpression) != nil
+        return self.range(of: Constants.validKanjiRegex,
+                          options: String.CompareOptions.regularExpression) != nil
     }
     
     var containsHiragana: Bool {
-        return self.range(of: Constants.validHiraganaRegex, options: String.CompareOptions.regularExpression) != nil
+        return self.range(of: Constants.validHiraganaRegex,
+                          options: String.CompareOptions.regularExpression) != nil
     }
     
     func trimingTrailingSpaces(using characterSet: CharacterSet = .whitespacesAndNewlines) -> String {

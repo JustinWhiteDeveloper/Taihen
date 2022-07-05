@@ -5,4 +5,3 @@ internal extension String {
         return self.range(of: "^.*\(text)$", options: String.CompareOptions.regularExpression) != nil
     }
 }
-
