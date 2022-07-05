@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "17DCE3512839C278001520A7"
-               BuildableName = "Taihen.app"
+               BuildableName = "Taihen Debug.app"
                BlueprintName = "Taihen"
                ReferencedContainer = "container:Taihen.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17DCE3512839C278001520A7"
-            BuildableName = "Taihen.app"
+            BuildableName = "Taihen Debug.app"
             BlueprintName = "Taihen"
             ReferencedContainer = "container:Taihen.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17DCE3512839C278001520A7"
-            BuildableName = "Taihen.app"
+            BuildableName = "Taihen Debug.app"
             BlueprintName = "Taihen"
             ReferencedContainer = "container:Taihen.xcodeproj">
          </BuildableReference>
@@ -93,7 +93,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17DCE3512839C278001520A7"
-            BuildableName = "Taihen.app"
+            BuildableName = "Taihen Debug.app"
             BlueprintName = "Taihen"
             ReferencedContainer = "container:Taihen.xcodeproj">
          </BuildableReference>
