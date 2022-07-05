@@ -2,16 +2,16 @@ import Foundation
 import TaihenDictionarySupport
 
 protocol ClipboardDescriptionFormatter {
-    func formatForTerms(terms: TaihenDictionaryViewModel) -> String
+    func formatForTerms(_ terms: [TaihenCustomDictionaryTerm]) -> String
 }
 
 class YomichanClipboardFormatter: ClipboardDescriptionFormatter {
 
-    func formatForTerms(terms: TaihenDictionaryViewModel) -> String {
+    func formatForTerms(_ terms: [TaihenCustomDictionaryTerm]) -> String {
         
         var text = ""
         
-        for (index, term) in terms.terms.enumerated() {
+        for (index, term) in terms.enumerated() {
             
             text += "\(index + 1). "
             

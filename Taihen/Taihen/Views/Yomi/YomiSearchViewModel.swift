@@ -9,6 +9,10 @@ private enum Strings {
     static let noResultsText = NSLocalizedString("No results", comment: "")
 }
 
+private enum Sizings {
+    static let maximumAudioSize = 52288
+}
+
 class YomiSearchViewModel: ObservableObject {
     @Published var hasBooted = false
     @Published var lastResultCount = 0
@@ -31,6 +35,7 @@ class YomiSearchViewModel: ObservableObject {
     @Published var isReviewed: Bool = false
     @Published var cardText: String = ""
     @Published var ankiExpressionText: String = ""
+    
     
     
     init() {
@@ -71,8 +76,7 @@ class YomiSearchViewModel: ObservableObject {
         do {
             let audioData = try Data(contentsOf: url)
             
-            let maximumAudioSize = 52288
-            if audioData.count >= maximumAudioSize {
+            if audioData.count >= Sizings.maximumAudioSize {
                 return
             }
             

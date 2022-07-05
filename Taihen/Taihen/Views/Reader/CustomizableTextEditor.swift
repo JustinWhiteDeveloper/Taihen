@@ -42,7 +42,10 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         
         let scrollView = NSTextView.scrollableTextView()
         
-        let nsTextView = scrollView.documentView as! NSTextView
+        guard let nsTextView = scrollView.documentView as? NSTextView else {
+            return scrollView
+        }
+        
         nsTextView.textColor = .black
         nsTextView.insertionPointColor = NSColor.black
         nsTextView.textContainerInset = NSSize(width: Sizings.containerWidthInset,
@@ -62,7 +65,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
                                                selector: #selector(context.coordinator.boundsChange),
                                                name: NSView.boundsDidChangeNotification,
                                                object: scrollView.contentView)
-        
         
         return scrollView
     }
@@ -105,9 +107,7 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
 }
 
 // Using alternate naming as Coordinator still not mature..
-private enum Dimensions {
-
-}
+private enum Dimensions {}
 
 // Declare nested Coordinator class which conforms to NSTextViewDelegate
 class TextCoordinator: NSObject, NSTextViewDelegate {

@@ -41,6 +41,8 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
     func getRealm() -> Realm {
         var config = Realm.Configuration()
         config.deleteRealmIfMigrationNeeded = true
+        
+        /// swiftlint:disable:next force_try
         return try! Realm(configuration: config)
     }
     
@@ -48,6 +50,8 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
         
         var config = Realm.Configuration()
         config.deleteRealmIfMigrationNeeded = true
+        
+        /// swiftlint:disable:next force_try
         realm = try! Realm(configuration: config)
 
         if deleteOnLaunch {
@@ -320,7 +324,6 @@ extension RealmManagedDictionaryController: DictionaryClipboardController {
         
         print("term description")
 
-        
         input = searchValue(value: term) { finished, _, model, _ in
             
             guard finished,
@@ -330,7 +333,7 @@ extension RealmManagedDictionaryController: DictionaryClipboardController {
             }
             
             let clipboardFormatter = YomichanClipboardFormatter()
-            let copyText = clipboardFormatter.formatForTerms(terms: firstSubModel)
+            let copyText = clipboardFormatter.formatForTerms(firstSubModel.terms)
             
             CopyboardEnabler.enabled = false
             
@@ -350,7 +353,6 @@ extension RealmManagedDictionaryController: DictionaryReloadController {
         
         print("reload dictionaries")
 
-        
         self.realm = getRealm()
 
         let dictionaries = realm.objects(RealmDictionary.self)

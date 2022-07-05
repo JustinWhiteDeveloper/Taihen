@@ -57,7 +57,8 @@ struct SettingsView: View {
                 
                 VStack(alignment: .center) {
                     
-                    Toggle(Strings.enableHightlightsTitle, isOn:  $viewModel.highlightsEnabled).onChange(of: viewModel.highlightsEnabled) { newValue in
+                    Toggle(Strings.enableHightlightsTitle, isOn:  $viewModel.highlightsEnabled)
+                        .onChange(of: viewModel.highlightsEnabled) { newValue in
                         FeatureManager.instance.enableTextHighlights = newValue
                     }
                     .foregroundColor(Color.black)

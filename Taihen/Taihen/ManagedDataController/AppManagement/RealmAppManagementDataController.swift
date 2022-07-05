@@ -11,6 +11,7 @@ class RealmAppManagementDataController: AppManagementDataController {
     func getRealm() -> Realm {
         var config = Realm.Configuration()
         config.deleteRealmIfMigrationNeeded = true
+        
         return try! Realm(configuration: config)
     }
     
@@ -18,6 +19,7 @@ class RealmAppManagementDataController: AppManagementDataController {
         
         var config = Realm.Configuration()
         config.deleteRealmIfMigrationNeeded = true
+        
         realm = try! Realm(configuration: config)
 
         if deleteOnLaunch {
@@ -26,9 +28,7 @@ class RealmAppManagementDataController: AppManagementDataController {
             
             do {
                 try realm.commitWrite()
-
-            }
-            catch {
+            } catch {
                 print(error.localizedDescription)
             }
         }
@@ -68,16 +68,16 @@ class RealmAppManagementDataController: AppManagementDataController {
         guard let object = realm.object(ofType: RealmFileState.self, forPrimaryKey: path) else {
             return
         }
-        
+
         object.highlights = List<String>()
-        
+
         let highLightList = highLights.map({ $0.stringValue()}).compactMap({ $0 })
         
         for item in highLightList {
             print(item.debugDescription)
             object.highlights.append(item)
         }
-        
+
         self.realm.add(object, update: .modified)
 
         do {

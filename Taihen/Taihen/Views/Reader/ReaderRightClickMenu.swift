@@ -21,13 +21,13 @@ class ReaderRightClickMenu: NSMenu {
         
         addItem(highlightOption)
         
-        let highlightOption2 = NSMenuItem()
-        highlightOption2.title = Strings.unhighlightOption
-        highlightOption2.target = target
-        highlightOption2.action = unhighlightSelector
-        highlightOption2.tag = 0
+        let unhighlightOption = NSMenuItem()
+        unhighlightOption.title = Strings.unhighlightOption
+        unhighlightOption.target = target
+        unhighlightOption.action = unhighlightSelector
+        unhighlightOption.tag = 0
         
-        addItem(highlightOption2)
+        addItem(unhighlightOption)
     }
     
     required init(coder: NSCoder) {

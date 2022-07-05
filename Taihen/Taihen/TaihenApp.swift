@@ -47,14 +47,18 @@ struct TaihenApp: App {
                 
                 if let folder = pickedFolders.first {
                     
-                    let readText: String = try! String(contentsOf: folder)
-                    
-                    UserDefaults.standard.lastOpenedFileKey = folder.path.md5
+                    do {
+                        let readText: String = try String(contentsOf: folder)
+                        
+                        UserDefaults.standard.lastOpenedFileKey = folder.path.md5
 
-                    SharedManagedDataController.appManagementInstance.saveFileContents(path: folder.path, contents: readText)
-                    
-                    NotificationCenter.default.post(name: Notification.Name.onReadFile, object: nil)
-                    
+                        SharedManagedDataController.appManagementInstance.saveFileContents(path: folder.path, contents: readText)
+                        
+                        NotificationCenter.default.post(name: Notification.Name.onReadFile, object: nil)
+                        
+                    } catch {
+                        print(String(describing: error))
+                    }
                 }
             }
         }

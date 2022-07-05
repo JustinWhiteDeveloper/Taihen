@@ -26,8 +26,7 @@ struct DictionariesView: View {
             if viewModel.loading {
                 CustomizableLoadingView(text: $viewModel.loadingText)
             
-            }
-            else {
+            } else {
                 HStack {
                     Spacer()
                     
@@ -46,7 +45,7 @@ struct DictionariesView: View {
                 }
                 
                 List {
-                    ForEach(viewModel.items, id:\.name) { item in
+                    ForEach(viewModel.items, id: \.name) { item in
                         
                         DictionaryRow(viewModel: DictionaryRowViewModel(model: item,
                                                                         onDelete: { name in
@@ -73,7 +72,6 @@ struct DictionariesView: View {
                 alignment: .center)
         .onAppear() {
             viewModel.onViewAppear()
-
         }
         .padding()
     }
@@ -87,4 +85,3 @@ extension NSTableView {
         enclosingScrollView?.drawsBackground = false
     }
 }
-
