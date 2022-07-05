@@ -63,7 +63,7 @@ jobs:
         run: mkdir Taihen_0.0.X
 
       - name: Copy App to Folder
-        run: cp -R ExportArchive/Taihen.archive/Taihen Taihen_0.0.X/Taihen
+        run: cp -R ExportArchive/Taihen.archive/Taihen.app Taihen_0.0.X/Taihen.app
 
       - name: Zip App
         run: /usr/bin/ditto -c -k --keepParent Taihen_0.0.X TaihenApp.zip
