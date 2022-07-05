@@ -37,24 +37,33 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
       - name: Store credentials
         env:
           APPPASS: ${{ secrets.APP_PASS }}
           DEVID: ${{ secrets.DEV_ID }}
         run: xcrun notarytool store-credentials "AC_PASSWORD" --password "$APPPASS" --apple-id "$DEVID" --team-id 26TL3CY23Q 
+
       - name: Archive
         run: xcodebuild -project Taihen/Taihen.xcodeproj archive -scheme Taihen -archivePath ArchiveResults/Taihen.xcarchive
-      - name: Upload xcarchive
+
+      - name: Export for Notary
+        run: xcodebuild -project Taihen/Taihen.xcodeproj -exportArchive -archivePath ArchiveResults/Taihen.xcarchive -exportPath ExportArchive/Taihen.archive -exportOptionsPlist Taihen/NoSignExportOptions.plist
+
+      - name: Export Archive results
         uses: actions/upload-artifact@v3
         with:
-          name: ArchiveResults
-          path: ArchiveResults/Taihen.xcarchive
+          name: appUnsigned
+          path: ExportArchive/Taihen.archive/Taihen
+
       - name: Zip Folder
-        run: /usr/bin/ditto -c -k --keepParent ArchiveResults/Taihen.xcarchive/Taihen.app Taihen.zip
+        run: /usr/bin/ditto -c -k --keepParent ExportArchive/Taihen.archive/Taihen Taihen.zip
+
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
           name: appzip
           path: Taihen.zip
+
       - name: Upload to notary
         run: xcrun notarytool submit Taihen.zip --keychain-profile "AC_PASSWORD"
