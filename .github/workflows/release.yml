@@ -54,10 +54,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: appUnsigned
-          path: ExportArchive/Taihen.archive/Taihen
+          path: ExportArchive/Taihen.archive
 
       - name: Zip Folder
-        run: /usr/bin/ditto -c -k --keepParent ExportArchive/Taihen.archive/Taihen Taihen.zip
+        run: /usr/bin/ditto -c -k --keepParent ExportArchive/Taihen.archive Taihen.zip
 
       - name: Upload zip
         uses: actions/upload-artifact@v3
