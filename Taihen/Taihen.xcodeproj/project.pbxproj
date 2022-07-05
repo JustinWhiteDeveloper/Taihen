@@ -125,7 +125,7 @@
 		17CA0BC52851DE1C00507CF5 /* ViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMode.swift; sourceTree = "<group>"; };
 		17CA0BC72851DE3E00507CF5 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		17CA0BE42855E04000507CF5 /* AnkiActionTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiActionTemplates.swift; sourceTree = "<group>"; };
-		17DCE3522839C278001520A7 /* Taihen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taihen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17DCE3522839C278001520A7 /* Taihen Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Taihen Debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DCE3552839C278001520A7 /* TaihenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenApp.swift; sourceTree = "<group>"; };
 		17DCE3572839C278001520A7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		17DCE3592839C27A001520A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 		17DCE3532839C278001520A7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17DCE3522839C278001520A7 /* Taihen.app */,
+				17DCE3522839C278001520A7 /* Taihen Debug.app */,
 				17DCE3642839C27B001520A7 /* TaihenTests.xctest */,
 				17DCE36F2839C27B001520A7 /* TaihenUITests.xctest */,
 			);
@@ -416,7 +416,7 @@
 				174A89A0285B15810074D0F8 /* JapaneseConjugation */,
 			);
 			productName = Taihen;
-			productReference = 17DCE3522839C278001520A7 /* Taihen.app */;
+			productReference = 17DCE3522839C278001520A7 /* Taihen Debug.app */;
 			productType = "com.apple.product-type.application";
 		};
 		17DCE3632839C27B001520A7 /* TaihenTests */ = {
@@ -668,6 +668,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Taihen Debug";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -722,6 +723,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = Taihen;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -731,8 +733,9 @@
 		17DCE3792839C27B001520A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUNDLE_ID_SUFFIX = .dev;
 				CODE_SIGN_ENTITLEMENTS = Taihen/TaihenDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
@@ -749,7 +752,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = justin.Taihen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME) Debug";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -758,8 +761,9 @@
 		17DCE37A2839C27B001520A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon${BUNDLE_ID_SUFFIX}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_ENTITLEMENTS = Taihen/Taihen.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;

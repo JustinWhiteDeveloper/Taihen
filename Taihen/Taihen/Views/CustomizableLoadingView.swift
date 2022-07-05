@@ -1,5 +1,10 @@
 import SwiftUI
 
+private enum Sizings {
+    static let loadingPadding: CGFloat = 10.0
+    static let loaderSizeLength: CGFloat = 50.0
+}
+
 struct CustomizableLoadingView: View {
     
     @Binding var text: String
@@ -10,10 +15,12 @@ struct CustomizableLoadingView: View {
             ZStack {
                 ProgressView(text)
                     .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
-                    .padding(.all, 10.0)
+                    .padding(.all,
+                             Sizings.loadingPadding)
             }
             .background(Color.gray)
-            .frame(height: 50.0, alignment: .center)
+            .frame(height: Sizings.loadingPadding,
+                   alignment: .center)
 
 
         }
