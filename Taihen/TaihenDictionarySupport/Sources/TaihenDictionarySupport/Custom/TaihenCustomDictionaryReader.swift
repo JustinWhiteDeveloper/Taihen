@@ -16,8 +16,7 @@ public class ConcreteTaihenCustomDictionaryReader: TaihenCustomDictionaryReader 
             let data = try Data(contentsOf: URL(fileURLWithPath: path))
             let item = try JSONDecoder().decode(ConcreteTaihenCustomDictionary.self, from: data)
             return item
-        }
-        catch(let error) {
+        } catch let error {
             print(String(describing: error))
             return nil
         }

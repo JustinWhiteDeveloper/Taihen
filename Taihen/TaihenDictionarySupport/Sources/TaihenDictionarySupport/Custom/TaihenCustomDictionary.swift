@@ -60,7 +60,7 @@ public struct TaihenCustomDictionaryTerm: Codable, Equatable {
                 meaningTags: [String] = [],
                 explicitType: String = "",
                 meanings: [String] = [],
-                extraMeanings: [[String : String]] = [],
+                extraMeanings: [[String: String]] = [],
                 index: Int = 0,
                 termTags: [String] = [],
                 dictionary: String = "") {
@@ -90,9 +90,9 @@ public class ConcreteTaihenCustomDictionary: TaihenCustomDictionary {
     public var terms: [TaihenCustomDictionaryTerm] = []
     
     public init(name: String = "",
-                  revision: String = "",
-                  tags: [TaihenCustomDictionaryTag] = [],
-                  terms: [TaihenCustomDictionaryTerm] = []) {
+                revision: String = "",
+                tags: [TaihenCustomDictionaryTag] = [],
+                terms: [TaihenCustomDictionaryTerm] = []) {
         self.name = name
         self.revision = revision
         self.tags = tags

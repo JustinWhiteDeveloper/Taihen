@@ -28,19 +28,17 @@ extension ConcreteTaihenCustomDictionary {
                 dict[term.term] = [model]
             } else {
                 let items = dict[term.term]!
-                for (index, model) in items.enumerated() {
-                    if term.term == model.groupTerm {
-                        dict[term.term]?[index].terms.append(term)
+                for (index, model) in items.enumerated() where model.groupTerm == term.term {
+                    dict[term.term]?[index].terms.append(term)
                         
-                        //remove "" chars
-                        let filteredTags = term.termTags.filter({ $0.count > 0 })
-                        
-                        var tagsArray = dict[term.term]?[index].tags ?? []
-                        tagsArray.append(contentsOf: filteredTags)
-                        
-                        dict[term.term]?[index].tags = Array(Set(tagsArray))
-                        break
-                    }
+                    //remove "" chars
+                    let filteredTags = term.termTags.filter({ $0.count > 0 })
+                    
+                    var tagsArray = dict[term.term]?[index].tags ?? []
+                    tagsArray.append(contentsOf: filteredTags)
+                    
+                    dict[term.term]?[index].tags = Array(Set(tagsArray))
+                    break
                 }
             }
         }
@@ -60,18 +58,18 @@ extension ConcreteTaihenCustomDictionary {
         for val in vals {
             if let firstKana = val.first?.kana {
                 
-                if (kanaDict[firstKana] == nil) {
+                if kanaDict[firstKana] == nil {
                     kanaDict[firstKana] = val
                 } else {
-                    for item in val  {
+                    for item in val {
                         kanaDict[firstKana]?.append(item)
                     }
                 }
             }
         }
         
-        dict.merge(kanaDict)  { (_, new) in new }
-        dict.merge(kanjiDict)  { (_, new) in new }
+        dict.merge(kanaDict) { (_, new) in new }
+        dict.merge(kanjiDict) { (_, new) in new }
         
         return dict
     }

@@ -56,7 +56,7 @@ enum QuantumValue: Decodable {
     init(from decoder: Decoder) throws {
         if let string = try? decoder.singleValueContainer().decode(String.self) {
             self = .string(string)
-        } else if let dict = try? decoder.singleValueContainer().decode([String:String].self) {
+        } else if let dict = try? decoder.singleValueContainer().decode([String: String].self) {
             self = .dictionary(dict)
         } else {
             self = .string("")
@@ -88,7 +88,7 @@ struct TaihenJSONDictionaryTerm: Codable, Equatable {
     let explicitType: String
     let unknownInteger: Int
     let meanings: [String]
-    let extraMeanings: [[String:String]]
+    let extraMeanings: [[String: String]]
     let index: Int
     let termTags: [String]
     

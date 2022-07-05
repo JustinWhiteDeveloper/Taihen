@@ -38,7 +38,7 @@ public class RuleListJapaneseConjugator: JapaneseConjugator {
     
     let i1 = ReplacementRule(term: "くとがっている", replacements: ["い"])
     
-    let tsu1 = ReplacementRule(term: "っている", replacements: ["つ","る"])
+    let tsu1 = ReplacementRule(term: "っている", replacements: ["つ", "る"])
     let tsu2 = ReplacementRule(term: "ち", replacements: ["つ"])
     
     let a1 = ReplacementRule(term: "ではなかった", replacements: ["では無い"])

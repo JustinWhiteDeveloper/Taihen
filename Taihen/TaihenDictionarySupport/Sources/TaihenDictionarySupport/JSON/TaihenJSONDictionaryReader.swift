@@ -31,8 +31,7 @@ public class ConcreteTaihenJSONDictionaryReader: TaihenJSONDictionaryReader {
             dictionary.format = indexResult.format
             dictionary.revision = indexResult.revision
             dictionary.sequenced = indexResult.sequenced
-        }
-        catch {
+        } catch {
             return nil
         }
         
@@ -41,8 +40,7 @@ public class ConcreteTaihenJSONDictionaryReader: TaihenJSONDictionaryReader {
             do {
                 let tagResult = try JSONDecoder().decode([TaihenJSONDictionaryTag].self, from: tagData)
                 dictionary.tags = tagResult
-            }
-            catch {
+            } catch {
                 return nil
             }
         }
@@ -65,8 +63,7 @@ public class ConcreteTaihenJSONDictionaryReader: TaihenJSONDictionaryReader {
                 dictionary.terms.append(contentsOf: termResult)
                 
                 indexValue += 1
-            }
-            catch {
+            } catch {
                 return nil
             }
         }

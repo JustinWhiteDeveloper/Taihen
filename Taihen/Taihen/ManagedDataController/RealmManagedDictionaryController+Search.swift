@@ -4,7 +4,6 @@ import RealmSwift
 import TaihenDictionarySupport
 import JapaneseConjugation
 
-
 extension RealmManagedDictionaryController: DictionarySearchController {
     
     func searchValue(value: String, callback: @escaping (Bool, Double, [[TaihenDictionaryViewModel]], Int) -> Void) {
@@ -53,8 +52,11 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                 if object != nil {
                     while object != nil {
                         resultsFoundInDictionaries.append(TaihenCustomDictionaryTerm.from(entity: object!))
+                        
+                        let primaryKey = activeDict + search + String(resultsFoundInDictionaries.count)
+                        
                         object = self.realm.object(ofType: RealmTerm.self,
-                                                   forPrimaryKey: activeDict + search + String(resultsFoundInDictionaries.count))
+                                                   forPrimaryKey: primaryKey)
                     }
                 }
                 

@@ -35,11 +35,10 @@ struct ManagedHighlight: Codable {
         let encoder = JSONEncoder()
         
         do {
-            
             let result = try encoder.encode(self)
             return String(data: result, encoding: .utf8)
-        }
-        catch {
+            
+        } catch {
             return nil
         }
     }
@@ -56,8 +55,7 @@ struct ManagedHighlight: Codable {
             
             let result = try decoder.decode(ManagedHighlight.self, from: data)
             return result
-        }
-        catch {
+        } catch {
             return nil
         }
     }

@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "TaihenDictionarySupport",
-            targets: ["TaihenDictionarySupport"]),
+            targets: ["TaihenDictionarySupport"])
     ],
     dependencies: [
         
@@ -21,7 +21,7 @@ let package = Package(
             name: "TaihenDictionarySupportTests",
             dependencies: ["TaihenDictionarySupport"],
             resources: [
-                .copy("Dictionaries"),
-            ]),
+                .copy("Dictionaries")
+            ])
     ]
 )

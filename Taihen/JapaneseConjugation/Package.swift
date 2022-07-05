@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "JapaneseConjugation",
-            targets: ["JapaneseConjugation"]),
+            targets: ["JapaneseConjugation"])
     ],
     dependencies: [
         
@@ -23,6 +23,6 @@ let package = Package(
         ),
         .testTarget(
             name: "JapaneseConjugationTests",
-            dependencies: ["JapaneseConjugation"]),
+            dependencies: ["JapaneseConjugation"])
     ]
 )

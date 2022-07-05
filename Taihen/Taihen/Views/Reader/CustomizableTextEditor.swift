@@ -36,7 +36,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     @Environment(\.undoManager) var undoManger
     
     @State var enableHighlights = false
-
     
     func makeNSView(context: Context) -> NSScrollView {
         

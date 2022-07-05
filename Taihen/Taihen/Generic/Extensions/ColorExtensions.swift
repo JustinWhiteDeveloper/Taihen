@@ -37,7 +37,6 @@ class YomichanColorScheme: ColorScheme {
     }
 }
 
-
 // Yomichan Color extension
 extension Colors {
     static let darkBlueColor = Color(red: 2/255, green: 117/255, blue: 216/255)
@@ -47,4 +46,3 @@ extension Colors {
     static let lightGreyColor = Color(red: 138/255.0, green: 138/255.0, blue: 144/255.0)
     static let lightOrangeColor = Color(red: 230/255.0, green: 176/255.0, blue: 95/255.0)
 }
-
