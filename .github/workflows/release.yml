@@ -38,7 +38,6 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
           
-	MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION
       - name: Store credentials
         env:
           APPPASS: ${{ secrets.APP_PASS }}
