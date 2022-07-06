@@ -145,9 +145,13 @@ struct SettingsView: View {
                 }
                 .padding()
                 .frame(width: Sizings.standardWidth)
+                
+                Text("Version " + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""))
+                    .foregroundColor(Color.black)
             }
             
             Spacer()
+            
         }
     }
 }
