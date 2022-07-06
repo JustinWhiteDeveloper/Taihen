@@ -33,7 +33,7 @@
 		1748712C2871492E00FFCC08 /* AnkiResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712B2871492E00FFCC08 /* AnkiResults.swift */; };
 		1748712E2871499C00FFCC08 /* YomiSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712D2871499C00FFCC08 /* YomiSearchBar.swift */; };
 		1748713028714CFE00FFCC08 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748712F28714CFE00FFCC08 /* TagView.swift */; };
-		1748713228714E0600FFCC08 /* YomiResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748713128714E0600FFCC08 /* YomiResultItemView.swift */; };
+		1748713228714E0600FFCC08 /* YomiSearchSubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748713128714E0600FFCC08 /* YomiSearchSubViews.swift */; };
 		174871342871555D00FFCC08 /* ReaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174871332871555D00FFCC08 /* ReaderViewModel.swift */; };
 		1748713628715A6400FFCC08 /* ReaderRightClickMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1748713528715A6400FFCC08 /* ReaderRightClickMenu.swift */; };
 		17487138287193BF00FFCC08 /* RealmManagedDictionaryController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17487137287193BF00FFCC08 /* RealmManagedDictionaryController+Search.swift */; };
@@ -106,7 +106,7 @@
 		1748712B2871492E00FFCC08 /* AnkiResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnkiResults.swift; sourceTree = "<group>"; };
 		1748712D2871499C00FFCC08 /* YomiSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiSearchBar.swift; sourceTree = "<group>"; };
 		1748712F28714CFE00FFCC08 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
-		1748713128714E0600FFCC08 /* YomiResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiResultItemView.swift; sourceTree = "<group>"; };
+		1748713128714E0600FFCC08 /* YomiSearchSubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiSearchSubViews.swift; sourceTree = "<group>"; };
 		174871332871555D00FFCC08 /* ReaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewModel.swift; sourceTree = "<group>"; };
 		1748713528715A6400FFCC08 /* ReaderRightClickMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderRightClickMenu.swift; sourceTree = "<group>"; };
 		17487137287193BF00FFCC08 /* RealmManagedDictionaryController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmManagedDictionaryController+Search.swift"; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 			children = (
 				17F935C5284358AE00513356 /* YomiSearchView.swift */,
 				174871392872B90700FFCC08 /* YomiSearchViewModel.swift */,
-				1748713128714E0600FFCC08 /* YomiResultItemView.swift */,
+				1748713128714E0600FFCC08 /* YomiSearchSubViews.swift */,
 				1748712D2871499C00FFCC08 /* YomiSearchBar.swift */,
 				1748712F28714CFE00FFCC08 /* TagView.swift */,
 				177BA8E32842137A004DC312 /* LookupContainerView.swift */,
@@ -586,7 +586,7 @@
 				174870FE286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift in Sources */,
 				1748710828702DA300FFCC08 /* DictionaryRow.swift in Sources */,
 				1794C70A284DC6F700AC6700 /* StringExtensions.swift in Sources */,
-				1748713228714E0600FFCC08 /* YomiResultItemView.swift in Sources */,
+				1748713228714E0600FFCC08 /* YomiSearchSubViews.swift in Sources */,
 				174871282871474B00FFCC08 /* CustomizableTextEditor.swift in Sources */,
 				17DCE3562839C278001520A7 /* TaihenApp.swift in Sources */,
 				174871192871118600FFCC08 /* SharedManagedDataController.swift in Sources */,

@@ -2,6 +2,8 @@ import Foundation
 import SwiftUI
 
 private enum Sizings {
+    
+    static let dictionaryPreviewMinimumSize: CGFloat = 300.0
     static let dictionaryPreviewMaximumSize: CGFloat = 600.0
 }
 
@@ -20,7 +22,8 @@ struct ReaderView: View {
                 
                 YomiSearchView()
                     .background(Colors.customGray1)
-                    .frame(maxWidth: Sizings.dictionaryPreviewMaximumSize)
+                    .frame(minWidth: Sizings.dictionaryPreviewMinimumSize,
+                           maxWidth: Sizings.dictionaryPreviewMaximumSize)
             }
             .onAppear {
                 viewModel.onAppear()

@@ -10,6 +10,10 @@ private enum Fonts {
     static let ankiPromptFont = Font.system(size: 30)
 }
 
+private enum Sizings {
+    static let topAccessoryViewSpacing: CGFloat = 10.0
+}
+
 private enum Strings {
     static let copyButtonTitle = NSLocalizedString("Copy", comment: "")
     static let playAudioButtonTitle = NSLocalizedString("Play Audio", comment: "")
@@ -48,26 +52,30 @@ struct YomiTopAccessoryView: View {
     var onAnkiPrompt: () -> Void
 
     var body: some View {
-        HStack {
+        VStack(alignment: .leading, spacing: Sizings.topAccessoryViewSpacing) {
+            
             TagView(tags: tags)
             
-            Button(Strings.copyButtonTitle) {
-               onCopyButtonPressed()
-            }
-            .foregroundColor(.black)
-
-            Button(Strings.playAudioButtonTitle) {
-                onPlayAudio(audioUrl)
-            }
-            .foregroundColor(.black)
-            
-            if didSearch {
-                Text((hasCard ? ( isReviewed ? "" : "^") : "+"))
-                    .font(Fonts.ankiPromptFont)
-                    .foregroundColor(Color.black)
-                    .onTapGesture {
-                        onAnkiPrompt()
-                    }
+            HStack {
+                
+                Button(Strings.copyButtonTitle) {
+                   onCopyButtonPressed()
+                }
+                .foregroundColor(.black)
+                
+                Button(Strings.playAudioButtonTitle) {
+                    onPlayAudio(audioUrl)
+                }
+                .foregroundColor(.black)
+                
+                if didSearch {
+                    Text((hasCard ? (isReviewed ? "" : "^") : "+"))
+                        .font(Fonts.ankiPromptFont)
+                        .foregroundColor(Color.black)
+                        .onTapGesture {
+                            onAnkiPrompt()
+                        }
+                }
             }
         }
     }
@@ -77,9 +85,7 @@ struct YomiBottomView: View {
     
     @State var cardText: String
     @State var ankiExpressionText: String
-    @State var lastSearchString: String
-    @State var groupTerm: String
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(cardText)
@@ -87,10 +93,6 @@ struct YomiBottomView: View {
                 .textSelection(.enabled)
             
             Text(ankiExpressionText)
-                .foregroundColor(Color.black)
-                .textSelection(.enabled)
-            
-            Text("\(lastSearchString)\t\(groupTerm)")
                 .foregroundColor(Color.black)
                 .textSelection(.enabled)
         }

@@ -84,10 +84,8 @@ struct YomiSearchView: View {
                                 }
 
                                 YomiBottomView(cardText: viewModel.cardText,
-                                               ankiExpressionText: viewModel.ankiExpressionText,
-                                               lastSearchString: viewModel.lastSearchString,
-                                               groupTerm: viewModel.firstTerm?.groupTerm ?? "")
-                                .padding(.vertical)
+                                               ankiExpressionText: viewModel.ankiExpressionText)
+                                    .padding(.vertical)
 
                             }
                             .padding()
