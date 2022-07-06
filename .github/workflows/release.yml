@@ -40,7 +40,8 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-          echo "MARKET_VERSION={{0.0.4}}" >> $GITHUB_ENV
+          cd Taihen && MARKET_VERSION_LOCAL=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION_LOCAL && cd ..
+          echo "MARKET_VERSION=$MARKET_VERSION_LOCAL" >> $GITHUB_ENV
           
       - name: Store credentials
         env:
@@ -78,7 +79,7 @@ jobs:
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
-          name: Taihen_{{env.MARKET_VERSION}}
+          name: Taihen_${{env.MARKET_VERSION}}
           path: TaihenApp.zip
 
       - name: Upload to notary
