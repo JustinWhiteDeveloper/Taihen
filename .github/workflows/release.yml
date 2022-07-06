@@ -61,18 +61,18 @@ jobs:
 
       - name: Create App Folder
         run: |
-        cd Taihen && MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
-        mkdir Taihen_${{MARKET_VERSION}}
+            cd Taihen && MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
+            mkdir Taihen_${{MARKET_VERSION}}
 
       - name: Copy App to Folder
         run: |
-        cd Taihen && MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
-        cp -R ExportArchive/Taihen.archive/Taihen.app Taihen_${{MARKET_VERSION}}/Taihen.app
+            cd Taihen && MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
+            cp -R ExportArchive/Taihen.archive/Taihen.app Taihen_${{MARKET_VERSION}}/Taihen.app
 
       - name: Zip App
         run: |
-        cd Taihen && MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
-        /usr/bin/ditto -c -k --keepParent Taihen_${{MARKET_VERSION}} TaihenApp.zip
+            cd Taihen && MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
+            /usr/bin/ditto -c -k --keepParent Taihen_${{MARKET_VERSION}} TaihenApp.zip
 
       - name: Upload zip
         uses: actions/upload-artifact@v3
