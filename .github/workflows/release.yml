@@ -40,7 +40,7 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-          echo "::set-env name=MARKET_VERSION::0.0.4"
+          echo "MARKET_VERSION={{0.0.4}}" >> $GITHUB_ENV
           
       - name: Store credentials
         env:
