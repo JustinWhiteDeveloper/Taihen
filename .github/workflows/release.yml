@@ -4,8 +4,8 @@ on:
   push:
     branches: [ "release" ]
     
-  env:
-    MARKET_VERSION: 0.0.3
+env:
+  MARKET_VERSION: 0.0.3
     
 jobs:
   build:
