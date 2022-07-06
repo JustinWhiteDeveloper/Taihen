@@ -19,7 +19,10 @@ protocol DictionaryReloadController {
 }
 
 protocol DictionarySearchController {
-    func searchValue(value: String, callback: @escaping (_ finished: Bool, _ timeTaken: Double, _ selectedTerms: [[TaihenDictionaryViewModel]], _ resultCount: Int) -> Void)
+    func searchValue(value: String, callback: @escaping (_ finished: Bool,
+                                                         _ timeTaken: Double,
+                                                         _ selectedTerms: [[TaihenDictionaryViewModel]],
+                                                         _ resultCount: Int) -> Void)
 }
 
 // Use a seperate View model to avoid coupling

@@ -23,11 +23,12 @@ struct TaihenApp: App {
         }
         .commands {
             CommandGroup(replacing: .newItem) {
+                
                 Button(action: {
                     selectFolder()
-                }) {
+                }, label: {
                     Text(Strings.openFolderTitle)
-                }
+                })
             }
             CommandGroup(replacing: .undoRedo) {}
             CommandGroup(replacing: .help) {}
@@ -52,7 +53,8 @@ struct TaihenApp: App {
                         
                         UserDefaults.standard.lastOpenedFileKey = folder.path.md5
 
-                        SharedManagedDataController.appManagementInstance.saveFileContents(path: folder.path, contents: readText)
+                        SharedManagedDataController.appManagementInstance.saveFileContents(path: folder.path,
+                                                                                           contents: readText)
                         
                         NotificationCenter.default.post(name: Notification.Name.onReadFile, object: nil)
                         

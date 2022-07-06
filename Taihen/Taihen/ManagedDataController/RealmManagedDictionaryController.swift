@@ -352,9 +352,19 @@ extension RealmManagedDictionaryController: DictionaryReloadController {
 
         let dictionaries = realm.objects(RealmDictionary.self)
 
-        RealmManagedDictionaryController.dictionaries = dictionaries.sorted(by: {$0.order < $1.order }).map({ $0._name })
-        RealmManagedDictionaryController.activeDictionaries = dictionaries.sorted(by: {$0.order < $1.order }).filter({ $0.isActive }).map({ $0._name })
-        RealmManagedDictionaryController.activeHashes = dictionaries.sorted(by: {$0.order < $1.order }).filter({ $0.isActive }).map({ $0.hashKey })
+        RealmManagedDictionaryController.dictionaries = dictionaries
+            .sorted(by: {$0.order < $1.order })
+            .map({ $0._name })
+        
+        RealmManagedDictionaryController.activeDictionaries = dictionaries
+            .sorted(by: {$0.order < $1.order })
+            .filter({ $0.isActive })
+            .map({ $0._name })
+        
+        RealmManagedDictionaryController.activeHashes = dictionaries
+            .sorted(by: {$0.order < $1.order })
+            .filter({ $0.isActive })
+            .map({ $0.hashKey })
     }
 }
 

@@ -9,6 +9,7 @@ class ConcreteAnkiClient: AnkiClient {
     init() {}
     
     func sendRequest(request: URLRequest, completionHandler handler: @escaping (URLResponse?, Data?, Error?) -> Void) {
+        
         NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler: handler)
     }
 }

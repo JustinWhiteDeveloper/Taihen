@@ -22,12 +22,14 @@ final class TaihenDictionaryTests: XCTestCase {
                                                          index: 1000000,
                                                          classifications: [""])
         
+        let expectedLastTermMeaning = "Japanese-Multilingual Dictionary Project - Creation Date: 2021-01-01"
+        
         let expectedLastTerm = TaihenJSONDictionaryTerm(term: "ＪＭｄｉｃｔ",
                                                         kana: "ジェイエムディクト",
                                                         definitionTags: ["unc"],
                                                         explicitType: "",
                                                         unknownInteger: 1,
-                                                        meanings: ["Japanese-Multilingual Dictionary Project - Creation Date: 2021-01-01"],
+                                                        meanings: [expectedLastTermMeaning],
                                                         extraMeanings: [],
                                                         index: 9999999,
                                                         classifications: [""])

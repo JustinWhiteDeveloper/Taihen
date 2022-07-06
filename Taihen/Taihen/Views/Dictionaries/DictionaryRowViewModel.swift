@@ -21,7 +21,8 @@ class DictionaryRowViewModel: ObservableObject {
     }
     
     func onChangeOfActiveState(newValue: Bool) {
-        SharedManagedDataController.dictionaryInstance.updateDictionaryActive(viewModel: model.managedModel, active: newValue)
+        SharedManagedDataController.dictionaryInstance.updateDictionaryActive(viewModel: model.managedModel,
+                                                                              active: newValue)
     }
 }
 

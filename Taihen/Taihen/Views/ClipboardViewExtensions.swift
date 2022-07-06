@@ -9,7 +9,8 @@ extension Publisher {
 }
 
 public extension View {
-    func onPasteboardChange(for pasteboard: NSPasteboard = .general, do callback: @escaping PasteboardCallback) -> some View {
+    func onPasteboardChange(for pasteboard: NSPasteboard = .general,
+                            do callback: @escaping PasteboardCallback) -> some View {
         PasteboardChangeListenerView(containing: self, for: pasteboard, do: callback)
     }
 }
@@ -35,7 +36,7 @@ struct PasteboardChangeListenerView<T>: View where T: View {
 
 final class PasteboardChangeStore: ObservableObject {
     
-    private var pasteboardChangedSubscription: AnyCancellable? = nil
+    private var pasteboardChangedSubscription: AnyCancellable?
     
     private let callback: PasteboardCallback
     

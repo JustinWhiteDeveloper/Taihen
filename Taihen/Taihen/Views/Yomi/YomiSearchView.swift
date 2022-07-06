@@ -50,15 +50,18 @@ struct YomiSearchView: View {
                                                          didSearch: viewModel.didSearch,
                                                          hasCard: viewModel.hasCard,
                                                          isReviewed: viewModel.isReviewed,
-                                                         audioUrl: firstTerm.audioUrl) {
+                                                         audioUrl: firstTerm.audioUrl,
+                                                         onCopyButtonPressed: {
                                         viewModel.onCopyButtonPressed()
 
-                                    } onPlayAudio: { url in
+                                    },
+                                                         onPlayAudio: { url in
                                         viewModel.playAudioUrl(url)
 
-                                    } onAnkiPrompt: {
+                                    },
+                                                         onAnkiPrompt: {
                                         viewModel.onAnkiPromptButtonPressed()
-                                    }
+                                    })
                                 }
                                 .padding(.top)
                                 
@@ -121,12 +124,14 @@ extension TaihenDictionaryViewModel {
         let encodedTerm = groupTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         let encodedKana = kana.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         
+        let langaugePod101BaseUrl = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php"
+        
         if kana.isEmpty {
-            let urlString = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kana=\(encodedTerm)"
+            let urlString = langaugePod101BaseUrl + "?kana=\(encodedTerm)"
 
             return URL(string: urlString)
         } else {
-            let urlString = "http://assets.languagepod101.com/dictionary/japanese/audiomp3.php?kanji=\(encodedTerm)&kana=\(encodedKana)"
+            let urlString = langaugePod101BaseUrl + "?kanji=\(encodedTerm)&kana=\(encodedKana)"
 
             return URL(string: urlString)
         }

@@ -134,7 +134,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                                                name: Notification.Name.onReadFile,
                                                object: nil)
         
-        prelayout()
+        layoutIfNeeded()
     }
     
     func textDidChange(_ notification: Notification) {
@@ -241,10 +241,10 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         
         parent.scrollPercentage = nsScrollview.verticalScroller?.floatValue ?? 0
         
-        prelayout()
+        layoutIfNeeded()
     }
     
-    func prelayout() {
+    func layoutIfNeeded() {
         if !hasDonePostLayout {
 
             DispatchQueue.main.async {
