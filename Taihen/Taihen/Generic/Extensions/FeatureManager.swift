@@ -30,19 +30,10 @@ class FeatureManager {
     
     private let userDefaults = UserDefaults.standard
     
-    var audioEnabled: Bool {
-        get {
-            userDefaults.bool(forKey: Strings.audioEnabled)
-        }
-        
-        set {
-            userDefaults.set(newValue, forKey: Strings.audioEnabled)
-        }
-    }
-    
     var autoplayAudio: Bool {
         get {
-            userDefaults.bool(forKey: Strings.audioPlayAudio)
+            userDefaults.bool(forKey: Strings.audioPlayAudio,
+                              withDefaultValue: true)
         }
         
         set {
@@ -52,7 +43,8 @@ class FeatureManager {
     
     var enableTextHighlights: Bool {
         get {
-            userDefaults.bool(forKey: Strings.enableTextHighlights)
+            userDefaults.bool(forKey: Strings.enableTextHighlights,
+                              withDefaultValue: true)
         }
         
         set {
@@ -62,7 +54,8 @@ class FeatureManager {
     
     var positionScrolling: Bool {
         get {
-            userDefaults.bool(forKey: Strings.enablePositionScrolling)
+            userDefaults.bool(forKey: Strings.enablePositionScrolling,
+                              withDefaultValue: false)
         }
         
         set {
@@ -72,7 +65,8 @@ class FeatureManager {
     
     var lookupPreviewEnabled: Bool {
         get {
-            userDefaults.bool(forKey: Strings.lookupPreviewEnabled)
+            userDefaults.bool(forKey: Strings.lookupPreviewEnabled,
+                              withDefaultValue: true)
         }
         
         set {
@@ -82,7 +76,8 @@ class FeatureManager {
     
     var clipboardReadingEnabled: Bool {
         get {
-            (userDefaults.object(forKey: Strings.clipboardEnabled) as? Bool) ?? true
+            userDefaults.bool(forKey: Strings.clipboardEnabled,
+                              withDefaultValue: true)
         }
         
         set {
@@ -164,5 +159,11 @@ class FeatureManager {
         let nextValue = textSelectionParserMode.rawValue + 1
         textSelectionParserMode = JapaneseTextSelectionParserMode(rawValue: nextValue) ?? .Rule
         return textSelectionParserMode
+    }
+}
+
+extension UserDefaults {
+    func bool(forKey key: String, withDefaultValue defaultValue: Bool) -> Bool {
+        (object(forKey: key) as? Bool) ?? defaultValue
     }
 }
