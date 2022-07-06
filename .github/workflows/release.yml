@@ -3,7 +3,10 @@ name: Release Archive
 on:
   push:
     branches: [ "release" ]
-
+    
+  env:
+    MARKET_VERSION: 0.0.3
+    
 jobs:
   build:
     runs-on: macos-12
@@ -37,6 +40,7 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+          echo "::set-env name=MARKET_VERSION::0.0.4"
           
       - name: Store credentials
         env:
@@ -61,23 +65,20 @@ jobs:
 
       - name: Create App Folder
         run: |
-            cd Taihen && $MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
-            mkdir Taihen_${{MARKET_VERSION}}
+            mkdir Taihen_${{env.MARKET_VERSION}}
 
       - name: Copy App to Folder
         run: |
-            cd Taihen && $MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
-            cp -R ExportArchive/Taihen.archive/Taihen.app Taihen_${{MARKET_VERSION}}/Taihen.app
+            cp -R ExportArchive/Taihen.archive/Taihen.app Taihen_${{env.MARKET_VERSION}}/Taihen.app
 
       - name: Zip App
         run: |
-            cd Taihen && $MARKET_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | tr -d 'MARKETING_VERSION =') && echo $MARKET_VERSION && cd ..
-            /usr/bin/ditto -c -k --keepParent Taihen_${{MARKET_VERSION}} TaihenApp.zip
+            /usr/bin/ditto -c -k --keepParent Taihen_${{env.MARKET_VERSION}} TaihenApp.zip
 
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
-          name: Taihen_0.0.X
+          name: Taihen_{{env.MARKET_VERSION}}
           path: TaihenApp.zip
 
       - name: Upload to notary
