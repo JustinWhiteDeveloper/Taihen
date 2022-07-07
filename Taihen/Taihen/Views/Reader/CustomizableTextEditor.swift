@@ -80,7 +80,8 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         nsTextView.minSize = size
         
         let coordinator = context.coordinator
-        
+        coordinator.textView = nsTextView
+
         if nsTextView.string != text || coordinator.clearAttributedText {
             nsTextView.string = text
             coordinator.clearAttributedText = false
@@ -103,6 +104,7 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     func makeCoordinator() -> TextCoordinator {
         TextCoordinator(textEditor: self)
     }
+
 }
 
 // Using alternate naming as Coordinator still not mature..
@@ -123,6 +125,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     
     var timer: Timer?
     var hasDonePostLayout = false
+
+    weak var textView: NSTextView?
 
     init(textEditor: Representable) {
         self.parent = textEditor
@@ -253,6 +257,13 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                     print("layout")
                     self.hasDonePostLayout = true
                     self.parent.enableHighlights = true
+                    
+                    if let lastHighlight = self.parent.highlights.sorted(by: { range1, range2 in
+                        
+                        range1.location < range2.location
+                    }).last {
+                        self.textView?.scrollRangeToVisible(lastHighlight)
+                    }
                 })
             }
         }

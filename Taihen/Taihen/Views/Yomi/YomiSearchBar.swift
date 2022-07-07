@@ -20,6 +20,7 @@ struct YomiSearchBar: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .cornerRadius(Sizings.searchBarCornerRadius)
             .padding(.horizontal, Sizings.searchBarHorizontalPadding)
-            .frame(maxWidth: Sizings.searchBarMaxWidth, alignment: .leading)
+            .frame(maxWidth: Sizings.searchBarMaxWidth,
+                   alignment: .leading)
     }
 }
