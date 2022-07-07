@@ -15,15 +15,13 @@ Guide to Taihen:
 
 This project is not very mature with bugs, known issues and some intentional differences such as verb conjugation using a learning algorithm and which dictionary libraries are used under the hood. I hope to eventually add machine learning to improve the user experience and create the best Japanese reader app.
 
-<img width="2403" alt="Screen Shot 2022-07-02 at 2 43 01 PM" src="https://user-images.githubusercontent.com/12780440/176987054-d8aa6481-2950-4d85-82d3-c9c1e4ad53e7.png">
+<img width="1838" alt="Screen Shot 2022-07-08 at 11 18 20 AM" src="https://user-images.githubusercontent.com/12780440/177887250-05e7c431-0fc5-4c7b-afa2-c70dbd4827d8.png">
 
-Can open txt files to read in the reader.
-
-<img width="188" alt="Screen Shot 2022-07-02 at 10 48 04 PM" src="https://user-images.githubusercontent.com/12780440/176997552-3f98f710-493a-45f6-aa9e-9cf17db8f7f1.png">
 
 Full screen Yomichan style lookup mode:
 
-<img width="1201" alt="Screen Shot 2022-07-02 at 10 48 46 PM" src="https://user-images.githubusercontent.com/12780440/176997559-fa16f5c7-e3fc-4301-a549-cc8a5dc93b72.png">
+<img width="1834" alt="Screen Shot 2022-07-08 at 11 23 42 AM" src="https://user-images.githubusercontent.com/12780440/177887520-d23f4a64-e4e9-4c42-b683-7e9bdb273e3b.png">
+
 
 Dictionaries:
 
