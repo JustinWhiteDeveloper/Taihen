@@ -62,6 +62,7 @@
 		17F935D3284603E000513356 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D2284603E000513356 /* Realm */; };
 		17F935D5284603E000513356 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D4284603E000513356 /* RealmSwift */; };
 		17F935D9284756CA00513356 /* ClipboardDescriptionFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935D8284756CA00513356 /* ClipboardDescriptionFormatter.swift */; };
+		17F96C532876A571004B3197 /* TaihenSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F96C522876A570004B3197 /* TaihenSearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		17F935CA2843797500513356 /* AppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagementDataController.swift; sourceTree = "<group>"; };
 		17F935CF2846026200513356 /* RealmAppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAppManagementDataController.swift; sourceTree = "<group>"; };
 		17F935D8284756CA00513356 /* ClipboardDescriptionFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardDescriptionFormatter.swift; sourceTree = "<group>"; };
+		17F96C522876A570004B3197 /* TaihenSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenSearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,6 +390,7 @@
 				1748711428710DEA00FFCC08 /* ManagedDictionaryControllers.swift */,
 				174870FD286FFAAA00FFCC08 /* RealmManagedDictionaryController.swift */,
 				17487137287193BF00FFCC08 /* RealmManagedDictionaryController+Search.swift */,
+				17F96C522876A570004B3197 /* TaihenSearchResult.swift */,
 			);
 			path = ManagedDataController;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				1748710828702DA300FFCC08 /* DictionaryRow.swift in Sources */,
 				1794C70A284DC6F700AC6700 /* StringExtensions.swift in Sources */,
 				1748713228714E0600FFCC08 /* YomiSearchSubViews.swift in Sources */,
+				17F96C532876A571004B3197 /* TaihenSearchResult.swift in Sources */,
 				174871282871474B00FFCC08 /* CustomizableTextEditor.swift in Sources */,
 				17DCE3562839C278001520A7 /* TaihenApp.swift in Sources */,
 				174871192871118600FFCC08 /* SharedManagedDataController.swift in Sources */,

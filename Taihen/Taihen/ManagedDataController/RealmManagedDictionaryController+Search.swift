@@ -6,7 +6,7 @@ import JapaneseConjugation
 
 extension RealmManagedDictionaryController: DictionarySearchController {
     
-    func searchValue(value: String, callback: @escaping (Bool, Double, [[TaihenDictionaryViewModel]], Int) -> Void) {
+    func searchValue(value: String, callback: @escaping (Bool, Double, TaihenSearchResult, Int) -> Void) {
                 
         print("search")
 
@@ -18,7 +18,7 @@ extension RealmManagedDictionaryController: DictionarySearchController {
             if value.isEmpty || !value.containsValidJapaneseCharacters {
                 
                 DispatchQueue.main.async {
-                    callback(false, 0, [], 0)
+                    callback(false, 0, TaihenSearchResult(models: []), 0)
                 }
                 
                 return
@@ -141,7 +141,7 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                 
                 DispatchQueue.main.async {
                     self.isSearching = false
-                    callback(true, lookupTime, [models], resultCount)
+                    callback(true, lookupTime, TaihenSearchResult(models: models), resultCount)
                 }
             }
         }

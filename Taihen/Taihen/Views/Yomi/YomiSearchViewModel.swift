@@ -22,8 +22,7 @@ class YomiSearchViewModel: ObservableObject {
 
     @Published var lookupTime: Double = 0
 
-    @Published var selectedTerms: [[TaihenDictionaryViewModel]] = []
-    @Published var firstTerm: TaihenDictionaryViewModel?
+    @Published var searchModel: TaihenSearchViewModel?
 
     @Published var loadingText = Strings.loadingText
     @Published var player: AVPlayer?
@@ -56,7 +55,11 @@ class YomiSearchViewModel: ObservableObject {
         // Delay to prevent blocking layout
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
             
-            guard let url = self.firstTerm?.audioUrl,
+            let audioSource = LanguagePodAudioSource()
+            
+            guard let firstTerm = self.searchModel,
+                  let url = audioSource.url(forTerm: firstTerm.groupTerm,
+                                            andKana: firstTerm.kana),
                   FeatureManager.instance.autoplayAudio else {
                 return
             }
@@ -133,15 +136,14 @@ class YomiSearchViewModel: ObservableObject {
         
         SharedManagedDataController
             .dictionaryInstance
-            .searchValue(value: value) { finished, timeTaken, selectedTerms, resultCount in
+            .searchValue(value: value) { finished, timeTaken, results, resultCount in
             
             DispatchQueue.main.async {
                 self.lookupTime = timeTaken
                 self.isLoading = false
-                self.selectedTerms = selectedTerms
+                self.searchModel = results.searchModel
                 self.lastResultCount = resultCount
                 self.finishedLoadingDelay = false
-                self.firstTerm = selectedTerms.first?.first
                 
                 self.onSearchFinished()
             }
@@ -161,8 +163,12 @@ class YomiSearchViewModel: ObservableObject {
 
     func onSearchFinished() {
         
-        let term = firstTerm?.groupTerm ?? ""
-        let kana = firstTerm?.kana ?? ""
+        guard let firstTerm = searchModel else {
+            return
+        }
+        
+        let term = firstTerm.groupTerm
+        let kana = firstTerm.kana
         
         let furiganaFormatter = ConcreteFuriganaFormatter()
         let result = furiganaFormatter.formattedString(fromKanji: term, andHiragana: kana)
@@ -211,7 +217,7 @@ class YomiSearchViewModel: ObservableObject {
                         return
                     }
                     
-                    if let firstItem = result.result.map({ $0.due}).sorted().first {
+                    if let firstItem = result.result.map({ $0.due }).sorted().first {
                         self.isReviewed = firstItem < 10000
                     }
                     
@@ -231,7 +237,34 @@ class YomiSearchViewModel: ObservableObject {
     }
     
     func onCopyButtonPressed() {
-        SharedManagedDataController.dictionaryInstance.termDescriptionToClipboard(term: firstTerm?.groupTerm ?? "")
+        
+        guard let firstTerm = searchModel else {
+            return
+        }
+        
+        SharedManagedDataController
+            .dictionaryInstance
+            .searchValue(value: firstTerm.groupTerm) { finished, _, model, _ in
+            
+            guard finished,
+                    let firstModel = self.searchModel else {
+                return
+            }
+            
+            let meanings = firstModel.terms.map({ $0.meanings })
+                
+            let clipboardFormatter = YomichanClipboardFormatter()
+            let copyText = clipboardFormatter.formatForTerms(meanings)
+            
+            CopyboardEnabler.enabled = false
+            
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString( copyText, forType: .string)
+                            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                CopyboardEnabler.enabled = true
+            }
+        }
     }
     
     func onAnkiPromptButtonPressed() {
@@ -239,5 +272,15 @@ class YomiSearchViewModel: ObservableObject {
         let searchText = hasCard ? ankiExpressionText : lastSearchString
         
         searcher.browseQuery(expression: searchText) {}
+    }
+    
+    var audioUrl: URL? {
+        guard let firstTerm = searchModel else {
+            return nil
+        }
+        
+        let source = LanguagePodAudioSource()
+        return source.url(forTerm: firstTerm.groupTerm,
+                          andKana: firstTerm.kana)
     }
 }

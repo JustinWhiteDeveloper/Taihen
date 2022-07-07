@@ -35,7 +35,7 @@ struct YomiSearchView: View {
                     
                 } else {
                     
-                    if let firstTerm = viewModel.firstTerm {
+                    if let firstTerm = viewModel.searchModel {
                         
                         ScrollView {
                             
@@ -50,7 +50,7 @@ struct YomiSearchView: View {
                                                          didSearch: viewModel.didSearch,
                                                          hasCard: viewModel.hasCard,
                                                          isReviewed: viewModel.isReviewed,
-                                                         audioUrl: firstTerm.audioUrl,
+                                                         audioUrl: viewModel.audioUrl,
                                                          onCopyButtonPressed: {
                                         viewModel.onCopyButtonPressed()
 
@@ -75,7 +75,7 @@ struct YomiSearchView: View {
                                         TagView(tags: term.meaningTags.filter({$0.count > 0}))
                                     }
                                     
-                                    Text(term.meaningDescription)
+                                    Text(YomichanMeaningFormatter().meaningDescription(meanings: term.meanings))
                                         .foregroundColor(.black)
                                         .font(Fonts.arial)
                                         .textSelection(.enabled)
@@ -113,13 +113,16 @@ struct YomiSearchView: View {
             viewModel.onPasteChange()
         }
     }
-
 }
 
-extension TaihenDictionaryViewModel {
+protocol AudioSource {
+    func url(forTerm term: String, andKana kana: String) -> URL?
+}
+
+class LanguagePodAudioSource: AudioSource {
     
-    var audioUrl: URL? {
-        let encodedTerm = groupTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+    func url(forTerm term: String, andKana kana: String) -> URL? {
+        let encodedTerm = term.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         let encodedKana = kana.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         
         let langaugePod101BaseUrl = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php"
@@ -136,9 +139,12 @@ extension TaihenDictionaryViewModel {
     }
 }
 
-extension TaihenCustomDictionaryTerm {
-    
-    var meaningDescription: String {
+protocol MeaningFormatter {
+    func meaningDescription(meanings: [String]) -> String
+}
+
+class YomichanMeaningFormatter: MeaningFormatter {
+    func meaningDescription(meanings: [String]) -> String {
         if meanings.count == 1 {
             return meanings.first ?? ""
             

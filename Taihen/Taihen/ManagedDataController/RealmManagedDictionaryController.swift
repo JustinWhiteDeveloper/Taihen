@@ -299,7 +299,7 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
     }
 }
 
-extension RealmManagedDictionaryController: DictionaryClipboardController {
+extension RealmManagedDictionaryController: DictionaryReloadController {
     
     func dictionaryViewModels() -> [ManagedDictionaryViewModel]? {
         
@@ -314,38 +314,6 @@ extension RealmManagedDictionaryController: DictionaryClipboardController {
                                                              active: $0.isActive)})
             .sorted(by: { $0.order < $1.order })
     }
-    
-    func termDescriptionToClipboard(term: String) {
-        
-        print("term description")
-
-        input = searchValue(value: term) { finished, _, model, _ in
-            
-            guard finished,
-                  let firstModel = model.first,
-                  let firstSubModel = firstModel.first else {
-                return
-            }
-            
-            let clipboardFormatter = YomichanClipboardFormatter()
-            
-            let meanings = firstSubModel.terms.map({ $0.meanings })
-            
-            let copyText = clipboardFormatter.formatForTerms(meanings)
-            
-            CopyboardEnabler.enabled = false
-            
-            NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString( copyText, forType: .string)
-                            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                CopyboardEnabler.enabled = true
-            }
-        }
-    }
-}
-
-extension RealmManagedDictionaryController: DictionaryReloadController {
     
     func reloadDictionaries() {
         

@@ -9,10 +9,6 @@ protocol DictionaryDataReaderWriterController {
     func deleteAllDictionaries(callback: @escaping () -> Void)
 }
 
-protocol DictionaryClipboardController {
-    func termDescriptionToClipboard(term: String)
-}
-
 protocol DictionaryReloadController {
     func dictionaryViewModels() -> [ManagedDictionaryViewModel]?
     func reloadDictionaries()
@@ -21,7 +17,7 @@ protocol DictionaryReloadController {
 protocol DictionarySearchController {
     func searchValue(value: String, callback: @escaping (_ finished: Bool,
                                                          _ timeTaken: Double,
-                                                         _ selectedTerms: [[TaihenDictionaryViewModel]],
+                                                         _ selectedTerms: TaihenSearchResult,
                                                          _ resultCount: Int) -> Void)
 }
 
