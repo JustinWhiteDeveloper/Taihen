@@ -2,16 +2,12 @@ import SwiftUI
 
 private enum Strings {
     static let activeToggle = NSLocalizedString("Active", comment: "")
-    static let deleteDictionaryIcon = NSLocalizedString("CancelIcon", comment: "")
-    static let reorderIcon = NSLocalizedString("MoveIcon", comment: "")
+    static let deleteDictionaryIcon = "folder.fill.badge.minus"
+    static let reorderIcon = "chevron.up.chevron.down"
 }
 
 private enum Sizings {
-    static let deleteButtonVerticalPadding: CGFloat = 10.0
-    static let deleteButtonSize = CGSize(width: 34.0, height: 34.0)
-    static let deleteButtonCornerRadius: CGFloat = 12.0
-    
-    static let reorderButtonSize = CGSize(width: 24.0, height: 24.0)
+    static let rightIconsHorizontalPadding: CGFloat = 10.0
 }
 
 struct DictionaryRow: View {
@@ -22,48 +18,33 @@ struct DictionaryRow: View {
         HStack {
             Text(viewModel.model.name)
                 .foregroundColor(.black)
-                .font(.title)
-                .bold()
-            
+                .font(.title2)
+                .padding(.horizontal, Sizings.rightIconsHorizontalPadding)
+
             Spacer()
-            
+
             Toggle(Strings.activeToggle, isOn: $viewModel.model.active)
                 .padding()
                 .foregroundColor(.black)
+                .padding(.horizontal, Sizings.rightIconsHorizontalPadding)
                 .onChange(of: viewModel.model.active) { newValue in
                     viewModel.onChangeOfActiveState(newValue: newValue)
                 }
             
-            ZStack {
-                Button("   ", action: {
+            Image(systemName: Strings.deleteDictionaryIcon)
+                .imageScale(.large)
+                .font(Font.title)
+                .onTapGesture {
                     viewModel.onDeleteRow()
-                })
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .buttonStyle(PlainButtonStyle())
-                
-                Image(Strings.deleteDictionaryIcon)
-                    .renderingMode(.original)
-                    .allowsHitTesting(false)
+                }
+                .padding(.horizontal, Sizings.rightIconsHorizontalPadding)
 
-            }
-            .padding(.vertical, Sizings.deleteButtonVerticalPadding)
-            .frame(width: Sizings.deleteButtonSize.width,
-                   height: Sizings.deleteButtonSize.height)
-            .cornerRadius(Sizings.deleteButtonCornerRadius)
-            
-            ZStack {
-                Button("",
-                       action: {
-                    
-                })
-                .buttonStyle(PlainButtonStyle())
+            Image(systemName: Strings.reorderIcon)
+                .imageScale(.large)
+                .font(Font.title)
+                .padding(.horizontal, Sizings.rightIconsHorizontalPadding)
 
-                Image(Strings.reorderIcon)
-                    .renderingMode(.original)
-                
-            }
-            .frame(width: Sizings.reorderButtonSize.width,
-                   height: Sizings.reorderButtonSize.height)
         }
+        .background(Colors.customGray2)
     }
 }

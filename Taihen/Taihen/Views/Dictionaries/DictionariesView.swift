@@ -5,8 +5,8 @@ import TaihenDictionarySupport
 private enum Strings {
     static let title = NSLocalizedString("Dictionaries", comment: "")
     static let defaultLoadingText = NSLocalizedString("loading", comment: "")
-    static let addButtonTitle = NSLocalizedString("Add Dictionaries", comment: "")
-    static let deleteAllButtonTitle = NSLocalizedString("Delete All", comment: "")
+    static let addButtonTitle = NSLocalizedString("Add New Dictionary", comment: "")
+    static let deleteAllButtonTitle = NSLocalizedString("Delete All Dictionaries", comment: "")
 }
 
 private enum Sizings {
