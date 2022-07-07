@@ -27,8 +27,8 @@ class YomiSearchViewModel: ObservableObject {
     @State var lastSearch = "*"
     @Published var lastSearchString = "*"
 
-    @Published var didAnkiSearchForCurrentTerm: Bool = false
-    @Published var hasAnkiCardForLastSearch: Bool = false
+    @Published var didSearch: Bool = false
+    @Published var hasAnkiCard: Bool = false
     @Published var isReviewed: Bool = false
     @Published var cardText: String = ""
     @Published var ankiExpressionText: String = ""
@@ -124,6 +124,9 @@ class YomiSearchViewModel: ObservableObject {
         self.finishedLoadingDelay = false
         self.lookupTime = 0
         
+        self.didSearch = false
+        self.hasAnkiCard = false
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             self.finishedLoadingDelay = true
         }
@@ -157,6 +160,11 @@ class YomiSearchViewModel: ObservableObject {
 
     func onSearchFinished(results: TaihenSearchResult) {
         
+        print("didSearch")
+        
+        self.didSearch = false
+        self.hasAnkiCard = false
+
         guard let searchModel = results.searchModel else {
             return
         }
@@ -165,10 +173,7 @@ class YomiSearchViewModel: ObservableObject {
         
         let ankiExpression = searchModel.ankiExpression
         ankiExpressionText = ankiExpression
-        
-        self.didAnkiSearchForCurrentTerm = false
-        self.hasAnkiCardForLastSearch = false
-        
+
         let searcher = ConcreteAnkiInterface()
         searcher.findCards(expression: ankiExpression) { result in
             
@@ -181,15 +186,13 @@ class YomiSearchViewModel: ObservableObject {
                 return
             }
             
-            print(result.result)
-            
             let innerResult = result.result
-            
+            print(innerResult)
+
             if innerResult.count > 0 {
+                
                 searcher.getCardInfo(values: innerResult) { result in
                     
-                    self.didAnkiSearchForCurrentTerm = true
-
                     guard let result = result else {
                         return
                     }
@@ -198,18 +201,22 @@ class YomiSearchViewModel: ObservableObject {
                         print(error)
                         return
                     }
-                    
-                    if let firstItem = result.result
-                        .map({ $0.due })
-                        .sorted()
-                        .first {
-                        
-                        self.isReviewed = firstItem < Sizings.reviewAsKnownSize
-                    }
-                    
-                    self.hasAnkiCardForLastSearch = true
+                
+                    DispatchQueue.main.async {
 
+                        if let dueDate = result.result
+                            .map({ $0.due })
+                            .sorted()
+                            .first {
+                            
+                            self.hasAnkiCard = true
+                            self.didSearch = true
+                            self.isReviewed = dueDate < Sizings.reviewAsKnownSize
+                        }
+                    }
                 }
+            } else {
+                self.didSearch = true
             }
         }
         
@@ -242,7 +249,7 @@ class YomiSearchViewModel: ObservableObject {
         }
         
         let searcher = ConcreteAnkiInterface()
-        let searchText = hasAnkiCardForLastSearch ? searchModel.ankiExpression : lastSearchString
+        let searchText = hasAnkiCard ? searchModel.ankiExpression : lastSearchString
         
         searcher.browseQuery(expression: searchText) {}
     }

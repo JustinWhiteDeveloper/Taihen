@@ -67,7 +67,9 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
         }
     }
 
-    func saveDictionary(_ dictionary: TaihenCustomDictionary, notifyOnBlockSize: Int, callback: @escaping () -> Void) {
+    func saveDictionary(_ dictionary: TaihenCustomDictionary,
+                        notifyOnBlockSize: Int,
+                        callback: @escaping () -> Void) {
 
         print("save")
         

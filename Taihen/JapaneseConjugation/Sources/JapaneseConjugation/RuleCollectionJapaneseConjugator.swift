@@ -40,13 +40,10 @@ public class RuleCollectionJapaneseConjugator: JapaneseConjugator {
                         
                         items.append(rule)
                     }
-                    
-                    print(parts)
                 }
                 
             } catch {
                 print(error.localizedDescription)
-                // contents could not be loaded
             }
         } else {
             return items

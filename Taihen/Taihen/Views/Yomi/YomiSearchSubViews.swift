@@ -42,9 +42,9 @@ struct YomiTopKanaView: View {
 struct YomiTopAccessoryView: View {
     
     @State var tags: [String]
-    @State var didSearch: Bool
-    @State var hasCard: Bool
-    @State var isReviewed: Bool
+    @Binding var hasCard: Bool
+    @Binding var hasSearched: Bool
+    @Binding var isReviewed: Bool
     @State var audioUrl: URL?
     
     var onCopyButtonPressed: () -> Void
@@ -68,12 +68,15 @@ struct YomiTopAccessoryView: View {
                 }
                 .foregroundColor(.black)
                 
-                if didSearch {
+                if hasSearched {
                     Text((hasCard ? (isReviewed ? "" : "^") : "+"))
                         .font(Fonts.ankiPromptFont)
                         .foregroundColor(Color.black)
                         .onTapGesture {
                             onAnkiPrompt()
+                        }
+                        .transaction { transaction in
+                            transaction.animation = nil
                         }
                 }
             }

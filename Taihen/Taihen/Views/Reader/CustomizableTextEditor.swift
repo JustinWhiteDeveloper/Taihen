@@ -253,7 +253,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
 
             DispatchQueue.main.async {
                 self.timer?.invalidate()
-                self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
+                self.timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
                     print("layout")
                     self.hasDonePostLayout = true
                     self.parent.enableHighlights = true
