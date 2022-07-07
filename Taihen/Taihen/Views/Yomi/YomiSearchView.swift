@@ -47,8 +47,8 @@ struct YomiSearchView: View {
                                                     term: firstTerm.groupTerm)
 
                                     YomiTopAccessoryView(tags: firstTerm.tags.filter({ $0.count > 0 }),
-                                                         didSearch: viewModel.didSearch,
-                                                         hasCard: viewModel.hasCard,
+                                                         didSearch: viewModel.didAnkiSearchForCurrentTerm,
+                                                         hasCard: viewModel.hasAnkiCardForLastSearch,
                                                          isReviewed: viewModel.isReviewed,
                                                          audioUrl: viewModel.audioUrl,
                                                          onCopyButtonPressed: {

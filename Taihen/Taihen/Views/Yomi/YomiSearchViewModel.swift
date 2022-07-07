@@ -11,17 +11,15 @@ private enum Strings {
 
 private enum Sizings {
     static let maximumAudioSize = 52288
+    static let reviewAsKnownSize = 10000
 }
 
 class YomiSearchViewModel: ObservableObject {
     @Published var hasBooted = false
     @Published var lastResultCount = 0
-
     @Published var isLoading = true
     @Published var finishedLoadingDelay = true
-
     @Published var lookupTime: Double = 0
-
     @Published var searchModel: TaihenSearchViewModel?
 
     @Published var loadingText = Strings.loadingText
@@ -29,8 +27,8 @@ class YomiSearchViewModel: ObservableObject {
     @State var lastSearch = "*"
     @Published var lastSearchString = "*"
 
-    @Published var didSearch: Bool = false
-    @Published var hasCard: Bool = false
+    @Published var didAnkiSearchForCurrentTerm: Bool = false
+    @Published var hasAnkiCardForLastSearch: Bool = false
     @Published var isReviewed: Bool = false
     @Published var cardText: String = ""
     @Published var ankiExpressionText: String = ""
@@ -54,12 +52,8 @@ class YomiSearchViewModel: ObservableObject {
 
         // Delay to prevent blocking layout
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-            
-            let audioSource = LanguagePodAudioSource()
-            
-            guard let firstTerm = self.searchModel,
-                  let url = audioSource.url(forTerm: firstTerm.groupTerm,
-                                            andKana: firstTerm.kana),
+                        
+            guard let url = self.searchModel?.audioUrl,
                   FeatureManager.instance.autoplayAudio else {
                 return
             }
@@ -145,7 +139,7 @@ class YomiSearchViewModel: ObservableObject {
                 self.lastResultCount = resultCount
                 self.finishedLoadingDelay = false
                 
-                self.onSearchFinished()
+                self.onSearchFinished(results: results)
             }
         }
     }
@@ -161,39 +155,28 @@ class YomiSearchViewModel: ObservableObject {
         }
     }
 
-    func onSearchFinished() {
+    func onSearchFinished(results: TaihenSearchResult) {
         
-        guard let firstTerm = searchModel else {
+        guard let searchModel = results.searchModel else {
             return
         }
         
-        let term = firstTerm.groupTerm
-        let kana = firstTerm.kana
+        cardText = searchModel.furiganaTerm
         
-        let furiganaFormatter = ConcreteFuriganaFormatter()
-        let result = furiganaFormatter.formattedString(fromKanji: term, andHiragana: kana)
-        
-        cardText = result
-
-        let searcher = ConcreteAnkiInterface()
-        
-        //If contains hiragana and kanji then use *contains*
-        let expressionPart = (result.containsKanji && result.containsHiragana) ? "*\(result)*" : result
-        
-        let ankiExpression = "\"expression:\(expressionPart)\" OR \"Focus:\(term)\" OR \"Meaning:\(term)\""
-        
+        let ankiExpression = searchModel.ankiExpression
         ankiExpressionText = ankiExpression
-        
+    
+        let searcher = ConcreteAnkiInterface()
         searcher.findCards(expression: ankiExpression) { result in
             
             guard let result = result else {
-                self.didSearch = false
+                self.didAnkiSearchForCurrentTerm = false
                 return
             }
             
             if let error = result.error {
                 print(error)
-                self.didSearch = false
+                self.didAnkiSearchForCurrentTerm = false
                 return
             }
             
@@ -203,32 +186,36 @@ class YomiSearchViewModel: ObservableObject {
                 searcher.getCardInfo(values: result.result) { result in
                     
                     guard let result = result else {
-                        self.hasCard = false
-                        self.didSearch = true
+                        self.hasAnkiCardForLastSearch = false
+                        self.didAnkiSearchForCurrentTerm = true
 
                         return
                     }
                     
                     if let error = result.error {
                         print(error)
-                        self.hasCard = false
-                        self.didSearch = true
+                        self.hasAnkiCardForLastSearch = false
+                        self.didAnkiSearchForCurrentTerm = true
 
                         return
                     }
                     
-                    if let firstItem = result.result.map({ $0.due }).sorted().first {
-                        self.isReviewed = firstItem < 10000
+                    if let firstItem = result.result
+                        .map({ $0.due })
+                        .sorted()
+                        .first {
+                        
+                        self.isReviewed = firstItem < Sizings.reviewAsKnownSize
                     }
                     
-                    self.hasCard = true
-                    self.didSearch = true
+                    self.hasAnkiCardForLastSearch = true
+                    self.didAnkiSearchForCurrentTerm = true
 
                 }
                 
             } else {
-                self.hasCard = false
-                self.didSearch = true
+                self.hasAnkiCardForLastSearch = false
+                self.didAnkiSearchForCurrentTerm = true
             }
         }
         
@@ -238,38 +225,25 @@ class YomiSearchViewModel: ObservableObject {
     
     func onCopyButtonPressed() {
         
-        guard let firstTerm = searchModel else {
+        guard let searchModel = self.searchModel else {
             return
         }
         
-        SharedManagedDataController
-            .dictionaryInstance
-            .searchValue(value: firstTerm.groupTerm) { finished, _, model, _ in
-            
-            guard finished,
-                    let firstModel = self.searchModel else {
-                return
-            }
-            
-            let meanings = firstModel.terms.map({ $0.meanings })
-                
-            let clipboardFormatter = YomichanClipboardFormatter()
-            let copyText = clipboardFormatter.formatForTerms(meanings)
-            
-            CopyboardEnabler.enabled = false
-            
-            NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString( copyText, forType: .string)
-                            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                CopyboardEnabler.enabled = true
-            }
+        let copyText = searchModel.clipboardDescription
+        
+        CopyboardEnabler.enabled = false
+        
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString( copyText, forType: .string)
+                        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            CopyboardEnabler.enabled = true
         }
     }
     
     func onAnkiPromptButtonPressed() {
         let searcher = ConcreteAnkiInterface()
-        let searchText = hasCard ? ankiExpressionText : lastSearchString
+        let searchText = hasAnkiCardForLastSearch ? ankiExpressionText : lastSearchString
         
         searcher.browseQuery(expression: searchText) {}
     }
