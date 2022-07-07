@@ -182,8 +182,10 @@ class YomiSearchViewModel: ObservableObject {
             
             print(result.result)
             
-            if result.result.count > 0 {
-                searcher.getCardInfo(values: result.result) { result in
+            let innerResult = result.result
+            
+            if innerResult.count > 0 {
+                searcher.getCardInfo(values: innerResult) { result in
                     
                     guard let result = result else {
                         self.hasAnkiCardForLastSearch = false
@@ -193,9 +195,9 @@ class YomiSearchViewModel: ObservableObject {
                     }
                     
                     if let error = result.error {
-                        print(error)
                         self.hasAnkiCardForLastSearch = false
                         self.didAnkiSearchForCurrentTerm = true
+                        print(error)
 
                         return
                     }
@@ -249,12 +251,32 @@ class YomiSearchViewModel: ObservableObject {
     }
     
     var audioUrl: URL? {
-        guard let firstTerm = searchModel else {
+        guard let searchModel = searchModel else {
             return nil
         }
         
         let source = LanguagePodAudioSource()
-        return source.url(forTerm: firstTerm.groupTerm,
-                          andKana: firstTerm.kana)
+        return source.url(forTerm: searchModel.groupTerm,
+                          andKana: searchModel.kana)
+    }
+    
+    var tags: [String] {
+        searchModel?.tags.filter({ $0.count > 0 }) ?? []
+    }
+    
+    var terms: EnumeratedSequence<[TaihenSearchTerm]> {
+        guard let terms = searchModel?.terms else {
+            return [].enumerated()
+        }
+        
+        return terms.enumerated()
+    }
+    
+    var groupTerm: String {
+        searchModel?.groupTerm ?? ""
+    }
+    
+    var kana: String {
+        searchModel?.kana ?? ""
     }
 }

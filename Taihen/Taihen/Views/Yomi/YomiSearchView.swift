@@ -35,7 +35,7 @@ struct YomiSearchView: View {
                     
                 } else {
                     
-                    if let firstTerm = viewModel.searchModel {
+                    if viewModel.searchModel != nil {
                         
                         ScrollView {
                             
@@ -43,10 +43,10 @@ struct YomiSearchView: View {
  
                                 HStack {
                                     
-                                    YomiTopKanaView(kana: firstTerm.kana,
-                                                    term: firstTerm.groupTerm)
+                                    YomiTopKanaView(kana: viewModel.kana,
+                                                    term: viewModel.groupTerm)
 
-                                    YomiTopAccessoryView(tags: firstTerm.tags.filter({ $0.count > 0 }),
+                                    YomiTopAccessoryView(tags: viewModel.tags,
                                                          didSearch: viewModel.didAnkiSearchForCurrentTerm,
                                                          hasCard: viewModel.hasAnkiCardForLastSearch,
                                                          isReviewed: viewModel.isReviewed,
@@ -65,7 +65,7 @@ struct YomiSearchView: View {
                                 }
                                 .padding(.top)
                                 
-                                ForEach(Array(firstTerm.terms.enumerated()), id: \.offset) { index1, term in
+                                ForEach(Array(viewModel.terms), id: \.offset) { index1, term in
                                     
                                     HStack {
                                         Text(String("\(index1 + 1):"))
@@ -75,7 +75,8 @@ struct YomiSearchView: View {
                                         TagView(tags: term.meaningTags.filter({$0.count > 0}))
                                     }
                                     
-                                    Text(YomichanMeaningFormatter().meaningDescription(meanings: term.meanings))
+                                    Text(YomichanMeaningFormatter()
+                                        .meaningDescription(meanings: term.meanings))
                                         .foregroundColor(.black)
                                         .font(Fonts.arial)
                                         .textSelection(.enabled)
