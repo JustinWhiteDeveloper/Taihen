@@ -73,4 +73,39 @@ public struct TaihenSearchTerm: Equatable {
     public let term: String
     public let meaningTags: [String]
     public let meanings: [String]
+    
+    public var meaningDescription: String {
+        let formatter = YomichanMeaningFormatter()
+        return formatter.meaningDescription(meanings: meanings)
+    }
+    
+    public var filteredMeaningTags: [String] {
+        meaningTags.filter({ $0.count > 0 })
+    }
+}
+
+protocol MeaningFormatter {
+    func meaningDescription(meanings: [String]) -> String
+}
+
+class YomichanMeaningFormatter: MeaningFormatter {
+    func meaningDescription(meanings: [String]) -> String {
+        if meanings.count == 1 {
+            return meanings.first ?? ""
+            
+        } else {
+            
+            var text = ""
+            
+            for (index, meaning) in meanings.enumerated() {
+                text += "• " + meaning
+                
+                if index < meanings.count - 1 {
+                    text += "\n"
+                }
+            }
+            
+            return text
+        }
+    }
 }

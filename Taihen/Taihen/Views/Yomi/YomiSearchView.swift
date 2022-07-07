@@ -35,7 +35,7 @@ struct YomiSearchView: View {
                     
                 } else {
                     
-                    if viewModel.searchModel != nil {
+                    if let searchModel = viewModel.searchModel {
                         
                         ScrollView {
                             
@@ -43,8 +43,8 @@ struct YomiSearchView: View {
  
                                 HStack {
                                     
-                                    YomiTopKanaView(kana: viewModel.kana,
-                                                    term: viewModel.groupTerm)
+                                    YomiTopKanaView(kana: searchModel.kana,
+                                                    term: searchModel.groupTerm)
 
                                     YomiTopAccessoryView(tags: viewModel.tags,
                                                          didSearch: viewModel.didAnkiSearchForCurrentTerm,
@@ -65,18 +65,18 @@ struct YomiSearchView: View {
                                 }
                                 .padding(.top)
                                 
-                                ForEach(Array(viewModel.terms), id: \.offset) { index1, term in
+                                ForEach(Array(viewModel.terms),
+                                        id: \.offset) { resultIndex, searchResultItem in
                                     
                                     HStack {
-                                        Text(String("\(index1 + 1):"))
+                                        Text(String("\(resultIndex + 1):"))
                                             .font(Fonts.arial)
                                             .foregroundColor(.black)
 
-                                        TagView(tags: term.meaningTags.filter({$0.count > 0}))
+                                        TagView(tags: searchResultItem.filteredMeaningTags)
                                     }
                                     
-                                    Text(YomichanMeaningFormatter()
-                                        .meaningDescription(meanings: term.meanings))
+                                    Text(searchResultItem.meaningDescription)
                                         .foregroundColor(.black)
                                         .font(Fonts.arial)
                                         .textSelection(.enabled)
@@ -112,56 +112,6 @@ struct YomiSearchView: View {
         }
         .onPasteboardChange {
             viewModel.onPasteChange()
-        }
-    }
-}
-
-protocol AudioSource {
-    func url(forTerm term: String, andKana kana: String) -> URL?
-}
-
-class LanguagePodAudioSource: AudioSource {
-    
-    func url(forTerm term: String, andKana kana: String) -> URL? {
-        let encodedTerm = term.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        let encodedKana = kana.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        
-        let langaugePod101BaseUrl = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php"
-        
-        if kana.isEmpty {
-            let urlString = langaugePod101BaseUrl + "?kana=\(encodedTerm)"
-
-            return URL(string: urlString)
-        } else {
-            let urlString = langaugePod101BaseUrl + "?kanji=\(encodedTerm)&kana=\(encodedKana)"
-
-            return URL(string: urlString)
-        }
-    }
-}
-
-protocol MeaningFormatter {
-    func meaningDescription(meanings: [String]) -> String
-}
-
-class YomichanMeaningFormatter: MeaningFormatter {
-    func meaningDescription(meanings: [String]) -> String {
-        if meanings.count == 1 {
-            return meanings.first ?? ""
-            
-        } else {
-            
-            var text = ""
-            
-            for (index, meaning) in meanings.enumerated() {
-                text += "• " + meaning
-                
-                if index < meanings.count - 1 {
-                    text += "\n"
-                }
-            }
-            
-            return text
         }
     }
 }

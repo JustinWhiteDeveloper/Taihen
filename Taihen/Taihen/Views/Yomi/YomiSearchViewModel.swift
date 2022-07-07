@@ -165,18 +165,19 @@ class YomiSearchViewModel: ObservableObject {
         
         let ankiExpression = searchModel.ankiExpression
         ankiExpressionText = ankiExpression
-    
+        
+        self.didAnkiSearchForCurrentTerm = false
+        self.hasAnkiCardForLastSearch = false
+        
         let searcher = ConcreteAnkiInterface()
         searcher.findCards(expression: ankiExpression) { result in
             
             guard let result = result else {
-                self.didAnkiSearchForCurrentTerm = false
                 return
             }
             
             if let error = result.error {
                 print(error)
-                self.didAnkiSearchForCurrentTerm = false
                 return
             }
             
@@ -187,18 +188,14 @@ class YomiSearchViewModel: ObservableObject {
             if innerResult.count > 0 {
                 searcher.getCardInfo(values: innerResult) { result in
                     
-                    guard let result = result else {
-                        self.hasAnkiCardForLastSearch = false
-                        self.didAnkiSearchForCurrentTerm = true
+                    self.didAnkiSearchForCurrentTerm = true
 
+                    guard let result = result else {
                         return
                     }
                     
                     if let error = result.error {
-                        self.hasAnkiCardForLastSearch = false
-                        self.didAnkiSearchForCurrentTerm = true
                         print(error)
-
                         return
                     }
                     
@@ -211,13 +208,8 @@ class YomiSearchViewModel: ObservableObject {
                     }
                     
                     self.hasAnkiCardForLastSearch = true
-                    self.didAnkiSearchForCurrentTerm = true
 
                 }
-                
-            } else {
-                self.hasAnkiCardForLastSearch = false
-                self.didAnkiSearchForCurrentTerm = true
             }
         }
         
@@ -244,8 +236,13 @@ class YomiSearchViewModel: ObservableObject {
     }
     
     func onAnkiPromptButtonPressed() {
+        
+        guard let searchModel = self.searchModel else {
+            return
+        }
+        
         let searcher = ConcreteAnkiInterface()
-        let searchText = hasAnkiCardForLastSearch ? ankiExpressionText : lastSearchString
+        let searchText = hasAnkiCardForLastSearch ? searchModel.ankiExpression : lastSearchString
         
         searcher.browseQuery(expression: searchText) {}
     }
@@ -271,12 +268,28 @@ class YomiSearchViewModel: ObservableObject {
         
         return terms.enumerated()
     }
+}
+
+protocol AudioSource {
+    func url(forTerm term: String, andKana kana: String) -> URL?
+}
+
+class LanguagePodAudioSource: AudioSource {
     
-    var groupTerm: String {
-        searchModel?.groupTerm ?? ""
-    }
-    
-    var kana: String {
-        searchModel?.kana ?? ""
+    func url(forTerm term: String, andKana kana: String) -> URL? {
+        let encodedTerm = term.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        let encodedKana = kana.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        
+        let langaugePod101BaseUrl = "https://assets.languagepod101.com/dictionary/japanese/audiomp3.php"
+        
+        if kana.isEmpty {
+            let urlString = langaugePod101BaseUrl + "?kana=\(encodedTerm)"
+
+            return URL(string: urlString)
+        } else {
+            let urlString = langaugePod101BaseUrl + "?kanji=\(encodedTerm)&kana=\(encodedKana)"
+
+            return URL(string: urlString)
+        }
     }
 }
