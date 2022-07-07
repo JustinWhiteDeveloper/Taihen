@@ -7,7 +7,7 @@ private enum Fonts {
     static let kanaFont = Font.system(size: 26.0)
     static let termFont = Font.system(size: 50.0)
     
-    static let ankiPromptFont = Font.system(size: 30)
+    static let ankiPromptFont = Font.system(size: 30.0)
 }
 
 private enum Sizings {
@@ -86,8 +86,8 @@ struct YomiTopAccessoryView: View {
 
 struct YomiBottomView: View {
     
-    @State var cardText: String
-    @State var ankiExpressionText: String
+    @Binding var cardText: String
+    @Binding var ankiExpressionText: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {

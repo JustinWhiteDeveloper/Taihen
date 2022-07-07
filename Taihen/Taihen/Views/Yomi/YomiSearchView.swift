@@ -84,8 +84,8 @@ struct YomiSearchView: View {
                                     Divider()
                                 }
 
-                                YomiBottomView(cardText: viewModel.cardText,
-                                               ankiExpressionText: viewModel.ankiExpressionText)
+                                YomiBottomView(cardText: $viewModel.cardText,
+                                               ankiExpressionText: $viewModel.ankiExpressionText)
                                     .padding(.vertical)
 
                             }
