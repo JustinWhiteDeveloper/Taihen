@@ -6,8 +6,6 @@ import LaughingOctoAdventure
 private enum Fonts {
     static let kanaFont = Font.system(size: 26.0)
     static let termFont = Font.system(size: 50.0)
-    
-    static let ankiPromptFont = Font.system(size: 30.0)
 }
 
 private enum Sizings {
@@ -15,8 +13,11 @@ private enum Sizings {
 }
 
 private enum Strings {
-    static let copyButtonTitle = NSLocalizedString("Copy", comment: "")
-    static let playAudioButtonTitle = NSLocalizedString("Play Audio", comment: "")
+    static let copyButtonIcon = "doc.on.doc"
+    static let playAudioButtonIcon = "headphones.circle"
+    
+    static let addButtonIcon = "plus"
+    static let reviewKnownCardIcon = "paperplane"
 }
 
 struct YomiTopKanaView: View {
@@ -30,11 +31,14 @@ struct YomiTopKanaView: View {
                 .foregroundColor(.black)
                 .font(Fonts.kanaFont)
                 .textSelection(.enabled)
+                .lineLimit(1)
             
             Text(term)
                 .foregroundColor(.black)
                 .font(Fonts.termFont)
                 .textSelection(.enabled)
+                .lineLimit(1)
+            
         }
     }
 }
@@ -58,19 +62,25 @@ struct YomiTopAccessoryView: View {
             
             HStack {
                 
-                Button(Strings.copyButtonTitle) {
+                Image(systemName: Strings.copyButtonIcon)
+                    .onTapGesture {
                    onCopyButtonPressed()
                 }
                 .foregroundColor(.black)
-                
-                Button(Strings.playAudioButtonTitle) {
+                .imageScale(.large)
+                .font(Font.title)
+
+                Image(systemName: Strings.playAudioButtonIcon)
+                    .onTapGesture {
                     onPlayAudio(audioUrl)
                 }
                 .foregroundColor(.black)
+                .imageScale(.large)
+                .font(Font.title)
                 
-                if hasSearched {
-                    Text((hasCard ? (isReviewed ? "" : "^") : "+"))
-                        .font(Fonts.ankiPromptFont)
+                if hasSearched && !isReviewed {
+                    Image(systemName: (hasCard ? Strings.reviewKnownCardIcon : Strings.addButtonIcon))
+                        .font(Font.title)
                         .foregroundColor(Color.black)
                         .onTapGesture {
                             onAnkiPrompt()

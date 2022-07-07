@@ -2,7 +2,8 @@ import SwiftUI
 
 private enum Sizings {
     static let pillPadding: CGFloat = 8.0
-    static let pillCornerRadius: CGFloat = 8.0
+    static let pillCornerRadius: CGFloat = 4.0
+    static let pillSpacing: CGFloat = 4.0
 }
 
 struct TagPill: View {
@@ -29,7 +30,7 @@ struct TagView: View {
     
     var body: some View {
         
-        HStack {
+        LazyHStack(spacing: Sizings.pillSpacing) {
                         
             ForEach(Array(tags.enumerated()), id: \.offset) { index1, text in
 

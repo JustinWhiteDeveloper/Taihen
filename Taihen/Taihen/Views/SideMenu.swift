@@ -1,6 +1,11 @@
 import Foundation
 import SwiftUI
 
+private enum Sizings {
+    static let sideMenuItemSpacing: CGFloat = 20.0
+    static let sideMenuHorizontalPadding: CGFloat = 20.0
+}
+
 struct SideMenu: View {
     
     @Binding var modes: [ViewMode]
@@ -10,7 +15,8 @@ struct SideMenu: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading, spacing: 20.0) {
+            VStack(alignment: .leading,
+                   spacing: Sizings.sideMenuItemSpacing) {
                 ForEach(modes, id: \.self) { item in
                     HStack {
                         Image(systemName: item.imageName)
@@ -28,7 +34,8 @@ struct SideMenu: View {
             .frame(maxHeight: .infinity)
 
         }
-        .padding(.horizontal, 20.0)
+        .padding(.horizontal,
+                 Sizings.sideMenuHorizontalPadding)
         .background(Colors.customGray2)
     }
 }
