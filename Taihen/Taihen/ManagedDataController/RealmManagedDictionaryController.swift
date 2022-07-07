@@ -328,7 +328,10 @@ extension RealmManagedDictionaryController: DictionaryClipboardController {
             }
             
             let clipboardFormatter = YomichanClipboardFormatter()
-            let copyText = clipboardFormatter.formatForTerms(firstSubModel.terms)
+            
+            let meanings = firstSubModel.terms.map({ $0.meanings })
+            
+            let copyText = clipboardFormatter.formatForTerms(meanings)
             
             CopyboardEnabler.enabled = false
             

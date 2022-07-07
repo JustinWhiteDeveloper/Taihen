@@ -2,31 +2,34 @@ import Foundation
 import TaihenDictionarySupport
 
 protocol ClipboardDescriptionFormatter {
-    func formatForTerms(_ terms: [TaihenCustomDictionaryTerm]) -> String
+    func formatForTerms(_ terms: [[String]]) -> String
 }
 
 class YomichanClipboardFormatter: ClipboardDescriptionFormatter {
 
-    func formatForTerms(_ terms: [TaihenCustomDictionaryTerm]) -> String {
+    func formatForTerms(_ terms: [[String]]) -> String {
         
         var text = ""
         
-        for (index, term) in terms.enumerated() {
+        for (index, termArray) in terms.enumerated() {
             
             text += "\(index + 1). "
             
-            if term.meanings.count == 1 {
-                text += term.meanings.first ?? ""
+            let termsCount = termArray.count
+            
+            if termsCount == 1 {
+                text += termArray.first ?? ""
                 
-            } else if term.meanings.count > 1 {
+            } else if termsCount > 1 {
                 
                 //put bullet on next line
                 text += "\n"
                 
-                for (index, meaning) in term.meanings.enumerated() {
+                for (index, meaning) in termArray.enumerated() {
                     text += "•\t" + meaning
                     
-                    if index < term.meanings.count {
+                    let notLastItem = index < termsCount
+                    if notLastItem {
                         text += "\n"
                     }
                 }
