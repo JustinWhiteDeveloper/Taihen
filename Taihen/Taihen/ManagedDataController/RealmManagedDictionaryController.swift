@@ -239,7 +239,7 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
 
         DispatchQueue.global(qos: .background).sync { [self] in
             self.realm = self.getRealm()
-
+            
             let dictionary = self.realm.object(ofType: RealmDictionary.self, forPrimaryKey: name)
             
             //Note: loads all terms in DB, costly!
@@ -262,9 +262,14 @@ class RealmManagedDictionaryController: DictionaryDataReaderWriterController {
                 print(error.localizedDescription)
             }
             
-            DispatchQueue.main.async {
-                callback(self.dictionaryViewModels() ?? [])
-            }
+            let dictionaries = realm.objects(RealmDictionary.self)
+
+            let models = dictionaries.map({ ManagedDictionaryViewModel(name: $0._name,
+                                                                 order: Int($0.order),
+                                                                 active: $0.isActive)})
+                    .sorted(by: { $0.order < $1.order })
+            
+            callback(models)
         }
     }
 

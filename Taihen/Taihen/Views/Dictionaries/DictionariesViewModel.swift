@@ -38,6 +38,10 @@ class DictionariesViewModel: ObservableObject {
                                                object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func onViewAppear() {
         items = SharedManagedDataController.dictionaryInstance.dictionaryViewModels()?
             .map({
@@ -56,23 +60,22 @@ class DictionariesViewModel: ObservableObject {
         
         DispatchQueue.global(qos: .background).async {
             guard let dictionary = reader.readFolder(path: path) else {
-                self.loading = false
+                DispatchQueue.main.async {
+                    self.loading = false
+                }
                 return
             }
 
             DispatchQueue.main.async {
-                self.loadingText = Strings.savingTags
-
-                //Save tags to Core Data
-                SharedManagedDataController.tagManagementInstance.addTags(tags: dictionary.tags)
-                
                 self.loadingText = Strings.savingDictionary
-
-                SharedManagedDataController.dictionaryInstance.saveDictionary(dictionary,
-                                                                              notifyOnBlockSize: 100) {
-                    self.onViewAppear()
-                    self.loading = false
-                }
+            }
+            
+            SharedManagedDataController.tagManagementInstance.addTags(tags: dictionary.tags)
+            
+            SharedManagedDataController.dictionaryInstance.saveDictionary(dictionary,
+                                                                          notifyOnBlockSize: 100) {
+                self.onViewAppear()
+                self.loading = false
             }
         }
     }
@@ -107,7 +110,9 @@ class DictionariesViewModel: ObservableObject {
     func onDeleteRowButtonPressed(name: String) {
         loading = true
         
-        loadingText = Strings.deletingDictionary
+        DispatchQueue.main.async {
+            self.loadingText = Strings.deletingDictionary
+        }
         
         SharedManagedDataController.dictionaryInstance.deleteDictionary(name: name) { elements in
             
@@ -123,6 +128,7 @@ class DictionariesViewModel: ObservableObject {
     }
     
     @objc func onRecieveNotification(notification output: Notification) {
+                
         switch output.name {
         case Notification.Name.onSaveDictionaryUpdate:
             
@@ -130,8 +136,9 @@ class DictionariesViewModel: ObservableObject {
                 let progress = dict["progress"],
                 let maxProgress = dict["maxProgress"] {
                 
-                loadingText = Strings.savingDictionary + " " + String(progress) + "/" + String(maxProgress)
-
+                DispatchQueue.main.async {
+                    self.loadingText = Strings.savingDictionary + " " + String(progress) + "/" + String(maxProgress)
+                }
             }
         default:
             break
