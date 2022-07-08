@@ -5,13 +5,24 @@ struct CustomizableTextEditor: View {
     @Binding var highlights: [NSRange]
     @Binding var scrollPercentage: Float
     
+    @State var isLoading: Bool = true
+    
     var body: some View {
         
         GeometryReader { geometry in
-            NSScrollableTextViewRepresentable(text: $text,
-                                              size: geometry.size,
-                                              highlights: $highlights,
-                                              scrollPercentage: $scrollPercentage)
+            
+            ZStack {
+                
+                NSScrollableTextViewRepresentable(text: $text,
+                                                  size: geometry.size,
+                                                  highlights: $highlights,
+                                                  scrollPercentage: $scrollPercentage,
+                                                  isLoading: $isLoading)
+                
+                if isLoading {
+                    CustomizableLoadingView(text: Binding.constant("Loading"))
+                }
+            }
         }
     }
 }
@@ -32,8 +43,7 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     @Binding var highlights: [NSRange]
     @State var setText: Bool = false
     @Binding var scrollPercentage: Float
-
-    @Environment(\.undoManager) var undoManger
+    @Binding var isLoading: Bool
     
     @State var enableHighlights = false
     
@@ -104,6 +114,10 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     func makeCoordinator() -> TextCoordinator {
         TextCoordinator(textEditor: self)
     }
+    
+    func setLoaded() {
+        isLoading = false
+    }
 
 }
 
@@ -160,7 +174,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     }
     
     func undoManager(for view: NSTextView) -> UndoManager? {
-        parent.undoManger
+        nil
     }
     
     func textViewDidChangeSelection(_ notification: Notification) {
@@ -264,6 +278,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                     }).last {
                         self.textView?.scrollRangeToVisible(lastHighlight)
                     }
+                    
+                    self.parent.setLoaded()
                 })
             }
         }

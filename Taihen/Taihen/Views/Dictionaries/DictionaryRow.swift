@@ -33,6 +33,7 @@ struct DictionaryRow: View {
             
             Image(systemName: Strings.deleteDictionaryIcon)
                 .imageScale(.large)
+                .foregroundColor(.black)
                 .font(Font.title)
                 .onTapGesture {
                     viewModel.onDeleteRow()
@@ -41,6 +42,7 @@ struct DictionaryRow: View {
 
             Image(systemName: Strings.reorderIcon)
                 .imageScale(.large)
+                .foregroundColor(.black)
                 .font(Font.title)
                 .padding(.horizontal, Sizings.rightIconsHorizontalPadding)
 
