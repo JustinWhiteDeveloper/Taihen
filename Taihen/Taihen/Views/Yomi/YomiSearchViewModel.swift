@@ -49,17 +49,12 @@ class YomiSearchViewModel: ObservableObject {
     }
     
     func autoplayAudioIfAvailable() {
-
-        // Delay to prevent blocking layout
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-                        
-            guard let url = self.searchModel?.audioUrl,
-                  FeatureManager.instance.autoplayAudio else {
-                return
-            }
-                 
-            self.playAudioUrl(url)
+        guard let url = self.searchModel?.audioUrl,
+              FeatureManager.instance.autoplayAudio else {
+            return
         }
+             
+        self.playAudioUrl(url)
     }
     
     func playAudioUrl(_ url: URL?) {
@@ -68,27 +63,32 @@ class YomiSearchViewModel: ObservableObject {
             return
         }
         
-        do {
-            let audioData = try Data(contentsOf: url)
+        URLSession.shared.dataTask(with: url, completionHandler: { result, response, error in
+            
+            guard let audioData = result else {
+                return
+            }
             
             if audioData.count >= Sizings.maximumAudioSize {
                 return
             }
             
-            let tmpFileURL = URL(fileURLWithPath: NSTemporaryDirectory())
+            let tmpFileUrl = URL(fileURLWithPath: NSTemporaryDirectory())
                 .appendingPathComponent("audio" + NSUUID().uuidString)
                                 .appendingPathExtension("mp3")
             
-            let wasFileWritten = (try? audioData.write(to: tmpFileURL, options: [.atomic])) != nil
+            let wasFileWritten = (try? audioData.write(to: tmpFileUrl, options: [.atomic])) != nil
 
             if wasFileWritten {
-                self.player = AVPlayer(url: tmpFileURL)
-                self.player?.volume = 1.0
-                self.player?.play()
+                
+                DispatchQueue.main.async {
+                    self.player = AVPlayer(url: tmpFileUrl)
+                    self.player?.volume = 1.0
+                    self.player?.play()
+                }
             }
-        } catch {
-            print(String(describing: error))
-        }
+        }).resume()
+        
     }
     
     func onPasteChange() {
