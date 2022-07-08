@@ -25,7 +25,7 @@ Full screen Yomichan style lookup mode:
 
 Dictionaries:
 
-<img width="1200" alt="Screen Shot 2022-07-02 at 10 48 57 PM" src="https://user-images.githubusercontent.com/12780440/176997672-a86a49f8-1b59-4fe2-946f-e1b96240f841.png">
+<img width="1835" alt="Screen Shot 2022-07-08 at 12 13 01 PM" src="https://user-images.githubusercontent.com/12780440/177891592-95d83f5b-e671-49cf-897f-47621a3e277e.png">
 
 App Settings (WIP):
 
