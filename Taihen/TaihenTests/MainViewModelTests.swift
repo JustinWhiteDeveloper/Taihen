@@ -21,9 +21,9 @@ class MainViewModelTests: XCTestCase {
         let viewModel = MainViewModel(viewMode: .settings)
         let view = MainView(viewModel: viewModel)
         
-        viewModel.onViewModeSelection(viewMode: .dictionaries)
+        viewModel.onViewModeSelection(viewMode: .yomi)
         
-        XCTAssertEqual(view.viewModel.viewMode, .dictionaries)
+        XCTAssertEqual(view.viewModel.viewMode, .yomi)
     }
     
     func testGivenAMainViewModelCanNavigateToTheSettingsView() throws {
@@ -33,14 +33,5 @@ class MainViewModelTests: XCTestCase {
         viewModel.onViewModeSelection(viewMode: .settings)
         
         XCTAssertEqual(view.viewModel.viewMode, .settings)
-    }
-    
-    func testGivenAMainViewModelCanNavigateToTheLookupView() throws {
-        let viewModel = MainViewModel(viewMode: .dictionaries)
-        let view = MainView(viewModel: viewModel)
-        
-        viewModel.onViewModeSelection(viewMode: .yomi)
-        
-        XCTAssertEqual(view.viewModel.viewMode, .yomi)
     }
 }

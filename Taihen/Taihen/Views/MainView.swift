@@ -5,7 +5,7 @@ import Foundation
 class MainViewModel: ObservableObject {
     
     @Published var viewMode: ViewMode
-    @State var modes: [ViewMode] = [ViewMode.reader, ViewMode.yomi, ViewMode.dictionaries, ViewMode.settings]
+    @State var modes: [ViewMode] = [ViewMode.reader, ViewMode.yomi, ViewMode.settings]
         
     init(viewMode: ViewMode) {
         self.viewMode = viewMode
@@ -26,7 +26,7 @@ struct MainView: View {
 
         VStack {
             
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 0) {
 
                 SideMenu(modes: $viewModel.modes,
                          viewMode: $viewModel.viewMode) { viewMode in
@@ -38,8 +38,6 @@ struct MainView: View {
                     ReaderView()
                 case .yomi:
                     LookupContainerView()
-                case .dictionaries:
-                    DictionariesView()
                 default:
                     SettingsView()
                 }

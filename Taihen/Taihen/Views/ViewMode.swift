@@ -1,19 +1,16 @@
 import Foundation
 
 enum ViewMode: String, CaseIterable {
-    case reader = "Reader"
-    case yomi = "Lookup tool"
-    case dictionaries = "Dictionaries"
-    case settings = "Settings"
+    case reader
+    case yomi
+    case settings
     
     var imageName: String {
         switch self {
         case .reader:
             return "book"
         case .yomi:
-            return "list.dash"
-        case .dictionaries:
-            return "folder"
+            return "magnifyingglass"
         default:
             return "gear"
         }

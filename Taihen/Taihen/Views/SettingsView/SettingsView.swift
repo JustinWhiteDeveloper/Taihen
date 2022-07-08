@@ -35,24 +35,32 @@ struct SettingsView: View {
 
     @ObservedObject var viewModel = SettingsViewModel()
     
+    var appVersionString: String {
+        ("Version " + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""))
+    }
+    
     var body: some View {
         
-        HStack {
-            Spacer()
+        ScrollView {
             
-            List {
-                SettingsSliderView(text: Strings.readerFontSize,
-                                   sliderValue: viewModel.fontSliderValue,
-                                   maximumValue: Sizings.maximumFontSize) { value in
-                    
-                    FeatureManager.instance.readerTextSize = value
-                }
+            VStack {
                 
-                SettingsSliderView(text: Strings.dictionaryFontSize,
-                                   sliderValue: viewModel.dictionaryFontSliderValue,
-                                   maximumValue: Sizings.maximumFontSize) { value in
+                DictionariesView()
+                
+                VStack {
+                    SettingsSliderView(text: Strings.readerFontSize,
+                                       sliderValue: viewModel.fontSliderValue,
+                                       maximumValue: Sizings.maximumFontSize) { value in
+                        
+                        FeatureManager.instance.readerTextSize = value
+                    }
                     
-                    FeatureManager.instance.dictionaryTextSize = value
+                    SettingsSliderView(text: Strings.dictionaryFontSize,
+                                       sliderValue: viewModel.dictionaryFontSliderValue,
+                                       maximumValue: Sizings.maximumFontSize) { value in
+                        
+                        FeatureManager.instance.dictionaryTextSize = value
+                    }
                 }
                 
                 VStack(alignment: .center) {
@@ -68,7 +76,7 @@ struct SettingsView: View {
                 .frame(width: Sizings.standardWidth)
                 
                 VStack(alignment: .center) {
- 
+
                     Toggle(Strings.autoPlayAudioTitle, isOn: $viewModel.autoPlayAudioEnabled)
                         .onChange(of: viewModel.autoPlayAudioEnabled) { newValue in
                             
@@ -81,7 +89,7 @@ struct SettingsView: View {
                 .frame(width: Sizings.standardWidth)
                 
                 VStack(alignment: .center) {
- 
+
                     Toggle(Strings.positionScrollingTitle, isOn: $viewModel.positionScrollingEnabled)
                         .onChange(of: viewModel.positionScrollingEnabled) { newValue in
                             
@@ -94,7 +102,7 @@ struct SettingsView: View {
                 .frame(width: Sizings.standardWidth)
                 
                 VStack(alignment: .center) {
- 
+
                     Toggle(Strings.previewEnabledTitle, isOn: $viewModel.lookupPreviewEnabled)
                         .onChange(of: viewModel.lookupPreviewEnabled) { newValue in
                             
@@ -107,7 +115,7 @@ struct SettingsView: View {
                 .frame(width: Sizings.standardWidth)
                 
                 VStack(alignment: .center) {
- 
+
                     Toggle(Strings.listenForClipboardTitle, isOn: $viewModel.clipboardEnabled)
                         .onChange(of: viewModel.clipboardEnabled) { newValue in
                             
@@ -120,7 +128,7 @@ struct SettingsView: View {
                 .frame(width: Sizings.standardWidth)
                 
                 VStack(alignment: .center) {
- 
+
                     ColorPicker(selection: $viewModel.readerBackgroundColor) {
                         Label(Strings.readerBackgroundColorTitle, image: "")
                             .foregroundColor(Color.black)
@@ -133,7 +141,7 @@ struct SettingsView: View {
                 .frame(width: Sizings.standardWidth)
                 
                 VStack(alignment: .center) {
- 
+
                     Text(Strings.parserModeTitle + viewModel.parserMode.description)
                         .foregroundColor(Color.black)
 
@@ -146,12 +154,10 @@ struct SettingsView: View {
                 .padding()
                 .frame(width: Sizings.standardWidth)
                 
-                Text("Version " + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""))
+                Text(appVersionString)
                     .foregroundColor(Color.black)
+                
             }
-            
-            Spacer()
-            
         }
     }
 }

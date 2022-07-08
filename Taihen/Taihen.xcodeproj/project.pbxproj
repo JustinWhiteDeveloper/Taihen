@@ -278,6 +278,7 @@
 		17CA0BC22851D7D600507CF5 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				17CA0BC02851D7BA00507CF5 /* Dictionaries */,
 				179E50C1284A106400A575E4 /* SettingsView.swift */,
 				17487101286FFDD200FFCC08 /* SettingsSliderView.swift */,
 			);
@@ -366,7 +367,6 @@
 			isa = PBXGroup;
 			children = (
 				17CA0BC12851D7C600507CF5 /* Reader */,
-				17CA0BC02851D7BA00507CF5 /* Dictionaries */,
 				17CA0BBF2851D7A100507CF5 /* Yomi */,
 				17CA0BC22851D7D600507CF5 /* SettingsView */,
 				17DCE3572839C278001520A7 /* MainView.swift */,

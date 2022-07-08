@@ -22,9 +22,7 @@ struct SideMenu: View {
                         Image(systemName: item.imageName)
                             .foregroundColor(.gray)
                             .imageScale(.large)
-                        Text(item.rawValue)
-                            .foregroundColor(.gray)
-                            .font(.headline)
+                        
                     }
                     .onTapGesture {
                         onChangeViewMode(item)
@@ -36,6 +34,6 @@ struct SideMenu: View {
         }
         .padding(.horizontal,
                  Sizings.sideMenuHorizontalPadding)
-        .background(Colors.customGray2)
+        .background(Colors.customGray1)
     }
 }
