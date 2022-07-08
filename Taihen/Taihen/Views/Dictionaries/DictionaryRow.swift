@@ -3,7 +3,7 @@ import SwiftUI
 private enum Strings {
     static let activeToggle = NSLocalizedString("Active", comment: "")
     static let deleteDictionaryIcon = "folder.fill.badge.minus"
-    static let reorderIcon = "chevron.up.chevron.down"
+    static let reorderIcon = "equal"
 }
 
 private enum Sizings {
