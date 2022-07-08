@@ -18,6 +18,8 @@ private enum Strings {
     
     static let addButtonIcon = "plus"
     static let reviewKnownCardIcon = "paperplane"
+    static let searchButtonIcon = "magnifyingglass"
+
 }
 
 struct YomiTopKanaView: View {
@@ -78,16 +80,44 @@ struct YomiTopAccessoryView: View {
                 .imageScale(.large)
                 .font(Font.title)
                 
-                if hasSearched && !isReviewed {
-                    Image(systemName: (hasCard ? Strings.reviewKnownCardIcon : Strings.addButtonIcon))
-                        .font(Font.title)
-                        .foregroundColor(Color.black)
-                        .onTapGesture {
-                            onAnkiPrompt()
-                        }
-                        .transaction { transaction in
-                            transaction.animation = nil
-                        }
+                Image(systemName: Strings.searchButtonIcon)
+                    .font(Font.title)
+                    .foregroundColor(Color.black)
+                    .imageScale(.large)
+                    .onTapGesture {
+                        onAnkiPrompt()
+                    }
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
+                
+                if hasSearched {
+                    
+                    if hasCard && isReviewed {
+                        Image(systemName: Strings.reviewKnownCardIcon)
+                            .font(Font.title)
+                            .foregroundColor(Color.black)
+                            .imageScale(.large)
+                            .onTapGesture {
+                                onAnkiPrompt()
+                            }
+                            .transaction { transaction in
+                                transaction.animation = nil
+                            }
+                        
+                    } else if isReviewed {
+                        
+                        Image(systemName: Strings.addButtonIcon)
+                            .font(Font.title)
+                            .foregroundColor(Color.black)
+                            .imageScale(.large)
+                            .onTapGesture {
+                                onAnkiPrompt()
+                            }
+                            .transaction { transaction in
+                                transaction.animation = nil
+                            }
+                    }
                 }
             }
         }
