@@ -5,7 +5,7 @@ import Foundation
 class MainViewModel: ObservableObject {
     
     @Published var viewMode: ViewMode
-    @State var modes: [ViewMode] = [ViewMode.reader, ViewMode.yomi, ViewMode.settings]
+    @State var modes: [ViewMode] = [ViewMode.reader, ViewMode.settings]
         
     init(viewMode: ViewMode) {
         self.viewMode = viewMode
