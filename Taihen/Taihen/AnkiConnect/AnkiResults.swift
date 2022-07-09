@@ -8,6 +8,11 @@ struct AnkiQueryResult: Codable, Equatable {
 struct AnkiCardInfoResultItem: Codable, Equatable {
     var cardId: Int
     var due: Int
+    var reps: Int
+    
+    var isNewCard: Bool {
+        return reps == 0
+    }
 }
 
 struct AnkiCardInfoResult: Codable, Equatable {

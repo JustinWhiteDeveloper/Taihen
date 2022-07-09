@@ -91,9 +91,9 @@ struct YomiTopAccessoryView: View {
                         transaction.animation = nil
                     }
                 
-                if hasSearched {
+                if hasSearched && !isReviewed {
                     
-                    if hasCard && isReviewed {
+                    if hasCard {
                         Image(systemName: Strings.reviewKnownCardIcon)
                             .font(Font.title)
                             .foregroundColor(Color.black)
@@ -105,7 +105,7 @@ struct YomiTopAccessoryView: View {
                                 transaction.animation = nil
                             }
                         
-                    } else if isReviewed {
+                    } else {
                         
                         Image(systemName: Strings.addButtonIcon)
                             .font(Font.title)

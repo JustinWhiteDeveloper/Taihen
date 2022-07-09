@@ -11,7 +11,6 @@ private enum Strings {
 
 private enum Sizings {
     static let maximumAudioSize = 52288
-    static let reviewAsKnownSize = 10000
 }
 
 class YomiSearchViewModel: ObservableObject {
@@ -204,14 +203,13 @@ class YomiSearchViewModel: ObservableObject {
                 
                     DispatchQueue.main.async {
 
-                        if let dueDate = result.result
-                            .map({ $0.due })
-                            .sorted()
+                        if let resultItem = result.result
+                            .sorted(by: { $0.due < $1.due })
                             .first {
                             
                             self.hasAnkiCard = true
                             self.didSearch = true
-                            self.isReviewed = dueDate < Sizings.reviewAsKnownSize
+                            self.isReviewed = !resultItem.isNewCard
                         }
                     }
                 }

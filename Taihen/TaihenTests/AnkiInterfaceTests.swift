@@ -12,7 +12,8 @@ class TestAnkiClient: AnkiClient {
         let encoder = JSONEncoder()
 
         if ((try? decoder.decode(CardInfoTemplate.self, from: httpBody)) != nil) {
-            let result = AnkiCardInfoResult(result: [], error: nil)
+            let result = AnkiCardInfoResult(result: [AnkiCardInfoResultItem(cardId: 4, due: 2, reps: 0),
+                                                     AnkiCardInfoResultItem(cardId: 2, due: 1, reps: 1)], error: nil)
             handler(nil, try? encoder.encode(result), nil)
             return
         }
@@ -32,7 +33,8 @@ class AnkiInterfaceTests: XCTestCase {
     func testGivenAnAnkiInterfaceThenCardInfoCanBeRetrieved() throws {
         
         // given
-        let expectedCards = AnkiCardInfoResult(result: [], error: nil)
+        let expectedCards = AnkiCardInfoResult(result: [AnkiCardInfoResultItem(cardId: 4, due: 2, reps: 0),
+                                                        AnkiCardInfoResultItem(cardId: 2, due: 1, reps: 1)], error: nil)
         let interface = ConcreteAnkiInterface(client: TestAnkiClient())
         var ankiResult: AnkiCardInfoResult?
         let expectation = XCTestExpectation(description: "Wait for Response")
@@ -46,6 +48,8 @@ class AnkiInterfaceTests: XCTestCase {
         //then
         wait(for: [expectation], timeout: 1.0)
         XCTAssertEqual(expectedCards, ankiResult)
+        XCTAssertTrue(expectedCards.result[0].isNewCard)
+        XCTAssertFalse(expectedCards.result[1].isNewCard)
     }
     
     func testGivenAnBadAnkiInterfaceThenCardInfoCannotBeRetrieved() throws {
