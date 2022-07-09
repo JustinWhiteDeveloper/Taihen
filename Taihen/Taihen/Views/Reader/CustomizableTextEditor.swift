@@ -107,9 +107,12 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     private var lastSelectedRange: NSRange?
     private var lastSelectedCharIndex: Int?
 
-    private var timer: Timer?
+    private var postLayoutTimer: Timer?
+    private var postLayoutScrollTimer: Timer?
+
     private var hasDonePostLayout = false
-    
+    private var hasDonePostScrollLayout = false
+
     init(textEditor: Representable) {
         self.parent = textEditor
 
@@ -264,9 +267,11 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     
     @objc func boundsChange(_ notification: Notification) {
         
-        DispatchQueue.main.async {
-            self.parent.scrollPercentage = self.textView?.enclosingScrollView?
-                .verticalScroller?.floatValue ?? 0
+        if hasDonePostScrollLayout {
+            DispatchQueue.main.async {
+                self.parent.scrollPercentage = self.textView?.enclosingScrollView?
+                    .verticalScroller?.floatValue ?? 0
+            }
         }
         
         layoutIfNeeded()
@@ -276,8 +281,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         if !hasDonePostLayout {
 
             DispatchQueue.main.async {
-                self.timer?.invalidate()
-                self.timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
+                self.postLayoutTimer?.invalidate()
+                self.postLayoutTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
                     print("layout")
                     self.hasDonePostLayout = true
                     
@@ -291,6 +296,16 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                         }
                         
                         self.setupHighlights()
+                    }
+                })
+                
+                self.postLayoutScrollTimer?.invalidate()
+                self.postLayoutScrollTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in
+                    self.hasDonePostScrollLayout = true
+                    
+                    DispatchQueue.main.async {
+                        self.parent.scrollPercentage = self.textView?.enclosingScrollView?
+                            .verticalScroller?.floatValue ?? 0
                     }
                 })
             }

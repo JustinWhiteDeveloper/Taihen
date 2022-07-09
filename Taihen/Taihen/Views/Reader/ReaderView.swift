@@ -33,9 +33,12 @@ struct ReaderView: View {
                 
                 VStack(alignment: .trailing) {
 
-                    Text(formattedScrollPercentage)
-                        .foregroundColor(Color.black)
-                    
+                    if viewModel.scrollPercentage > 0 {
+                        Text(formattedScrollPercentage)
+                            .foregroundColor(Color.black)
+                        
+                    }
+
                     Spacer()
                 }
             }
