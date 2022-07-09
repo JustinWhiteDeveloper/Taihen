@@ -15,7 +15,8 @@ class CoreDataAppManagementDataController: AppManagementDataController {
     func saveFileContents(path: String, contents: String) {
                 
         let fetchRequest: NSFetchRequest<ManagedFileEntity> = ManagedFileEntity.fetchRequest()
-        
+        fetchRequest.predicate = NSPredicate(format: "key == %@", path.md5)
+
         if let object: ManagedFileEntity = (try? controller.container.viewContext.fetch(fetchRequest))?.first {
             object.content = contents
         } else {
@@ -25,8 +26,8 @@ class CoreDataAppManagementDataController: AppManagementDataController {
             newObject.highlights = []
             newObject.lastSelectedRange = ManagedRange.zero.stringValue()
         }
+        
         controller.save()
-
     }
     
     func saveFileContents(path: String, highlights: [ManagedRange]) {

@@ -3,9 +3,7 @@ import SwiftUI
 struct CustomizableTextEditor: View {
     @Binding var text: String
     @Binding var scrollPercentage: Float
-    
-    @State var isLoading: Bool = true
-    
+
     var body: some View {
         
         GeometryReader { geometry in
@@ -14,12 +12,8 @@ struct CustomizableTextEditor: View {
                 
                 NSScrollableTextViewRepresentable(text: $text,
                                                   size: geometry.size,
-                                                  scrollPercentage: $scrollPercentage,
-                                                  isLoading: $isLoading)
+                                                  scrollPercentage: $scrollPercentage)
                 
-                if isLoading {
-                    CustomizableLoadingView(text: Binding.constant("Loading"))
-                }
             }
         }
     }
@@ -40,7 +34,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     var size: CGSize
     @State var setText: Bool = false
     @Binding var scrollPercentage: Float
-    @Binding var isLoading: Bool
         
     func makeNSView(context: Context) -> NSScrollView {
         
@@ -96,10 +89,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     func makeCoordinator() -> TextCoordinator {
         TextCoordinator(textEditor: self)
     }
-    
-    func setLoaded() {
-        isLoading = false
-    }
 }
 
 // Using alternate naming as Coordinator still not mature..
@@ -110,18 +99,17 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     
     typealias Representable = NSScrollableTextViewRepresentable
     
-    var parent: Representable // store reference to parent
-        
-    var highlights: [NSRange] = []
-    
-    var lastSelectedRange: NSRange?
-    var lastSelectedCharIndex: Int?
-
-    var timer: Timer?
-    var hasDonePostLayout = false
-    
+    private var parent: Representable // store reference to parent
     weak var textView: NSTextView?
 
+    private var highlights: [NSRange] = []
+    
+    private var lastSelectedRange: NSRange?
+    private var lastSelectedCharIndex: Int?
+
+    private var timer: Timer?
+    private var hasDonePostLayout = false
+    
     init(textEditor: Representable) {
         self.parent = textEditor
 
@@ -169,7 +157,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
             return
         }
     
-      //  setupHighlights()
+        setupHighlights()
     }
     
     func undoManager(for view: NSTextView) -> UndoManager? {
@@ -297,14 +285,13 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                         let appData = SharedManagedDataController.appManagementInstance
                             .fileContentsByKey(key: lastActiveKey)
                         
-                        let lastRange = (appData?.lastSelectedRange ?? ManagedRange.zero).range
-                        
-                        self.textView?.scrollRangeToVisible(lastRange)
+                        if let lastRange = appData?.lastSelectedRange.range,
+                           lastRange.location < self.parent.text.count {
+                            self.textView?.scrollRangeToVisible(lastRange)
+                        }
                         
                         self.setupHighlights()
                     }
-                    
-                    self.parent.setLoaded()
                 })
             }
         }
