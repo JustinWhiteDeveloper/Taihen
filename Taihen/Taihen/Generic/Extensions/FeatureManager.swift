@@ -119,17 +119,23 @@ class FeatureManager {
     
     var readerBackgroundColor: Color {
         get {
-            let valueR = userDefaults.double(forKey: Strings.readerBackgroundColorR)
-            let valueG = userDefaults.double(forKey: Strings.readerBackgroundColorG)
-            let valueB = userDefaults.double(forKey: Strings.readerBackgroundColorB)
+            
+            let defaultComponents = Colors.customGray2.cgColor?.components ?? [0.3, 0.3, 0.3]
+            
+            let valueR = userDefaults.double(forKey: Strings.readerBackgroundColorR,
+                                             withDefaultValue: defaultComponents[0])
+            let valueG = userDefaults.double(forKey: Strings.readerBackgroundColorG,
+                                             withDefaultValue: defaultComponents[1])
+            let valueB = userDefaults.double(forKey: Strings.readerBackgroundColorB,
+                                             withDefaultValue: defaultComponents[2])
 
             return Color(red: valueR, green: valueG, blue: valueB)
         }
         
         set {
-            userDefaults.set(newValue.cgColor?.components?[0] ?? 0, forKey: Strings.readerBackgroundColorR)
-            userDefaults.set(newValue.cgColor?.components?[1] ?? 0, forKey: Strings.readerBackgroundColorG)
-            userDefaults.set(newValue.cgColor?.components?[2] ?? 0, forKey: Strings.readerBackgroundColorB)
+            userDefaults.set(newValue.cgColor?.components?[0] ?? 0.3, forKey: Strings.readerBackgroundColorR)
+            userDefaults.set(newValue.cgColor?.components?[1] ?? 0.3, forKey: Strings.readerBackgroundColorG)
+            userDefaults.set(newValue.cgColor?.components?[2] ?? 0.3, forKey: Strings.readerBackgroundColorB)
         }
     }
     
@@ -165,5 +171,9 @@ class FeatureManager {
 extension UserDefaults {
     func bool(forKey key: String, withDefaultValue defaultValue: Bool) -> Bool {
         (object(forKey: key) as? Bool) ?? defaultValue
+    }
+    
+    func double(forKey key: String, withDefaultValue defaultValue: Double) -> Double {
+        (object(forKey: key) as? Double) ?? defaultValue
     }
 }
