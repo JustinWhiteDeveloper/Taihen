@@ -15,18 +15,8 @@ Guide to Taihen:
 
 This project is not very mature with bugs, known issues and some intentional differences such as verb conjugation using a learning algorithm and which dictionary libraries are used under the hood. I hope to eventually add machine learning to improve the user experience and create the best Japanese reader app.
 
-<img width="1838" alt="Screen Shot 2022-07-08 at 11 18 20 AM" src="https://user-images.githubusercontent.com/12780440/177887250-05e7c431-0fc5-4c7b-afa2-c70dbd4827d8.png">
-
-
-Full screen Yomichan style lookup mode:
-
-<img width="1834" alt="Screen Shot 2022-07-08 at 11 23 42 AM" src="https://user-images.githubusercontent.com/12780440/177887520-d23f4a64-e4e9-4c42-b683-7e9bdb273e3b.png">
-
-
-Dictionaries:
-
-<img width="1835" alt="Screen Shot 2022-07-08 at 12 13 01 PM" src="https://user-images.githubusercontent.com/12780440/177891592-95d83f5b-e671-49cf-897f-47621a3e277e.png">
+<img width="1610" alt="Screen Shot 2022-07-09 at 1 33 51 PM" src="https://user-images.githubusercontent.com/12780440/178086802-134180c7-745e-44bd-b8e7-adcbfefe7a7d.png">
 
 App Settings (WIP):
 
-<img width="1201" alt="Screen Shot 2022-07-02 at 10 49 09 PM" src="https://user-images.githubusercontent.com/12780440/176997675-942f5483-d9e6-4a18-9cad-2fd96cb98df0.png">
+<img width="1611" alt="Screen Shot 2022-07-09 at 1 37 45 PM" src="https://user-images.githubusercontent.com/12780440/178086816-47366aaf-af5f-499a-b1a1-de128f681072.png">
