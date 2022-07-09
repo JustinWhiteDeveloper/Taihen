@@ -22,10 +22,7 @@ private enum Sizings {
 class SettingsViewModel: ObservableObject {
     @Published var fontSliderValue = FeatureManager.instance.readerTextSize
     @Published var dictionaryFontSliderValue = FeatureManager.instance.dictionaryTextSize
-    @Published var highlightsEnabled = FeatureManager.instance.enableTextHighlights
     @Published var autoPlayAudioEnabled = FeatureManager.instance.autoplayAudio
-    @Published var positionScrollingEnabled = FeatureManager.instance.positionScrolling
-    @Published var lookupPreviewEnabled = FeatureManager.instance.lookupPreviewEnabled
     @Published var readerBackgroundColor = FeatureManager.instance.readerBackgroundColor
     @Published var clipboardEnabled = FeatureManager.instance.clipboardReadingEnabled
     @Published var parserMode = FeatureManager.instance.textSelectionParserMode.rawValue
@@ -45,87 +42,58 @@ struct SettingsView: View {
             
             VStack {
                 
+                Spacer()
+                
                 DictionariesView()
                 
-                VStack {
-                    SettingsSliderView(text: Strings.readerFontSize,
-                                       sliderValue: viewModel.fontSliderValue,
-                                       maximumValue: Sizings.maximumFontSize) { value in
+                HStack {
+                    
+                    VStack {
+                        SettingsSliderView(text: Strings.readerFontSize,
+                                           sliderValue: viewModel.fontSliderValue,
+                                           maximumValue: Sizings.maximumFontSize) { value in
+                            
+                            FeatureManager.instance.readerTextSize = value
+                        }
                         
-                        FeatureManager.instance.readerTextSize = value
+                        SettingsSliderView(text: Strings.dictionaryFontSize,
+                                           sliderValue: viewModel.dictionaryFontSliderValue,
+                                           maximumValue: Sizings.maximumFontSize) { value in
+                            
+                            FeatureManager.instance.dictionaryTextSize = value
+                        }
                     }
                     
-                    SettingsSliderView(text: Strings.dictionaryFontSize,
-                                       sliderValue: viewModel.dictionaryFontSliderValue,
-                                       maximumValue: Sizings.maximumFontSize) { value in
+                    VStack {
+                        VStack(alignment: .center) {
+
+                            Toggle(Strings.autoPlayAudioTitle, isOn: $viewModel.autoPlayAudioEnabled)
+                                .onChange(of: viewModel.autoPlayAudioEnabled) { newValue in
+                                    
+                                FeatureManager.instance.autoplayAudio = newValue
+                            }
+                            .foregroundColor(Color.black)
+
+                        }
+                        .padding()
+                        .frame(width: Sizings.standardWidth)
+
+                        VStack(alignment: .center) {
+
+                            Toggle(Strings.listenForClipboardTitle, isOn: $viewModel.clipboardEnabled)
+                                .onChange(of: viewModel.clipboardEnabled) { newValue in
+                                    
+                                    FeatureManager.instance.clipboardReadingEnabled = newValue
+                            }
+                            .foregroundColor(Color.black)
+
+                        }
+                        .padding()
+                        .frame(width: Sizings.standardWidth)
                         
-                        FeatureManager.instance.dictionaryTextSize = value
                     }
-                }
-                
-                VStack(alignment: .center) {
-                    
-                    Toggle(Strings.enableHightlightsTitle, isOn: $viewModel.highlightsEnabled)
-                        .onChange(of: viewModel.highlightsEnabled) { newValue in
-                        FeatureManager.instance.enableTextHighlights = newValue
-                    }
-                    .foregroundColor(Color.black)
 
                 }
-                .padding()
-                .frame(width: Sizings.standardWidth)
-                
-                VStack(alignment: .center) {
-
-                    Toggle(Strings.autoPlayAudioTitle, isOn: $viewModel.autoPlayAudioEnabled)
-                        .onChange(of: viewModel.autoPlayAudioEnabled) { newValue in
-                            
-                        FeatureManager.instance.autoplayAudio = newValue
-                    }
-                    .foregroundColor(Color.black)
-
-                }
-                .padding()
-                .frame(width: Sizings.standardWidth)
-                
-                VStack(alignment: .center) {
-
-                    Toggle(Strings.positionScrollingTitle, isOn: $viewModel.positionScrollingEnabled)
-                        .onChange(of: viewModel.positionScrollingEnabled) { newValue in
-                            
-                        FeatureManager.instance.positionScrolling = newValue
-                    }
-                    .foregroundColor(Color.black)
-
-                }
-                .padding()
-                .frame(width: Sizings.standardWidth)
-                
-                VStack(alignment: .center) {
-
-                    Toggle(Strings.previewEnabledTitle, isOn: $viewModel.lookupPreviewEnabled)
-                        .onChange(of: viewModel.lookupPreviewEnabled) { newValue in
-                            
-                        FeatureManager.instance.lookupPreviewEnabled = newValue
-                    }
-                    .foregroundColor(Color.black)
-
-                }
-                .padding()
-                .frame(width: Sizings.standardWidth)
-                
-                VStack(alignment: .center) {
-
-                    Toggle(Strings.listenForClipboardTitle, isOn: $viewModel.clipboardEnabled)
-                        .onChange(of: viewModel.clipboardEnabled) { newValue in
-                            
-                            FeatureManager.instance.clipboardReadingEnabled = newValue
-                    }
-                    .foregroundColor(Color.black)
-
-                }
-                .padding()
-                .frame(width: Sizings.standardWidth)
                 
                 VStack(alignment: .center) {
 
@@ -140,19 +108,23 @@ struct SettingsView: View {
                 .padding()
                 .frame(width: Sizings.standardWidth)
                 
-                VStack(alignment: .center) {
+                if FeatureManager.instance.isDebugMode {
+                    VStack(alignment: .center) {
 
-                    Text(Strings.parserModeTitle + viewModel.parserMode.description)
+                        Text(Strings.parserModeTitle + viewModel.parserMode.description)
+                            .foregroundColor(Color.black)
+
+                        Button(Strings.parserChangeActionTitle) {
+                            viewModel.parserMode = FeatureManager.instance.changeToNextParserMode().rawValue
+                        }
                         .foregroundColor(Color.black)
 
-                    Button(Strings.parserChangeActionTitle) {
-                        viewModel.parserMode = FeatureManager.instance.changeToNextParserMode().rawValue
                     }
-                    .foregroundColor(Color.black)
-
+                    .padding()
+                    .frame(width: Sizings.standardWidth)
                 }
-                .padding()
-                .frame(width: Sizings.standardWidth)
+                
+                Spacer()
                 
                 Text(appVersionString)
                     .foregroundColor(Color.black)

@@ -17,7 +17,6 @@ struct ReaderView: View {
             
             HSplitView {
                 CustomizableTextEditor(text: $viewModel.text,
-                                       highlights: $viewModel.highlights,
                                        scrollPercentage: $viewModel.scrollPercentage)
                 
                 YomiSearchView()

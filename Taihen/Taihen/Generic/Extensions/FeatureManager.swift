@@ -32,45 +32,13 @@ class FeatureManager {
     
     var autoplayAudio: Bool {
         get {
+            
             userDefaults.bool(forKey: Strings.audioPlayAudio,
                               withDefaultValue: true)
         }
         
         set {
             userDefaults.set(newValue, forKey: Strings.audioPlayAudio)
-        }
-    }
-    
-    var enableTextHighlights: Bool {
-        get {
-            userDefaults.bool(forKey: Strings.enableTextHighlights,
-                              withDefaultValue: true)
-        }
-        
-        set {
-            userDefaults.set(newValue, forKey: Strings.enableTextHighlights)
-        }
-    }
-    
-    var positionScrolling: Bool {
-        get {
-            userDefaults.bool(forKey: Strings.enablePositionScrolling,
-                              withDefaultValue: false)
-        }
-        
-        set {
-            userDefaults.set(newValue, forKey: Strings.enablePositionScrolling)
-        }
-    }
-    
-    var lookupPreviewEnabled: Bool {
-        get {
-            userDefaults.bool(forKey: Strings.lookupPreviewEnabled,
-                              withDefaultValue: true)
-        }
-        
-        set {
-            userDefaults.set(newValue, forKey: Strings.lookupPreviewEnabled)
         }
     }
     
@@ -139,6 +107,14 @@ class FeatureManager {
         }
     }
     
+    var isDebugMode: Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
+    }
+    
     public enum JapaneseTextSelectionParserMode: Int {
         case Rule
         case Basic
@@ -166,6 +142,8 @@ class FeatureManager {
         textSelectionParserMode = JapaneseTextSelectionParserMode(rawValue: nextValue) ?? .Rule
         return textSelectionParserMode
     }
+    
+    
 }
 
 extension UserDefaults {

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct CustomizableTextEditor: View {
     @Binding var text: String
-    @Binding var highlights: [NSRange]
     @Binding var scrollPercentage: Float
     
     @State var isLoading: Bool = true
@@ -15,7 +14,6 @@ struct CustomizableTextEditor: View {
                 
                 NSScrollableTextViewRepresentable(text: $text,
                                                   size: geometry.size,
-                                                  highlights: $highlights,
                                                   scrollPercentage: $scrollPercentage,
                                                   isLoading: $isLoading)
                 
@@ -40,13 +38,10 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     
     @Binding var text: String
     var size: CGSize
-    @Binding var highlights: [NSRange]
     @State var setText: Bool = false
     @Binding var scrollPercentage: Float
     @Binding var isLoading: Bool
-    
-    @State var enableHighlights = false
-    
+        
     func makeNSView(context: Context) -> NSScrollView {
         
         let scrollView = NSTextView.scrollableTextView()
@@ -92,21 +87,8 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
         let coordinator = context.coordinator
         coordinator.textView = nsTextView
 
-        if nsTextView.string != text || coordinator.clearAttributedText {
+        if nsTextView.string != text {
             nsTextView.string = text
-            coordinator.clearAttributedText = false
-        }
-        
-        if enableHighlights {
-
-            for range in highlights {
-                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: Colors.highlight]
-                nsTextView.textStorage?.addAttributes(attrs, range: range)
-            }
-
-            DispatchQueue.main.async {
-                enableHighlights = false
-            }
         }
     }
 
@@ -130,16 +112,13 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     
     var parent: Representable // store reference to parent
         
+    var highlights: [NSRange] = []
+    
     var lastSelectedRange: NSRange?
     var lastSelectedCharIndex: Int?
 
-    // Don't continually set text as it overrides Attributed text
-    var clearAttributedText: Bool = true
-    
     var timer: Timer?
     var hasDonePostLayout = false
-
-    var lastActiveKey: String?
     
     weak var textView: NSTextView?
 
@@ -152,9 +131,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                                                selector: #selector(onReadFile(_:)),
                                                name: Notification.Name.onReadFile,
                                                object: nil)
-        
-        lastActiveKey = UserDefaults.standard.lastOpenedFileKey
-        
+
         layoutIfNeeded()
     }
     
@@ -168,13 +145,31 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         parent.text = nsTextView.string
     }
     
+    private func setupHighlights() {
+        
+        if let lastActiveKey = UserDefaults.standard.lastOpenedFileKey {
+            let data = SharedManagedDataController.appManagementInstance.fileContentsByKey(key: lastActiveKey)
+            
+            let managedHighlights: [ManagedRange] = data?.highlights ?? []
+            highlights = managedHighlights.map({ $0.range })
+        }
+        
+        let lastHighlightLocation = highlights.map({ $0.location}).sorted().last ?? 0
+        
+        if lastHighlightLocation <= parent.text.count {
+            for range in highlights {
+                let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: Colors.highlight]
+                textView?.textStorage?.addAttributes(attrs, range: range)
+            }
+        }
+    }
+    
     @objc func onReadFile(_ notification: Notification) {
         guard notification.name == Notification.Name.onReadFile else {
             return
         }
-        
-        lastActiveKey = UserDefaults.standard.lastOpenedFileKey
-        parent.enableHighlights = true
+    
+      //  setupHighlights()
     }
     
     func undoManager(for view: NSTextView) -> UndoManager? {
@@ -190,7 +185,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         DispatchQueue.main.async {
             self.parent.scrollPercentage = nsTextView.enclosingScrollView?.verticalScroller?.floatValue ?? 0
         }
-
+        
         let text = nsTextView.selectedText
 
         lastSelectedRange = nsTextView.selectedRange()
@@ -200,7 +195,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
             
         } else if let position = lastSelectedRange?.location {
             
-            if let range = parent.highlights.first(where: { $0.contains(position) }) {
+            if let range = highlights.first(where: { $0.contains(position) }) {
                 let text = nsTextView.string[range]
                 
                 NotificationCenter.default.post(name: Notification.Name.onSelectionChange,
@@ -208,14 +203,16 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
             }
         }
         
-        guard let lastActiveKey = lastActiveKey,
+        guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey,
               let lastSelectedRange = lastSelectedRange else {
             return
         }
         
+        let range =  ManagedRange(start: lastSelectedRange.location,
+                                  length: 0)
+        
         SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey,
-                                                                           lastSelectedRange: ManagedRange(start: lastSelectedRange.location,
-                                                                                                                                length: 0))
+                                                                           lastSelectedRange: range)
     }
     
     func textView(_ view: NSTextView, menu: NSMenu, for event: NSEvent, at charIndex: Int) -> NSMenu? {
@@ -230,25 +227,23 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     @objc func highlightItem() {
         
         if let range = lastSelectedRange {
-            parent.highlights.append(range)
+            highlights.append(range)
+            textView?.textStorage?.addAttributes([NSAttributedString.Key.backgroundColor: Colors.highlight],
+                                                 range: range)
         }
         
-        parent.enableHighlights = true
-
         updateHighlightsOnDisk()
     }
     
     @objc func unhighlightItem() {
         
-        for (index, item) in parent.highlights.enumerated() {
+        for (index, item) in highlights.enumerated() {
             if let lastCharIndex = lastSelectedCharIndex,
                 item.contains(lastCharIndex) {
-                parent.highlights.remove(at: index)
+                highlights.remove(at: index)
                 textView?.textStorage?.removeAttribute(NSAttributedString.Key.backgroundColor, range: item)
             }
         }
-        
-        parent.enableHighlights = true
     }
     
     @objc func copyItem() {
@@ -269,11 +264,11 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     
     func updateHighlightsOnDisk() {
         
-        guard let lastActiveKey = lastActiveKey else {
+        guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
             return
         }
         
-        let mappedValues = parent.highlights.map({ ManagedRange(start: $0.location, length: $0.length) })
+        let mappedValues = highlights.map({ ManagedRange(start: $0.location, length: $0.length) })
         
         SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey,
                                                                            highlights: mappedValues)
@@ -281,11 +276,10 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     
     @objc func boundsChange(_ notification: Notification) {
         
-        guard let nsScrollview = (notification.object as? NSClipView)?.enclosingScrollView else {
-            return
+        DispatchQueue.main.async {
+            self.parent.scrollPercentage = self.textView?.enclosingScrollView?
+                .verticalScroller?.floatValue ?? 0
         }
-        
-        parent.scrollPercentage = nsScrollview.verticalScroller?.floatValue ?? 0
         
         layoutIfNeeded()
     }
@@ -298,9 +292,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                 self.timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
                     print("layout")
                     self.hasDonePostLayout = true
-                    self.parent.enableHighlights = true
                     
-                    if let lastActiveKey = self.lastActiveKey {
+                    if let lastActiveKey = UserDefaults.standard.lastOpenedFileKey {
                         let appData = SharedManagedDataController.appManagementInstance
                             .fileContentsByKey(key: lastActiveKey)
                         
@@ -308,10 +301,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                         
                         self.textView?.scrollRangeToVisible(lastRange)
                         
-                        DispatchQueue.main.async {
-                            self.parent.scrollPercentage = self.textView?.enclosingScrollView?
-                                .verticalScroller?.floatValue ?? 0
-                        }
+                        self.setupHighlights()
                     }
                     
                     self.parent.setLoaded()

@@ -5,9 +5,7 @@ import SwiftUI
 class ReaderViewModel: ObservableObject {
     
     @Published var text = ""
-    @Published var highlights: [NSRange] = []
     @Published var scrollPercentage: Float = 0.0
-    @Published var lookupPreviewEnabled = FeatureManager.instance.lookupPreviewEnabled
 
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(onRecieveNotification(notification:)),
@@ -24,7 +22,7 @@ class ReaderViewModel: ObservableObject {
         switch output.name {
         case Notification.Name.onReadFile:
             
-            update()
+            updateFile()
 
         default:
             break
@@ -32,19 +30,16 @@ class ReaderViewModel: ObservableObject {
     }
     
     func onAppear() {
-        update()
+        updateFile()
     }
     
-    func update() {
+    func updateFile() {
         guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
             return
         }
         
         let data = SharedManagedDataController.appManagementInstance.fileContentsByKey(key: lastActiveKey)
-        
-        let marks: [ManagedRange] = data?.highlights ?? []
-        
+                
         text = data?.content ?? ""
-        highlights = marks.map({ $0.range })
     }
 }
