@@ -118,7 +118,6 @@ struct NSScrollableTextViewRepresentable: NSViewRepresentable {
     func setLoaded() {
         isLoading = false
     }
-
 }
 
 // Using alternate naming as Coordinator still not mature..
@@ -210,7 +209,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
         
         return ReaderRightClickMenu(target: self,
                                     highlightSelector: #selector(highlightItem),
-                                    unhighlightSelector: #selector(unhighlightItem))
+                                    unhighlightSelector: #selector(unhighlightItem),
+                                    copySelector: #selector(copyItem))
     }
     
     @objc func highlightItem() {
@@ -230,14 +230,27 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
             if let lastCharIndex = lastSelectedCharIndex,
                 item.contains(lastCharIndex) {
                 parent.highlights.remove(at: index)
+                textView?.textStorage?.removeAttribute(NSAttributedString.Key.backgroundColor, range: item)
             }
         }
         
         parent.enableHighlights = true
-
-        clearAttributedText = true
-                            
-        updateHighlightsOnDisk()
+    }
+    
+    @objc func copyItem() {
+        
+        guard let selectedText = textView?.selectedText else {
+            return
+        }
+        
+        CopyboardEnabler.enabled = false
+        
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(selectedText, forType: .string)
+                        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            CopyboardEnabler.enabled = true
+        }
     }
     
     func updateHighlightsOnDisk() {
