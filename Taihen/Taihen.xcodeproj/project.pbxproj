@@ -58,7 +58,7 @@
 		17F935C42843500200513356 /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C32843500200513356 /* ReaderView.swift */; };
 		17F935C6284358AE00513356 /* YomiSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C5284358AE00513356 /* YomiSearchView.swift */; };
 		17F935CB2843797500513356 /* AppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CA2843797500513356 /* AppManagementDataController.swift */; };
-		17F935D02846026200513356 /* RealmAppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CF2846026200513356 /* RealmAppManagementDataController.swift */; };
+		17F935D02846026200513356 /* CoreDataAppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CF2846026200513356 /* CoreDataAppManagementDataController.swift */; };
 		17F935D3284603E000513356 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D2284603E000513356 /* Realm */; };
 		17F935D5284603E000513356 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 17F935D4284603E000513356 /* RealmSwift */; };
 		17F935D9284756CA00513356 /* ClipboardDescriptionFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935D8284756CA00513356 /* ClipboardDescriptionFormatter.swift */; };
@@ -141,7 +141,7 @@
 		17F935C32843500200513356 /* ReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderView.swift; sourceTree = "<group>"; };
 		17F935C5284358AE00513356 /* YomiSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiSearchView.swift; sourceTree = "<group>"; };
 		17F935CA2843797500513356 /* AppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagementDataController.swift; sourceTree = "<group>"; };
-		17F935CF2846026200513356 /* RealmAppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAppManagementDataController.swift; sourceTree = "<group>"; };
+		17F935CF2846026200513356 /* CoreDataAppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAppManagementDataController.swift; sourceTree = "<group>"; };
 		17F935D8284756CA00513356 /* ClipboardDescriptionFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardDescriptionFormatter.swift; sourceTree = "<group>"; };
 		17F96C522876A570004B3197 /* TaihenSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenSearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,7 +188,7 @@
 		1748711A287111A800FFCC08 /* AppManagement */ = {
 			isa = PBXGroup;
 			children = (
-				17F935CF2846026200513356 /* RealmAppManagementDataController.swift */,
+				17F935CF2846026200513356 /* CoreDataAppManagementDataController.swift */,
 				17F935CA2843797500513356 /* AppManagementDataController.swift */,
 				174870FF286FFB5500FFCC08 /* RealmFileState.swift */,
 			);
@@ -597,7 +597,7 @@
 				1748713028714CFE00FFCC08 /* TagView.swift in Sources */,
 				17CA0BC62851DE1C00507CF5 /* ViewMode.swift in Sources */,
 				17F935CB2843797500513356 /* AppManagementDataController.swift in Sources */,
-				17F935D02846026200513356 /* RealmAppManagementDataController.swift in Sources */,
+				17F935D02846026200513356 /* CoreDataAppManagementDataController.swift in Sources */,
 				1748711E28712A8200FFCC08 /* PersistenceContainer.swift in Sources */,
 				1748710428701CF700FFCC08 /* NotificationExtensions.swift in Sources */,
 				17F935D9284756CA00513356 /* ClipboardDescriptionFormatter.swift in Sources */,

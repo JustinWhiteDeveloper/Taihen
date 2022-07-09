@@ -4,6 +4,7 @@ import TaihenDictionarySupport
 
 protocol AppManagementDataController {
     func saveFileContents(path: String, contents: String)
-    func saveFileContents(path: String, highLights: [ManagedHighlight])
+    func saveFileContents(path: String, highlights: [ManagedRange])
+    func saveFileContents(path: String, lastSelectedRange: ManagedRange)
     func fileContentsByKey(key: String) -> ManagedFileState?
 }

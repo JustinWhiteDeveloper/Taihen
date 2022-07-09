@@ -139,6 +139,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     var timer: Timer?
     var hasDonePostLayout = false
 
+    var lastActiveKey: String?
+    
     weak var textView: NSTextView?
 
     init(textEditor: Representable) {
@@ -150,6 +152,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                                                selector: #selector(onReadFile(_:)),
                                                name: Notification.Name.onReadFile,
                                                object: nil)
+        
+        lastActiveKey = UserDefaults.standard.lastOpenedFileKey
         
         layoutIfNeeded()
     }
@@ -169,6 +173,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
             return
         }
         
+        lastActiveKey = UserDefaults.standard.lastOpenedFileKey
         parent.enableHighlights = true
     }
     
@@ -178,7 +183,7 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     
     func textViewDidChangeSelection(_ notification: Notification) {
     
-        guard let nsTextView = notification.object as? NSTextView else {
+        guard let nsTextView = notification.object as? NSTextView, hasDonePostLayout else {
             return
         }
         
@@ -202,6 +207,15 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                                                 object: text)
             }
         }
+        
+        guard let lastActiveKey = lastActiveKey,
+              let lastSelectedRange = lastSelectedRange else {
+            return
+        }
+        
+        SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey,
+                                                                           lastSelectedRange: ManagedRange(start: lastSelectedRange.location,
+                                                                                                                                length: 0))
     }
     
     func textView(_ view: NSTextView, menu: NSMenu, for event: NSEvent, at charIndex: Int) -> NSMenu? {
@@ -254,14 +268,15 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
     }
     
     func updateHighlightsOnDisk() {
-        let mappedValues = parent.highlights.map({ ManagedHighlight(start: $0.location, length: $0.length) })
         
-        guard let lastActiveKey = UserDefaults.standard.lastOpenedFileKey else {
+        guard let lastActiveKey = lastActiveKey else {
             return
         }
         
+        let mappedValues = parent.highlights.map({ ManagedRange(start: $0.location, length: $0.length) })
+        
         SharedManagedDataController.appManagementInstance.saveFileContents(path: lastActiveKey,
-                                                                           highLights: mappedValues)
+                                                                           highlights: mappedValues)
     }
     
     @objc func boundsChange(_ notification: Notification) {
@@ -285,11 +300,18 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                     self.hasDonePostLayout = true
                     self.parent.enableHighlights = true
                     
-                    if let lastHighlight = self.parent.highlights.sorted(by: { range1, range2 in
+                    if let lastActiveKey = self.lastActiveKey {
+                        let appData = SharedManagedDataController.appManagementInstance
+                            .fileContentsByKey(key: lastActiveKey)
                         
-                        range1.location < range2.location
-                    }).last {
-                        self.textView?.scrollRangeToVisible(lastHighlight)
+                        let lastRange = (appData?.lastSelectedRange ?? ManagedRange.zero).range
+                        
+                        self.textView?.scrollRangeToVisible(lastRange)
+                        
+                        DispatchQueue.main.async {
+                            self.parent.scrollPercentage = self.textView?.enclosingScrollView?
+                                .verticalScroller?.floatValue ?? 0
+                        }
                     }
                     
                     self.parent.setLoaded()

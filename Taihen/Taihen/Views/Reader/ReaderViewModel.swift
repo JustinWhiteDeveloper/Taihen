@@ -42,7 +42,7 @@ class ReaderViewModel: ObservableObject {
         
         let data = SharedManagedDataController.appManagementInstance.fileContentsByKey(key: lastActiveKey)
         
-        let marks: [ManagedHighlight] = data?.highlights ?? []
+        let marks: [ManagedRange] = data?.highlights ?? []
         
         text = data?.content ?? ""
         highlights = marks.map({ $0.range })

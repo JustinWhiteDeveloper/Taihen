@@ -3,30 +3,12 @@ import Realm
 import RealmSwift
 import Foundation
 
-class RealmFileState: Object {
+struct ManagedRange: Codable {
     
-    //Path hash
-    @Persisted(primaryKey: true) var _key: String
-    @Persisted var content: String
-    @Persisted var highlights: List<String>
-}
-
-extension RealmFileState {
-    var managedObject: ManagedFileState {
-        
-        var managedHighlights: [ManagedHighlight] = []
-        
-        for highlight in highlights {
-            if let castedObject = ManagedHighlight.from(stringValue: highlight) {
-                managedHighlights.append(castedObject)
-            }
-        }
-        
-        return ManagedFileState(key: _key, content: content, highlights: managedHighlights)
+    static var zero: ManagedRange {
+        ManagedRange(start: 0, length: 0)
     }
-}
-
-struct ManagedHighlight: Codable {
+    
     var start: Int
     var length: Int
     
@@ -43,7 +25,7 @@ struct ManagedHighlight: Codable {
         }
     }
     
-    static func from(stringValue: String) -> ManagedHighlight? {
+    static func from(stringValue: String) -> ManagedRange? {
         
         let decoder = JSONDecoder()
         
@@ -53,7 +35,7 @@ struct ManagedHighlight: Codable {
                 return nil
             }
             
-            let result = try decoder.decode(ManagedHighlight.self, from: data)
+            let result = try decoder.decode(ManagedRange.self, from: data)
             return result
         } catch {
             return nil
@@ -68,5 +50,6 @@ struct ManagedHighlight: Codable {
 struct ManagedFileState {
     var key: String
     var content: String
-    var highlights: [ManagedHighlight]
+    var highlights: [ManagedRange]
+    var lastSelectedRange: ManagedRange
 }
