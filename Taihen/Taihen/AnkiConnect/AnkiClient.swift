@@ -100,4 +100,37 @@ class ConcreteAnkiInterface: AnkiInterface {
             callback()
         }
     }
+    
+    func addCard(frontContent: String,
+                 backContent: String,
+                 audioUrl: String?,
+                 callback: @escaping (AnkiAddCardResult?) -> Void) {
+        
+        guard let url = URL(string: address) else {
+            callback(nil)
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.POST.rawValue
+        
+        let template = AddCardTemplate.addCard(deckName: "Taihen",
+                                               modelName: "Basic",
+                                               frontContent: frontContent,
+                                               backContent: backContent,
+                                               audioURL: audioUrl)
+        
+        let encoder = JSONEncoder()
+        request.httpBody = try? encoder.encode(template)
+
+        client.sendRequest(request: request) {(response, data, error) in
+            guard let data = data else {
+                callback(nil)
+                return
+            }
+            
+            let jsonDecoder = JSONDecoder()
+            callback(try? jsonDecoder.decode(AnkiAddCardResult.self, from: data))
+        }
+    }
 }

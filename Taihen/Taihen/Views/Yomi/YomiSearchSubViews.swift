@@ -56,6 +56,7 @@ struct YomiTopAccessoryView: View {
     var onCopyButtonPressed: () -> Void
     var onPlayAudio: (_ url: URL?) -> Void
     var onAnkiPrompt: () -> Void
+    var onAddAnkiCard: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: Sizings.topAccessoryViewSpacing) {
@@ -91,9 +92,9 @@ struct YomiTopAccessoryView: View {
                         transaction.animation = nil
                     }
                 
-                if hasSearched && !isReviewed {
+                if hasSearched {
                     
-                    if hasCard {
+                    if hasCard && !isReviewed {
                         Image(systemName: Strings.reviewKnownCardIcon)
                             .font(Font.title)
                             .foregroundColor(Color.black)
@@ -105,14 +106,14 @@ struct YomiTopAccessoryView: View {
                                 transaction.animation = nil
                             }
                         
-                    } else {
+                    } else if !hasCard {
                         
                         Image(systemName: Strings.addButtonIcon)
                             .font(Font.title)
                             .foregroundColor(Color.black)
                             .imageScale(.large)
                             .onTapGesture {
-                                onAnkiPrompt()
+                                onAddAnkiCard()
                             }
                             .transaction { transaction in
                                 transaction.animation = nil

@@ -61,6 +61,9 @@ struct YomiSearchView: View {
                                     },
                                                          onAnkiPrompt: {
                                         viewModel.onAnkiPromptButtonPressed()
+                                    },
+                                                         onAddAnkiCard: {
+                                        viewModel.onAnkiAddCardButtonPressed()
                                     })
                                 }
                                 .padding(.top)

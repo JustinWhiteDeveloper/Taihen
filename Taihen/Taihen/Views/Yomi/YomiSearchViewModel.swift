@@ -141,7 +141,7 @@ class YomiSearchViewModel: ObservableObject {
                 self.lastResultCount = resultCount
                 self.finishedLoadingDelay = false
                 
-                self.onSearchFinished(results: results)
+                self.onSearchFinished(results: results.searchModel)
             }
         }
     }
@@ -157,14 +157,14 @@ class YomiSearchViewModel: ObservableObject {
         }
     }
 
-    func onSearchFinished(results: TaihenSearchResult) {
+    func onSearchFinished(results: TaihenSearchViewModel?) {
         
         print("didSearch")
         
         self.didSearch = false
         self.hasAnkiCard = false
 
-        guard let searchModel = results.searchModel else {
+        guard let searchModel = results else {
             return
         }
         
@@ -249,7 +249,25 @@ class YomiSearchViewModel: ObservableObject {
         let searcher = ConcreteAnkiInterface()
         let searchText = hasAnkiCard ? searchModel.ankiExpression : lastSearchString
         
-        searcher.browseQuery(expression: searchText) {}
+        searcher.browseQuery(expression: searchText) {
+            self.onSearchFinished(results: self.searchModel)
+        }
+    }
+    
+    func onAnkiAddCardButtonPressed() {
+        
+        guard let searchModel = self.searchModel else {
+            return
+        }
+        
+        let searcher = ConcreteAnkiInterface()
+        searcher.addCard(frontContent: searchModel.furiganaTerm,
+                         backContent: searchModel.clipboardDescription,
+                         audioUrl: searchModel.audioUrl?.absoluteString) { result in
+            print(result.debugDescription)
+            
+            self.onSearchFinished(results: self.searchModel)
+        }
     }
     
     var audioUrl: URL? {

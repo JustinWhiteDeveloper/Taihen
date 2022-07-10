@@ -19,3 +19,8 @@ struct AnkiCardInfoResult: Codable, Equatable {
     var result: [AnkiCardInfoResultItem]
     var error: String?
 }
+
+struct AnkiAddCardResult: Codable, Equatable {
+    var result: Int?
+    var error: String?
+}

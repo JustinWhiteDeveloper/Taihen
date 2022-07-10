@@ -52,7 +52,7 @@ public struct TaihenSearchViewModel: Equatable {
         let expressionPart = (furiganaTerm.containsKanji &&
                               furiganaTerm.containsHiragana) ? "*\(furiganaTerm)*" : furiganaTerm
         
-        return "\"expression:\(expressionPart)\" OR \"Focus:\(groupTerm)\" OR \"Meaning:\(groupTerm)\""
+        return "\"expression:\(expressionPart)\" OR \"Focus:\(groupTerm)\" OR \"Meaning:\(groupTerm)\" OR \"Front:\(expressionPart)\""
     }
     
     public var clipboardDescription: String {
