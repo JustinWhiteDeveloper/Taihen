@@ -274,6 +274,7 @@ class YomiSearchViewModel: ObservableObject {
         
         let newCardDescription = searchModel.clipboardDescription
             .replacingOccurrences(of: "\n", with: "<br>")
+            .replacingOccurrences(of: "\t", with: "&nbsp;&nbsp;&nbsp;&nbsp;")
         
         let searcher = ConcreteAnkiInterface()
         searcher.addCard(frontContent: searchModel.furiganaTerm,
