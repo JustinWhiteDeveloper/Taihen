@@ -75,10 +75,20 @@ extension AddCardTemplate {
                                                   fields: ["Back"])
         }
         
+        var fields: [String: String] = [:]
+        
+        if modelName == "Basic" {
+            fields = ["Front": frontContent,
+                      "Back": backContent]
+        } else {
+            fields = ["Expression": frontContent,
+                      "Meaning": backContent]
+        }
+        
+
         let params = AddCardParams(note: AddCardDetailParams(deckName: deckName,
                                                              modelName: modelName,
-                                                             fields: ["Front": frontContent,
-                                                                      "Back": backContent],
+                                                             fields: fields,
                                                              tags: ["taihen"],
                                                              audio: audioParams))
         

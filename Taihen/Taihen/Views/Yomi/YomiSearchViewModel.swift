@@ -257,7 +257,8 @@ class YomiSearchViewModel: ObservableObject {
         
         let searcher = ConcreteAnkiInterface()
         
-        let newCardTerm = (searchModel.furiganaTerm + " OR " + searchModel.groupTerm)
+        let newCardTerm = (searchModel.furiganaTerm +
+                           " OR " + searchModel.groupTerm)
         
         let searchText = hasAnkiCard ? searchModel.ankiExpression : newCardTerm
         
@@ -277,7 +278,13 @@ class YomiSearchViewModel: ObservableObject {
             .replacingOccurrences(of: "\t", with: "&nbsp;&nbsp;&nbsp;&nbsp;")
         
         let searcher = ConcreteAnkiInterface()
-        searcher.addCard(frontContent: searchModel.furiganaTerm,
+        
+        let tempDeckName = "Review-Final-Just-Immerse-Now"
+        let tempModelName = "MIA Japanese"
+        
+        searcher.addCard(deckName: tempDeckName,
+                         modelName: tempModelName,
+                         frontContent: searchModel.furiganaTerm,
                          backContent: newCardDescription,
                          audioUrl: searchModel.audioUrl?.absoluteString) { result in
             print(result.debugDescription)

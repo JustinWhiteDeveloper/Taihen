@@ -101,7 +101,9 @@ class ConcreteAnkiInterface: AnkiInterface {
         }
     }
     
-    func addCard(frontContent: String,
+    func addCard(deckName: String,
+                 modelName: String,
+                 frontContent: String,
                  backContent: String,
                  audioUrl: String?,
                  callback: @escaping (AnkiAddCardResult?) -> Void) {
@@ -114,8 +116,8 @@ class ConcreteAnkiInterface: AnkiInterface {
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.POST.rawValue
         
-        let template = AddCardTemplate.addCard(deckName: "Taihen",
-                                               modelName: "Basic",
+        let template = AddCardTemplate.addCard(deckName: deckName,
+                                               modelName: modelName,
                                                frontContent: frontContent,
                                                backContent: backContent,
                                                audioURL: audioUrl)
