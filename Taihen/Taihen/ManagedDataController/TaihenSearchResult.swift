@@ -52,7 +52,17 @@ public struct TaihenSearchViewModel: Equatable {
         let expressionPart = (furiganaTerm.containsKanji &&
                               furiganaTerm.containsHiragana) ? "*\(furiganaTerm)*" : furiganaTerm
         
-        return "\"expression:\(expressionPart)\" OR \"Focus:\(groupTerm)\" OR \"Meaning:\(groupTerm)\" OR \"Front:\(expressionPart)\""
+        let expressionCardSearch = "\"expression:\(expressionPart)\""
+        let focusCardSearch = "\"Focus:\(groupTerm)\""
+        let meaningCardSearch = "\"Meaning:\(groupTerm)\""
+        let frontCardSearch = "\"Front:\(expressionPart)\""
+        let tangoCardSearch = "\"Tango_Vocab_Furigana:\(expressionPart)\""
+        
+        return expressionCardSearch + " OR "
+        + focusCardSearch + " OR "
+        + meaningCardSearch + " OR "
+        + frontCardSearch + " OR "
+        + tangoCardSearch
     }
     
     public var clipboardDescription: String {

@@ -103,8 +103,17 @@ class YomiSearchViewModel: ObservableObject {
         if latestItem.containsValidJapaneseCharacters == false || latestItem.contains("expression") {
             return
         }
+        
+        var search = latestItem
+        
+        // De-furiganize. Note: Need to move to furigana module, Handle multiple braces i.e A[a]B[b]
+        if let leftIdx = search.firstIndex(of: "["),
+            let rightIdx = search.firstIndex(of: "]"),
+            rightIdx > leftIdx {
+            search = String(search.prefix(upTo: leftIdx) + search.suffix(from: search.index(after: rightIdx)))
+        }
     
-        onSearch(value: latestItem)
+        onSearch(value: search)
     }
     
     func onSearch(value: String) {
@@ -247,7 +256,10 @@ class YomiSearchViewModel: ObservableObject {
         }
         
         let searcher = ConcreteAnkiInterface()
-        let searchText = hasAnkiCard ? searchModel.ankiExpression : lastSearchString
+        
+        let newCardTerm = (searchModel.furiganaTerm + " OR " + searchModel.groupTerm)
+        
+        let searchText = hasAnkiCard ? searchModel.ankiExpression : newCardTerm
         
         searcher.browseQuery(expression: searchText) {
             self.onSearchFinished(results: self.searchModel)
@@ -260,9 +272,12 @@ class YomiSearchViewModel: ObservableObject {
             return
         }
         
+        let newCardDescription = searchModel.clipboardDescription
+            .replacingOccurrences(of: "\n", with: "<br>")
+        
         let searcher = ConcreteAnkiInterface()
         searcher.addCard(frontContent: searchModel.furiganaTerm,
-                         backContent: searchModel.clipboardDescription,
+                         backContent: newCardDescription,
                          audioUrl: searchModel.audioUrl?.absoluteString) { result in
             print(result.debugDescription)
             
