@@ -7,6 +7,7 @@ import JapaneseConjugation
 extension RealmManagedDictionaryController: DictionarySearchController {
     
     func searchValue(value: String,
+                     timeAlreadyTaken: Double = 0,
                      callback: @escaping (Bool, Double, TaihenSearchResult, Int) -> Void) {
                 
         print("search")
@@ -86,7 +87,7 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                 }
             }
             
-            let lookupTime = abs(time.timeIntervalSinceNow)
+            let lookupTime = abs(time.timeIntervalSinceNow) + timeAlreadyTaken
             
             //retry if possible
             if resultCount == 0 && search.count > 1 {
@@ -107,8 +108,13 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                     // Note: Should be for every term
                     if let firstTerm = kanaMap.terms.first {
                         
-                        self.searchValue(value: firstTerm) { finished, timeTaken, selectedTerms, resultCount in
-                            callback(finished, timeTaken + lookupTime, selectedTerms, resultCount)
+                        self.searchValue(value: firstTerm,
+                                         timeAlreadyTaken: lookupTime) { finished,
+                            timeTaken,
+                            selectedTerms,
+                            resultCount in
+                            
+                            callback(finished, timeTaken, selectedTerms, resultCount)
                         }
                         
                         return
@@ -122,8 +128,13 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                             if self.realm.object(ofType: RealmTerm.self,
                                                  forPrimaryKey: activeDict + searchItem + "0") != nil {
 
-                                self.searchValue(value: searchItem) { finished, timeTaken, selectedTerms, resultCount in
-                                    callback(finished, timeTaken + lookupTime, selectedTerms, resultCount)
+                                self.searchValue(value: searchItem,
+                                                 timeAlreadyTaken: lookupTime) { finished,
+                                    timeTaken,
+                                    selectedTerms,
+                                    resultCount in
+                                    
+                                    callback(finished, timeTaken, selectedTerms, resultCount)
                                 }
                                 
                                 return
@@ -134,8 +145,13 @@ extension RealmManagedDictionaryController: DictionarySearchController {
                 
                 search.removeLast()
                 
-                self.searchValue(value: search) { finished, timeTaken, selectedTerms, resultCount in
-                    callback(finished, timeTaken + lookupTime, selectedTerms, resultCount)
+                self.searchValue(value: search,
+                                 timeAlreadyTaken: lookupTime) { finished,
+                    timeTaken,
+                    selectedTerms,
+                    resultCount in
+                    
+                    callback(finished, timeTaken, selectedTerms, resultCount)
                 }
                 
             } else {

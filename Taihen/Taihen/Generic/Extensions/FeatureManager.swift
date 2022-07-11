@@ -143,7 +143,6 @@ class FeatureManager {
         return textSelectionParserMode
     }
     
-    
 }
 
 extension UserDefaults {
