@@ -279,11 +279,8 @@ class YomiSearchViewModel: ObservableObject {
         
         let searcher = ConcreteAnkiInterface()
         
-        let tempDeckName = "Review-Final-Just-Immerse-Now"
-        let tempModelName = "MIA Japanese"
-        
-        searcher.addCard(deckName: tempDeckName,
-                         modelName: tempModelName,
+        searcher.addCard(deckName: FeatureManager.instance.deckName,
+                         modelName: FeatureManager.instance.noteType,
                          frontContent: searchModel.furiganaTerm,
                          backContent: newCardDescription,
                          audioUrl: searchModel.audioUrl?.absoluteString) { result in

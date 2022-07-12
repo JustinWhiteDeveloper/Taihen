@@ -18,6 +18,10 @@ private enum Strings {
     static let readerBackgroundColorB = "BGColorB"
     
     static let japaneseParserMode = "JPParserMode"
+    
+    static let deckName = "DeckName"
+    static let noteType = "noteType"
+
 }
 
 private enum Sizings {
@@ -55,13 +59,8 @@ class FeatureManager {
     
     var readerTextSize: Double {
         get {
-            let value = userDefaults.double(forKey: Strings.readerTextSize)
-            
-            if value == 0 {
-                return Sizings.defaultTextSize
-            } else {
-                return value
-            }
+            userDefaults.double(forKey: Strings.readerTextSize,
+                                        withDefaultValue: Sizings.defaultTextSize)
         }
         
         set {
@@ -71,17 +70,32 @@ class FeatureManager {
     
     var dictionaryTextSize: Double {
         get {
-            let value = userDefaults.double(forKey: Strings.dictionaryTextSize)
-            
-            if value == 0 {
-                return Sizings.defaultTextSize
-            } else {
-                return value
-            }
+            userDefaults.double(forKey: Strings.dictionaryTextSize,
+                                        withDefaultValue: Sizings.defaultTextSize)
         }
         
         set {
             userDefaults.set(newValue, forKey: Strings.dictionaryTextSize)
+        }
+    }
+    
+    var deckName: String {
+        get {
+            userDefaults.string(forKey: Strings.deckName, withDefaultValue: "Default")
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: Strings.deckName)
+        }
+    }
+    
+    var noteType: String {
+        get {
+            userDefaults.string(forKey: Strings.noteType, withDefaultValue: "Basic")
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: Strings.noteType)
         }
     }
     
@@ -152,5 +166,9 @@ extension UserDefaults {
     
     func double(forKey key: String, withDefaultValue defaultValue: Double) -> Double {
         (object(forKey: key) as? Double) ?? defaultValue
+    }
+    
+    func string(forKey key: String, withDefaultValue defaultValue: String) -> String {
+        (object(forKey: key) as? String) ?? defaultValue
     }
 }
