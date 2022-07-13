@@ -1,6 +1,6 @@
 # Taihen - A Yomichan OSX Fan project
 
-## !NOTE: This project is not ready for general use. Several serious bugs are fixed daily and the readme is incomplete!.
+## !NOTE: This project is quite 'new' and has numerous known issues but slowly getting better.
 
 [![UnitTestRunner](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/JustinWhiteDeveloper/Taihen/actions/workflows/test.yml)
 
