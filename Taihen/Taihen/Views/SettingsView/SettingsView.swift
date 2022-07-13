@@ -19,6 +19,7 @@ private enum Strings {
 private enum Sizings {
     static let standardWidth: CGFloat = 400.0
     static let maximumFontSize = 60.0
+    static let maximumTextFieldWidth = 400.0
 }
 
 class SettingsViewModel: ObservableObject {
@@ -62,12 +63,14 @@ struct SettingsView: View {
                         .onChange(of: ankiDeckName) { newValue in
                             FeatureManager.instance.deckName = newValue
                         }
-                    
+                        .frame(maxWidth: Sizings.maximumTextFieldWidth)
+
                     TextField("", text: $ankiNoteType)
                         .foregroundColor(Color.black)
                         .onChange(of: ankiNoteType) { newValue in
                             FeatureManager.instance.noteType = newValue
                         }
+                        .frame(maxWidth: Sizings.maximumTextFieldWidth)
                 }
                 
                 HStack {
