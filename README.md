@@ -16,8 +16,6 @@ Guide to Taihen (WIP):
 ### Taihen:<img width="1731" alt="Screen Shot 2022-07-13 at 10 13 39 PM" src="https://user-images.githubusercontent.com/12780440/178710185-bdf00bf0-b726-463c-a745-ed7e73a7e4d6.png">
 
 
-<img width="1610" alt="Screen Shot 2022-07-09 at 1 33 51 PM" src="https://user-images.githubusercontent.com/12780440/178086802-134180c7-745e-44bd-b8e7-adcbfefe7a7d.png">
-
 App Settings:
 
 <img width="1738" alt="Screen Shot 2022-07-13 at 9 56 53 PM" src="https://user-images.githubusercontent.com/12780440/178706859-469963d1-d402-4772-8500-f09cffcdbdce.png">
