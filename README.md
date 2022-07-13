@@ -19,6 +19,7 @@ This project is not very mature with bugs, known issues and some intentional dif
 
 <img width="1610" alt="Screen Shot 2022-07-09 at 1 33 51 PM" src="https://user-images.githubusercontent.com/12780440/178086802-134180c7-745e-44bd-b8e7-adcbfefe7a7d.png">
 
-App Settings (WIP):
+App Settings:
 
-<img width="1278" alt="Screen Shot 2022-07-09 at 8 03 13 PM" src="https://user-images.githubusercontent.com/12780440/178097341-7ce1400f-89a9-48e4-8fcc-d915466b32da.png">
+<img width="1738" alt="Screen Shot 2022-07-13 at 9 56 53 PM" src="https://user-images.githubusercontent.com/12780440/178706859-469963d1-d402-4772-8500-f09cffcdbdce.png">
+
