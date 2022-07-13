@@ -17,12 +17,13 @@ private enum Strings {
     
     static let ankiDeckNameTitle = NSLocalizedString("Anki Deck Name", comment: "")
     static let ankiNoteTypeNameTitle = NSLocalizedString("Anki Note Type", comment: "")
+    static let ankiCardSearchTitle = NSLocalizedString("Anki Card Search Expression", comment: "")
 }
 
 private enum Sizings {
     static let standardWidth: CGFloat = 400.0
     static let maximumFontSize = 60.0
-    static let maximumTextFieldWidth = 400.0
+    static let maximumTextFieldWidth = 600.0
 }
 
 class SettingsViewModel: ObservableObject {
@@ -40,7 +41,8 @@ struct SettingsView: View {
     
     @State var ankiDeckName: String = FeatureManager.instance.deckName
     @State var ankiNoteType: String = FeatureManager.instance.noteType
-    
+    @State var ankiCardSearchExpression: String = FeatureManager.instance.cardSearchExpression
+
     var appVersionString: String {
         ("Version " + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""))
     }
@@ -83,6 +85,18 @@ struct SettingsView: View {
                             .foregroundColor(Color.black)
                             .onChange(of: ankiNoteType) { newValue in
                                 FeatureManager.instance.noteType = newValue
+                            }
+                            .frame(maxWidth: Sizings.maximumTextFieldWidth)
+                    }
+                    
+                    HStack {
+                        Text(Strings.ankiCardSearchTitle)
+                            .foregroundColor(Color.black)
+                        
+                        TextField("", text: $ankiCardSearchExpression)
+                            .foregroundColor(Color.black)
+                            .onChange(of: ankiCardSearchExpression) { newValue in
+                                FeatureManager.instance.cardSearchExpression = newValue
                             }
                             .frame(maxWidth: Sizings.maximumTextFieldWidth)
                     }

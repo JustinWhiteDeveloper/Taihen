@@ -49,20 +49,13 @@ public struct TaihenSearchViewModel: Equatable {
         let furiganaTerm = self.furiganaTerm
         
         //If contains hiragana and kanji then use *contains*
-        let expressionPart = (furiganaTerm.containsKanji &&
+        let expression = (furiganaTerm.containsKanji &&
                               furiganaTerm.containsHiragana) ? "*\(furiganaTerm)*" : furiganaTerm
         
-        let expressionCardSearch = "\"expression:\(expressionPart)\""
-        let focusCardSearch = "\"Focus:\(groupTerm)\""
-        let meaningCardSearch = "\"Meaning:\(groupTerm)\""
-        let frontCardSearch = "\"Front:\(expressionPart)\""
-        let tangoCardSearch = "\"Tango_Vocab_Furigana:\(expressionPart)\""
-        
-        return expressionCardSearch + " OR "
-        + focusCardSearch + " OR "
-        + meaningCardSearch + " OR "
-        + frontCardSearch + " OR "
-        + tangoCardSearch
+        return FeatureManager.instance.cardSearchExpression
+            .replacingOccurrences(of: "%e", with: expression)
+            .replacingOccurrences(of: "%g", with: groupTerm)
+
     }
     
     public var clipboardDescription: String {

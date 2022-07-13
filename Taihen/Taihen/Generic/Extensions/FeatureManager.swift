@@ -21,6 +21,7 @@ private enum Strings {
     
     static let deckName = "DeckName"
     static let noteType = "noteType"
+    static let cardSearchExpression = "cardSearch"
 
 }
 
@@ -96,6 +97,17 @@ class FeatureManager {
         
         set {
             userDefaults.set(newValue, forKey: Strings.noteType)
+        }
+    }
+    
+    var cardSearchExpression: String {
+        get {
+            userDefaults.string(forKey: Strings.cardSearchExpression,
+                                withDefaultValue: "\"Meaning:%e\" OR \"Front:%e\" OR \"Focus:%g\"")
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: Strings.cardSearchExpression)
         }
     }
     
