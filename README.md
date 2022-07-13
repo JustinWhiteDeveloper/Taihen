@@ -13,9 +13,7 @@ Taihen (working name) is a Fan project porting much of the functionality of Yomi
 Guide to Taihen:
 [Getting Started With Taihen](Docs/GettingStarted.md)
 
-### Project Description:
-
-This project is not very mature with bugs, known issues and some intentional differences such as verb conjugation using a learning algorithm and which dictionary libraries are used under the hood. I hope to eventually add machine learning to improve the user experience and create the best Japanese reader app.
+### Taihen:
 
 <img width="1610" alt="Screen Shot 2022-07-09 at 1 33 51 PM" src="https://user-images.githubusercontent.com/12780440/178086802-134180c7-745e-44bd-b8e7-adcbfefe7a7d.png">
 
