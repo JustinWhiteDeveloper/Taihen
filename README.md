@@ -10,10 +10,11 @@ Taihen (working name) is a Fan project porting much of the functionality of Yomi
 
 ### Getting Started:
 
-Guide to Taihen:
+Guide to Taihen (WIP):
 [Getting Started With Taihen](Docs/GettingStarted.md)
 
-### Taihen:
+### Taihen:<img width="1731" alt="Screen Shot 2022-07-13 at 10 13 39 PM" src="https://user-images.githubusercontent.com/12780440/178710185-bdf00bf0-b726-463c-a745-ed7e73a7e4d6.png">
+
 
 <img width="1610" alt="Screen Shot 2022-07-09 at 1 33 51 PM" src="https://user-images.githubusercontent.com/12780440/178086802-134180c7-745e-44bd-b8e7-adcbfefe7a7d.png">
 
