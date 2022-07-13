@@ -37,7 +37,6 @@ struct DictionariesView: View {
                     viewModel.selectFolder()
                 })
                 .foregroundColor(.black)
-                .frame(maxWidth: 400.0)
 
                 Button(Strings.deleteAllButtonTitle,
                        action: {
@@ -45,7 +44,6 @@ struct DictionariesView: View {
                     viewModel.onDeleteAllButtonPressed()
                 })
                 .foregroundColor(.black)
-                .frame(maxWidth: 400.0)
             }
             
             List {
