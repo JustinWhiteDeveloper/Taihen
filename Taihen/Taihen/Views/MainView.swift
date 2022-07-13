@@ -45,12 +45,5 @@ struct MainView: View {
 
         }
         .background(Colors.customGray1)
-        .onAppear {
-            let tempDeckName = "Review-Final-Just-Immerse-Now"
-            let tempModelName = "MIA Japanese"
-            
-            FeatureManager.instance.deckName = tempDeckName
-            FeatureManager.instance.noteType = tempModelName
-        }
     }
 }

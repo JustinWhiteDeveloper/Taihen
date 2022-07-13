@@ -12,6 +12,8 @@ private enum Strings {
     static let readerBackgroundColorTitle = NSLocalizedString("Reader background color", comment: "")
     static let parserModeTitle = NSLocalizedString("Parser Mode ", comment: "")
     static let parserChangeActionTitle = NSLocalizedString("Change JP Mode", comment: "")
+    
+    static let ankiSettingsTitle = NSLocalizedString("Anki Setup", comment: "")
 }
 
 private enum Sizings {
@@ -32,6 +34,9 @@ struct SettingsView: View {
 
     @ObservedObject var viewModel = SettingsViewModel()
     
+    @State var ankiDeckName: String = FeatureManager.instance.deckName
+    @State var ankiNoteType: String = FeatureManager.instance.noteType
+    
     var appVersionString: String {
         ("Version " + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""))
     }
@@ -45,6 +50,25 @@ struct SettingsView: View {
                 Spacer()
                 
                 DictionariesView()
+                
+                VStack {
+                    
+                    Text(Strings.ankiSettingsTitle)
+                        .foregroundColor(Color.black)
+                        .font(.title)
+
+                    TextField("", text: $ankiDeckName)
+                        .foregroundColor(Color.black)
+                        .onChange(of: ankiDeckName) { newValue in
+                            FeatureManager.instance.deckName = newValue
+                        }
+                    
+                    TextField("", text: $ankiNoteType)
+                        .foregroundColor(Color.black)
+                        .onChange(of: ankiNoteType) { newValue in
+                            FeatureManager.instance.noteType = newValue
+                        }
+                }
                 
                 HStack {
                     
