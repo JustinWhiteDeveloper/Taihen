@@ -14,6 +14,9 @@ private enum Strings {
     static let parserChangeActionTitle = NSLocalizedString("Change JP Mode", comment: "")
     
     static let ankiSettingsTitle = NSLocalizedString("Anki Setup", comment: "")
+    
+    static let ankiDeckNameTitle = NSLocalizedString("Anki Deck Name", comment: "")
+    static let ankiNoteTypeNameTitle = NSLocalizedString("Anki Note Type", comment: "")
 }
 
 private enum Sizings {
@@ -57,20 +60,32 @@ struct SettingsView: View {
                     Text(Strings.ankiSettingsTitle)
                         .foregroundColor(Color.black)
                         .font(.title)
+                    
+                    Spacer()
 
-                    TextField("", text: $ankiDeckName)
-                        .foregroundColor(Color.black)
-                        .onChange(of: ankiDeckName) { newValue in
-                            FeatureManager.instance.deckName = newValue
-                        }
-                        .frame(maxWidth: Sizings.maximumTextFieldWidth)
+                    HStack {
+                        Text(Strings.ankiDeckNameTitle)
+                            .foregroundColor(Color.black)
 
-                    TextField("", text: $ankiNoteType)
-                        .foregroundColor(Color.black)
-                        .onChange(of: ankiNoteType) { newValue in
-                            FeatureManager.instance.noteType = newValue
-                        }
-                        .frame(maxWidth: Sizings.maximumTextFieldWidth)
+                        TextField("", text: $ankiDeckName)
+                            .foregroundColor(Color.black)
+                            .onChange(of: ankiDeckName) { newValue in
+                                FeatureManager.instance.deckName = newValue
+                            }
+                            .frame(maxWidth: Sizings.maximumTextFieldWidth)
+                    }
+
+                    HStack {
+                        Text(Strings.ankiNoteTypeNameTitle)
+                            .foregroundColor(Color.black)
+                        
+                        TextField("", text: $ankiNoteType)
+                            .foregroundColor(Color.black)
+                            .onChange(of: ankiNoteType) { newValue in
+                                FeatureManager.instance.noteType = newValue
+                            }
+                            .frame(maxWidth: Sizings.maximumTextFieldWidth)
+                    }
                 }
                 
                 HStack {
