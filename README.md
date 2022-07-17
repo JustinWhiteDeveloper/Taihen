@@ -13,7 +13,7 @@ This project is currently quite new: [Known Issues](Docs/KnownIssues.md)
 
 ### Getting Started:
 
-Guide to Taihen (WIP):
+Guide to Taihen:
 [Getting Started With Taihen](Docs/GettingStarted.md)
 
 ### Text Reader:
