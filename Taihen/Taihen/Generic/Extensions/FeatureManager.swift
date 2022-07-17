@@ -9,7 +9,8 @@ private enum Strings {
     
     static let lookupPreviewEnabled = "LookupPreviewEnabled"
     static let clipboardEnabled = "ClipboardEnabled"
-    
+    static let userFinishedIntro = "UserFinishedIntro"
+
     static let readerTextSize = "ReaderSize"
     static let dictionaryTextSize = "MiniReaderSize"
     
@@ -55,6 +56,17 @@ class FeatureManager {
         
         set {
             userDefaults.set(newValue, forKey: Strings.clipboardEnabled)
+        }
+    }
+    
+    var userHasFinishedIntro: Bool {
+        get {
+            userDefaults.bool(forKey: Strings.userFinishedIntro,
+                              withDefaultValue: false)
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: Strings.userFinishedIntro)
         }
     }
     

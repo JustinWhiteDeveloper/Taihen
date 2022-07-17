@@ -5,7 +5,6 @@ import AVFoundation
 import LaughingOctoAdventure
 
 private enum Strings {
-    static let loadingText = NSLocalizedString("Loading", comment: "")
     static let noResultsText = NSLocalizedString("No results", comment: "")
 }
 
@@ -22,6 +21,7 @@ struct YomiSearchView: View {
         VStack {
             
             if viewModel.hasBooted == false {
+                
                 YomiIntroView()
             } else {
 
@@ -101,6 +101,7 @@ struct YomiSearchView: View {
                             Color.clear
                             Text(Strings.noResultsText)
                                 .foregroundColor(Color.black)
+                                .font(.title)
                                 .padding()
                         }
                     }

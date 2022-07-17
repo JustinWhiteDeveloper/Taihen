@@ -249,9 +249,9 @@
 				174871392872B90700FFCC08 /* YomiSearchViewModel.swift */,
 				1748713128714E0600FFCC08 /* YomiSearchSubViews.swift */,
 				1748712D2871499C00FFCC08 /* YomiSearchBar.swift */,
+				17F817902883C59700AC96C9 /* YomiIntroView.swift */,
 				1748712F28714CFE00FFCC08 /* TagView.swift */,
 				177BA8E32842137A004DC312 /* LookupContainerView.swift */,
-				17F817902883C59700AC96C9 /* YomiIntroView.swift */,
 			);
 			path = Yomi;
 			sourceTree = "<group>";
@@ -778,7 +778,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.3.6;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = justin.Taihen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -806,7 +806,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.3.6;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = justin.Taihen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Justin Taihen Developer ID Profile";

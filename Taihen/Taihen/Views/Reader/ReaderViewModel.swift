@@ -40,6 +40,10 @@ class ReaderViewModel: ObservableObject {
         
         let data = SharedManagedDataController.appManagementInstance.fileContentsByKey(key: lastActiveKey)
                 
-        text = data?.content ?? ""
+        guard let content = data?.content, content.count < 500000 else {
+            return
+        }
+                
+        text = content
     }
 }

@@ -76,6 +76,8 @@ class DictionariesViewModel: ObservableObject {
                                                                           notifyOnBlockSize: 100) {
                 self.onViewAppear()
                 self.loading = false
+                
+                FeatureManager.instance.userHasFinishedIntro = true
             }
         }
     }

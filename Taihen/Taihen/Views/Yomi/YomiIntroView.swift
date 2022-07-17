@@ -3,8 +3,10 @@ import SwiftUI
 private enum Strings {
     static let copyTextTitle = NSLocalizedString("Welcome to Taihen.",
                                                  comment: "")
-    
-    static let copyTextBody = NSLocalizedString("Before you get started head over to the Dictionaries tab to add new dictionaries.",
+
+    static let copyTextBody = NSLocalizedString("""
+    Before you get started head over to the Dictionaries tab to add new dictionaries.
+    """,
                                                 comment: "")
 
     static let switchToDictionariesButtonTitle = NSLocalizedString("Switch to dictionaries tab", comment: "")
@@ -18,14 +20,16 @@ struct YomiIntroView: View {
                 .foregroundColor(Color.black)
                 .font(.title)
             
-            Text(Strings.copyTextBody)
-                .foregroundColor(Color.black)
-                .font(.title)
-            
-            Button(Strings.switchToDictionariesButtonTitle) {
+            if !FeatureManager.instance.userHasFinishedIntro {
+                Text(Strings.copyTextBody)
+                    .foregroundColor(Color.black)
+                    .font(.title)
                 
-                NotificationCenter.default.post(name: Notification.Name.onSwitchToDictionaryView,
-                                                object: nil)
+                Button(Strings.switchToDictionariesButtonTitle) {
+                    
+                    NotificationCenter.default.post(name: Notification.Name.onSwitchToDictionaryView,
+                                                    object: nil)
+                }
             }
         }
         .frame(maxHeight: .infinity)

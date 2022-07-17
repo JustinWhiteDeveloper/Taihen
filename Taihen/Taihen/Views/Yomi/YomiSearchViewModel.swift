@@ -6,7 +6,6 @@ import LaughingOctoAdventure
 
 private enum Strings {
     static let loadingText = NSLocalizedString("Loading", comment: "")
-    static let noResultsText = NSLocalizedString("No results", comment: "")
 }
 
 private enum Sizings {
