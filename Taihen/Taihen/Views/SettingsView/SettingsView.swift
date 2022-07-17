@@ -57,9 +57,7 @@ struct SettingsView: View {
             VStack {
                 
                 Spacer()
-                
-                DictionariesView()
-                
+
                 VStack {
                     
                     Text(Strings.ankiSettingsTitle)
@@ -202,5 +200,6 @@ struct SettingsView: View {
 
             }
         }
+        .frame(maxWidth: .infinity)
     }
 }

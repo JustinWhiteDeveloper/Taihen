@@ -55,6 +55,7 @@
 		17DCE35A2839C27A001520A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE3592839C27A001520A7 /* Assets.xcassets */; };
 		17DCE35D2839C27A001520A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DCE35C2839C27A001520A7 /* Preview Assets.xcassets */; };
 		17DCE3742839C27B001520A7 /* TaihenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCE3732839C27B001520A7 /* TaihenUITests.swift */; };
+		17F817912883C59700AC96C9 /* YomiIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F817902883C59700AC96C9 /* YomiIntroView.swift */; };
 		17F935C42843500200513356 /* ReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C32843500200513356 /* ReaderView.swift */; };
 		17F935C6284358AE00513356 /* YomiSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935C5284358AE00513356 /* YomiSearchView.swift */; };
 		17F935CB2843797500513356 /* AppManagementDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F935CA2843797500513356 /* AppManagementDataController.swift */; };
@@ -138,6 +139,7 @@
 		17DCE36F2839C27B001520A7 /* TaihenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaihenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DCE3732839C27B001520A7 /* TaihenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaihenUITests.swift; sourceTree = "<group>"; };
 		17DCE3752839C27B001520A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17F817902883C59700AC96C9 /* YomiIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiIntroView.swift; sourceTree = "<group>"; };
 		17F935C32843500200513356 /* ReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderView.swift; sourceTree = "<group>"; };
 		17F935C5284358AE00513356 /* YomiSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiSearchView.swift; sourceTree = "<group>"; };
 		17F935CA2843797500513356 /* AppManagementDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagementDataController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				1748712D2871499C00FFCC08 /* YomiSearchBar.swift */,
 				1748712F28714CFE00FFCC08 /* TagView.swift */,
 				177BA8E32842137A004DC312 /* LookupContainerView.swift */,
+				17F817902883C59700AC96C9 /* YomiIntroView.swift */,
 			);
 			path = Yomi;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				174871172871112E00FFCC08 /* TagManagementDataController.swift in Sources */,
 				17DCE3582839C278001520A7 /* MainView.swift in Sources */,
 				1748713A2872B90800FFCC08 /* YomiSearchViewModel.swift in Sources */,
+				17F817912883C59700AC96C9 /* YomiIntroView.swift in Sources */,
 				17CA0BC82851DE3E00507CF5 /* SideMenu.swift in Sources */,
 				1748712C2871492E00FFCC08 /* AnkiResults.swift in Sources */,
 				17487102286FFDD200FFCC08 /* SettingsSliderView.swift in Sources */,

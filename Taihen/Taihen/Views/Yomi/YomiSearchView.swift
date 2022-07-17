@@ -22,7 +22,7 @@ struct YomiSearchView: View {
         VStack {
             
             if viewModel.hasBooted == false {
-                Color.clear
+                YomiIntroView()
             } else {
 
                 if viewModel.isLoading {

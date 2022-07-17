@@ -7,9 +7,8 @@ private enum Strings {
     static let defaultLoadingText = NSLocalizedString("loading", comment: "")
     static let addButtonTitle = NSLocalizedString("Add New Dictionary", comment: "")
     static let deleteAllButtonTitle = NSLocalizedString("Delete All Dictionaries", comment: "")
-}
-
-private enum Sizings {
+    
+    static let noDictionariesTitle = NSLocalizedString("No dictionaries found", comment: "")
 }
 
 struct DictionariesView: View {
@@ -18,52 +17,68 @@ struct DictionariesView: View {
     
     var body: some View {
         
-        Text(Strings.title)
-            .font(.title)
-            .foregroundColor(.black)
-            .onAppear {
-                viewModel.onViewAppear()
-            }
-    
-        if viewModel.loading {
-            CustomizableLoadingView(text: $viewModel.loadingText)
-        
-        } else {
-            HStack {
-                Spacer()
-                
-                Button(Strings.addButtonTitle,
-                       action: {
-                    viewModel.selectFolder()
-                })
+        VStack {
+            Text(Strings.title)
+                .font(.title)
                 .foregroundColor(.black)
 
-                Button(Strings.deleteAllButtonTitle,
-                       action: {
-                    
-                    viewModel.onDeleteAllButtonPressed()
-                })
-                .foregroundColor(.black)
-            }
+            if viewModel.loading {
+                CustomizableLoadingView(text: $viewModel.loadingText)
             
-            List {
-                ForEach(viewModel.items, id: \.name) { item in
+            } else {
+                HStack {
+                    Spacer()
                     
-                    DictionaryRow(viewModel: DictionaryRowViewModel(model: item,
-                                                                    onDelete: { name in
-                        viewModel.onDeleteRowButtonPressed(name: name)
-                    }))
+                    Button(Strings.addButtonTitle,
+                           action: {
+                        viewModel.selectFolder()
+                    })
+                    .foregroundColor(.black)
+                    .padding()
+
+                    if $viewModel.items.count > 0 {
+                        Button(Strings.deleteAllButtonTitle,
+                               action: {
+                            
+                            viewModel.onDeleteAllButtonPressed()
+                        })
+                        .foregroundColor(.black)
+                        .padding()
+
+                    }
                 }
-                .onMove(perform: viewModel.onMove)
-                .background(Color.clear)
+                
+                if $viewModel.items.count == 0 {
+                    Text(Strings.noDictionariesTitle)
+                        .font(.title)
+                        .foregroundColor(.black)
+                } else {
+                    List {
+                        ForEach(viewModel.items, id: \.name) { item in
+                            
+                            DictionaryRow(viewModel: DictionaryRowViewModel(model: item,
+                                                                            onDelete: { name in
+                                viewModel.onDeleteRowButtonPressed(name: name)
+                            }))
+                        }
+                        .onMove(perform: viewModel.onMove)
+                        .background(Color.clear)
+                    }
+                    .background(Color.clear)
+
+                    .onChange(of: viewModel.items) { newValue in
+                        viewModel.onUpdateOrderOfDictionaries()
+                    }
+                }
             }
-            .background(Color.clear)
-            .frame(minHeight: 300.0, maxHeight: .infinity)
-            .onChange(of: viewModel.items) { newValue in
-                viewModel.onUpdateOrderOfDictionaries()
-            }
-        
         }
+        .frame(maxWidth: .infinity,
+                maxHeight: .infinity,
+               alignment: .topLeading)
+        .onAppear {
+            viewModel.onViewAppear()
+        }
+
     }
 }
 

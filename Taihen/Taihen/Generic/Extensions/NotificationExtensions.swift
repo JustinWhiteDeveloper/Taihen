@@ -5,6 +5,9 @@ extension Notification.Name {
     static let onReadFile = Notification.Name("onReadFile")
     static let onSaveDictionaryUpdate = Notification.Name("onDictionarySaveUpdate")
     static let onDeleteDictionaryUpdate = Notification.Name("onDictionaryDeleteUpdate")
+    
+    static let onSwitchToDictionaryView = Notification.Name("onSwitchToDictionaryView")
+
 }
 
 extension Notification {
