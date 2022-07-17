@@ -22,3 +22,37 @@
 #### Changes will then be written to disk
 
 <img width="223" alt="Screen Shot 2022-07-17 at 5 52 37 PM" src="https://user-images.githubusercontent.com/12780440/179385867-7c73db57-6889-450f-9b45-9026c4e5a86a.png">
+
+#### If the process is successful you should see your dictionary
+<img width="1283" alt="Screen Shot 2022-07-17 at 6 04 28 PM" src="https://user-images.githubusercontent.com/12780440/179386211-e4774da3-503b-4865-9108-c21896b921f1.png">
+
+#### Navigate bar to the reader view using the left tab
+
+<img width="47" alt="Screen Shot 2022-07-17 at 6 10 36 PM" src="https://user-images.githubusercontent.com/12780440/179386337-e7bf44f9-1b34-4746-b298-7217f6217c21.png">
+
+
+### Reading a file
+<img width="1285" alt="Screen Shot 2022-07-17 at 6 04 41 PM" src="https://user-images.githubusercontent.com/12780440/179386212-7b3e603d-b896-4736-be29-ee2bfa1a9b11.png">
+
+#### From the contextual menu click 'Open'
+<img width="128" alt="Screen Shot 2022-07-17 at 6 04 48 PM" src="https://user-images.githubusercontent.com/12780440/179386214-282fd50a-79ce-4c52-9741-c975903a8d41.png">
+
+#### Select a txt file
+<img width="171" alt="Screen Shot 2022-07-17 at 6 05 08 PM" src="https://user-images.githubusercontent.com/12780440/179386235-894b4a34-f804-4ea4-a61d-db7a4befcc5a.png">
+
+#### Confirm
+<img width="89" alt="Screen Shot 2022-07-17 at 6 05 18 PM" src="https://user-images.githubusercontent.com/12780440/179386236-189ebe30-7fab-4522-8f09-c1b5376d3e00.png">
+
+#### The file should be opened
+<img width="1291" alt="Screen Shot 2022-07-17 at 6 05 27 PM" src="https://user-images.githubusercontent.com/12780440/179386239-f8bff26c-aea1-483a-bee4-2f0d2751e4cb.png">
+
+#### Select content to confirm the dictionary is working as intended
+<img width="1289" alt="Screen Shot 2022-07-17 at 6 05 36 PM" src="https://user-images.githubusercontent.com/12780440/179386241-3d8d3431-1a1e-407a-a14f-06d82ae27744.png">
+
+
+### Highlight words
+
+<img width="230" alt="Screen Shot 2022-07-17 at 6 08 08 PM" src="https://user-images.githubusercontent.com/12780440/179386265-161d241e-6848-47d5-8551-adf4cc6379b7.png">
+
+<img width="107" alt="Screen Shot 2022-07-17 at 6 08 16 PM" src="https://user-images.githubusercontent.com/12780440/179386268-d6e328f7-0ade-4d87-9a4b-bdb5d7566b41.png">
+
