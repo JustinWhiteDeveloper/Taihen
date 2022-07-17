@@ -1,7 +1,11 @@
 import Foundation
 import TaihenDictionarySupport
 
-protocol DictionaryDataReaderWriterController {
+protocol ManagedControllerResetSupport {
+    func reset(callback: @escaping () -> Void)
+}
+
+protocol DictionaryDataReaderWriterController: ManagedControllerResetSupport {
     func saveDictionary(_ dictionary: TaihenCustomDictionary, notifyOnBlockSize: Int, callback: @escaping () -> Void)
     func updateDictionaryActive(viewModel model: ManagedDictionaryViewModel, active: Bool)
     func updateDictionaryOrder(viewModels items: [ManagedDictionaryViewModel])
@@ -9,7 +13,7 @@ protocol DictionaryDataReaderWriterController {
     func deleteAllDictionaries(callback: @escaping () -> Void)
 }
 
-protocol DictionaryReloadController {
+protocol DictionaryReloadController: ManagedControllerResetSupport {
     func dictionaryViewModels() -> [ManagedDictionaryViewModel]?
     func reloadDictionaries()
 }

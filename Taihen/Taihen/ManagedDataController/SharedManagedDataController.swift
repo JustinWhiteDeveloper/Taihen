@@ -4,5 +4,5 @@ import Foundation
 class SharedManagedDataController {
     static var tagManagementInstance: TagManagementDataController = CoreDataTagManagementDataController()
     static var appManagementInstance: AppManagementDataController = CoreDataAppManagementDataController()
-    static var dictionaryInstance = RealmManagedDictionaryController()
+    static var dictionaryInstance: DictionaryDataReaderWriterController & DictionaryReloadController & DictionarySearchController = RealmManagedDictionaryController()
 }

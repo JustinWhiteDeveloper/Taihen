@@ -346,6 +346,12 @@ extension RealmManagedDictionaryController: DictionaryReloadController {
     }
 }
 
+extension RealmManagedDictionaryController: ManagedControllerResetSupport {
+    func reset(callback: @escaping () -> Void) {
+        
+    }
+}
+
 extension TaihenCustomDictionaryTerm {
     
     static func from(entity: RealmTerm) -> TaihenCustomDictionaryTerm {

@@ -141,7 +141,8 @@ class YomiSearchViewModel: ObservableObject {
         
         SharedManagedDataController
             .dictionaryInstance
-            .searchValue(value: value) { finished, timeTaken, results, resultCount in
+            .searchValue(value: value,
+                         timeAlreadyTaken: 0.0) { finished, timeTaken, results, resultCount in
             
             DispatchQueue.main.async {
                 self.lookupTime = timeTaken

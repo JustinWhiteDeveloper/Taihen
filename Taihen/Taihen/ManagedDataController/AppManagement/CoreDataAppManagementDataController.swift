@@ -77,3 +77,9 @@ class CoreDataAppManagementDataController: AppManagementDataController {
                                     ManagedRange.from(stringValue: lastSelectedRange) ?? ManagedRange.zero)
     }
 }
+
+extension CoreDataAppManagementDataController: ManagedControllerResetSupport {
+    func reset(callback: @escaping () -> Void) {
+        
+    }
+}

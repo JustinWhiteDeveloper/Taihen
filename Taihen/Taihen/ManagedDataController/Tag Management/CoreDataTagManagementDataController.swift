@@ -62,3 +62,9 @@ class CoreDataTagManagementDataController: TagManagementDataController {
         return colorScheme.integerToColor(integerValue)
     }
 }
+
+extension CoreDataTagManagementDataController: ManagedControllerResetSupport {
+    func reset(callback: @escaping () -> Void) {
+        
+    }
+}
