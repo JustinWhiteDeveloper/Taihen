@@ -18,6 +18,9 @@ struct DictionariesView: View {
     var body: some View {
         
         VStack {
+            
+            Spacer()
+            
             Text(Strings.title)
                 .font(.title)
                 .foregroundColor(.black)
@@ -27,7 +30,6 @@ struct DictionariesView: View {
             
             } else {
                 HStack {
-                    Spacer()
                     
                     Button(Strings.addButtonTitle,
                            action: {
@@ -35,7 +37,9 @@ struct DictionariesView: View {
                     })
                     .foregroundColor(.black)
                     .padding()
-
+                    
+                    Spacer()
+                    
                     if $viewModel.items.count > 0 {
                         Button(Strings.deleteAllButtonTitle,
                                action: {
