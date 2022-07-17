@@ -235,6 +235,8 @@ class TextCoordinator: NSObject, NSTextViewDelegate {
                 textView?.textStorage?.removeAttribute(NSAttributedString.Key.backgroundColor, range: item)
             }
         }
+        
+        updateHighlightsOnDisk()
     }
     
     @objc func copyItem() {

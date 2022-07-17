@@ -78,6 +78,7 @@ struct DictionariesView: View {
             Spacer()
 
         }
+        .padding()
         .frame(maxWidth: .infinity,
                 maxHeight: .infinity,
                alignment: .topLeading)
