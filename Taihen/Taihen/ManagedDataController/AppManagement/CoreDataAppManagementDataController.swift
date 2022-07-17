@@ -80,6 +80,7 @@ class CoreDataAppManagementDataController: AppManagementDataController {
 
 extension CoreDataAppManagementDataController: ManagedControllerResetSupport {
     func reset(callback: @escaping () -> Void) {
-        
+        controller.deleteAll()
+        callback()
     }
 }

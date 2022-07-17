@@ -18,6 +18,9 @@ private enum Strings {
     static let ankiDeckNameTitle = NSLocalizedString("Anki Deck Name", comment: "")
     static let ankiNoteTypeNameTitle = NSLocalizedString("Anki Note Type", comment: "")
     static let ankiCardSearchTitle = NSLocalizedString("Anki Card Search Expression", comment: "")
+    
+    static let resetAllTitle = NSLocalizedString("Reset All", comment: "")
+
 }
 
 private enum Sizings {
@@ -174,6 +177,16 @@ struct SettingsView: View {
                             viewModel.parserMode = FeatureManager.instance.changeToNextParserMode().rawValue
                         }
                         .foregroundColor(Color.black)
+                        
+                        Button(Strings.resetAllTitle) {
+                            
+                            SharedManagedDataController.resetAll {
+                                
+                                print("Reset done")
+                                
+                            }
+                        }
+                        .foregroundColor(Color.black)
 
                     }
                     .padding()
@@ -185,6 +198,8 @@ struct SettingsView: View {
                 Text(appVersionString)
                     .foregroundColor(Color.black)
                 
+                Spacer()
+
             }
         }
     }

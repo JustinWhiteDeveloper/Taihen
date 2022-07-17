@@ -349,6 +349,17 @@ extension RealmManagedDictionaryController: DictionaryReloadController {
 extension RealmManagedDictionaryController: ManagedControllerResetSupport {
     func reset(callback: @escaping () -> Void) {
         
+        self.realm = getRealm()
+
+        do {
+            try self.realm.write {
+                self.realm.deleteAll()
+            }
+        } catch {
+            print(String(describing: error))
+        }
+        
+        callback()
     }
 }
 

@@ -1,10 +1,6 @@
 import Foundation
 import TaihenDictionarySupport
 
-protocol ManagedControllerResetSupport {
-    func reset(callback: @escaping () -> Void)
-}
-
 protocol DictionaryDataReaderWriterController: ManagedControllerResetSupport {
     func saveDictionary(_ dictionary: TaihenCustomDictionary, notifyOnBlockSize: Int, callback: @escaping () -> Void)
     func updateDictionaryActive(viewModel model: ManagedDictionaryViewModel, active: Bool)

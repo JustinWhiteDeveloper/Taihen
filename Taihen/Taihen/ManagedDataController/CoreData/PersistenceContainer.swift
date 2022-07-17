@@ -6,7 +6,7 @@ struct PersistenceController {
     
     static let shared = PersistenceController()
 
-    let container: NSPersistentContainer
+    var container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
         
@@ -33,5 +33,30 @@ struct PersistenceController {
                 print("Save Error" + error.localizedDescription)
             }
         }
+    }
+    
+    mutating func deleteAll() {
+        
+        do {
+            for store in container.persistentStoreCoordinator.persistentStores {
+                try container.persistentStoreCoordinator.destroyPersistentStore(
+                    at: store.url!,
+                    ofType: store.type,
+                    options: nil
+                )
+            }
+            
+            container = NSPersistentContainer(name: modelName)
+            
+            container.loadPersistentStores { description, error in
+                if let error = error {
+                    fatalError("Container Load Error: \(error.localizedDescription)")
+                }
+            }
+        }
+        catch {
+            print(String(describing: error))
+        }
+        
     }
 }

@@ -65,6 +65,7 @@ class CoreDataTagManagementDataController: TagManagementDataController {
 
 extension CoreDataTagManagementDataController: ManagedControllerResetSupport {
     func reset(callback: @escaping () -> Void) {
-        
+        controller.deleteAll()
+        callback()
     }
 }
