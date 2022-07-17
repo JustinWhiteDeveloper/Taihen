@@ -44,10 +44,11 @@
 <img width="89" alt="Screen Shot 2022-07-17 at 6 05 18 PM" src="https://user-images.githubusercontent.com/12780440/179386236-189ebe30-7fab-4522-8f09-c1b5376d3e00.png">
 
 #### The file should be opened
-<img width="1291" alt="Screen Shot 2022-07-17 at 6 05 27 PM" src="https://user-images.githubusercontent.com/12780440/179386239-f8bff26c-aea1-483a-bee4-2f0d2751e4cb.png">
 
-#### Select content to confirm the dictionary is working as intended
-<img width="1289" alt="Screen Shot 2022-07-17 at 6 05 36 PM" src="https://user-images.githubusercontent.com/12780440/179386241-3d8d3431-1a1e-407a-a14f-06d82ae27744.png">
+Select content to confirm the dictionary is working as intended
+
+<img width="1283" alt="Screen Shot 2022-07-17 at 6 32 26 PM" src="https://user-images.githubusercontent.com/12780440/179386952-32d85ece-8abf-4f98-be07-3651e3fed1df.png">
+
 
 
 ### Highlight words
