@@ -19,11 +19,10 @@ struct DictionariesView: View {
         
         VStack {
             
-            Spacer()
-            
             Text(Strings.title)
                 .font(.title)
                 .foregroundColor(.black)
+                .padding()
 
             if viewModel.loading {
                 CustomizableLoadingView(text: $viewModel.loadingText)
@@ -54,7 +53,7 @@ struct DictionariesView: View {
                 
                 if $viewModel.items.count == 0 {
                     Text(Strings.noDictionariesTitle)
-                        .font(.title)
+                        .font(.title2)
                         .foregroundColor(.black)
                 } else {
                     List {
@@ -75,6 +74,9 @@ struct DictionariesView: View {
                     }
                 }
             }
+            
+            Spacer()
+
         }
         .frame(maxWidth: .infinity,
                 maxHeight: .infinity,

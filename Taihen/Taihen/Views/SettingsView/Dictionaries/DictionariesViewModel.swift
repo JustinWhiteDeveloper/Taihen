@@ -138,8 +138,10 @@ class DictionariesViewModel: ObservableObject {
                 let progress = dict["progress"],
                 let maxProgress = dict["maxProgress"] {
                 
+                let percentageProgress: Int = Int((Double(progress)/Double(maxProgress)) * 100)
+                
                 DispatchQueue.main.async {
-                    self.loadingText = Strings.savingDictionary + " " + String(progress) + "/" + String(maxProgress)
+                    self.loadingText = Strings.savingDictionary + String(format: " %d", percentageProgress) + "%"
                 }
             }
         default:

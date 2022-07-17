@@ -180,6 +180,8 @@ struct SettingsView: View {
                             
                             SharedManagedDataController.resetAll {
                                 
+                                FeatureManager.instance.userHasFinishedIntro = false
+                                
                                 print("Reset done")
                                 
                             }

@@ -23,7 +23,7 @@ struct YomiIntroView: View {
             if !FeatureManager.instance.userHasFinishedIntro {
                 Text(Strings.copyTextBody)
                     .foregroundColor(Color.black)
-                    .font(.title)
+                    .font(.title2)
                 
                 Button(Strings.switchToDictionariesButtonTitle) {
                     
